@@ -111,6 +111,32 @@
   }
 }
 
+@media(max-height: 800px) {
+  .hero_section .title_hero {
+    margin-top: 50px;
+  }
+}
+@media(max-height: 750px) {
+  .hero_section .title_hero {
+    margin-top: 100px;
+  }
+}
+@media(max-height: 700px) {
+  .hero_section .title_hero {
+    margin-top: 150px;
+  }
+}
+@media(max-height: 650px) {
+  .hero_section .title_hero {
+    margin-top: 200px;
+  }
+}
+@media(max-height: 600px) {
+  .hero_section .title_hero {
+    margin-top: 250px;
+  }
+}
+
 /* Nav Header */
 .nav_header {
   z-index: 9;
