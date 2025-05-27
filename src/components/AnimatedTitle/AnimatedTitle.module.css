@@ -1,11 +1,3 @@
-.h1 {
-  text-transform: uppercase;
-  font-size: var(--font-size-title);
-  font-weight: var(--font-weight-title);
-  letter-spacing: -.2rem;
-  line-height: .8;
-}
-
 .paragraph {
   text-transform: uppercase;
   font-size: var(--font-size-paragraph);
@@ -27,14 +19,15 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  max-width: 100%;
+  width: 100vw;
   height: 100%;
 }
 
 .hero_img_container > :first-child {
   max-width: 100%;
   width: 100%;
-  height: 100%;
+  height: auto;
 }
 
 .hero_img_title {
@@ -99,6 +92,7 @@
   width: 200px;
   height: 150px;
   z-index: 2;
+  pointer-events: none;
 }
 
 .overlay_copy {
@@ -107,6 +101,8 @@
   left: 50%;
   transform: translate(-50%, 0%);
   z-index: 2;
+  text-align: center;
+  pointer-events: none;
 }
 
 .overlay_copy h1 {
@@ -115,11 +111,23 @@
   color: transparent;
   -webkit-text-fill-color: transparent;
   transform-origin: center 0%;
+  text-transform: uppercase;
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-title);
+  letter-spacing: -.2rem;
+  line-height: .8;
+  pointer-events: none;
 }
 
 @media (max-width: 900px) {
-  h1 {
+  .overlay_copy h1 {
     letter-spacing: 0;
+  }
+
+  .hero_img_title {
+    z-index: 1;
+    top: 5%;
+    left: 50%;
   }
 
   .overlay_copy {

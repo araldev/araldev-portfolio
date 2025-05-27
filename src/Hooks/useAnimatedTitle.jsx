@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { projectsDataSvg } from '../components/AnimatedTitle/titles'
 
 import { gsap } from 'gsap'
@@ -8,6 +8,10 @@ import Lenis from 'lenis'
 gsap.registerPlugin(ScrollTrigger)
 
 export function useAnimatedTitle () {
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight
+  })
   const heroRef = useRef(null)
   const heroImgContainerRef = useRef(null)
   const heroImgTitleRef = useRef(null)
@@ -15,11 +19,20 @@ export function useAnimatedTitle () {
   const fadeOverlayRef = useRef(null)
   const svgOverlayRef = useRef(null)
   const overlayCopyRef = useRef(null)
+  const overlayCopyContainerRef = useRef(null)
   const titleContainerRef = useRef(null)
   const titleMaskRef = useRef(null)
 
   useEffect(() => {
-    console.log('funciona')
+    const handleResize = () => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight
+      })
+    }
+
+    window.addEventListener('resize', handleResize)
+
     const hero = heroRef.current
     const heroImgContainer = heroImgContainerRef.current
     const heroImgTitle = heroImgTitleRef.current
@@ -27,11 +40,12 @@ export function useAnimatedTitle () {
     const fadeOverlay = fadeOverlayRef.current
     const svgOverlay = svgOverlayRef.current
     const overlayCopy = overlayCopyRef.current
+    const overlayCopyContainer = overlayCopyContainerRef.current
     const titleContainer = titleContainerRef.current
     const titleMask = titleMaskRef.current
     const initialOverlayScale = 350
 
-    if (!hero || !heroImgContainer || !heroImgTitle || !titleMask || !overlayCopy || !fadeOverlay || !svgOverlay || !titleContainer || !heroImgCopy) {
+    if (!hero || !heroImgContainer || !heroImgTitle || !titleMask || !overlayCopy || !overlayCopyContainer || !fadeOverlay || !svgOverlay || !titleContainer || !heroImgCopy) {
       console.warn('GSAP/ScrollTrigger: Algunos elementos no se encontraron. La animación se intentará de nuevo cuando los refs se asignen.')
       console.log({
         hero,
@@ -41,6 +55,7 @@ export function useAnimatedTitle () {
         fadeOverlay,
         svgOverlay,
         overlayCopy,
+        overlayCopyContainer,
         titleContainer,
         titleMask
       })
@@ -78,6 +93,8 @@ export function useAnimatedTitle () {
       pin: true,
       pinSpacing: true,
       scrub: 1,
+      invalidateOnRefresh: true,
+      // markers: true,
       onUpdate: (self) => {
         const scrollProgress = self.progress
         const fadeOpacity = 1 - scrollProgress * (1 / 0.15)
@@ -94,8 +111,16 @@ export function useAnimatedTitle () {
         }
 
         if (scrollProgress <= 0.85) {
+          const numberScale =
+            window.innerWidth < 1500 && window.innerWidth > 1401
+              ? 1.1
+              : window.innerWidth < 1400 && window.innerWidth > 501
+                ? 1
+                : 1.1
+          console.log(numberScale)
+
           const normalizedProgress = scrollProgress * (1 / 0.85)
-          const heroImgContainerScale = 1.5 - 0.5 * normalizedProgress
+          const heroImgContainerScale = numberScale - 0.3 * normalizedProgress
           const overlayScale =
             initialOverlayScale *
             Math.pow(1 / initialOverlayScale, normalizedProgress)
@@ -117,7 +142,7 @@ export function useAnimatedTitle () {
             fadeOverlayOpacity = Math.min(1, (scrollProgress - 0.25) * (1 / 0.4))
           }
 
-          gsap.set(svgOverlay, {
+          gsap.set([svgOverlay, overlayCopyContainer], {
             pointerEvents: pointerState
           })
 
@@ -138,7 +163,6 @@ export function useAnimatedTitle () {
           overlayCopy.style.background = `linear-gradient(to bottom, #111117 0%, #111117 ${gradientTopPosition}%, #e66461 ${gradientBottomPosition}%, #e66461 100%)`
           overlayCopy.style.backgroundClip = 'text'
           overlayCopy.style.webkitBackgroundClip = 'text'
-          // overlayCopy.style.color = 'transparent'
 
           gsap.set(overlayCopy, {
             scale: overlayCopyScale,
@@ -153,19 +177,21 @@ export function useAnimatedTitle () {
     })
 
     return () => {
+      window.removeEventListener('resize', handleResize)
       lenis.destroy() // Destruir la instancia de Lenis
       ScrollTrigger.getAll().forEach(st => st.kill()) // Eliminar todos los ScrollTriggers
       gsap.ticker.remove((time) => {
         lenis.raf(time * 1000)
       })
     }
-  }, [heroImgContainerRef, heroImgTitleRef, heroImgCopyRef, fadeOverlayRef, svgOverlayRef, overlayCopyRef, titleContainerRef, titleMaskRef])
+  }, [windowSize, heroImgContainerRef, heroImgTitleRef, heroImgCopyRef, fadeOverlayRef, svgOverlayRef, overlayCopyRef, overlayCopyContainerRef, titleContainerRef, titleMaskRef])
 
   return {
     heroRef,
     heroImgContainerRef,
     heroImgTitleRef,
     heroImgCopyRef,
+    overlayCopyContainerRef,
     fadeOverlayRef,
     svgOverlayRef,
     overlayCopyRef,

@@ -11,6 +11,7 @@ export default function () {
       </AnimatedTitle>
       <main className='container_main'>
         <NavHeader />
+        <HeroSection />
         <Projects />
       </main>
     </>

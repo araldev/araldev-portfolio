@@ -7,6 +7,7 @@ export function AnimatedTitle ({ children }) {
     heroImgContainerRef,
     heroImgTitleRef,
     heroImgCopyRef,
+    overlayCopyContainerRef,
     fadeOverlayRef,
     svgOverlayRef,
     overlayCopyRef,
@@ -50,8 +51,8 @@ export function AnimatedTitle ({ children }) {
 
         <div className={styles.title_container} ref={titleContainerRef} />
 
-        <div className={styles.overlay_copy}>
-          <h1 className={styles.h1} ref={overlayCopyRef}>
+        <div className={styles.overlay_copy} ref={overlayCopyContainerRef}>
+          <h1 ref={overlayCopyRef}>
             Animation <br />
             Experiment 452 <br />
             By Araldev

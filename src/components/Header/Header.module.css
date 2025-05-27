@@ -16,175 +16,16 @@
   position: relative;
 }
 
-/* Nav Header */
-.nav_header {
-  position: sticky;
-  top: 0;
-  left: 0;
-  display: flex;
-  flex-direction: row;
-  max-width: 100%;
-  width: var(--width-web-content);
-  height: 80px;
-  justify-content: space-between;
-  align-items: center;
-  padding: var(--padding-nav);
-  background-color: var(--bg-blur-transparent);
-  backdrop-filter: blur(20px);
-}
-
-.nav_logo{
-  display: flex;
-  align-items: center;
-  width: 40px;
-  height: 40px;
-  background-size: cover;
-}
-
-.nav_links {
-  display: flex;
-  width: 80%;
-  height: 100%;
-  list-style: none;
-  justify-content: center;
-  align-items: center;
-  
-  li {
-    width: fit-content;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    a {
-      padding: 20px;
-      text-decoration: none;
-      color: var(--color-nav-text);
-      font-weight: var(--font-weight-nav);
-      font-size: var(--font-size-nav);
-    }  
-  }
-}
-
-.nav_icon {
-  display: none;
-  position: fixed;
-  top: 15px;
-  right: 30px;
-  width: 46px;
-  height: 46px;
-  cursor: pointer;
-  z-index: 9999;
-
-  .checkbox {
-    width: 100%;
-    height: 100%;
-  }
-  .stroke_1{
-    position: absolute; 
-    top: 25%;
-    left: 0;
-    transform: translateY(-50%);
-    width: 100%;
-    height: 5px;
-    background: var(--color-bg-button-gradient);
-    transition: top .3s ease-in-out, transform .3s ease-in-out;
-  }
-  .stroke_2{
-    position: absolute; 
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    width: 100%;
-    height: 5px;
-    background: var(--color-bg-button-gradient);
-    transition: opacity .2s ease-in-out;
-  }
-  .stroke_3{
-    position: absolute; 
-    top: 75%;
-    left: 0;
-    transform: translateY(-50%);
-    width: 100%;
-    height: 5px;
-    background: var(--color-bg-button-gradient);
-    transition: top .3s ease-in-out, transform .3s ease-in-out;
-  }
-
-  .checkbox:checked ~ .stroke_1 {
-    transform: translateY(160%) rotate(45deg);
-    background: var(--color-bg-button-hover-gradient);
-  }
-  .checkbox:checked ~ .stroke_2 {
-    opacity: 0;
-    background: var(--color-bg-button-hover-gradient);
-  }
-  .checkbox:checked ~ .stroke_3 {
-    transform: translateY(-280%) rotate(-45deg);
-    background: var(--color-bg-button-hover-gradient);
-  }
-}
-
-/* Menu Mobile */
-@media(width < 600px) {
-  .nav_links {
-    visibility: hidden;
-    pointer-events: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    position: fixed;
-    top: 0;
-    left: 0;
-    max-width: 100%;
-    width: 100vw;
-    height: 100vh;
-    z-index: 999;
-    opacity: 0;
-    transform: translateY(-100%);
-    transition: opacity .3s ease-in-out, background .3s ease-in-out, transform .3s ease-in-out,  visibility 0s linear 0.5s; 
-  }
-  .nav_icon:has(.checkbox:checked) ~ .nav_links {
-    visibility: visible;
-    pointer-events: unset;
-    background: #000000;
-    opacity: 1;
-    transform: translateY(0%);
-    transition: opacity .3s ease-in-out, background .3s ease-in-out, transform .3s ease-in-out, visibility 0s linear 0s; 
-  }
-  .nav_icon:has(.checkbox:checked) ~ .nav_links li {
-    width: fit-content;
-    height: 100px;
-    a{
-      color: var(--color-nav-text-checked);
-    }
-  }
-  
-  .nav_icon {
-    display: block;
-  }
-  
-  /* para evitar que el .button_cv se vea al abrir el menú mobile */
-  body:has(.checkbox:checked) .button_cv{
-    visibility: hidden;
-    pointer-events: none;
-    transition: visibility 0s linear .2s;
-  }
-  /* Cuando el menu mobile esté abierto evitamos el scroll */
-  body:has(.checkbox:checked) {
-    overflow: hidden;
-  }
-}
-
 /* Hero Section */
 .hero_section {
   max-width: 100%;
   width: var(--width-web-content);
-  height: fit-content;
+  height: 100vh;
   padding: 30px 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: left;
+  align-items: flex-start;
   gap: 30px;
   padding: var(--padding-web-content);
 
@@ -267,5 +108,165 @@
         transform: translateX(0%);
       }
     }
+  }
+}
+
+/* Nav Header */
+.nav_header {
+  z-index: 9;
+  position: sticky;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  max-width: 100%;
+  width: var(--width-web-content);
+  height: 80px;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--padding-nav);
+  background-color: var(--bg-blur-transparent);
+  backdrop-filter: blur(20px);
+}
+
+.nav_logo{
+  display: flex;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background-size: cover;
+}
+
+.nav_links {
+  display: flex;
+  width: 80%;
+  height: 100%;
+  list-style: none;
+  justify-content: center;
+  align-items: center;
+  
+  li {
+    width: fit-content;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    a {
+      padding: 20px;
+      text-decoration: none;
+      color: var(--color-nav-text);
+      font-weight: var(--font-weight-nav);
+      font-size: var(--font-size-nav);
+    }  
+  }
+}
+
+.nav_icon {
+  display: none;
+  position: fixed;
+  top: 15px;
+  right: 30px;
+  width: 46px;
+  height: 46px;
+  cursor: pointer;
+  z-index: 999;
+
+  .checkbox {
+    width: 100%;
+    height: 100%;
+  }
+  .stroke_1{
+    position: absolute; 
+    top: 25%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 5px;
+    background: var(--color-bg-button-gradient);
+    transition: top .3s ease-in-out, transform .3s ease-in-out;
+  }
+  .stroke_2{
+    position: absolute; 
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 5px;
+    background: var(--color-bg-button-gradient);
+    transition: opacity .2s ease-in-out;
+  }
+  .stroke_3{
+    position: absolute; 
+    top: 75%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 5px;
+    background: var(--color-bg-button-gradient);
+    transition: top .3s ease-in-out, transform .3s ease-in-out;
+  }
+
+  .checkbox:checked ~ .stroke_1 {
+    transform: translateY(160%) rotate(45deg);
+    background: var(--color-bg-button-hover-gradient);
+  }
+  .checkbox:checked ~ .stroke_2 {
+    opacity: 0;
+    background: var(--color-bg-button-hover-gradient);
+  }
+  .checkbox:checked ~ .stroke_3 {
+    transform: translateY(-280%) rotate(-45deg);
+    background: var(--color-bg-button-hover-gradient);
+  }
+}
+
+/* Menu Mobile */
+@media(width < 600px) {
+  .nav_links {
+    visibility: hidden;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    max-width: 100%;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99;
+    opacity: 0;
+    transform: translateY(-100%);
+    transition: opacity .3s ease-in-out, background .3s ease-in-out, transform .3s ease-in-out,  visibility 0s linear 0.5s; 
+  }
+  .nav_icon:has(.checkbox:checked) ~ .nav_links {
+    visibility: visible;
+    pointer-events: unset;
+    background: #000000;
+    opacity: 1;
+    transform: translateY(0%);
+    transition: opacity .3s ease-in-out, background .3s ease-in-out, transform .3s ease-in-out, visibility 0s linear 0s; 
+  }
+  .nav_icon:has(.checkbox:checked) ~ .nav_links li {
+    width: fit-content;
+    height: 100px;
+    a{
+      color: var(--color-nav-text-checked);
+    }
+  }
+  
+  .nav_icon {
+    display: block;
+  }
+  
+  /* para evitar que el .button_cv se vea al abrir el menú mobile */
+  body:has(.checkbox:checked) .button_cv{
+    visibility: hidden;
+    pointer-events: none;
+    transition: visibility 0s linear .2s;
+  }
+  /* Cuando el menu mobile esté abierto evitamos el scroll */
+  body:has(.checkbox:checked) {
+    overflow: hidden;
   }
 }
