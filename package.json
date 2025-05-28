@@ -15,13 +15,15 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "deploy": "gh-pages -d dist",
     "lint": "standard",
     "lint:fix": "standard --fix"
   },
   "devDependencies": {
     "@vitejs/plugin-react-swc": "3.10.0",
     "standard": "17.1.2",
-    "vite": "6.3.5"
+    "vite": "6.3.5",
+    "vite-plugin-gh-pages": "^1.0.1"
   },
   "dependencies": {
     "gsap": "^3.13.0",
