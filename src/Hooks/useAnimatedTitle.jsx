@@ -3,9 +3,6 @@ import { projectsDataSvg } from '../components/AnimatedTitle/titles'
 
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import Lenis from 'lenis'
-
-gsap.registerPlugin(ScrollTrigger)
 
 export function useAnimatedTitle () {
   const [windowSize, setWindowSize] = useState({
@@ -62,13 +59,6 @@ export function useAnimatedTitle () {
       return
     }
 
-    const lenis = new Lenis()
-    lenis.on('scroll', ScrollTrigger.update)
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000)
-    })
-    gsap.ticker.lagSmoothing(0)
-
     titleMask.setAttribute('d', projectsDataSvg)
 
     const titleDimensions = titleContainer.getBoundingClientRect()
@@ -83,7 +73,7 @@ export function useAnimatedTitle () {
 
     titleMask.setAttribute(
       'transform',
-      `translate(${titleHorizontalPosition}, ${titleVerticalPosition}) 
+      `translate(${titleHorizontalPosition - 5}, ${titleVerticalPosition}) 
       scale(${titleScaleFactor})`)
 
     ScrollTrigger.create({
@@ -94,6 +84,7 @@ export function useAnimatedTitle () {
       pinSpacing: true,
       scrub: 1,
       invalidateOnRefresh: true,
+      scroller: document.body,
       // markers: true,
       onUpdate: (self) => {
         const scrollProgress = self.progress
@@ -117,7 +108,6 @@ export function useAnimatedTitle () {
               : window.innerWidth < 1400 && window.innerWidth > 501
                 ? 1
                 : 1.1
-          console.log(numberScale)
 
           const normalizedProgress = scrollProgress * (1 / 0.85)
           const heroImgContainerScale = numberScale - 0.3 * normalizedProgress
@@ -178,11 +168,7 @@ export function useAnimatedTitle () {
 
     return () => {
       window.removeEventListener('resize', handleResize)
-      lenis.destroy() // Destruir la instancia de Lenis
-      ScrollTrigger.getAll().forEach(st => st.kill()) // Eliminar todos los ScrollTriggers
-      gsap.ticker.remove((time) => {
-        lenis.raf(time * 1000)
-      })
+      ScrollTrigger.killAll()
     }
   }, [windowSize, heroImgContainerRef, heroImgTitleRef, heroImgCopyRef, fadeOverlayRef, svgOverlayRef, overlayCopyRef, overlayCopyContainerRef, titleContainerRef, titleMaskRef])
 

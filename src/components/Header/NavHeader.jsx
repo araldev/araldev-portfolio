@@ -1,7 +1,9 @@
 import { useId } from 'react'
 import styles from './Header.module.css'
+import { useNavPaths } from '../../Hooks/useNavPaths'
 
 export function NavHeader () {
+  const { handleClick } = useNavPaths()
   const idNavIcon = useId()
 
   return (
@@ -16,9 +18,9 @@ export function NavHeader () {
       </label>
 
       <ul className={styles.nav_links}>
-        <li><a href='#about-me'>About me</a></li>
-        <li><a href='#projects'>Projects</a></li>
-        <li><a href='#contact'>Contact</a></li>
+        <li><a data-id='about-me' onClick={handleClick}>About me</a></li>
+        <li><a data-id='projects' onClick={handleClick}>Projects</a></li>
+        <li><a data-id='contact' onClick={handleClick}>Contact</a></li>
       </ul>
     </nav>
   )

@@ -1,7 +1,9 @@
 import styles from './AnimatedTitle.module.css'
+import { useId } from 'react'
 import { useAnimatedTitle } from '../../Hooks/useAnimatedTitle.jsx'
 
 export function AnimatedTitle ({ children }) {
+  const titleRevealMaskId = useId()
   const {
     heroRef,
     heroImgContainerRef,
@@ -35,7 +37,7 @@ export function AnimatedTitle ({ children }) {
         <div className={styles.overlay} ref={svgOverlayRef}>
           <svg width='100%' height='100%'>
             <defs>
-              <mask id='titleRevealMask'>
+              <mask id={titleRevealMaskId}>
                 <rect width='100%' height='100%' fill='white' />
                 <path id='titleMask' ref={titleMaskRef} />
               </mask>
@@ -44,7 +46,7 @@ export function AnimatedTitle ({ children }) {
               width='100%'
               height='100%'
               fill='#111117'
-              mask='url(#titleRevealMask)'
+              mask={`url(#${titleRevealMaskId})`}
             />
           </svg>
         </div>

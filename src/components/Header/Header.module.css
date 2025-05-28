@@ -2,17 +2,11 @@
   max-width: 100%;
   width: 100dvw;
   height: auto;
-  background: 
-    linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-    url('../../utils/img-bg.webp');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  isolation: isolate;
+  /* isolation: isolate; */
   position: relative;
 }
 
@@ -182,6 +176,10 @@
       color: var(--color-nav-text);
       font-weight: var(--font-weight-nav);
       font-size: var(--font-size-nav);
+
+      &:hover {
+        cursor: pointer;
+      }
     }  
   }
 }

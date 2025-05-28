@@ -1,0 +1,27 @@
+.projects_section {
+  max-width: 100%;
+  width: 100vw;
+  height: auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .animated_radial_bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: radial-gradient(circle at center, #1a2a6c 0%, #b21f1f 50%, #fdbb2d 100%);
+    background-size: 300% 300%;
+    animation: radialZoom 10s ease-in-out infinite alternate;
+    z-index: -1;
+} */
+
+@keyframes radialZoom {
+    0% { background-size: 200% 200%; }
+    100% { background-size: 400% 400%; }
+}

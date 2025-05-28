@@ -1,0 +1,51 @@
+.animated_bg_hero_section {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: 100%;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle, #111117 0%, rgba(17, 17, 23, 0) 100%);
+  z-index: -99;
+  overflow: hidden;
+
+  .objects_container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 0 5px;
+    padding: 0 5px;
+    width: 100%; 
+        
+    span {
+      display: block;
+      max-width: 30px;
+      width: 30px;
+      min-width: 30px;
+      max-height: 30px;
+      height: 30px;
+      min-height: 30px;
+      border-radius: 50%;
+      background: var(--color-bg-button-hover-gradient);
+      background-size: 100%;
+      animation: animation-objects 20s linear infinite alternate;
+      animation-duration: var(--duration);
+    }
+
+    span:nth-child(even) {
+      background: var(--color-bg-button-gradient);
+    }
+  }
+}
+
+@keyframes animation-objects {
+  0% {
+    background-size: 100% 100%;
+    transform: translateY(100vh) scale(0);
+  }
+  100% {
+    background-size: 400% 400%;
+    transform: translateY(-10vh) scale(1);
+  }
+}
