@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useCallBack } from 'react'
 import { projectsDataSvg } from '../components/AnimatedTitle/titles'
 
 import { gsap } from 'gsap'
@@ -7,6 +7,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 export function useAnimatedTitle () {
+  const frameIdRef = useRef(null)
   const [windowSize, setWindowSize] = useState({
     width: window.innerWidth,
     height: window.innerHeight
@@ -23,15 +24,6 @@ export function useAnimatedTitle () {
   const titleMaskRef = useRef(null)
 
   useEffect(() => {
-    const handleResize = () => {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight
-      })
-    }
-
-    window.addEventListener('resize', handleResize)
-
     const hero = heroRef.current
     const heroImgContainer = heroImgContainerRef.current
     const heroImgTitle = heroImgTitleRef.current
@@ -60,29 +52,43 @@ export function useAnimatedTitle () {
       })
       return
     }
-    const frameId = requestAnimationFrame(() => {
-      titleMask.setAttribute('d', projectsDataSvg)
 
-      const titleDimensions = titleContainer.getBoundingClientRect()
-      const titleBoundingBox = titleMask.getBBox()
+    const handleResize = () => {
+      setWindowSize(prevState => {
+        if (prevState.width === window.innerWidth && prevState.height === window.innerHeight) return prevState
+        return {
+          width: window.innerWidth,
+          height: window.innerHeight
+        }
+      })
 
-      const horizontalScaleRatio = titleDimensions.width / titleBoundingBox.width
-      const verticalScaleRatio = titleDimensions.height / titleBoundingBox.height
-      const titleScaleFactor = Math.min(horizontalScaleRatio, verticalScaleRatio)
+      frameIdRef.current = requestAnimationFrame(() => {
+        titleMask.setAttribute('d', projectsDataSvg)
 
-      const titleHorizontalPosition = titleDimensions.left + (titleDimensions.width - titleBoundingBox.width * titleScaleFactor) / 2 - titleBoundingBox.x * titleScaleFactor
-      const titleVerticalPosition = titleDimensions.top + (titleDimensions.height - titleBoundingBox.height * titleScaleFactor) / 2 - titleBoundingBox.y * titleScaleFactor
+        const titleDimensions = titleContainer.getBoundingClientRect()
+        const titleBoundingBox = titleMask.getBBox()
 
-      titleMask.setAttribute(
-        'transform',
-      `translate(${titleHorizontalPosition - 5}, ${titleVerticalPosition}) 
-      scale(${titleScaleFactor})`)
-    })
+        const horizontalScaleRatio = titleDimensions.width / titleBoundingBox.width
+        const verticalScaleRatio = titleDimensions.height / titleBoundingBox.height
+        const titleScaleFactor = Math.min(horizontalScaleRatio, verticalScaleRatio)
+
+        const titleHorizontalPosition = titleDimensions.left + (titleDimensions.width - titleBoundingBox.width * titleScaleFactor) / 2 - titleBoundingBox.x * titleScaleFactor
+        const titleVerticalPosition = titleDimensions.top + (titleDimensions.height - titleBoundingBox.height * titleScaleFactor) / 2 - titleBoundingBox.y * titleScaleFactor
+
+        titleMask.setAttribute(
+          'transform',
+          `translate(${titleHorizontalPosition - 5}, ${titleVerticalPosition}) 
+          scale(${titleScaleFactor})`)
+      })
+    }
+    handleResize()
+
+    window.addEventListener('resize', handleResize)
 
     ScrollTrigger.create({
       trigger: hero,
       start: 'top top',
-      end: `${window.innerHeight * 2}px`,
+      end: `${hero.getBoundingClientRect().height + 200}px`,
       pin: true,
       pinSpacing: true,
       scrub: 1,
@@ -171,7 +177,7 @@ export function useAnimatedTitle () {
     ScrollTrigger.refresh()
 
     return () => {
-      cancelAnimationFrame(frameId)
+      cancelAnimationFrame(frameIdRef.current)
       window.removeEventListener('resize', handleResize)
       ScrollTrigger.killAll()
     }

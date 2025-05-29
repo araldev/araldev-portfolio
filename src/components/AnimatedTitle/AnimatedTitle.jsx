@@ -1,6 +1,6 @@
 import styles from './AnimatedTitle.module.css'
 import { useId } from 'react'
-import { useAnimatedTitle } from '../../Hooks/useAnimatedTitle.jsx'
+import { useAnimatedTitle } from '../../Hooks/useAnimatedTitle.js'
 import avatar from '../../utils/yo-sin-fondo.png'
 
 export function AnimatedTitle ({ children }) {
