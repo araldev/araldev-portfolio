@@ -24,7 +24,7 @@ export function AnimatedTitle ({ children }) {
           {children}
 
           <div className={styles.hero_img_title} ref={heroImgTitleRef}>
-            <img src='src/utils/yo-sin-fondo.png' alt='AVATAR' />
+            <img src='./src/utils/yo-sin-fondo.png' alt='AVATAR' />
           </div>
 
           <div className={styles.hero_img_copy} ref={heroImgCopyRef}>

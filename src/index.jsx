@@ -1,10 +1,12 @@
 import './index.css'
 import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
-import { ScrollProvider } from './contexts/ScrollProvider.jsx'
+import { ReactLenis } from 'lenis/react'
+import { ScrollSync } from './components/ScrollSync.jsx'
 
 createRoot(document.getElementById('root')).render(
-  <ScrollProvider>
+  <ReactLenis root options={{ smooth: true }}>
+    <ScrollSync />
     <App />
-  </ScrollProvider>
+  </ReactLenis>
 )

@@ -1,6 +1,6 @@
 import { useId } from 'react'
 import styles from './Header.module.css'
-import { useNavPaths } from '../../Hooks/useNavPaths'
+import { useNavPaths } from '../../Hooks/useNavPaths.js'
 
 export function NavHeader () {
   const { handleClick } = useNavPaths()

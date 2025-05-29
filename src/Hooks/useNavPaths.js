@@ -1,9 +1,10 @@
-import { useCallback } from 'react'
-import { useScroll } from './useScroll.js'
+import { useCallback, useEffect, useRef } from 'react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useLenis } from 'lenis/react'
 
 export function useNavPaths () {
-  const { lenis } = useScroll()
+  const lenis = useLenis()
+  const frameIdRef = useRef(null)
 
   const handleClick = useCallback((event) => {
     event.preventDefault()
@@ -24,7 +25,8 @@ export function useNavPaths () {
     ScrollTrigger.refresh()
 
     function goTo () {
-      console.log(lenis)
+      console.log('lenis: ', lenis)
+      console.log('targetElement: ', targetElement.offsetTop)
 
       lenis.scrollTo(targetElement, {
         offset: -80,
@@ -33,10 +35,16 @@ export function useNavPaths () {
       })
     }
 
-    requestAnimationFrame(goTo)
-
-    return cancelAnimationFrame(goTo)
+    frameIdRef.current = requestAnimationFrame(goTo)
   }, [lenis])
+
+  useEffect(() => {
+    return () => {
+      if (frameIdRef.current !== null) {
+        cancelAnimationFrame(frameIdRef.current)
+      }
+    }
+  }, [])
 
   return { handleClick }
 }
