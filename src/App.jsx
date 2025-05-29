@@ -13,6 +13,7 @@ export default function () {
       <main className='container_main'>
         <NavHeader />
         <Projects />
+        <HeroSection />
         <BackgroundHero />
       </main>
     </>

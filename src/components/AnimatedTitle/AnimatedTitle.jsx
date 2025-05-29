@@ -1,6 +1,7 @@
 import styles from './AnimatedTitle.module.css'
 import { useId } from 'react'
 import { useAnimatedTitle } from '../../Hooks/useAnimatedTitle.jsx'
+import avatar from '../../utils/yo-sin-fondo.png'
 
 export function AnimatedTitle ({ children }) {
   const titleRevealMaskId = useId()
@@ -24,7 +25,7 @@ export function AnimatedTitle ({ children }) {
           {children}
 
           <div className={styles.hero_img_title} ref={heroImgTitleRef}>
-            <img src='./src/utils/yo-sin-fondo.png' alt='AVATAR' />
+            <img src={avatar} alt='AVATAR' />
           </div>
 
           <div className={styles.hero_img_copy} ref={heroImgCopyRef}>
