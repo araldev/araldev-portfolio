@@ -18,8 +18,6 @@ export default function () {
       </AnimatedTitle>
       <main ref={mainRef} className='container_main'>
         <Projects />
-        <HeroSection />
-        <BackgroundHero />
       </main>
     </>
   )
