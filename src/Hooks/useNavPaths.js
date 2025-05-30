@@ -9,18 +9,9 @@ export function useNavPaths ({ navMenuRef }) {
     if (!lenis) return
     if (!navMenuRef || !navMenuRef.current) return
 
-    if (navMenuRef.current.checked) {
-      lenis.scrollTo(document.querySelector('.container_main'), {
-        offset: 0,
-        duration: 1.5,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) // easing personalizado
-      })
-      // Hacer una funcion para que para cuando haga el scroll
-      lenis.stop()
-    } else {
-      lenis.start()
-    }
-    console.log('onChange')
+    // Hacer una funcion para que para cuando haga el scroll
+    if (navMenuRef.current.checked) lenis.stop()
+    else lenis.start()
   }
 
   useEffect(() => {
@@ -52,7 +43,7 @@ export function useNavPaths ({ navMenuRef }) {
       return
     }
 
-    if (targetDataIdValue === 'about-me') offsetValue = -(window.innerHeight + 250)
+    if (targetDataIdValue === 'about-me') offsetValue = -(window.innerHeight + 300)
     if (targetDataIdValue === 'projects') offsetValue = -80
 
     const targetElement = document.getElementById(targetDataIdValue)

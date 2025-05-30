@@ -4,10 +4,8 @@ import { show } from '../components/NavHeader/NavHeader.module.css'
 
 export function useAnimatedNavHeader ({ mainRef, navHeaderRef }) {
   useEffect(() => {
-    console.log(mainRef, navHeaderRef)
-
     if (!navHeaderRef?.current || !mainRef?.current) return
-    console.log('hola')
+
     const navHeader = navHeaderRef.current
     const main = mainRef.current
 
@@ -16,7 +14,7 @@ export function useAnimatedNavHeader ({ mainRef, navHeaderRef }) {
       tl.set(navHeader, {
         scrollTrigger: {
           trigger: main,
-          start: 'top 60%',
+          start: 'top bottom',
           markers: true,
           onEnter: () => {
             navHeader.classList.add(show)
