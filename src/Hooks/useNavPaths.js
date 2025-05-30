@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useRef } from 'react'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useLenis } from 'lenis/react'
 
 export function useNavPaths () {
@@ -11,25 +10,29 @@ export function useNavPaths () {
 
     if (!lenis) return
 
+    let offsetValue
+
     const targetDataIdValue = event.target.dataset.id
     if (!targetDataIdValue) {
       console.warn('El elemento clickeado no tiene un data-id válido.')
       return
     }
 
+    if (targetDataIdValue === 'about-me') offsetValue = -(window.innerHeight + 250)
+    if (targetDataIdValue === 'projects') offsetValue = -80
+
     const targetElement = document.getElementById(targetDataIdValue)
     if (!targetElement) {
       console.warn(`No se encontró un elemento con el id: ${targetDataIdValue}`)
       return
     }
-    ScrollTrigger.refresh()
 
     function goTo () {
       console.log('lenis: ', lenis)
       console.log('targetElement: ', targetElement.offsetTop)
 
       lenis.scrollTo(targetElement, {
-        offset: () => -(window.innerHeight + 210),
+        offset: offsetValue,
         duration: 1.5,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) // easing personalizado
       })
