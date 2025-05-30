@@ -56,21 +56,18 @@ export function useAnimatedTitle () {
     }
 
     const handleResizeDebounce = () => {
-      const heightDiff = lastWindowInnerHeight - window.innerHeight
-      const widthtDiff = lastWindowInnerWidth - window.innerWidth
+      return function () {
+        clearTimeout(timeoutId.current)
 
-      if (Math.abs(heightDiff) > 100 || Math.abs(widthtDiff) > 100) {
-        lastWindowInnerHeight = window.innerHeight
-        lastWindowInnerWidth = window.innerWidth
-        return function () {
-          clearTimeout(timeoutId.current)
-          timeoutId.current = setTimeout(() => {
-            ScrollTrigger.update()
+        timeoutId.current = setTimeout(() => {
+          const heightDiff = Math.abs(lastWindowInnerHeight - window.innerHeight)
+          const widthDiff = Math.abs(lastWindowInnerWidth - window.innerWidth)
+          if (heightDiff > 100 || widthDiff > 100) {
+            lastWindowInnerHeight = window.innerHeight
+            lastWindowInnerWidth = window.innerWidth
             ScrollTrigger.refresh()
-          }, 300)
-        }
-      } else {
-        return null
+          }
+        }, 300)
       }
     }
     window.addEventListener('resize', handleResizeDebounce)
