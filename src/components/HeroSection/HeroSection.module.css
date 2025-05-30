@@ -1,0 +1,106 @@
+.container_header {
+  max-width: 100%;
+  width: 100dvw;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* isolation: isolate; */
+  position: relative;
+}
+
+/* Hero Section */
+.hero_section {
+  max-width: 100%;
+  width: var(--width-web-content);
+  height: 100vh;
+  padding: 30px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
+  padding: var(--padding-web-content);
+
+  .title_hero{
+    background: var(--color-text-gradient);
+    background-clip: text;
+    color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: var(--font-size-title);
+    font-weight: var(--font-weight-title);
+  }
+  .subTitle_hero{
+    background: var(--color-text-button-hover-gradient);
+    background-clip: text;
+    color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: var(--font-size-subtitle);
+    font-weight: var(--font-weight-subtitle);
+  }
+  .paragraph_hero{
+    font-size: var(--font-size-paragraph);
+    font-weight: var(--font-weight-paragraph);
+    max-width: var(--paragraph-max-width);
+    transform: translateZ(0); /* Para evitar que haga un rerenderizado por culpa del botón */
+    -webkit-font-smoothing: antialiased; /* Para navegadores basados en WebKit (Chrome, Safari) */
+  }
+  /* Button */
+  .button_cv{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    width: fit-content;
+    height: auto;
+    border-radius: var(--button-border-radius);
+    padding: var(--button-padding);
+    font-size: var(--font-size-button);
+    font-weight: var(--font-weight-button);
+    background: var(--color-text-button-gradient);
+    background-clip: text;
+    color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    box-shadow: var(--shadow-button-box);
+    overflow: hidden;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--color-bg-button-gradient);
+      border-radius: var(--button-border-radius);
+      z-index: -3;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--color-bg-button-hover-gradient);
+      border-radius: var(--button-border-radius);
+      z-index: -2;
+      transform: translateX(-100%);
+      transition: transform .3s ease-in-out;
+    }
+    &:hover {
+      background: var(--color-text-button-hover-gradient);
+      background-clip: text;
+      color: transparent;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      &::after {
+        transform: translateX(0%);
+      }
+    }
+  }
+}

@@ -1,17 +1,17 @@
-import { useId } from 'react'
-import styles from './Header.module.css'
+import { useId, useRef, forwardRef } from 'react'
+import styles from './NavHeader.module.css'
 import { useNavPaths } from '../../Hooks/useNavPaths.js'
 
-export function NavHeader () {
-  const { handleClick } = useNavPaths()
+export const NavHeader = forwardRef((props, ref) => {
+  const navMenuRef = useRef(null)
+  const { handleClick } = useNavPaths({ navMenuRef })
   const idNavIcon = useId()
-
   return (
-    <nav className={styles.nav_header}>
+    <nav ref={ref} className={styles.nav_header}>
       <div className={styles.nav_logo}>Logo</div>
 
       <label htmlFor={idNavIcon} className={styles.nav_icon}>
-        <input className={styles.checkbox} id={idNavIcon} type='checkbox' hidden />
+        <input ref={navMenuRef} className={styles.checkbox} id={idNavIcon} type='checkbox' hidden />
         <div className={styles.stroke_1} />
         <div className={styles.stroke_2} />
         <div className={styles.stroke_3} />
@@ -24,4 +24,4 @@ export function NavHeader () {
       </ul>
     </nav>
   )
-}
+})

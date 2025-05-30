@@ -4,8 +4,6 @@ import { projectsDataSvg } from '../components/AnimatedTitle/titles'
 import { gsap } from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 
-gsap.registerPlugin(ScrollTrigger)
-
 export function useAnimatedTitle () {
   const heroRef = useRef(null)
   const heroImgContainerRef = useRef(null)
@@ -79,7 +77,8 @@ export function useAnimatedTitle () {
         titleMask.setAttribute(
           'transform',
           `translate(${titleHorizontalPosition - 5}, ${titleVerticalPosition}) 
-          scale(${titleScaleFactor})`)
+          scale(${titleScaleFactor})`
+        )
       },
       onUpdate: (self) => {
         const scrollProgress = self.progress

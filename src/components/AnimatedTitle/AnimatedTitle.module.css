@@ -157,12 +157,38 @@
 @media(max-width: 850px) {
   .hero_img_title {
     top: 3%;
-    left: 50%;
+    left: 70%;
+
+    img {
+      mask-image: linear-gradient(
+        to bottom,
+        black 20%,
+        transparent 100%
+      );
+      -webkit-mask-image: linear-gradient(
+        to bottom,
+        black 20%, 
+        transparent 100% 
+      );
+    }
   }
 }
 @media(max-width: 500px) {
   .hero_img_title {
     top: 5%;
-    left: 50%;
+    left: 70%;
+
+    img {
+      mask-image: linear-gradient(
+        to bottom,
+        black 20%,
+        transparent 100%
+      );
+      -webkit-mask-image: linear-gradient(
+        to bottom,
+        black 20%, 
+        transparent 100% 
+      );
+    }
   }
 }

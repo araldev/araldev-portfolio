@@ -13,11 +13,25 @@
   --padding-web-content: 60px 70px;
   --bg-blur-transparent: #ffffff50;
   --shadow-button-box: 0 4px 15px rgba(0, 0, 0, .4);
+  --shadow-bg-obj1: 
+    0 0 10px 10px rgba(0, 201, 255, 0.7),
+    0 0 25px 15px rgba(0, 201, 255, 0.5),
+    0 0 40px 20px rgba(0, 201, 255, 0.4);
+  --shadow-bg-obj2: 
+    0 0 10px 10px rgba(0, 78, 146, 0.7),
+    0 0 25px 15px rgba(0, 78, 146, 0.5),
+    0 0 40px 20px rgba(0, 78, 146, 0.4);
+  --shadow-bg-obj3: 
+    0 0 10px 10px rgba(224, 247, 244, 0.7),
+    0 0 25px 15px rgba(224, 247, 244, 0.5),
+    0 0 40px 20px rgba(224, 247, 244, 0.4);
   --color-text-gradient: linear-gradient(90deg, #00C9FF, #92FE9D);
   --color-text-button-gradient: linear-gradient(90deg, #92FE9D 20%, #00C9FF 50%);
   --color-text-button-hover-gradient: linear-gradient(135deg, #004e92 0%, #000428 100%);
   --color-bg-button-gradient: linear-gradient(135deg, #004e92 0%, #000428 100%);
   --color-bg-button-hover-gradient: linear-gradient(135deg, #00C9FF 0%, #92FE9D 100%);
+  --color-background-gradient: linear-gradient(180deg, #e0f7f4 0%, #a3e9ff 100%);
+  --color-background-radial-gradient-transparent: radial-gradient(circle, #111117 0%, rgba(17, 17, 23, 0) 100%);
   --color-nav-text: black;
   --color-nav-text-checked: white;
   --font-size-button: clamp(1rem, 1vw + 0.5rem, 1.125rem);
@@ -41,7 +55,7 @@ body {
   height: 100vh;
   background-color: #111117;
   color: #fff;
-  /* overflow-x: hidden; */
+  overflow-x: hidden;
 }
 
 .container_main {

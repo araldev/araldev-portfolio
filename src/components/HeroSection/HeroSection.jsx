@@ -1,5 +1,5 @@
-import styles from './Header.module.css'
-import { BackgroundHero } from '../Backgrounds/BackgroundHero'
+import styles from './HeroSection.module.css'
+import { BackgroundHero } from '../Backgrounds/BackgroundHero.jsx'
 
 export function HeroSection () {
   return (
