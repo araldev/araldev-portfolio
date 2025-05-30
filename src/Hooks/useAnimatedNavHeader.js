@@ -10,8 +10,7 @@ export function useAnimatedNavHeader ({ mainRef, navHeaderRef }) {
     const main = mainRef.current
 
     const ctxGsapNavHeader = gsap.context(() => {
-      const tl = gsap.timeline()
-      tl.set(navHeader, {
+      gsap.set(navHeader, {
         scrollTrigger: {
           trigger: main,
           start: 'top bottom',
