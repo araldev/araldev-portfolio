@@ -5,6 +5,8 @@ import { gsap } from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 
 export function useAnimatedTitle () {
+  const timeoutId = useRef(null)
+
   const heroRef = useRef(null)
   const heroImgContainerRef = useRef(null)
   const heroImgTitleRef = useRef(null)
@@ -46,11 +48,16 @@ export function useAnimatedTitle () {
       return
     }
 
-    const handleResize = () => {
-      ScrollTrigger.update()
-      ScrollTrigger.refresh()
+    const handleResizeDebounce = () => {
+      return function () {
+        clearTimeout(timeoutId.current)
+        timeoutId.current = setTimeout(() => {
+          ScrollTrigger.update()
+          ScrollTrigger.refresh()
+        }, 300)
+      }
     }
-    window.addEventListener('resize', handleResize)
+    window.addEventListener('resize', handleResizeDebounce)
 
     ScrollTrigger.create({
       trigger: hero,
@@ -163,7 +170,7 @@ export function useAnimatedTitle () {
     ScrollTrigger.refresh()
 
     return () => {
-      window.removeEventListener('resize', handleResize)
+      window.removeEventListener('resize', handleResizeDebounce)
       ScrollTrigger.killAll()
     }
   }, [heroImgContainerRef, heroImgTitleRef, heroImgCopyRef, fadeOverlayRef, svgOverlayRef, overlayCopyRef, overlayCopyContainerRef, titleContainerRef, titleMaskRef])

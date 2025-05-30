@@ -15,7 +15,7 @@ export function useAnimatedNavHeader ({ mainRef, navHeaderRef }) {
         scrollTrigger: {
           trigger: main,
           start: 'top bottom',
-          markers: true,
+          // markers: true,
           onEnter: () => {
             navHeader.classList.add(show)
           },
