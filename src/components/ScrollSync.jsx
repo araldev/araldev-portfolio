@@ -12,45 +12,18 @@ export function ScrollSync () {
   useEffect(() => {
     if (!lenis) return
 
-    console.log('lenis: ', lenis)
-    console.log('lenis options wrapper: ', lenis.options.wrapper)
-
-    const scroller = lenis.options.wrapper
-
-    ScrollTrigger.scrollerProxy(scroller, {
-      scrollTop (value) {
-        if (arguments.length) {
-          lenis.scrollTo(value, { immediate: true })
-        }
-        return lenis.animatedScroll
-      },
-      getBoundingClientRect () {
-        return {
-          top: 0,
-          left: 0,
-          width: window.innerWidth,
-          height: window.innerHeight
-        }
-      },
-      pinType: 'transform'
+    gsap.ticker.lagSmoothing(0)
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000)
+      ScrollTrigger.update()
     })
-
-    // Configuración especial para trabajar con Lenis
-    ScrollTrigger.config({
-      autoRefreshEvents: 'visibilitychange,DOMContentLoaded,load'
-      // ignoreMobileResize: true
-    })
-
-    const update = () => ScrollTrigger.update()
-    lenis.on('scroll', update)
 
     const refreshId = setTimeout(() => {
       ScrollTrigger.refresh()
-    }, 500)
+    }, 10)
 
     return () => {
       clearTimeout(refreshId)
-      lenis.off('scroll', update)
       ScrollTrigger.getAll().forEach(trigger => trigger.kill())
     }
   }, [lenis])

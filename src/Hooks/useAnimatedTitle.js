@@ -49,6 +49,7 @@ export function useAnimatedTitle () {
     }
 
     const handleResize = () => {
+      ScrollTrigger.update()
       ScrollTrigger.refresh()
     }
     window.addEventListener('resize', handleResize)
@@ -59,7 +60,7 @@ export function useAnimatedTitle () {
       end: () => `+=${hero.getBoundingClientRect().height + 200}px`,
       pin: true,
       pinSpacing: true,
-      scrub: 1,
+      scrub: true,
       invalidateOnRefresh: true,
       // markers: true,
       onRefresh: () => {

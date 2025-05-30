@@ -5,7 +5,7 @@ import { ReactLenis } from 'lenis/react'
 import { ScrollSync } from './components/ScrollSync.jsx'
 
 createRoot(document.getElementById('root')).render(
-  <ReactLenis root options={{ smooth: true }}>
+  <ReactLenis root options={{ autoRaf: false, smooth: true }}>
     <ScrollSync />
     <App />
   </ReactLenis>
