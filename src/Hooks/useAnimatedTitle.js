@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallBack } from 'react'
+import { useEffect, useRef } from 'react'
 import { projectsDataSvg } from '../components/AnimatedTitle/titles'
 
 import { gsap } from 'gsap'
@@ -7,11 +7,6 @@ import ScrollTrigger from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 export function useAnimatedTitle () {
-  const frameIdRef = useRef(null)
-  const [windowSize, setWindowSize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight
-  })
   const heroRef = useRef(null)
   const heroImgContainerRef = useRef(null)
   const heroImgTitleRef = useRef(null)
@@ -54,15 +49,20 @@ export function useAnimatedTitle () {
     }
 
     const handleResize = () => {
-      setWindowSize(prevState => {
-        if (prevState.width === window.innerWidth && prevState.height === window.innerHeight) return prevState
-        return {
-          width: window.innerWidth,
-          height: window.innerHeight
-        }
-      })
+      ScrollTrigger.refresh()
+    }
+    window.addEventListener('resize', handleResize)
 
-      frameIdRef.current = requestAnimationFrame(() => {
+    ScrollTrigger.create({
+      trigger: hero,
+      start: 'top top',
+      end: () => `+=${hero.getBoundingClientRect().height + 200}px`,
+      pin: true,
+      pinSpacing: true,
+      scrub: 1,
+      invalidateOnRefresh: true,
+      // markers: true,
+      onRefresh: () => {
         titleMask.setAttribute('d', projectsDataSvg)
 
         const titleDimensions = titleContainer.getBoundingClientRect()
@@ -79,21 +79,7 @@ export function useAnimatedTitle () {
           'transform',
           `translate(${titleHorizontalPosition - 5}, ${titleVerticalPosition}) 
           scale(${titleScaleFactor})`)
-      })
-    }
-    handleResize()
-
-    window.addEventListener('resize', handleResize)
-
-    ScrollTrigger.create({
-      trigger: hero,
-      start: 'top top',
-      end: `${hero.getBoundingClientRect().height + 200}px`,
-      pin: true,
-      pinSpacing: true,
-      scrub: 1,
-      invalidateOnRefresh: true,
-      // markers: true,
+      },
       onUpdate: (self) => {
         const scrollProgress = self.progress
         const fadeOpacity = 1 - scrollProgress * (1 / 0.15)
@@ -177,11 +163,10 @@ export function useAnimatedTitle () {
     ScrollTrigger.refresh()
 
     return () => {
-      cancelAnimationFrame(frameIdRef.current)
       window.removeEventListener('resize', handleResize)
       ScrollTrigger.killAll()
     }
-  }, [windowSize, heroImgContainerRef, heroImgTitleRef, heroImgCopyRef, fadeOverlayRef, svgOverlayRef, overlayCopyRef, overlayCopyContainerRef, titleContainerRef, titleMaskRef])
+  }, [heroImgContainerRef, heroImgTitleRef, heroImgCopyRef, fadeOverlayRef, svgOverlayRef, overlayCopyRef, overlayCopyContainerRef, titleContainerRef, titleMaskRef])
 
   return {
     heroRef,
