@@ -6,6 +6,8 @@ import ScrollTrigger from 'gsap/ScrollTrigger'
 
 export function useAnimatedTitle () {
   const timeoutId = useRef(null)
+  const lastWindowInnerHeightRef = useRef()
+  const lastWindowInnerWidthRef = useRef()
 
   const heroRef = useRef(null)
   const heroImgContainerRef = useRef(null)
@@ -19,6 +21,11 @@ export function useAnimatedTitle () {
   const titleMaskRef = useRef(null)
 
   useEffect(() => {
+    let lastWindowInnerHeight = lastWindowInnerHeightRef.current
+    let lastWindowInnerWidth = lastWindowInnerWidthRef.current
+    lastWindowInnerHeight = window.innerHeight
+    lastWindowInnerWidth = window.innerWidth
+
     const hero = heroRef.current
     const heroImgContainer = heroImgContainerRef.current
     const heroImgTitle = heroImgTitleRef.current
@@ -49,12 +56,21 @@ export function useAnimatedTitle () {
     }
 
     const handleResizeDebounce = () => {
-      return function () {
-        clearTimeout(timeoutId.current)
-        timeoutId.current = setTimeout(() => {
-          ScrollTrigger.update()
-          ScrollTrigger.refresh()
-        }, 300)
+      const heightDiff = lastWindowInnerHeight - window.innerHeight
+      const widthtDiff = lastWindowInnerWidth - window.innerWidth
+
+      if (Math.abs(heightDiff) > 100 || Math.abs(widthtDiff) > 100) {
+        lastWindowInnerHeight = window.innerHeight
+        lastWindowInnerWidth = window.innerWidth
+        return function () {
+          clearTimeout(timeoutId.current)
+          timeoutId.current = setTimeout(() => {
+            ScrollTrigger.update()
+            ScrollTrigger.refresh()
+          }, 300)
+        }
+      } else {
+        return null
       }
     }
     window.addEventListener('resize', handleResizeDebounce)
@@ -84,7 +100,8 @@ export function useAnimatedTitle () {
 
           titleMask.setAttribute(
             'transform',
-        `translate(${titleHorizontalPosition - 5}, ${titleVerticalPosition}) scale(${titleScaleFactor})`
+            `translate(${titleHorizontalPosition - 5}, ${titleVerticalPosition}) 
+            scale(${titleScaleFactor})`
           )
         },
         onUpdate: (self) => {
