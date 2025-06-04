@@ -1,15 +1,23 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export function BackgroundHeroCanvas () {
   const canvasRef = useRef(null)
+  const [canvasSize, setCanvasSize] = useState({
+    width: null,
+    height: null
+  })
+  const idTimeoutRef = useRef(null)
 
   useEffect(() => {
+    let idTimeout = idTimeoutRef.current
     const canvas = canvasRef.current
     const ctx = canvas?.getContext('2d')
     if (!canvas || !ctx) return
 
-    let width = (canvas.width = window.innerWidth)
-    let height = (canvas.height = window.innerHeight)
+    let { width, height } = canvasSize
+
+    width = (canvas.width = window.innerWidth)
+    height = (canvas.height = window.innerHeight)
 
     const colors = [
       ['#004e92', '#000428'],
@@ -29,7 +37,7 @@ export function BackgroundHeroCanvas () {
       y: 0
     }
 
-    const particles = Array.from({ length: 60 }, () => {
+    const particles = Array.from({ length: 10 }, () => {
       const duration = Math.random() * 20 + 50 // 50s - 70s
       return {
         x: Math.random() * width,
@@ -116,13 +124,18 @@ export function BackgroundHeroCanvas () {
     draw()
 
     const handleResize = () => {
-      width = canvas.width = window.innerWidth
-      height = canvas.height = window.innerHeight
+      clearTimeout(idTimeout)
+      idTimeout = setTimeout(() => {
+        setCanvasSize({
+          width: canvas.width = window.innerWidth,
+          height: canvas.height = window.innerHeight
+        })
+      }, 100)
     }
 
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
-  }, [])
+  }, [canvasSize])
 
   return (
     <canvas
@@ -135,7 +148,8 @@ export function BackgroundHeroCanvas () {
         width: '100vw',
         height: '100vh',
         zIndex: -9999,
-        background: 'radial-gradient(circle, #111117 0%, rgba(17, 17, 23, 0) 100%)'
+        background: 'radial-gradient(circle, #111117 0%, rgba(17, 17, 23, 0) 100%)',
+        overflow: 'hidden'
       }}
     />
   )
