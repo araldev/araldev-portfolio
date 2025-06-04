@@ -56,9 +56,9 @@ export function AnimatedTitle ({ children }) {
 
         <div className={styles.overlay_copy} ref={overlayCopyContainerRef}>
           <h1 ref={overlayCopyRef}>
-            Animation <br />
-            Experiment 452 <br />
-            By Araldev
+            «Code meets creativity» <br /> <br />
+            «Logic flows with art» <br /> <br />
+            «These are my projects»
           </h1>
         </div>
       </section>

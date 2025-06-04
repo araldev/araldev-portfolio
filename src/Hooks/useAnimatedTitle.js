@@ -70,98 +70,101 @@ export function useAnimatedTitle () {
     }
     window.addEventListener('resize', handleResizeDebounce)
 
-    const scrollTimeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: hero,
-        start: 'top top',
-        end: () => `+=${hero.getBoundingClientRect().height + 200}px`,
-        pin: true,
-        pinSpacing: true,
-        scrub: true,
-        invalidateOnRefresh: true,
-        // markers: true,
-        onRefresh: () => {
-          titleMask.setAttribute('d', projectsDataSvg)
+    ScrollTrigger.create({
+      id: 'hero-trigger',
+      trigger: hero,
+      start: 'top top',
+      end: () => `+=${hero.getBoundingClientRect().height + 200}px`,
+      pin: true,
+      pinSpacing: true,
+      scrub: true,
+      invalidateOnRefresh: true,
+      // markers: true,
+      onUpdate: (self) => {
+        const scrollProgress = self.progress
 
-          const titleDimensions = titleContainer.getBoundingClientRect()
-          const titleBoundingBox = titleMask.getBBox()
+        // SVG translate and scale
+        titleMask.setAttribute('d', projectsDataSvg)
 
-          const horizontalScaleRatio = titleDimensions.width / titleBoundingBox.width
-          const verticalScaleRatio = titleDimensions.height / titleBoundingBox.height
-          const titleScaleFactor = Math.min(horizontalScaleRatio, verticalScaleRatio)
+        const titleDimensions = titleContainer.getBoundingClientRect()
+        const titleBoundingBox = titleMask.getBBox()
 
-          const titleHorizontalPosition = titleDimensions.left + (titleDimensions.width - titleBoundingBox.width * titleScaleFactor) / 2 - titleBoundingBox.x * titleScaleFactor
-          const titleVerticalPosition = titleDimensions.top + (titleDimensions.height - titleBoundingBox.height * titleScaleFactor) / 2 - titleBoundingBox.y * titleScaleFactor
+        const horizontalScaleRatio = titleDimensions.width / titleBoundingBox.width
+        const verticalScaleRatio = titleDimensions.height / titleBoundingBox.height
+        const titleScaleFactor = Math.min(horizontalScaleRatio, verticalScaleRatio) * 1.6
 
-          titleMask.setAttribute(
-            'transform',
-            `translate(${titleHorizontalPosition - 5}, ${titleVerticalPosition}) 
+        const titleHorizontalPosition = titleDimensions.left + (titleDimensions.width - titleBoundingBox.width * titleScaleFactor) / 2 - titleBoundingBox.x * titleScaleFactor
+        const titleVerticalPosition = titleDimensions.top + (titleDimensions.height - titleBoundingBox.height * titleScaleFactor) / 2 - titleBoundingBox.y * titleScaleFactor
+
+        titleMask.setAttribute(
+          'transform',
+            `translate(${titleHorizontalPosition}, ${titleVerticalPosition}) 
             scale(${titleScaleFactor})`
-          )
-        },
-        onUpdate: (self) => {
-          const scrollProgress = self.progress
+        )
 
-          // Fade out heroImgTitle & heroImgCopy
-          const fadeOpacity = 1 - scrollProgress * (1 / 0.15)
-          gsap.set([heroImgTitle, heroImgCopy], {
-            opacity: scrollProgress <= 0.15 ? fadeOpacity : 0
-          })
+        // Fade out heroImgTitle & heroImgCopy
+        const fadeOpacity = 1 - scrollProgress * (1 / 0.15)
+        gsap.set([heroImgTitle, heroImgCopy], {
+          opacity: scrollProgress <= 0.15 ? fadeOpacity : 0
+        })
 
-          if (scrollProgress <= 0.85) {
-            const numberScale =
+        if (scrollProgress <= 0.85) {
+          const numberScale =
             window.innerWidth < 1500 && window.innerWidth > 1401
               ? 1.1
               : window.innerWidth < 1400 && window.innerWidth > 501
                 ? 1
                 : 1.1
 
-            const normalizedProgress = scrollProgress * (1 / 0.85)
-            const heroImgContainerScale = numberScale - 0.3 * normalizedProgress
-            const overlayScale =
+          const normalizedProgress = scrollProgress * (1 / 0.85)
+          const heroImgContainerScale = numberScale - 0.5 * normalizedProgress
+          const overlayScale =
               initialOverlayScale *
               Math.pow(1 / initialOverlayScale, normalizedProgress)
 
-            gsap.set(heroImgContainer, { scale: heroImgContainerScale })
-            gsap.set(svgOverlay, { scale: overlayScale })
+          gsap.set(heroImgContainer, { scale: heroImgContainerScale })
+          gsap.set(svgOverlay, { scale: overlayScale })
 
-            const pointerState = scrollProgress >= 0.15 ? 'unset' : 'none'
-            let fadeOverlayOpacity = 0
+          const pointerState = scrollProgress >= 0.25 ? 'unset' : 'none'
+          let fadeOverlayOpacity = 0
 
-            if (scrollProgress >= 0.25) {
-              fadeOverlayOpacity = Math.min(1, (scrollProgress - 0.25) * (1 / 0.4))
-            }
-
-            gsap.set([svgOverlay, overlayCopyContainer], {
-              pointerEvents: pointerState
-            })
-
-            gsap.set(fadeOverlay, {
-              opacity: fadeOverlayOpacity,
-              pointerEvents: pointerState
-            })
+          if (scrollProgress >= 0.25) {
+            fadeOverlayOpacity = Math.min(1, (scrollProgress - 0.25) * (1 / 0.4))
           }
 
-          // Overlay copy reveal
-          if (scrollProgress >= 0.6 && scrollProgress <= 0.85) {
-            const revealProgress = (scrollProgress - 0.6) * (1 / 0.25)
+          gsap.set([svgOverlay, overlayCopyContainer], {
+            pointerEvents: pointerState
+          })
 
-            const gradientSpread = 100
-            const gradientBottom = 240 - revealProgress * 280
-            const gradientTop = gradientBottom - gradientSpread
-            const overlayCopyScale = 1.25 - 0.25 * revealProgress
+          gsap.set(fadeOverlay, {
+            opacity: fadeOverlayOpacity,
+            pointerEvents: pointerState
+          })
+        }
 
-            overlayCopy.style.background = `linear-gradient(to bottom, #111117 0%, #111117 ${gradientTop}%, #e66461 ${gradientBottom}%, #e66461 100%)`
-            overlayCopy.style.backgroundClip = 'text'
-            overlayCopy.style.webkitBackgroundClip = 'text'
+        // Overlay copy reveal
+        if (scrollProgress >= 0.6 && scrollProgress <= 0.85) {
+          const revealProgress = (scrollProgress - 0.6) * (1 / 0.25)
 
-            gsap.set(overlayCopy, {
-              scale: overlayCopyScale,
-              opacity: revealProgress
-            })
-          } else if (scrollProgress < 0.6) {
-            gsap.set(overlayCopy, { opacity: 0 })
-          }
+          const gradientSpread = 100
+          const gradientBottom = 240 - revealProgress * 280
+          const gradientTop = gradientBottom - gradientSpread
+          const overlayCopyScale = 1.25 - 0.45 * revealProgress
+
+          overlayCopy.style.background = `linear-gradient( to bottom,
+          #111117 0%,
+          #111117 ${gradientTop}%,
+          #e66461 ${gradientBottom}%, 
+          #e66461 100%)`
+          overlayCopy.style.backgroundClip = 'text'
+          overlayCopy.style.webkitBackgroundClip = 'text'
+
+          gsap.set(overlayCopy, {
+            scale: overlayCopyScale,
+            opacity: revealProgress
+          })
+        } else if (scrollProgress < 0.6) {
+          gsap.set(overlayCopy, { opacity: 0 })
         }
       }
     })
@@ -170,7 +173,8 @@ export function useAnimatedTitle () {
 
     return () => {
       window.removeEventListener('resize', handleResizeDebounce)
-      scrollTimeline.kill()
+      const st = ScrollTrigger.getById('hero-trigger')
+      if (st) st.kill()
     }
   }, [heroImgContainerRef, heroImgTitleRef, heroImgCopyRef, fadeOverlayRef, svgOverlayRef, overlayCopyRef, overlayCopyContainerRef, titleContainerRef, titleMaskRef])
 

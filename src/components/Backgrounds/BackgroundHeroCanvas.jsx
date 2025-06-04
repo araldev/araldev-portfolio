@@ -126,9 +126,16 @@ export function BackgroundHeroCanvas () {
     const handleResize = () => {
       clearTimeout(idTimeout)
       idTimeout = setTimeout(() => {
-        setCanvasSize({
-          width: canvas.width = window.innerWidth,
-          height: canvas.height = window.innerHeight
+        setCanvasSize(prevState => {
+          const newWidth = canvas.width = window.innerWidth
+          const newHeight = canvas.height = window.innerHeight
+
+          if (prevState.width === newWidth && prevState.height === newHeight) return prevState
+
+          return {
+            width: newWidth,
+            height: newHeight
+          }
         })
       }, 100)
     }
