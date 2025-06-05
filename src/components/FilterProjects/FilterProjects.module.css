@@ -6,6 +6,7 @@
   justify-content: center;
   align-items: center;
   gap: 40px;
+  margin: 50px;
   
 
   legend {
@@ -54,6 +55,97 @@
     .filter_icon_checkbox {
       width: 100%;
       height: 100%;
+    }
+
+    .js {
+      transition: transform .3s ease-in-out;
+    }
+    .react {
+      transition: transform .3s ease-in-out;
+    }
+    .css {
+      transition: transform .3s ease-in-out;
+    }
+    .html {
+      transition: transform .3s ease-in-out;
+    }
+    .ts {
+      transition: transform .3s ease-in-out;
+    }
+    .git {
+      transition: transform .3s ease-in-out;
+    }
+    .gitHub {
+      transition: transform .3s ease-in-out;
+    }
+    .gsap {
+      transition: transform .3s ease-in-out;
+    }
+
+    &:hover .js {
+      transform: scale(1.2);
+      color: #F7DF1E;
+    }
+    &:hover .react {
+      transform: scale(1.2);
+      color: #61DAFB;
+    }
+    &:hover .css {
+      transform: scale(1.2);
+      color: #1572B6;
+    }
+    &:hover .html {
+      transform: scale(1.2);
+      color: #E34F26;
+    }
+    &:hover .ts {
+      transform: scale(1.2);
+      color: #3178C6;
+    }
+    &:hover .git {
+      transform: scale(1.2);
+      color: #F05032;
+    }
+    &:hover .gitHub {
+      transform: scale(1.2);
+      fill: #181717;
+      circle {
+        fill: #F05032;
+      }
+    }
+    &:hover .gsap {
+      transform: scale(1.2);
+      > * {
+        fill: #0ae448;
+      }
+    }
+
+    .filter_icon_checkbox:checked ~ div .js {
+      color: #F7DF1E;
+    }
+    .filter_icon_checkbox:checked ~ div .react {
+      color: #61DAFB;
+    }
+    .filter_icon_checkbox:checked ~ div .css {
+      color: #1572B6;
+    }
+    .filter_icon_checkbox:checked ~ div .html {
+      color: #E34F26;
+    }
+    .filter_icon_checkbox:checked ~ div .ts {
+      color: #3178C6;
+    }
+    .filter_icon_checkbox:checked ~ div .git {
+      color: #F05032;
+    }
+    .filter_icon_checkbox:checked ~ div .gitHub {
+      fill: #181717;
+      circle {
+        fill: #F05032;
+      }
+    }
+    .filter_icon_checkbox:checked ~ div .gsap > * {
+      fill: #0ae448;
     }
   }
 }

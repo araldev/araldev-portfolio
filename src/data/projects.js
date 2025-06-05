@@ -6,20 +6,21 @@ export const projects = [
     imgSrc: `${import.meta.env.BASE_URL}/images/shot-english-web.webp`,
     title: 'English Web',
     description: 'ejemplo de descripción no muy larga',
-    tech: [
-      techIconsDictionary.js,
-      techIconsDictionary.react
-    ]
+    tech: {
+      js: techIconsDictionary.js,
+      react: techIconsDictionary.react,
+      gitHub: techIconsDictionary.gitHub
+    }
   },
   {
     id: 2,
     imgSrc: `${import.meta.env.BASE_URL}/images/shot-english-web.webp`,
     title: 'Juego',
     description: 'ejemplo de descripción no muy larga',
-    tech: [
-      techIconsDictionary.js,
-      techIconsDictionary.css,
-      techIconsDictionary.html
-    ]
+    tech: {
+      js: techIconsDictionary.js,
+      css: techIconsDictionary.css,
+      html: techIconsDictionary.html
+    }
   }
 ]

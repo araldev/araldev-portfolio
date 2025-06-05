@@ -1,4 +1,4 @@
-import * as ICONS from '../components/icons.jsx'
+import * as ICONS from '../components/Icons/Icons.jsx'
 
 export const allIconsDictionary = {
   js: ICONS.JAVASCRIPT_ICON,
@@ -23,8 +23,4 @@ export const techIconsDictionary = {
   git: ICONS.GIT_ICON,
   gitHub: ICONS.GITHUB_ICON,
   gsap: ICONS.GSAP_ICON
-}
-
-export const iconsColors = {
-  gsapColor: '#0ae448'
 }

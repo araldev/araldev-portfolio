@@ -76,3 +76,32 @@
     0% { background-size: 200% 200%; }
     100% { background-size: 400% 400%; }
 } 
+
+/* Clases para añadir a los projectos filtrados */
+.js > svg {
+color: #F7DF1E;
+}
+.react > svg {
+color: #61DAFB;
+}
+.css > svg {
+color: #1572B6;
+}
+.html > svg {
+color: #E34F26;
+}
+.ts > svg {
+color: #3178C6;
+}
+.git > svg {
+color: #F05032;
+}
+.gitHub > svg {
+  fill: #181717;
+  circle {
+    fill: #F05032;
+  }
+}
+.gsap > svg > * {
+fill: #0ae448;
+}

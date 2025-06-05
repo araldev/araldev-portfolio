@@ -31,7 +31,7 @@
     font-weight: var(--font-weight-title);
   }
   .subTitle_hero{
-    background: var(--color-text-button-hover-gradient);
+    background: var(--color2-text-gradient);
     background-clip: text;
     color: transparent;
     -webkit-background-clip: text;

@@ -1,13 +1,23 @@
 import styles from './Projects.module.css'
 import { projects } from '../../data/projects.js'
 import { FilterProjects } from '../FilterProjects/FilterProjects.jsx'
+import { IsIconCheckFilterProvider } from '../../contexts/IsIconCheckFilter.jsx'
+import { useIsIconCheckFilter } from '../../Hooks/useIsIconCheckFilter.js'
 
 function TechsIcons ({ project }) {
-  return project.tech.map((eachTech, index) => (
-    <span key={`${project.id}-${index}`}>
-      {eachTech}
-    </span>
-  ))
+  const { isIconCheck } = useIsIconCheckFilter()
+  const techIcons = []
+
+  for (const key in project.tech) {
+    const className = isIconCheck[key] ? styles[key] : ''
+    techIcons.push(
+      <span key={`${project.id}-${key}`} className={className}>
+        {project.tech[key]}
+      </span>
+    )
+  }
+
+  return techIcons
 }
 
 function ProjectCard ({ project }) {
@@ -28,16 +38,18 @@ function ProjectCard ({ project }) {
 
 export function Projects () {
   return (
-    <>
-
+    <IsIconCheckFilterProvider>
       <section id='projects' className={styles.projects_section}>
+
         <FilterProjects />
+
         {
           projects.map(project => (
             <ProjectCard key={project.id} project={project} />
           ))
         }
+
       </section>
-    </>
+    </IsIconCheckFilterProvider>
   )
 }
