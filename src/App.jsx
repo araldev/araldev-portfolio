@@ -5,6 +5,7 @@ import { NavHeader } from './components/NavHeader/NavHeader.jsx'
 import { Projects } from './components/Projects/Projects.jsx'
 import { useAnimatedNavHeader } from './Hooks/useAnimatedNavHeader.js'
 import { BackgroundHeroCanvas } from './components/Backgrounds/BackgroundHeroCanvas.jsx'
+import { IsIconCheckFilterProvider } from './contexts/IsIconCheckFilter.jsx'
 
 export default function () {
   const mainRef = useRef()
@@ -17,7 +18,9 @@ export default function () {
         <HeroSection />
       </AnimatedTitle>
       <main ref={mainRef} className='container_main'>
-        <Projects />
+        <IsIconCheckFilterProvider>
+          <Projects />
+        </IsIconCheckFilterProvider>
         <BackgroundHeroCanvas />
       </main>
     </>
