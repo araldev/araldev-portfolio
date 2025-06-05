@@ -1,13 +1,14 @@
 .projects_section {
-  max-width: 100%;
+  max-width: 80%;
   width: var(--width-web-content);
   height: auto;
-  padding: var(--padding-web-content);
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 40px;
+  padding: var(--padding-web-content);
 }
 
 .project_card{
@@ -27,15 +28,20 @@
   border-radius: var(--border-radius);
   position: relative;
   gap: 10px;
-  animation: radialZoom 10s ease-in-out infinite alternate;
+  animation: radialZoom 5s ease-in-out infinite alternate;
 
-  div {
+  .project_image_container {
     width: 90%;
   }
 
   h2 {
     font-size: var(--font-size-subtitle);
     font-weight: var(--font-weight-subtitle);
+    background: var(--color-text-gradient);
+    background-clip: text;
+    color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
   p {
@@ -44,6 +50,25 @@
     width: 52ch;
     font-size: var(--font-size-paragraph);
     font-weight: var(--font-weight-paragraph);
+  }
+
+  .project_icons_container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+    span {
+      width: fit-content;
+      height: fit-content;
+      > * {
+        width: 40px;
+        height: 40px;
+      }
+    }
+
   }
 }
 

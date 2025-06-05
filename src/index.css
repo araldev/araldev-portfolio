@@ -10,7 +10,7 @@
   /* scroll-behavior: smooth; */
   --width-web-content: 1200px;
   --padding-nav: 30px 40px;
-  --padding-web-content: 60px 70px;
+  --padding-web-content: 60px 0px;
   --border-radius: 12px;
   --bg-blur-transparent: #ffffff50;
   --shadow-button-box: 0 4px 15px rgba(0, 0, 0, .4);
@@ -27,6 +27,7 @@
     0 0 25px 15px rgba(224, 247, 244, 0.5),
     0 0 40px 20px rgba(224, 247, 244, 0.4);
   --color-text-gradient: linear-gradient(90deg, #00C9FF, #92FE9D);
+  --color2-text-gradient: linear-gradient(135deg, #8fc6ff 0%, #5a9cff  100%);
   --color-text-button-gradient: linear-gradient(90deg, #92FE9D 20%, #00C9FF 50%);
   --color-text-button-hover-gradient: linear-gradient(135deg, #004e92 0%, #000428 100%);
   --color-bg-button-gradient: linear-gradient(135deg, #004e92 0%, #000428 100%);

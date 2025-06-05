@@ -1,32 +1,42 @@
 import styles from './Projects.module.css'
+import { projects } from '../../data/projects.js'
+import { FilterProjects } from '../FilterProjects/FilterProjects.jsx'
+
+function TechsIcons ({ project }) {
+  return project.tech.map((eachTech, index) => (
+    <span key={`${project.id}-${index}`}>
+      {eachTech}
+    </span>
+  ))
+}
+
+function ProjectCard ({ project }) {
+  return (
+    <aside className={styles.project_card}>
+      <div className={styles.project_image_container}>
+        <img src={project.imgSrc} alt='Thumbnail about my project english-web' />
+      </div>
+      <h2>{project.title}</h2>
+      <p>{project.description}</p>
+
+      <div className={styles.project_icons_container}>
+        <TechsIcons project={project} />
+      </div>
+    </aside>
+  )
+}
 
 export function Projects () {
   return (
     <>
+
       <section id='projects' className={styles.projects_section}>
-        <aside className={styles.project_card}>
-          <div>
-            <img src={`${import.meta.env.BASE_URL}/images/shot-english-web.webp`} alt='Thumbnail about my project english-web' />
-          </div>
-          <h2>English Web</h2>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quidem ea iusto sed nemo asperiores quas officia atque maxime odit, saepe facilis perferendis ut quaerat inventore! Itaque dolores maxime repellendus eaque.</p>
-        </aside>
-
-        <aside className={styles.project_card}>
-          <div>
-            <img src={`${import.meta.env.BASE_URL}/images/shot-english-web.webp`} alt='Thumbnail about my project english-web' />
-          </div>
-          <h2>English Web</h2>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quidem ea iusto sed nemo asperiores quas officia atque maxime odit, saepe facilis perferendis ut quaerat inventore! Itaque dolores maxime repellendus eaque.</p>
-        </aside>
-
-        <aside className={styles.project_card}>
-          <div>
-            <img src={`${import.meta.env.BASE_URL}/images/shot-english-web.webp`} alt='Thumbnail about my project english-web' />
-          </div>
-          <h2>English Web</h2>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quidem ea iusto sed nemo asperiores quas officia atque maxime odit, saepe facilis perferendis ut quaerat inventore! Itaque dolores maxime repellendus eaque.</p>
-        </aside>
+        <FilterProjects />
+        {
+          projects.map(project => (
+            <ProjectCard key={project.id} project={project} />
+          ))
+        }
       </section>
     </>
   )

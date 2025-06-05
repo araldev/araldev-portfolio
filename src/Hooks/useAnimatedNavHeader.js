@@ -1,4 +1,4 @@
-import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useEffect } from 'react'
 import { show } from '../components/NavHeader/NavHeader.module.css'
 
@@ -9,23 +9,23 @@ export function useAnimatedNavHeader ({ mainRef, navHeaderRef }) {
     const navHeader = navHeaderRef.current
     const main = mainRef.current
 
-    const ctxGsapNavHeader = gsap.context(() => {
-      gsap.set(navHeader, {
-        scrollTrigger: {
-          trigger: main,
-          start: 'top bottom',
-          // markers: true,
-          onEnter: () => {
-            navHeader.classList.add(show)
-          },
-          onLeaveBack: () => {
-            navHeader.classList.remove(show)
-          }
-        }
-      })
+    ScrollTrigger.create({
+      id: 'nav-trigger',
+      trigger: main,
+      start: 'top bottom',
+      // markers: true,
+      onEnter: () => {
+        navHeader.classList.add(show)
+      },
+      onLeaveBack: () => {
+        navHeader.classList.remove(show)
+      }
     })
 
-    return () => ctxGsapNavHeader.revert()
+    return () => {
+      const st = ScrollTrigger.getById('nav-trigger')
+      if (st) st.kill()
+    }
   }, [navHeaderRef, mainRef])
 
   return null

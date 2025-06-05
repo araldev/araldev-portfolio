@@ -29,7 +29,6 @@ export function useNavPaths ({ navMenuRef }) {
     event.preventDefault()
 
     if (navMenuRef.current) navMenuRef.current.checked = false
-    console.log(navMenuRef.current)
 
     onChange()
 
@@ -63,16 +62,12 @@ export function useNavPaths ({ navMenuRef }) {
       })
     }
 
+    if (frameIdRef.current !== null) {
+      cancelAnimationFrame(frameIdRef.current)
+    }
+
     frameIdRef.current = requestAnimationFrame(goTo)
   }, [lenis])
-
-  useEffect(() => {
-    return () => {
-      if (frameIdRef.current !== null) {
-        cancelAnimationFrame(frameIdRef.current)
-      }
-    }
-  }, [])
 
   return { handleClick }
 }

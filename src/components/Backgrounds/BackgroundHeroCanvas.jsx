@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import styles from './BackgroundHeroCanvas.module.css'
 
 export function BackgroundHeroCanvas () {
   const canvasRef = useRef(null)
@@ -145,19 +146,11 @@ export function BackgroundHeroCanvas () {
   }, [canvasSize])
 
   return (
-    <canvas
-      ref={canvasRef}
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        maxWidth: '100%',
-        width: '100vw',
-        height: '100vh',
-        zIndex: -9999,
-        background: 'radial-gradient(circle, #111117 0%, rgba(17, 17, 23, 0) 100%)',
-        overflow: 'hidden'
-      }}
-    />
+    <div className={styles.canvas_container}>
+      <canvas
+        className={styles.canvas}
+        ref={canvasRef}
+      />
+    </div>
   )
 }
