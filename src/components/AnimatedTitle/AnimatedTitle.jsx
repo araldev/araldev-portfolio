@@ -1,7 +1,7 @@
 import styles from './AnimatedTitle.module.css'
 import { useId } from 'react'
 import { useAnimatedTitle } from '../../Hooks/useAnimatedTitle.js'
-import avatar from '../../utils/yo-sin-fondo.png'
+import avatar from '../../assets/yo-sin-fondo.webp'
 
 export function AnimatedTitle ({ children }) {
   const titleRevealMaskId = useId()

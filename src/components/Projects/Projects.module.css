@@ -87,6 +87,9 @@ color: #61DAFB;
 .css > svg {
 color: #1572B6;
 }
+.tailwind > svg {
+color: #06B6D4;
+}
 .html > svg {
 color: #E34F26;
 }
@@ -97,9 +100,9 @@ color: #3178C6;
 color: #F05032;
 }
 .gitHub > svg {
-  fill: #181717;
+  fill: #F05032;
   circle {
-    fill: #F05032;
+    fill: #181717;
   }
 }
 .gsap > svg > * {

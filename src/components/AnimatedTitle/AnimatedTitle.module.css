@@ -71,7 +71,7 @@
 }
 
 .fade_overlay {
-  background-color: #fff;
+  background: var(--color-text-gradient);
   will-change: opacity;
   pointer-events: none;
 }
@@ -82,6 +82,7 @@
   left: 0;
   transform-origin: 49.7% 19%;
   width: 100%;
+  color: var(--fon);
   height: 100%;
   z-index: 1;
   pointer-events: none;

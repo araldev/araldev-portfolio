@@ -143,7 +143,7 @@ export function BackgroundHeroCanvas () {
 
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
-  }, [canvasSize])
+  }, [])
 
   return (
     <div className={styles.canvas_container}>

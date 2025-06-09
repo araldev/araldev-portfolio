@@ -6,8 +6,7 @@
 }
 
 :root {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  /* scroll-behavior: smooth; */
+  font-family: Roboto, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   --width-web-content: 1200px;
   --padding-nav: 30px 40px;
   --padding-web-content: 60px 0px;
@@ -44,7 +43,7 @@
   --font-weight-subtitle: 500;
   --font-size-paragraph: clamp(1rem, 1.2vw + 0.5rem, 1.25rem);
   --font-weight-paragraph: 400;
-  --font-weight-nav: 650;
+  --font-weight-nav: 700;
   --font-size-nav: clamp(1rem, 0.8vw, 1.5rem);
   --button-border-radius: 10px;
   --button-padding: clamp(0.5rem, 1vw, 0.75rem) clamp(1rem, 2vw, 2rem);
@@ -63,7 +62,7 @@ body {
 .container_main {
   max-width: 100%;
   width: 100%;
-  height: 400vh;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

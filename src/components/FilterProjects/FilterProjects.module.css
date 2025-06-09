@@ -57,94 +57,104 @@
       height: 100%;
     }
 
-    .js {
+    .js > svg {
       transition: transform .3s ease-in-out;
     }
-    .react {
+    .react > svg {
       transition: transform .3s ease-in-out;
     }
-    .css {
+    .css > svg {
       transition: transform .3s ease-in-out;
     }
-    .html {
+    .tailwind > svg {
       transition: transform .3s ease-in-out;
     }
-    .ts {
+    .html > svg {
       transition: transform .3s ease-in-out;
     }
-    .git {
+    .ts > svg {
       transition: transform .3s ease-in-out;
     }
-    .gitHub {
+    .git > svg {
       transition: transform .3s ease-in-out;
     }
-    .gsap {
+    .gitHub > svg {
+      transition: transform .3s ease-in-out;
+    }
+    .gsap > svg {
       transition: transform .3s ease-in-out;
     }
 
-    &:hover .js {
+    &:hover .js > svg {
       transform: scale(1.2);
       color: #F7DF1E;
     }
-    &:hover .react {
+    &:hover .react > svg {
       transform: scale(1.2);
       color: #61DAFB;
     }
-    &:hover .css {
+    &:hover .css > svg {
       transform: scale(1.2);
       color: #1572B6;
     }
-    &:hover .html {
+    &:hover .tailwind > svg {
+      transform: scale(1.2);
+      color: #06B6D4;
+    }
+    &:hover .html > svg {
       transform: scale(1.2);
       color: #E34F26;
     }
-    &:hover .ts {
+    &:hover .ts > svg {
       transform: scale(1.2);
       color: #3178C6;
     }
-    &:hover .git {
+    &:hover .git > svg {
       transform: scale(1.2);
       color: #F05032;
     }
-    &:hover .gitHub {
+    &:hover .gitHub > svg {
       transform: scale(1.2);
-      fill: #181717;
+      fill: #F05032;
       circle {
-        fill: #F05032;
+        fill: #181717;
       }
     }
-    &:hover .gsap {
+    &:hover .gsap > svg {
       transform: scale(1.2);
       > * {
         fill: #0ae448;
       }
     }
 
-    .filter_icon_checkbox:checked ~ div .js {
+    .filter_icon_checkbox:checked ~ .js > svg {
       color: #F7DF1E;
     }
-    .filter_icon_checkbox:checked ~ div .react {
+    .filter_icon_checkbox:checked ~ .react > svg {
       color: #61DAFB;
     }
-    .filter_icon_checkbox:checked ~ div .css {
+    .filter_icon_checkbox:checked ~ .css > svg {
       color: #1572B6;
     }
-    .filter_icon_checkbox:checked ~ div .html {
+    .filter_icon_checkbox:checked ~ .tailwind > svg {
+      color: #06B6D4;
+    }
+    .filter_icon_checkbox:checked ~ .html > svg{
       color: #E34F26;
     }
-    .filter_icon_checkbox:checked ~ div .ts {
+    .filter_icon_checkbox:checked ~ .ts > svg {
       color: #3178C6;
     }
-    .filter_icon_checkbox:checked ~ div .git {
+    .filter_icon_checkbox:checked ~ .git > svg {
       color: #F05032;
     }
-    .filter_icon_checkbox:checked ~ div .gitHub {
-      fill: #181717;
+    .filter_icon_checkbox:checked ~ .gitHub > svg {
+      fill: #F05032;
       circle {
-        fill: #F05032;
+        fill: #181717;
       }
     }
-    .filter_icon_checkbox:checked ~ div .gsap > * {
+    .filter_icon_checkbox:checked ~ .gsap > svg > * {
       fill: #0ae448;
     }
   }

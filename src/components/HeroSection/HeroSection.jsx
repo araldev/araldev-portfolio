@@ -4,7 +4,6 @@ import { BackgroundHeroCanvas } from '../Backgrounds/BackgroundHeroCanvas.jsx'
 export function HeroSection () {
   return (
     <header id='about-me' className={styles.container_header}>
-      <BackgroundHeroCanvas />
       <aside className={styles.hero_section}>
         <h1 className={styles.title_hero}>Arturo Alba García</h1>
         <h2 className={styles.subTitle_hero}>Frontend Developer</h2>
@@ -12,6 +11,7 @@ export function HeroSection () {
         <a className={styles.button_cv} href='../public/cv-araldev.pdf' download>
           Descargar CV
         </a>
+        <BackgroundHeroCanvas />
       </aside>
     </header>
   )

@@ -154,8 +154,8 @@ export function useAnimatedTitle () {
           overlayCopy.style.background = `linear-gradient( to bottom,
           #111117 0%,
           #111117 ${gradientTop}%,
-          #e66461 ${gradientBottom}%, 
-          #e66461 100%)`
+          #8fc6ff ${gradientBottom}%, 
+          #5a9cff ${100 + gradientBottom}%)`
           overlayCopy.style.backgroundClip = 'text'
           overlayCopy.style.webkitBackgroundClip = 'text'
 

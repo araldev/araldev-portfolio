@@ -1,6 +1,6 @@
 import { useId } from 'react'
 import styles from './FilterProjects.module.css'
-import { techIconsDictionary } from '../../data/icons.js'
+import { techIcons } from '../../data/icons.js'
 import { useIsIconCheckFilter } from '../../Hooks/useIsIconCheckFilter.js'
 
 function TechIcons () {
@@ -12,9 +12,7 @@ function TechIcons () {
     setIsIconCheck(prevState => {
       const newState = { ...prevState }
       if (key) {
-        for (const prevKey in newState) {
-          if (prevKey === key) newState[prevKey] = !newState[prevKey]
-        }
+        newState[key] = !newState[key]
         return newState
       }
     })
@@ -23,8 +21,9 @@ function TechIcons () {
   return (
     <>
       {
-        Object.entries(techIconsDictionary).map(([key, eachTechIcon], index) => {
+        Object.entries(techIcons).map(([key, eachTechIcon], index) => {
           const idFilter = `${idBaseFilter}-${index}`
+          const styleForIcon = key ? styles[key] : ''
 
           return (
             <label className={styles.filter_icon_label} key={index} htmlFor={idFilter}>
@@ -36,7 +35,7 @@ function TechIcons () {
                 type='checkbox'
                 hidden
               />
-              <div className={styles.filter_icon_container}>
+              <div className={`${styles.filter_icon_container} ${styleForIcon}`}>
                 {eachTechIcon}
               </div>
             </label>
