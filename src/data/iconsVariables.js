@@ -25,5 +25,7 @@ export const allIconsDictionaryKey = {
   gsap: 'gsap',
   linkedin: 'linkedin',
   discord: 'discord',
-  gmail: 'gmail'
+  gmail: 'gmail',
+  arrowUp: 'arrowUp',
+  arrowDown: 'arrowDown'
 }

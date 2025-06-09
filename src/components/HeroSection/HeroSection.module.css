@@ -6,14 +6,15 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* isolation: isolate; */
   position: relative;
+  z-index: 1;
 }
 
 /* Hero Section */
 .hero_section {
   max-width: 80%;
   width: var(--width-web-content);
+  min-width: 0;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -46,62 +47,6 @@
     transform: translateZ(0); /* Para evitar que haga un rerenderizado por culpa del botón */
     -webkit-font-smoothing: antialiased; /* Para navegadores basados en WebKit (Chrome, Safari) */
   }
-  /* Button */
-  .button_cv{
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    width: fit-content;
-    height: auto;
-    min-height: 40px;
-    border-radius: var(--button-border-radius);
-    padding: var(--button-padding);
-    font-size: var(--font-size-button);
-    font-weight: var(--font-weight-button);
-    background: var(--color-text-button-gradient);
-    background-clip: text;
-    color: transparent;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    box-shadow: var(--shadow-button-box);
-    overflow: hidden;
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--color-bg-button-gradient);
-      border-radius: var(--button-border-radius);
-      z-index: -3;
-    }
-    &::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--color-bg-button-hover-gradient);
-      border-radius: var(--button-border-radius);
-      z-index: -2;
-      transform: translateX(-100%);
-      transition: transform .3s ease-in-out;
-    }
-    &:hover {
-      background: var(--color-text-button-hover-gradient);
-      background-clip: text;
-      color: transparent;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      &::after {
-        transform: translateX(0%);
-      }
-    }
-  }
 
   .socials_hero_container{
     display: flex;
@@ -109,50 +54,111 @@
     align-items: center;
     gap: 20px;
     flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
 
-    svg {
-      width: 100%;
+    /* Button */
+    .button_cv{
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      width: fit-content;
+      height: auto;
+      min-height: 40px;
+      border-radius: var(--button-border-radius);
+      padding: var(--button-padding);
+      font-size: var(--font-size-button);
+      font-weight: var(--font-weight-button);
+      background: var(--color-text-button-gradient);
+      background-clip: text;
+      color: transparent;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      box-shadow: var(--shadow-button-box);
+      overflow: hidden;
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--color-bg-button-gradient);
+        border-radius: var(--button-border-radius);
+        z-index: -3;
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--color-bg-button-hover-gradient);
+        border-radius: var(--button-border-radius);
+        z-index: -2;
+        transform: translateX(-102%);
+        transition: transform .3s ease-in-out;
+      }
+      &:hover {
+        background: var(--color-text-button-hover-gradient);
+        background-clip: text;
+        color: transparent;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        &::after {
+          transform: translateX(0%);
+        }
+      }
+    }
+
+    .social_icons_container{
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      width: auto;
       height: 100%;
-    }
+      gap: 20px;
+      flex-wrap: nowrap;
 
-    .linkedin {
-      text-decoration: none;
-      width: 40px;
-      height: 40px;
-      transition: transform .2s ease-in-out;
-      cursor: pointer;
-      &:hover {
-        transform: scale(1.2);
+      svg {
+        width: 40px;
+        height: 40px;
       }
-    }
-    .gmail {
-      text-decoration: none;
-      width: 40px;
-      height: 40px;
-      transition: transform .2s ease-in-out;
-      cursor: pointer;
-      &:hover {
-        transform: scale(1.2);
+  
+      .linkedin {
+        text-decoration: none;
+        transition: transform .2s ease-in-out;
+        cursor: pointer;
+        &:hover {
+          transform: scale(1.2);
+        }
       }
-    }
-    .gitHub {
-      text-decoration: none;
-      width: 40px;
-      height: 40px;
-      transition: transform .2s ease-in-out;
-      cursor: pointer;
-      &:hover {
-        transform: scale(1.2);
+      .gmail {
+        text-decoration: none;
+        transition: transform .2s ease-in-out;
+        cursor: pointer;
+        &:hover {
+          transform: scale(1.2);
+        }
       }
-    }
-    .discord {
-      text-decoration: none;
-      width: 40px;
-      height: 40px;
-      transition: transform .2s ease-in-out;
-      cursor: pointer;
-      &:hover {
-        transform: scale(1.2);
+      .gitHub {
+        text-decoration: none;
+        transition: transform .2s ease-in-out;
+        cursor: pointer;
+        &:hover {
+          transform: scale(1.2);
+        }
+      }
+      .discord {
+        text-decoration: none;
+        transition: transform .2s ease-in-out;
+        cursor: pointer;
+        &:hover {
+          transform: scale(1.2);
+        }
       }
     }
   }

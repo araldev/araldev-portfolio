@@ -13,18 +13,20 @@ export function HeroSection () {
           <a className={styles.button_cv} href='../public/cv-araldev.pdf' download>
             Descargar CV
           </a>
-          <a href='https://www.linkedin.com/in/araldev/' target='_blank' rel='noopener noreferrer' className={styles.linkedin}>
-            {socialIcons.linkedin}
-          </a>
-          <a href='mailto:arturo.r2d2.dev@gmail.com' target='_blank' rel='noopener noreferrer' className={styles.gmail}>
-            {socialIcons.gmail}
-          </a>
-          <a href='https://github.com/araldev' target='_blank' rel='noopener noreferrer' className={styles.gitHub}>
-            {socialIcons.gitHub}
-          </a>
-          <a href='https://discord.gg/jeTvBNjp' target='_blank' rel='noopener noreferrer' className={styles.discord}>
-            {socialIcons.discord}
-          </a>
+          <nav className={styles.social_icons_container}>
+            <a href='https://www.linkedin.com/in/araldev/' target='_blank' rel='noopener noreferrer' className={styles.linkedin}>
+              {socialIcons.linkedin}
+            </a>
+            <a href='mailto:arturo.r2d2.dev@gmail.com' target='_blank' rel='noopener noreferrer' className={styles.gmail}>
+              {socialIcons.gmail}
+            </a>
+            <a href='https://github.com/araldev' target='_blank' rel='noopener noreferrer' className={styles.gitHub}>
+              {socialIcons.gitHub}
+            </a>
+            <a href='https://discord.gg/jeTvBNjp' target='_blank' rel='noopener noreferrer' className={styles.discord}>
+              {socialIcons.discord}
+            </a>
+          </nav>
         </div>
         <BackgroundHeroCanvas />
       </aside>

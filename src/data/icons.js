@@ -21,5 +21,6 @@ export const techIcons = {
 }
 
 export const utilsIcons = {
-  arrowUp: ICONS.ARROW_UP
+  arrowUp: ICONS.ARROW_UP,
+  arrowDown: ICONS.ARROW_DOWN
 }

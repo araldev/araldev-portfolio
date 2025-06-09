@@ -3,6 +3,7 @@ import { useId } from 'react'
 import { useAnimatedTitle } from '../../Hooks/useAnimatedTitle.js'
 import { usePreloadImg } from '../../Hooks/usePreloadImg.js'
 import avatar from '../../assets/yo-sin-fondo.webp'
+import { utilsIcons } from '../../data/icons.js'
 
 export function AnimatedTitle ({ children }) {
   const titleRevealMaskId = useId()
@@ -32,7 +33,8 @@ export function AnimatedTitle ({ children }) {
           </div>
 
           <div className={styles.hero_img_copy} ref={heroImgCopyRef}>
-            <p className={styles.paragraph}>Scroll down to reveal</p>
+            <p className={styles.paragraph}>Scroll down</p>
+            {utilsIcons.arrowDown}
           </div>
         </div>
 
@@ -58,11 +60,11 @@ export function AnimatedTitle ({ children }) {
         <div className={styles.title_container} ref={titleContainerRef} />
 
         <div className={styles.overlay_copy} ref={overlayCopyContainerRef}>
-          <h1 ref={overlayCopyRef}>
+          <h2 ref={overlayCopyRef}>
             «Code meets creativity» <br /> <br />
             «Logic flows with art» <br /> <br />
             «These are my projects»
-          </h1>
+          </h2>
         </div>
       </section>
     </>
