@@ -23,11 +23,11 @@ export function AnimatedTitle ({ children }) {
 
   return (
     <>
-      <section className={styles.hero} ref={heroRef}>
-        <div className={styles.hero_img_container} ref={heroImgContainerRef}>
+      <section className={styles.animation_container} ref={heroRef}>
+        <div className={styles.hero_container} ref={heroImgContainerRef}>
           {children}
 
-          <div className={styles.hero_img_title} ref={heroImgTitleRef}>
+          <div className={styles.hero_img_container} ref={heroImgTitleRef}>
             <img src={avatar} alt='Profile Image' />
           </div>
 

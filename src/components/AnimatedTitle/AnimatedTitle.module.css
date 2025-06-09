@@ -5,7 +5,7 @@
   line-height: .8;
 }
 
-.hero {
+.animation_container {
   position: relative;
   max-width: 100%;
   width: 100vw;
@@ -15,8 +15,8 @@
   overflow: hidden;
 }
 
-.hero_img_container,
-.hero_img_container img,
+.hero_container,
+.hero_container img,
 .fade_overlay {
   position: absolute;
   top: 0;
@@ -26,13 +26,13 @@
   height: 100%;
 }
 
-.hero_img_container > :first-child {
+.hero_container > :first-child {
   max-width: 100%;
   width: 100%;
   height: auto;
 }
 
-.hero_img_title {
+.hero_img_container {
   position: absolute;
   top: 30%;
   left: 65%;
@@ -138,19 +138,19 @@
 }
 
 @media(max-width: 1600px) {
-  .hero_img_title {
+  .hero_img_container {
     top: 30%;
     left: 70%;
   }
 }
 @media(max-width: 1300px) {
-  .hero_img_title {
+  .hero_img_container {
     top: 30%;
     left: 75%;
   }
 }
 @media(max-width: 1050px) {
-  .hero_img_title {
+  .hero_img_container {
     top: 30%;
     left: 80%;
   }
@@ -164,7 +164,7 @@
     letter-spacing: 0;
   }
 
-  .hero_img_title {
+  .hero_img_container {
     top: 30%;
     left: 82%;
   }
@@ -174,7 +174,7 @@
   }
 }
 @media(max-width: 850px) {
-  .hero_img_title {
+  .hero_img_container {
     top: 3%;
     left: 70%;
 
@@ -193,7 +193,7 @@
   }
 }
 @media(max-width: 500px) {
-  .hero_img_title {
+  .hero_img_container {
     top: 5%;
     left: 70%;
 

@@ -172,6 +172,7 @@
     flex-direction: column;
     max-width: 50%;
     width: 50%;
+    min-width: 280px;
     height: 100vh;
     opacity: 0;
     transform: translateX(100%);

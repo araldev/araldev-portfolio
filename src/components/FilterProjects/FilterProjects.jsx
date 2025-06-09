@@ -49,7 +49,7 @@ function TechIcons () {
 export function FilterProjects () {
   return (
     <form className={styles.form_filter_container}>
-      <legend>Search projects by technology used</legend>
+      <legend>Select and search projects by technology used</legend>
       <div className={styles.filter_container}>
         <TechIcons />
       </div>
