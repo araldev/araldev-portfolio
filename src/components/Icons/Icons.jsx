@@ -129,3 +129,11 @@ export const GMAIL_ICON = (
     </defs>
   </svg>
 )
+
+// Utils Svg
+export const ARROW_UP = (
+  <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1' strokeLinecap='round' strokeLinejoin='round'>
+    <path d='M0 12a9 9 0 1 0 24 0a9 9 0 0 0 -24 0' />
+    <path d='M17 11v6l-5 -4l-5 4v-6l5 -4z' />
+  </svg>
+)

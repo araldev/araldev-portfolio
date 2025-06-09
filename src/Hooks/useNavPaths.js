@@ -52,9 +52,6 @@ export function useNavPaths ({ navMenuRef }) {
     }
 
     function goTo () {
-      console.log('lenis: ', lenis)
-      console.log('targetElement: ', targetElement.offsetTop)
-
       lenis.scrollTo(targetElement, {
         offset: offsetValue,
         duration: 1.5,

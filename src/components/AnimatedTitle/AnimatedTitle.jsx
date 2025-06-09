@@ -1,6 +1,7 @@
 import styles from './AnimatedTitle.module.css'
 import { useId } from 'react'
 import { useAnimatedTitle } from '../../Hooks/useAnimatedTitle.js'
+import { usePreloadImg } from '../../Hooks/usePreloadImg.js'
 import avatar from '../../assets/yo-sin-fondo.webp'
 
 export function AnimatedTitle ({ children }) {
@@ -18,6 +19,8 @@ export function AnimatedTitle ({ children }) {
     titleMaskRef
   } = useAnimatedTitle()
 
+  usePreloadImg(avatar)
+
   return (
     <>
       <section className={styles.hero} ref={heroRef}>
@@ -25,7 +28,7 @@ export function AnimatedTitle ({ children }) {
           {children}
 
           <div className={styles.hero_img_title} ref={heroImgTitleRef}>
-            <img src={avatar} alt='AVATAR' />
+            <img src={avatar} alt='Profile Image' />
           </div>
 
           <div className={styles.hero_img_copy} ref={heroImgCopyRef}>

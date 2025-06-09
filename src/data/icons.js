@@ -19,3 +19,7 @@ export const techIcons = {
   gitHub: ICONS.GITHUB_ICON,
   gsap: ICONS.GSAP_ICON
 }
+
+export const utilsIcons = {
+  arrowUp: ICONS.ARROW_UP
+}

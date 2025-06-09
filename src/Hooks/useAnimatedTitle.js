@@ -40,18 +40,6 @@ export function useAnimatedTitle () {
 
     if (!hero || !heroImgContainer || !heroImgTitle || !titleMask || !overlayCopy || !overlayCopyContainer || !fadeOverlay || !svgOverlay || !titleContainer || !heroImgCopy) {
       console.warn('GSAP/ScrollTrigger: Algunos elementos no se encontraron. La animación se intentará de nuevo cuando los refs se asignen.')
-      console.log({
-        hero,
-        heroImgContainer,
-        heroImgTitle,
-        heroImgCopy,
-        fadeOverlay,
-        svgOverlay,
-        overlayCopy,
-        overlayCopyContainer,
-        titleContainer,
-        titleMask
-      })
       return
     }
 
