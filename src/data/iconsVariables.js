@@ -8,9 +8,9 @@ export const iconsColors = {
   git: '#F05032',
   gitHub: ['#181717', '#ffffff'],
   gsap: '#0ae448',
-  linkedin: '#0077B5',
-  discord: ['#5865F2', '#FFFFFF', '#23272A'],
-  gmail: ['#D93025', '#1A73E8', '#188038', '#F9AB00', '#D14836']
+  linkedin: '#0a66c2',
+  discord: ['#5865F2', '#E0E3FF'],
+  gmail: ['#4285F4', '#34A853', '#FBBC04', '#EA4335', '#C5221F']
 }
 
 export const allIconsDictionaryKey = {

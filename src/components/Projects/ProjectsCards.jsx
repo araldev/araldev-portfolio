@@ -1,4 +1,4 @@
-import styles from './Projects.module.css'
+import styles from './ProjectsCards.module.css'
 import { FilterProjects } from '../FilterProjects/FilterProjects.jsx'
 import { useIsIconCheckFilter } from '../../Hooks/useIsIconCheckFilter.js'
 import { useSortProjects } from '../../Hooks/useSortProjects.js'
@@ -35,7 +35,7 @@ function ProjectCard ({ project }) {
   )
 }
 
-export function Projects () {
+export function ProjectsCards () {
   const { sortProjects } = useSortProjects()
 
   return (
@@ -43,11 +43,13 @@ export function Projects () {
 
       <FilterProjects />
 
-      {
+      <div className={styles.projects_cards_container}>
+        {
           sortProjects.map(project => (
             <ProjectCard key={project.id} project={project} />
           ))
         }
+      </div>
 
     </section>
   )

@@ -1,6 +1,7 @@
 import { useId, useRef, forwardRef } from 'react'
 import styles from './NavHeader.module.css'
 import { useNavPaths } from '../../Hooks/useNavPaths.js'
+import brand from '../../assets/brand-araldev-miniatura.webp'
 
 export const NavHeader = forwardRef((props, ref) => {
   const navMenuRef = useRef(null)
@@ -8,7 +9,9 @@ export const NavHeader = forwardRef((props, ref) => {
   const idNavIcon = useId()
   return (
     <nav ref={ref} className={styles.nav_header}>
-      <div className={styles.nav_logo}>Logo</div>
+      <div className={styles.nav_logo}>
+        <img src={brand} alt='Brand Araldev' />
+      </div>
 
       <label htmlFor={idNavIcon} className={styles.nav_icon}>
         <input ref={navMenuRef} className={styles.checkbox} id={idNavIcon} type='checkbox' hidden />
