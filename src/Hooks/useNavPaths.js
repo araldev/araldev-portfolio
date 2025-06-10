@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef } from 'react'
 import { useLenis } from 'lenis/react'
 
-export function useNavPaths ({ navMenuRef }) {
+export function useNavPaths ({ navMenuRef = null }) {
   const lenis = useLenis()
   const frameIdRef = useRef(null)
 
@@ -15,6 +15,7 @@ export function useNavPaths ({ navMenuRef }) {
   }
 
   useEffect(() => {
+    if (!navMenuRef) return
     navMenuRef.current.addEventListener('change', onChange)
 
     // Ejecutar una vez al montar por si ya está checked
@@ -28,9 +29,10 @@ export function useNavPaths ({ navMenuRef }) {
   const handleClick = useCallback((event) => {
     event.preventDefault()
 
-    if (navMenuRef.current) navMenuRef.current.checked = false
-
-    onChange()
+    if (navMenuRef) {
+      navMenuRef.current.checked = false
+      onChange()
+    }
 
     if (!lenis) return
 
@@ -47,7 +49,6 @@ export function useNavPaths ({ navMenuRef }) {
     if (targetDataIdValue === 'projects') offsetValue = -80
 
     const targetElement = document.getElementById(targetDataIdValue)
-    console.log(targetElement)
     if (!targetElement) {
       console.warn(`No se encontró un elemento con el id: ${targetDataIdValue}`)
       return

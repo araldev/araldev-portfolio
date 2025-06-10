@@ -37,7 +37,7 @@
       
       > ul {
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: flex-start;
         flex-direction: column;
         list-style: none;
@@ -49,12 +49,29 @@
         > li {
           width: clamp(150px, 50%, 200px);
           height: max-content;
-          text-wrap: nowrap;
-          color: #ddd;
 
-          > svg {
-            width: 30px;
-            height: 30px;
+          a {
+            text-decoration: none;
+            width: 100%;
+            height: 100%;
+            text-wrap: nowrap;
+            display: grid;
+            grid-template-columns: 30px 1fr;
+            grid-template-rows: 1fr 1fr;
+            column-gap: 10px;
+            justify-content: start;
+            align-items: center;
+            svg {
+              width: 30px;
+              height: 30px;
+              grid-row: 1/-1;
+            }
+            > h5 {
+              color: #fff;
+            }
+            > small {
+              color: #ddd;
+            }
           }
         }
       }
@@ -64,7 +81,7 @@
       width: 200px;
       height: 100%;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: flex-start;
       flex-direction: column;
       gap: 20px;
@@ -74,6 +91,7 @@
         font-size: var(--font-size-subtitle);
         font-weight: var(--font-weight-subtitle);
       }
+
       > ul {
         display: flex;
         justify-content: flex-start;
@@ -81,23 +99,109 @@
         flex-direction: column;
         list-style: none;
         width: 100%;
-        height: 100%;
-        gap: 20px;
+        height: auto;
+        gap: 40px;
+        margin-bottom: auto;
         > li {
           width: 200px;
           height: max-content;
           text-wrap: nowrap;
         }
         a {
+          padding: 15px 0px;
+          cursor: pointer;
           text-align: start;  
           text-decoration: none;
           color: #ddd;
         }
       } 
     }
-  
-    .form {
-  
+  }
+
+  .form {
+    max-width: 90%;
+    width: var(--width-web-content);
+    height: auto;
+    grid-column: 1/-1;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .form_label {
+      width: max-content;
+      height: auto;
+      input {
+        width: 250px;
+        height: 40px;
+        padding: 0px 5px;
+        color: #fff;
+        border: none;
+        border-bottom: 1px solid #ddd;
+        background-color: transparent;
+        overflow-x: scroll;
+        &:focus {
+          outline: none;
+          background: rgba(255,255,255,.1);
+        }
+      }
+    }
+    > button {
+      cursor: pointer;
+      border: none;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      width: fit-content;
+      height: auto;
+      min-height: 40px;
+      border-radius: var(--button-border-radius);
+      padding: var(--button-padding);
+      font-size: var(--font-size-button);
+      font-weight: var(--font-weight-button);
+      background: var(--color-text-button-gradient);
+      background-clip: text;
+      color: transparent;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      box-shadow: var(--shadow-button-box);
+      overflow: hidden;
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--color-bg-button-gradient);
+        border-radius: var(--button-border-radius);
+        z-index: -3;
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--color-bg-button-hover-gradient);
+        border-radius: var(--button-border-radius);
+        z-index: -2;
+        transform: translateX(-102%);
+        transition: transform .3s ease-in-out;
+      }
+      &:hover {
+        background: var(--color-text-button-hover-gradient);
+        background-clip: text;
+        color: transparent;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        &::after {
+          transform: translateX(0%);
+        }
+      }
     }
   }
 

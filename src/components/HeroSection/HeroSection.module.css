@@ -59,6 +59,7 @@
 
     /* Button */
     .button_cv{
+      border: none;
       position: relative;
       display: flex;
       justify-content: center;
