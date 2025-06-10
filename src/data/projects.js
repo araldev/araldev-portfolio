@@ -8,7 +8,7 @@ export const projects = [
     description: 'ejemplo de descripción no muy larga',
     tech: {
       js: techIcons.js,
-      react: techIcons.react,
+      css: techIcons.css,
       html: techIcons.html,
       gitHub: techIcons.gitHub,
       git: techIcons.git
@@ -21,7 +21,7 @@ export const projects = [
     description: 'Juego lógico en inglés sobre decidir el camino correcto',
     tech: {
       js: techIcons.js,
-      react: techIcons.react,
+      css: techIcons.css,
       html: techIcons.html,
       gitHub: techIcons.gitHub,
       git: techIcons.git
@@ -47,9 +47,13 @@ export const projects = [
     title: 'Red Social',
     description: 'ejemplo de descripción no muy larga',
     tech: {
-      js: techIcons.js,
+      ts: techIcons.ts,
+      react: techIcons.react,
       css: techIcons.css,
-      html: techIcons.html
+      html: techIcons.html,
+      gsap: techIcons.gsap,
+      gitHub: techIcons.gitHub,
+      git: techIcons.git
     }
   }
 ]
