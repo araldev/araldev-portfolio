@@ -4,7 +4,7 @@ import { socialIcons } from '../../data/icons.js'
 
 export function HeroSection () {
   return (
-    <header id='about-me' className={styles.container_header}>
+    <header id='home' className={styles.container_header}>
       <aside className={styles.hero_section}>
         <h1 className={styles.title_hero}>Arturo Alba García</h1>
         <h2 className={styles.subTitle_hero}>Frontend Developer</h2>

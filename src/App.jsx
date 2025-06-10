@@ -8,6 +8,7 @@ import { BackgroundHeroCanvas } from './components/Backgrounds/BackgroundHeroCan
 import { IsIconCheckFilterProvider } from './contexts/IsIconCheckFilter.jsx'
 import { NavToTop } from './components/NavToTop/NavToTop.jsx'
 import { useAnimatedNavToTop } from './Hooks/useAnimatedNavToTop.js'
+import { Footer } from './components/Footer/Footer.jsx'
 
 export default function () {
   const mainRef = useRef()
@@ -18,16 +19,17 @@ export default function () {
   return (
     <>
       <NavHeader ref={navHeaderRef} />
+      <NavToTop ref={navToTopRef} />
       <AnimatedTitle>
         <HeroSection />
       </AnimatedTitle>
-      <main ref={mainRef} className='container_main'>
+      <main ref={mainRef} className='container_main '>
         <IsIconCheckFilterProvider>
           <ProjectsCards />
         </IsIconCheckFilterProvider>
-        <NavToTop ref={navToTopRef} />
         <BackgroundHeroCanvas />
       </main>
+      <Footer />
     </>
   )
 }

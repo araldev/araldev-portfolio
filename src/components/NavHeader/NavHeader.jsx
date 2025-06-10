@@ -22,8 +22,9 @@ export const NavHeader = forwardRef((props, ref) => {
         </label>
 
         <ul className={styles.nav_links}>
-          <li><a data-id='about-me' onClick={handleClick}>About me</a></li>
+          <li><a data-id='home' onClick={handleClick}>Home</a></li>
           <li><a data-id='projects' onClick={handleClick}>Projects</a></li>
+          <li><a data-id='about-me' onClick={handleClick}>About me</a></li>
           <li><a data-id='contact' onClick={handleClick}>Contact</a></li>
         </ul>
       </nav>

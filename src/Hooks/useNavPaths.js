@@ -42,10 +42,12 @@ export function useNavPaths ({ navMenuRef }) {
       return
     }
 
-    if (targetDataIdValue === 'about-me') offsetValue = -(window.innerHeight + 300)
+    if (targetDataIdValue === 'home') offsetValue = -(window.innerHeight * 2)
+    if (targetDataIdValue === 'about-me') offsetValue = -80
     if (targetDataIdValue === 'projects') offsetValue = -80
 
     const targetElement = document.getElementById(targetDataIdValue)
+    console.log(targetElement)
     if (!targetElement) {
       console.warn(`No se encontró un elemento con el id: ${targetDataIdValue}`)
       return

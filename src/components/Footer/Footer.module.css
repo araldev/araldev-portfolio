@@ -1,0 +1,118 @@
+.footer_container{
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  min-height: max-content;
+  background: var(--color-bg-web);
+  z-index: 1;
+  position: relative;
+
+  .footer_content {
+    max-width: 90%;
+    width: var(--width-web-content);
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+    grid-template-rows: auto;
+    place-content: center;
+    place-items: center;
+    margin: 0 auto;
+    padding: 60px 0;
+
+    .contact_container {
+      width: 200px;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 20px;
+      position: relative;
+
+      h3 {
+        font-size: var(--font-size-subtitle);
+        font-weight: var(--font-weight-subtitle);
+      }
+      
+      > ul {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: column;
+        list-style: none;
+        width: 100%;
+        height: 100%;
+        gap: 20px;
+
+        > li {
+          width: 200px;
+          height: max-content;
+          text-wrap: nowrap;
+          color: #ddd;
+
+          > svg {
+            width: 30px;
+            height: 30px;
+          }
+        }
+      }
+    }
+  
+    .links_container {
+      width: 200px;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 20px;
+      position: relative;
+
+      h3 {
+        font-size: var(--font-size-subtitle);
+        font-weight: var(--font-weight-subtitle);
+      }
+      > ul {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: column;
+        list-style: none;
+        width: 100%;
+        height: 100%;
+        gap: 20px;
+        > li {
+          width: 200px;
+          height: max-content;
+          text-wrap: nowrap;
+        }
+        a {
+          text-align: start;  
+          text-decoration: none;
+          color: #ddd;
+        }
+      } 
+    }
+  
+    .form {
+  
+    }
+  }
+
+  .brand {
+    max-width: 90%;
+    width: var(--width-web-content);
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    padding-bottom: 30px;
+
+    > img {
+      width: 200px;
+      height: auto;
+      margin: 0 auto;
+    }
+  }
+}

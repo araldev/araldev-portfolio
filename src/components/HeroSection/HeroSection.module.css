@@ -20,7 +20,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 30px;
+  gap: 20px;
 
   .title_hero{
     background: var(--color-text-gradient);
@@ -39,13 +39,13 @@
     -webkit-text-fill-color: transparent;
     font-size: var(--font-size-subtitle);
     font-weight: var(--font-weight-subtitle);
+    margin-bottom: 30px;
   }
   .paragraph_hero{
     font-size: var(--font-size-paragraph);
     font-weight: var(--font-weight-paragraph);
     max-width: var(--paragraph-max-width);
-    transform: translateZ(0); /* Para evitar que haga un rerenderizado por culpa del botón */
-    -webkit-font-smoothing: antialiased; /* Para navegadores basados en WebKit (Chrome, Safari) */
+    margin-bottom: 30px;
   }
 
   .socials_hero_container{

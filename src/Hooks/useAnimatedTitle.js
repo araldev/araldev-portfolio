@@ -62,7 +62,7 @@ export function useAnimatedTitle () {
       id: 'hero-trigger',
       trigger: hero,
       start: 'top top',
-      end: () => `+=${hero.getBoundingClientRect().height + 200}px`,
+      end: () => `+=${window.innerHeight * 1.5}px`,
       pin: true,
       pinSpacing: true,
       scrub: true,
