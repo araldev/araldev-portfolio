@@ -72,6 +72,12 @@ html, body {
   align-items: center;
   position: relative;
   z-index: 0;
+  gap: 40px;
+  padding: var(--padding-web-content);
+
+  > * + * {
+    margin-top: 40px;
+  }
 }
 
 img {

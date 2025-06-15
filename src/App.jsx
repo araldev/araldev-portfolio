@@ -9,6 +9,7 @@ import { IsIconCheckFilterProvider } from './contexts/IsIconCheckFilter.jsx'
 import { NavToTop } from './components/NavToTop/NavToTop.jsx'
 import { useAnimatedNavToTop } from './Hooks/useAnimatedNavToTop.js'
 import { Footer } from './components/Footer/Footer.jsx'
+import { ContactSection } from './components/Contact/ContactSection.jsx'
 
 export default function () {
   const mainRef = useRef()
@@ -27,6 +28,7 @@ export default function () {
         <IsIconCheckFilterProvider>
           <ProjectsCards />
         </IsIconCheckFilterProvider>
+        <ContactSection />
         <BackgroundHeroCanvas />
       </main>
       <Footer />

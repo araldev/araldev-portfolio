@@ -25,7 +25,7 @@ function ProjectCard ({ project }) {
       <div className={styles.project_image_container}>
         <img src={project.imgSrc} alt={`Thumbnail of ${project.title}`} />
       </div>
-      <h2>{project.title}</h2>
+      <h3>{project.title}</h3>
       <p>{project.description}</p>
 
       <div className={styles.project_icons_container}>

@@ -4,7 +4,6 @@
   height: auto;
   position: relative;
   gap: 40px;
-  padding: var(--padding-web-content);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -54,7 +53,7 @@
     width: 90%;
   }
 
-  h2 {
+  h3 {
     font-size: var(--font-size-subtitle);
     font-weight: var(--font-weight-subtitle);
     background: var(--color-text-gradient);
