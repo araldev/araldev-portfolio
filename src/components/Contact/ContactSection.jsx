@@ -1,4 +1,6 @@
 import styles from './ContactSection.module.css'
+import { Button } from '../Button/Button.jsx'
+import ReCAPTCHA from 'react-google-recaptcha'
 
 export function ContactSection () {
   return (
@@ -7,12 +9,21 @@ export function ContactSection () {
 
       <form className={styles.form} action=''>
         <label>
-          <input type='text' placeholder='example@gmail.com' />
+          <input name='email' type='text' placeholder='example@gmail.com' />
         </label>
+
         <label>
-          <textarea rows='5' cols='40' placeholder='Cómo podemos colaborar' />
+          <textarea name='message' rows='5' cols='40' placeholder='Cómo podemos colaborar' />
         </label>
-        <button type='submit'>Contactar</button>
+
+        <ReCAPTCHA
+          sitekey='6LcgEGIrAAAAACA0BuNeb6Y-D9YDnInr8mZ7ThS-'
+          theme='dark'
+        />
+
+        <Button type='submit'>
+          Send
+        </Button>
       </form>
     </section>
   )
