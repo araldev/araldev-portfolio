@@ -47,6 +47,7 @@ export function useNavPaths ({ navMenuRef = null }) {
     if (targetDataIdValue === 'home') offsetValue = -(window.innerHeight * 2)
     if (targetDataIdValue === 'about-me') offsetValue = -80
     if (targetDataIdValue === 'projects') offsetValue = -80
+    if (targetDataIdValue === 'contact') offsetValue = -100
 
     const targetElement = document.getElementById(targetDataIdValue)
     if (!targetElement) {

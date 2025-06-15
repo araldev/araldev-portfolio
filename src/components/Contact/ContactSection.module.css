@@ -6,6 +6,16 @@
   justify-content: center;
   align-items: center;
   gap: 40px;
+
+  h2 {
+    font-size: var(--font-size-title);
+    font-weight: var(--font-weight-title);
+    background: var(--color-text-gradient);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
 }
 
 .form {

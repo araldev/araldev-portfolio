@@ -4,16 +4,24 @@ import ReCAPTCHA from 'react-google-recaptcha'
 
 export function ContactSection () {
   return (
-    <section className={styles.contact_container}>
+    <section id='contact' className={styles.contact_container}>
       <h2>Contact</h2>
 
       <form className={styles.form} action=''>
         <label>
-          <input name='email' type='text' placeholder='example@gmail.com' />
+          <input name='name' type='text' placeholder='Name LastName' required />
         </label>
 
         <label>
-          <textarea name='message' rows='5' cols='40' placeholder='Cómo podemos colaborar' />
+          <input name='email' type='email' placeholder='example@gmail.com' required />
+        </label>
+
+        <label>
+          <input name='title' type='text' placeholder='Subject' required />
+        </label>
+
+        <label>
+          <textarea name='message' rows='5' cols='40' placeholder='How we can colaborate?' required />
         </label>
 
         <ReCAPTCHA
