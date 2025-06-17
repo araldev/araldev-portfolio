@@ -2,11 +2,12 @@ import styles from './ContactSection.module.css'
 import { Button } from '../Button/Button.jsx'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { useSendEmailJs } from '../../Hooks/useSendEmailJs.js'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 
 export function ContactSection () {
   const { isFormSend, error, handleSendEmailJs } = useSendEmailJs()
   const captchaRef = useRef(null)
+  const [isLoading, setIsLoading] = useState(false)
 
   async function handleSubmit (event) {
     event.preventDefault()
@@ -14,6 +15,7 @@ export function ContactSection () {
     const captcha = captchaRef.current
 
     try {
+      setIsLoading(true)
       const token = await captcha.executeAsync()
 
       const form = event.target
@@ -32,6 +34,8 @@ export function ContactSection () {
       }
     } catch (err) {
       captcha.reset()
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -64,8 +68,8 @@ export function ContactSection () {
           theme='dark'
         />
 
-        <Button type='submit'>
-          Send
+        <Button disabled={isLoading} type='submit'>
+          {isLoading ? 'Loading...' : 'Send'}
         </Button>
 
         {error && <small style={{ color: 'red' }}>{error}</small>}

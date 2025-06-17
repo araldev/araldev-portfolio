@@ -30,6 +30,7 @@
     background: var(--color-bg-button-gradient);
     border-radius: var(--button-border-radius);
     z-index: -3;
+    pointer-events: none;
   }
   &::after {
     content: "";
@@ -43,6 +44,7 @@
     z-index: -2;
     transform: translateX(-102%);
     transition: transform .3s ease-in-out;
+    pointer-events: none;
   }
   &:hover {
     background: var(--color-text-button-hover-gradient);
@@ -52,6 +54,14 @@
     -webkit-text-fill-color: transparent;
     &::after {
       transform: translateX(0%);
+    }
+  }
+  &:disabled {
+    /* opacity: .9; */
+    cursor: not-allowed;
+    pointer-events: none;
+    &::before {
+      background: var(--color-disabled);
     }
   }
 }

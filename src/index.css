@@ -28,6 +28,7 @@
     0 0 40px 20px rgba(224, 247, 244, 0.4);
   --color-text-gradient: linear-gradient(90deg, #00C9FF, #92FE9D);
   --color2-text-gradient: linear-gradient(135deg, #8fc6ff 0%, #5a9cff  100%);
+  --color-disabled: linear-gradient(135deg, #8394a5 0%, #2a3341  100%);
   --color-text-button-gradient: linear-gradient(90deg, #92FE9D 20%, #00C9FF 50%);
   --color-text-button-hover-gradient: linear-gradient(135deg, #004e92 0%, #000428 100%);
   --color-bg-button-gradient: linear-gradient(135deg, #004e92 0%, #000428 100%);
