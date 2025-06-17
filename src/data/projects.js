@@ -12,7 +12,9 @@ export const projects = [
       html: techIcons.html,
       gitHub: techIcons.gitHub,
       git: techIcons.git
-    }
+    },
+    demoLink: '',
+    codeLink: ''
   },
   {
     id: 2,
@@ -25,7 +27,9 @@ export const projects = [
       html: techIcons.html,
       gitHub: techIcons.gitHub,
       git: techIcons.git
-    }
+    },
+    demoLink: '',
+    codeLink: ''
   },
   {
     id: 3,
@@ -39,7 +43,9 @@ export const projects = [
       html: techIcons.html,
       gitHub: techIcons.gitHub,
       git: techIcons.git
-    }
+    },
+    demoLink: '',
+    codeLink: ''
   },
   {
     id: 4,
@@ -54,6 +60,8 @@ export const projects = [
       gsap: techIcons.gsap,
       gitHub: techIcons.gitHub,
       git: techIcons.git
-    }
+    },
+    demoLink: '',
+    codeLink: ''
   }
 ]
