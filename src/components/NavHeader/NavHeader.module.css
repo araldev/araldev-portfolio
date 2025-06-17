@@ -23,6 +23,9 @@
   pointer-events: none;
   transform: translate(-50%, -100%);
   transition: opacity .3s ease-in-out, transform .3s ease-in-out;
+  overflow: hidden;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 
 .nav_header.show {

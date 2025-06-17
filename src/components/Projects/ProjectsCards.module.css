@@ -23,7 +23,6 @@
 }
 
 .project_card{
-  z-index: -2;
   max-width: 100%;
   width: 100%;
   max-height: 450px;
@@ -125,6 +124,15 @@
     align-items: center;
     position: relative;
     z-index: 2;
+    svg {
+      transition: stroke .2s ease-in-out, fill .2s ease-in-out;
+    }
+    > *:hover svg[data-key="git"] {
+      stroke: #F05032;
+    }
+    > *:hover svg[data-key="gitHub"] {
+      fill: #181717;
+    }
   }
 }
 
