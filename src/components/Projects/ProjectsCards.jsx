@@ -24,6 +24,8 @@ function TechsIcons ({ project }) {
 function ProjectCard ({ project }) {
   return (
     <article className={styles.project_card}>
+      <div className={styles.project_card_overlay} />
+
       <div className={styles.project_image_container}>
         <img src={project.imgSrc} alt={`Thumbnail of ${project.title}`} />
       </div>
