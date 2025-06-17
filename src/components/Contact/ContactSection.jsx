@@ -19,6 +19,7 @@ export function ContactSection () {
     const formData = Object.fromEntries(new FormData(form))
     const formDataWithToken = {
       ...formData,
+      time: new Date().toLocaleString(),
       'g-recaptcha-response': token
     }
 
@@ -63,7 +64,7 @@ export function ContactSection () {
           // size='invisible'
           sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
           theme='dark'
-          onChange={(token) => onChangeCaptcha(token)}
+          onChange={onChangeCaptcha}
         />
 
         <Button type='submit'>
