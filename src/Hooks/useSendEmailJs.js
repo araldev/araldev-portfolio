@@ -17,26 +17,33 @@ export function useSendEmailJs () {
     }
   }, [])
 
-  const handleSendEmailJs = async ({ form, formData, captchaToken }) => {
-    if (!captchaToken) {
-      setError('Please complete the CAPTCHA')
-      return Promise.reject(new Error('CAPTCHA not completed'))
-    }
+  const handleSendEmailJs = async ({ formData, captchaToken }) => {
+    try {
+      if (!captchaToken) {
+        setError('Please complete the CAPTCHA')
+        return Promise.reject(new Error('CAPTCHA not completed'))
+      }
+      if (!formData) {
+        setError('Please complete the form')
+        return Promise.reject(new Error('form not completed'))
+      }
 
-    return emailjs.send(import.meta.env.VITE_EMAILJS_SERVICE_ID, import.meta.env.VITE_EMAILJS_TEMPLATE_ID, formData)
-      .then(response => {
-        clearTimeout(idTimeoutRef.current)
-        if (response.status !== 200) throw new Error('Email service not found')
-        setError(null)
-        setIsFormSend(true)
-        idTimeoutRef.current = setTimeout(() => setIsFormSend(false), 5000)
-        form.reset()
-        return response
-      })
-      .catch(error => {
-        setError('The form could not be submitted')
-        return Promise.reject(error)
-      })
+      const response = await emailjs.send(import.meta.env.VITE_EMAILJS_SERVICE_ID, import.meta.env.VITE_EMAILJS_TEMPLATE_ID, formData)
+
+      if (response.status !== 200) throw new Error('Email service not found')
+
+      clearTimeout(idTimeoutRef.current)
+      setError(null)
+      setIsFormSend(true)
+      idTimeoutRef.current = setTimeout(() => setIsFormSend(false), 5000)
+
+      return response
+    } catch (err) {
+      const errorMessage = err.text || 'Error al enviar el formulario'
+
+      setError(errorMessage)
+      return Promise.reject(errorMessage)
+    }
   }
 
   return { isFormSend, error, handleSendEmailJs }

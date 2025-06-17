@@ -6,65 +6,62 @@ import { useRef } from 'react'
 
 export function ContactSection () {
   const { isFormSend, error, handleSendEmailJs } = useSendEmailJs()
-  const tokenRef = useRef(null)
   const captchaRef = useRef(null)
 
   async function handleSubmit (event) {
     event.preventDefault()
 
-    const form = event.target
-    const token = tokenRef.current
     const captcha = captchaRef.current
 
-    const formData = Object.fromEntries(new FormData(form))
-    const formDataWithToken = {
-      ...formData,
-      time: new Date().toLocaleString(),
-      'g-recaptcha-response': token
-    }
-
     try {
-      const succes = await handleSendEmailJs({ form, formData: formDataWithToken, captchaToken: token })
-      if (succes) {
-        tokenRef.current = null
+      const token = await captcha.executeAsync()
+
+      const form = event.target
+      const formData = Object.fromEntries(new FormData(form))
+      const formDataWithToken = {
+        ...formData,
+        time: new Date().toLocaleString(),
+        'g-recaptcha-response': token
+      }
+
+      const success = await handleSendEmailJs({ formData: formDataWithToken, captchaToken: token })
+
+      if (success) {
+        form.reset()
         captcha.reset()
       }
     } catch (err) {
-      console.warn('dentro del catch', err)
+      captcha.reset()
     }
-  }
-
-  function onChangeCaptcha (token) {
-    tokenRef.current = token
   }
 
   return (
     <section id='contact' className={styles.contact_container}>
       <h2>Contact</h2>
 
-      <form onSubmit={handleSubmit} className={styles.form} action=''>
+      <form autoComplete='on' name='contact-form' onSubmit={handleSubmit} className={styles.form} action=''>
         <label>
-          <input name='name' type='text' placeholder='Name LastName' required />
+          <input autoComplete='on' name='name' type='text' placeholder='Name' required />
         </label>
 
         <label>
-          <input name='email' type='email' placeholder='example@gmail.com' required />
+          <input autoComplete='on' name='email' type='email' placeholder='example@gmail.com' required />
         </label>
 
         <label>
-          <input name='title' type='text' placeholder='Subject' required />
+          <input autoComplete='on' name='title' type='text' placeholder='Subject' required />
         </label>
 
         <label>
-          <textarea name='message' rows='5' cols='40' placeholder='How we can colaborate?' required />
+          <textarea autoComplete='on' name='message' rows='5' cols='40' placeholder='How we can colaborate?' required />
         </label>
 
         <ReCAPTCHA
           ref={captchaRef}
-          // size='invisible'
-          sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+          badge='bottomleft'
+          size='invisible'
+          sitekey={import.meta.env.VITE_RECAPTCHA_INVISIBLE_SITE_KEY}
           theme='dark'
-          onChange={onChangeCaptcha}
         />
 
         <Button type='submit'>

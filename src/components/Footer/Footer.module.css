@@ -147,36 +147,6 @@
     }
   }
 
-  .form {
-    max-width: 90%;
-    width: var(--width-web-content);
-    height: auto;
-    grid-column: 1/-1;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .form_label {
-      width: max-content;
-      height: auto;
-      input {
-        width: 250px;
-        height: 40px;
-        padding: 0px 5px;
-        color: #fff;
-        border: none;
-        border-bottom: 1px solid #ddd;
-        background-color: transparent;
-        overflow-x: scroll;
-        &:focus {
-          outline: none;
-          background: rgba(255,255,255,.1);
-        }
-      }
-    }
-  }
-
   .brand {
     max-width: 90%;
     width: var(--width-web-content);

@@ -2,7 +2,6 @@ import styles from './Footer.module.css'
 import { socialIcons } from '../../data/icons'
 import brand from '../../assets/brand-araldev.webp'
 import { useNavPaths } from '../../Hooks/useNavPaths'
-import { Button } from '../Button/Button'
 
 export function Footer () {
   const { handleClick } = useNavPaths({})
@@ -61,15 +60,6 @@ export function Footer () {
           </ul>
 
         </section>
-
-        <form className={styles.form} action=''>
-          <label className={styles.form_label}>
-            <input type='text' />
-          </label>
-          <Button type='submit'>
-            Send
-          </Button>
-        </form>
       </div>
 
       <div className={styles.brand}>
