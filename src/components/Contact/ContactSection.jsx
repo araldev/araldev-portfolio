@@ -2,27 +2,39 @@ import styles from './ContactSection.module.css'
 import { Button } from '../Button/Button.jsx'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { useSendEmailJs } from '../../Hooks/useSendEmailJs.js'
-import { useState } from 'react'
+import { useRef } from 'react'
 
 export function ContactSection () {
-  const [captchaToken, setCaptchaToken] = useState(null)
-  const { error, handleSendEmailJs } = useSendEmailJs()
+  const { isFormSend, error, handleSendEmailJs } = useSendEmailJs()
+  const tokenRef = useRef(null)
+  const captchaRef = useRef(null)
 
-  function onCaptchaChange (token) {
-    setCaptchaToken(token)
-  }
+  async function handleSubmit (event) {
+    event.preventDefault()
 
-  function handleSubmit (event) {
-    const { name, email, title, message } = Object.fromEntries(new FormData(event.target))
-    const formData = {
-      name,
-      email,
-      title,
-      message,
-      'g-recaptcha-response': captchaToken
+    const form = event.target
+    const token = tokenRef.current
+    const captcha = captchaRef.current
+
+    const formData = Object.fromEntries(new FormData(form))
+    const formDataWithToken = {
+      ...formData,
+      'g-recaptcha-response': token
     }
 
-    handleSendEmailJs({ event, formData, captchaToken })
+    try {
+      const succes = await handleSendEmailJs({ form, formData: formDataWithToken, captchaToken: token })
+      if (succes) {
+        tokenRef.current = null
+        captcha.reset()
+      }
+    } catch (err) {
+      console.warn('dentro del catch', err)
+    }
+  }
+
+  function onChangeCaptcha (token) {
+    tokenRef.current = token
   }
 
   return (
@@ -47,17 +59,19 @@ export function ContactSection () {
         </label>
 
         <ReCAPTCHA
-          sitekey='6LcgEGIrAAAAACA0BuNeb6Y-D9YDnInr8mZ7ThS-'
+          ref={captchaRef}
+          // size='invisible'
+          sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
           theme='dark'
-          onChange={onCaptchaChange}
+          onChange={(token) => onChangeCaptcha(token)}
         />
 
         <Button type='submit'>
           Send
         </Button>
 
-        {error && <small>{error}</small>}
-        {!error && <small>Sended</small>}
+        {error && <small style={{ color: 'red' }}>{error}</small>}
+        {!error && isFormSend && <small style={{ color: 'green' }}>Successfully sent</small>}
       </form>
     </section>
   )
