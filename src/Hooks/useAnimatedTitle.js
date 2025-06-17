@@ -36,7 +36,6 @@ export function useAnimatedTitle () {
     const overlayCopyContainer = overlayCopyContainerRef.current
     const titleContainer = titleContainerRef.current
     const titleMask = titleMaskRef.current
-    const initialOverlayScale = 350
 
     if (!hero || !heroImgContainer || !heroImgTitle || !titleMask || !overlayCopy || !overlayCopyContainer || !fadeOverlay || !svgOverlay || !titleContainer || !heroImgCopy) {
       console.warn('GSAP/ScrollTrigger: Algunos elementos no se encontraron. La animación se intentará de nuevo cuando los refs se asignen.')
@@ -79,7 +78,7 @@ export function useAnimatedTitle () {
 
         const horizontalScaleRatio = titleDimensions.width / titleBoundingBox.width
         const verticalScaleRatio = titleDimensions.height / titleBoundingBox.height
-        const titleScaleFactor = Math.min(horizontalScaleRatio, verticalScaleRatio) * 1.6
+        const titleScaleFactor = Math.min(horizontalScaleRatio, verticalScaleRatio)
 
         const titleHorizontalPosition = titleDimensions.left + (titleDimensions.width - titleBoundingBox.width * titleScaleFactor) / 2 - titleBoundingBox.x * titleScaleFactor
         const titleVerticalPosition = titleDimensions.top + (titleDimensions.height - titleBoundingBox.height * titleScaleFactor) / 2 - titleBoundingBox.y * titleScaleFactor
@@ -104,6 +103,7 @@ export function useAnimatedTitle () {
                 ? 1
                 : 1.1
 
+          const initialOverlayScale = 900
           const normalizedProgress = scrollProgress * (1 / 0.85)
           const heroImgContainerScale = numberScale - 0.5 * normalizedProgress
           const overlayScale =

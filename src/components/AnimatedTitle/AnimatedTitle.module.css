@@ -74,6 +74,7 @@
   gap: 10px;
   animation: bounce 1s ease-in-out both infinite alternate;
   width: 100%;
+  z-index: 9;
 
   .paragraph {
   text-transform: uppercase;
@@ -106,8 +107,8 @@
   top: 20%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 200px;
-  height: 150px;
+  width: 300px;
+  height: 250px;
   z-index: 2;
   pointer-events: none;
 }

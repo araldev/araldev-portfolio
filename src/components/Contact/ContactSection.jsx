@@ -41,19 +41,19 @@ export function ContactSection () {
 
       <form autoComplete='on' name='contact-form' onSubmit={handleSubmit} className={styles.form} action=''>
         <label>
-          <input autoComplete='on' name='name' type='text' placeholder='Name' required />
+          <input name='name' type='text' placeholder='Name' required />
         </label>
 
         <label>
-          <input autoComplete='on' name='email' type='email' placeholder='example@gmail.com' required />
+          <input name='email' type='email' placeholder='example@gmail.com' required />
         </label>
 
         <label>
-          <input autoComplete='on' name='title' type='text' placeholder='Subject' required />
+          <input name='subject' type='text' placeholder='Subject' required />
         </label>
 
         <label>
-          <textarea autoComplete='on' name='message' rows='5' cols='40' placeholder='How we can colaborate?' required />
+          <textarea name='message' rows='5' cols='40' placeholder='How we can colaborate?' required />
         </label>
 
         <ReCAPTCHA

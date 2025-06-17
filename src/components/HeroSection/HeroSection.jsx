@@ -28,8 +28,8 @@ export function HeroSection () {
             </a>
           </nav>
         </div>
-        <BackgroundHeroCanvas />
       </aside>
+      <BackgroundHeroCanvas />
     </header>
   )
 }
