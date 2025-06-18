@@ -18,7 +18,7 @@
   gap: 50px;
   justify-content: center;
   align-items: center;
-  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(425px, 575px));
   grid-template-rows: auto;
 }
 
@@ -35,6 +35,7 @@
   border-radius: var(--border-radius);
   position: relative;
   gap: 10px;
+  border: .5px solid #7d9cb8;
   &::after {
     content: "";
     position: absolute;
@@ -89,6 +90,11 @@
   .projec_text_container {
     width: 100%;
     height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
 
     h3 {
       font-size: var(--font-size-subtitle);
@@ -103,7 +109,7 @@
   
     p {
       text-align: center;
-      max-width: 90%;
+      max-width: 100%;
       width: 52ch;
       font-size: var(--font-size-paragraph);
       font-weight: var(--font-weight-paragraph);
@@ -134,10 +140,12 @@
     width: 100%;
     height: auto;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     position: relative;
     z-index: 2;
+    flex-wrap: wrap;
+    gap: 25px;
     svg {
       transition: stroke .2s ease-in-out, fill .2s ease-in-out;
     }

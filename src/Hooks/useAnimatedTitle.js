@@ -103,7 +103,7 @@ export function useAnimatedTitle () {
                 ? 1
                 : 1.1
 
-          const initialOverlayScale = 900
+          const initialOverlayScale = 350
           const normalizedProgress = scrollProgress * (1 / 0.85)
           const heroImgContainerScale = numberScale - 0.5 * normalizedProgress
           const overlayScale =
