@@ -194,3 +194,19 @@ color: #F05032;
 .gsap > svg > * {
 fill: #0ae448;
 }
+
+@media (max-width: 519px) {
+  .projects_cards_container{
+    grid-template-columns: repeat(auto-fit, 350px);
+  }
+
+  .project_card{
+    max-height: 500px;
+    height: 500px;
+  }
+
+  .project_card .project_icons_container span > * {
+    width: 30px;
+    height: 30px;
+  }
+}
