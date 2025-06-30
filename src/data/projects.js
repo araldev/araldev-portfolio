@@ -5,7 +5,7 @@ export const projects = [
     id: 1,
     imgSrc: `${import.meta.env.BASE_URL}/images/shot-english-web.webp`,
     title: 'English Web',
-    description: 'ejemplo de descripción no muy larga',
+    description: 'ejemplo de descripción no muy larga, ejemplo de descripción no muy larga, ejemplo de descripción no muy larga, ejemplo de descripción no muy larga, ejemplo de descripción no muy larga, ejemplo de descripción no muy larga, ejemplo de descripción no muy larga, ejemplo de descripción no muy larga.',
     tech: {
       js: techIcons.js,
       css: techIcons.css,

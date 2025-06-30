@@ -111,7 +111,7 @@
     }
     &:hover .git > svg {
       transform: scale(1.2);
-      color: #F05032;
+      stroke: #F05032;
     }
     &:hover .gitHub > svg {
       transform: scale(1.2);
@@ -146,7 +146,7 @@
       color: #3178C6;
     }
     .filter_icon_checkbox:checked ~ .git > svg {
-      color: #F05032;
+      stroke: #F05032;
     }
     .filter_icon_checkbox:checked ~ .gitHub > svg {
       fill: #F05032;

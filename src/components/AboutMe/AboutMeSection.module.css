@@ -1,0 +1,20 @@
+.about_me_container {
+  width: 100%;
+  height: auto;
+  gap: 40px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h2 {
+    font-size: var(--font-size-title);
+    font-weight: var(--font-weight-title);
+    background: var(--color-text-gradient);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+}

@@ -3,7 +3,7 @@ import { FilterProjects } from '../FilterProjects/FilterProjects.jsx'
 import { useIsIconCheckFilter } from '../../Hooks/useIsIconCheckFilter.js'
 import { useSortProjects } from '../../Hooks/useSortProjects.js'
 import { LinkButton } from '../LinkButton/LinkButton.jsx'
-import { techIcons } from '../../data/icons.js'
+import { techIcons, socialIcons } from '../../data/icons.js'
 
 function TechsIcons ({ project }) {
   const { isIconCheck } = useIsIconCheckFilter()
@@ -43,7 +43,7 @@ function ProjectCard ({ project }) {
       <nav className={styles.links_container}>
         <LinkButton href={project.demoLink}>
           Demo
-          {techIcons.git}
+          {socialIcons.demo}
         </LinkButton>
         <LinkButton href={project.codeLink}>
           Code

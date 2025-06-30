@@ -5,7 +5,8 @@ export const socialIcons = {
   gitHub: ICONS.GITHUB_ICON,
   linkedin: ICONS.LINKEDIN_ICON,
   discord: ICONS.DISCORD_ICON,
-  gmail: ICONS.GMAIL_ICON
+  gmail: ICONS.GMAIL_ICON,
+  demo: ICONS.DEMO_ICON
 }
 
 export const techIcons = {

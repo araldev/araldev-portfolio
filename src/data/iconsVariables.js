@@ -26,6 +26,7 @@ export const allIconsDictionaryKey = {
   linkedin: 'linkedin',
   discord: 'discord',
   gmail: 'gmail',
+  demo: 'demo',
   arrowUp: 'arrowUp',
   arrowDown: 'arrowDown'
 }

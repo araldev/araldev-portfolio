@@ -25,39 +25,16 @@
 .project_card{
   max-width: 100%;
   width: 100%;
-  max-height: 450px;
-  height: 450px;
+  height: auto;
   display: flex;
   flex-direction: column;
   place-content: flex-end;
   place-items: center;
-  padding: 40px;
   border-radius: var(--border-radius);
   position: relative;
-  gap: 10px;
   border: .5px solid #7d9cb8;
-  &::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -2;
-    transform: rotateZ(180deg);
-    background: var(--color-background-gradient);
-    background-size: 300% 300%;
-    animation: radialZoom 5s ease-in-out infinite alternate;
-    clip-path: path("M 0 240 L 53.3 257.5 C 106.7 275 213.3 310 320 315.5 C 426.7 321 533.3 297 640 270.8 C 746.7 244.7 853.3 216.3 906.7 202.2 L 960 188 L 960 0 L 906.7 0 C 853.3 0 746.7 0 640 0 C 533.3 0 426.7 0 320 0 C 213.3 0 106.7 0 53.3 0 L 0 0 Z");
-    pointer-events: none;
-    border-radius: var(--border-radius);
-  }
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: -1;
-    pointer-events: none;
-    border-radius: var(--border-radius);
-  }
+  background-color: var(--color-bg-web);
+
   .project_card_overlay {
     position: absolute;
     inset: 6%;
@@ -68,33 +45,47 @@
     transition: inset .2s ease-in-out;
   }
   &:hover .project_card_overlay {
-    inset: 1%;
+    inset: .5%;
   }
 
   .project_image_container {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
-    height: 50%;
-    z-index: -3;
+    height: 200px;
+    clip-path: path("M 0 156 L 19.2 158.3 C 38.4 160.7 76.8 165.3 114.9 172.5 C 153.1 179.7 191.0 189.3 229.2 191.7 C 267.4 194 305.8 189 343.9 183.7 C 382.0 178.3 420.0 172.7 458.2 167 C 496.3 161.3 534.8 155.7 553.9 152.8 L 573 150 L 573 0 L 0 0 Z");
+    margin-bottom: -40px;
 
     > img {
       width: 100%;
+      height: 100%;
       aspect-ratio: 4/3;
       object-fit: cover;
+      object-position: 0px -85px;
       border-radius: var(--border-radius);
+      box-sizing: border-box;
     }
   }
 
   .projec_text_container {
     width: 100%;
-    height: auto;
+    min-height: 400px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 15px;
+    padding: 30px;
+    margin-bottom: -40px;
+    background: var(--color-background-gradient);
+    background-size: 300% 300%;
+    animation: radialZoom 5s ease-in-out infinite alternate;
+    clip-path: path("M 0 6 L 19.2 8.3 C 38.4 10.7 76.8 15.3 114.9 22.5 C 153.1 29.7 191.0 39.3 229.2 41.7 C 267.4 44 305.8 39 343.9 33.7 C 382.0 28.3 420.0 22.7 458.2 17 C 496.3 11.3 534.8 5.7 553.9 2.8 L 573 0 L 573 350 L 553.9 352.8 C 534.8 355.7 496.3 361.3 458.2 367 C 420.0 372.7 382.0 378.3 343.9 383.7 C 305.8 389 267.4 394 229.2 391.7 C 191.0 389.3 153.1 379.7 114.9 372.5 C 76.8 365.3 38.4 360.7 19.2 358.3 L 0 356 Z");
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, .3);
+      z-index: -1;
+    }
 
     h3 {
       font-size: var(--font-size-subtitle);
@@ -118,15 +109,28 @@
 
   .project_icons_container {
     width: 100%;
-    height: auto;
+    height: 180px;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    column-gap: 20px;
+    margin-bottom: -40px;
     flex-wrap: wrap;
-    margin: 20px 0;
+    padding: 30px;
+    background: var(--color-background-gradient);
+    background-size: 300% 300%;
+    animation: radialZoom 5s ease-in-out infinite alternate;
+    clip-path: path("M 0 6 L 19.2 8.3 C 38.4 10.7 76.8 15.3 114.9 22.5 C 153.1 29.7 191.0 39.3 229.2 41.7 C 267.4 44 305.8 39 343.9 33.7 C 382.0 28.3 420.0 22.7 458.2 17 C 496.3 11.3 534.8 5.7 553.9 2.8 L 573 0 L 573 130 L 553.9 132.8 C 534.8 135.7 496.3 141.3 458.2 147 C 420.0 152.7 382.0 158.3 343.9 163.7 C 305.8 169 267.4 174 229.2 171.7 C 191.0 169.3 153.1 159.7 114.9 152.5 C 76.8 145.3 38.4 140.7 19.2 138.3 L 0 136 Z");
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, .3);
+      z-index: -1;
+    }
 
     span {
+      margin-top: 20px;
       width: fit-content;
       height: fit-content;
       > * {
@@ -137,8 +141,11 @@
   }
 
   .links_container {
+    overflow: hidden;
+    border-bottom-left-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
     width: 100%;
-    height: auto;
+    height: 160px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -146,11 +153,25 @@
     z-index: 2;
     flex-wrap: wrap;
     gap: 25px;
+    background: var(--color-background-gradient);
+    background-size: 300% 300%;
+    animation: radialZoom 5s ease-in-out infinite alternate;
+    clip-path: path("M 0 6 L 19.2 8.3 C 38.4 10.7 76.8 15.3 114.9 22.5 C 153.1 29.7 191.0 39.3 229.2 41.7 C 267.4 44 305.8 39 343.9 33.7 C 382.0 28.3 420.0 22.7 458.2 17 C 496.3 11.3 534.8 5.7 553.9 2.8 L 573 0 L 573 160 L 553.9 162.8 C 534.8 165.7 496.3 171.3 458.2 177 C 420.0 182.7 382.0 188.3 343.9 193.7 C 305.8 199 267.4 204 229.2 201.7 C 191.0 199.3 153.1 189.7 114.9 182.5 C 76.8 175.3 38.4 170.7 19.2 168.3 L 0 166 Z");
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, .3);
+      z-index: -1;
+    }
+    > a {
+      margin-top: 20px;
+    }
     svg {
       transition: stroke .2s ease-in-out, fill .2s ease-in-out;
     }
-    > *:hover svg[data-key="git"] {
-      stroke: #F05032;
+    > *:hover svg[data-key="demo"] {
+      stroke: #181717;
     }
     > *:hover svg[data-key="gitHub"] {
       fill: #181717;
@@ -183,7 +204,7 @@ color: #E34F26;
 color: #3178C6;
 }
 .git > svg {
-color: #F05032;
+stroke: #F05032;
 }
 .gitHub > svg {
   fill: #F05032;
@@ -198,11 +219,6 @@ fill: #0ae448;
 @media (max-width: 519px) {
   .projects_cards_container{
     grid-template-columns: repeat(auto-fit, 350px);
-  }
-
-  .project_card{
-    max-height: 500px;
-    height: 500px;
   }
 
   .project_card .project_icons_container span > * {
