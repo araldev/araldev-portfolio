@@ -144,7 +144,7 @@
 @media (max-height: 600px) {
   .overlay {
   top: 15;
-  transform-origin: 49.5% 19%;
+  transform-origin: 49.7% 19%;
 }
   .overlay_copy {
   bottom: 0%;
