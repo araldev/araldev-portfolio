@@ -39,7 +39,7 @@
         -webkit-background-clip: text;
         color: transparent;
         -webkit-text-fill-color: transparent;
-        width: 100px;
+        width: 110px;
         height: max-content;
         text-align: left;
       }
@@ -50,7 +50,7 @@
         align-items: flex-start;
         flex-direction: column;
         list-style: none;
-        width: 100px;
+        width: 110px;
         height: auto;
         gap: 20px;
         position: relative;
