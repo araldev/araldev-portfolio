@@ -33,7 +33,13 @@ function ProjectCard ({ project }) {
       <div className={styles.projec_text_container}>
         <h3>{project.title}</h3>
 
-        <p>{project.description}</p>
+        <div>
+          {project.description.map((parrafo, index) => {
+            return (
+              <p key={`${project.id + index}`}><small>{parrafo}</small></p>
+            )
+          })}
+        </div>
       </div>
 
       <div className={styles.project_icons_container}>

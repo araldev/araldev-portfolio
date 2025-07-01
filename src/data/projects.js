@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 import { techIcons } from './icons'
 
 export const projects = [
@@ -5,7 +6,10 @@ export const projects = [
     id: 1,
     imgSrc: `${import.meta.env.BASE_URL}/images/shot-english-web.webp`,
     title: 'English Web',
-    description: 'ejemplo de descripción no muy larga, ejemplo de descripción no muy larga, ejemplo de descripción no muy larga, ejemplo de descripción no muy larga, ejemplo de descripción no muy larga, ejemplo de descripción no muy larga, ejemplo de descripción no muy larga, ejemplo de descripción no muy larga.',
+    description: [
+      'Fue mi primer proyecto, en el cual puse en práctica lo que fuí aprendiendo.',
+      'Está desarrollado con js, CSS y HTML. Quise hacerlo así para aprender bien las bases antes de empezar a usar frameworks y librerías.'
+    ],
     tech: {
       js: techIcons.js,
       css: techIcons.css,
@@ -20,7 +24,10 @@ export const projects = [
     id: 2,
     imgSrc: `${import.meta.env.BASE_URL}/images/shot-english-web.webp`,
     title: 'Juego del laverinto',
-    description: 'Juego lógico en inglés sobre decidir el camino correcto',
+    description: [
+      'Fue mi primer proyecto, en el cual puse en práctica lo que fuí aprendiendo.',
+      'Está desarrollado con js, CSS y HTML. Quise hacerlo así para aprender bien las bases antes de empezar a usar frameworks y librerías.'
+    ],
     tech: {
       js: techIcons.js,
       css: techIcons.css,
@@ -35,7 +42,10 @@ export const projects = [
     id: 3,
     imgSrc: `${import.meta.env.BASE_URL}/images/shot-english-web.webp`,
     title: 'Biblioteca de Componentes',
-    description: 'Biblioteca de componentes UI de React',
+    description: [
+      'Fue mi primer proyecto, en el cual puse en práctica lo que fuí aprendiendo.',
+      'Está desarrollado con js, CSS y HTML. Quise hacerlo así para aprender bien las bases antes de empezar a usar frameworks y librerías.'
+    ],
     tech: {
       ts: techIcons.ts,
       react: techIcons.react,
@@ -51,7 +61,10 @@ export const projects = [
     id: 4,
     imgSrc: `${import.meta.env.BASE_URL}/images/shot-english-web.webp`,
     title: 'Red Social',
-    description: 'ejemplo de descripción no muy larga',
+    description: [
+      'Fue mi primer proyecto, en el cual puse en práctica lo que fuí aprendiendo.',
+      'Está desarrollado con js, CSS y HTML. Quise hacerlo así para aprender bien las bases antes de empezar a usar frameworks y librerías.'
+    ],
     tech: {
       ts: techIcons.ts,
       react: techIcons.react,
