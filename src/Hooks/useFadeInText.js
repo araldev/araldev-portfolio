@@ -10,7 +10,7 @@ export function useFadeInText (textRef, triggerRef, splitType = 'chars', backgro
     if (!text && !trigger) return
 
     const splitText = new SplitText(text, {
-      type: 'words, chars'
+      type: splitType
     })
 
     if (backgroundColor) {
@@ -39,8 +39,8 @@ export function useFadeInText (textRef, triggerRef, splitType = 'chars', backgro
     })
 
     return () => {
-      tl.kill()
-      splitText.revert()
+      if (tl) tl.kill()
+      if (splitText) splitText.revert()
     }
   }, [])
 }

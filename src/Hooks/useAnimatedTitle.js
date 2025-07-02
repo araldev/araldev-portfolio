@@ -57,6 +57,15 @@ export function useAnimatedTitle () {
     }
     window.addEventListener('resize', handleResizeDebounce)
 
+    const fadeInImg = gsap.fromTo(heroImgTitle, {
+      x: 60,
+      filter: 'blur(10px)'
+    }, {
+      x: 0,
+      filter: 'blur(0px)',
+      duration: 1
+    })
+
     ScrollTrigger.create({
       id: 'hero-trigger',
       trigger: hero,
@@ -64,7 +73,7 @@ export function useAnimatedTitle () {
       end: () => `+=${window.innerHeight * 1.5}px`,
       pin: true,
       pinSpacing: true,
-      scrub: true,
+      scrub: 1,
       invalidateOnRefresh: true,
       // markers: true,
       onUpdate: (self) => {
@@ -163,6 +172,7 @@ export function useAnimatedTitle () {
       window.removeEventListener('resize', handleResizeDebounce)
       const st = ScrollTrigger.getById('hero-trigger')
       if (st) st.kill()
+      if (fadeInImg) fadeInImg.kill()
     }
   }, [heroImgContainerRef, heroImgTitleRef, heroImgCopyRef, fadeOverlayRef, svgOverlayRef, overlayCopyRef, overlayCopyContainerRef, titleContainerRef, titleMaskRef])
 
