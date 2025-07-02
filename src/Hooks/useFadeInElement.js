@@ -1,7 +1,7 @@
 import { gsap } from 'gsap'
 import { useEffect } from 'react'
 
-export function useFadeInGrid (elementRef, moveDirection) {
+export function useFadeInElement (elementRef, moveDirection) {
   useEffect(() => {
     const element = elementRef.current
     if (!element) return

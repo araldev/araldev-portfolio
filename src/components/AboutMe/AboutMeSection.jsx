@@ -1,16 +1,16 @@
 import styles from './AboutMeSection.module.css'
 import avatar from '../../assets/yo-sin-fondo-M.webp'
 import brand from '../../assets/brand-araldev.webp'
-import { useFadeInGrid } from '../../Hooks/useFadeInGrid'
+import { useFadeInElement } from '../../Hooks/useFadeInElement'
 import { useRef } from 'react'
 
 export function AboutMeSection () {
   const avatarRef = useRef()
   const brandRef = useRef()
   const textRef = useRef()
-  useFadeInGrid(avatarRef, 'right')
-  useFadeInGrid(brandRef, 'left')
-  useFadeInGrid(textRef, 'up')
+  useFadeInElement(avatarRef, 'right')
+  useFadeInElement(brandRef, 'left')
+  useFadeInElement(textRef, 'up')
 
   return (
     <section id='about-me' className={styles.about_me_container}>
