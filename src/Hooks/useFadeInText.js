@@ -32,9 +32,9 @@ export function useFadeInText (textRef, triggerRef, splitType = 'chars', backgro
     })
     tl.from(splitText[splitType], {
       opacity: 0,
-      y: 15,
+      y: 10,
       filter: 'blur(10px)',
-      duration: 1,
+      duration: 0.5,
       stagger: 0.03
     })
 
