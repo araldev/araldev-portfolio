@@ -17,13 +17,13 @@ export const projects = [
       gitHub: techIcons.gitHub,
       git: techIcons.git
     },
-    demoLink: '',
-    codeLink: ''
+    demoLink: 'https://araldev.github.io/english-web/index.html',
+    codeLink: 'https://github.com/araldev/english-web'
   },
   {
     id: 2,
     imgSrc: `${import.meta.env.BASE_URL}/images/shot-english-web.webp`,
-    title: 'Juego del laverinto',
+    title: 'Listening Maze',
     description: [
       'Fue mi primer proyecto, en el cual puse en práctica lo que fuí aprendiendo.',
       'Está desarrollado con js, CSS y HTML. Quise hacerlo así para aprender bien las bases antes de empezar a usar frameworks y librerías.'
@@ -35,8 +35,8 @@ export const projects = [
       gitHub: techIcons.gitHub,
       git: techIcons.git
     },
-    demoLink: '',
-    codeLink: ''
+    demoLink: 'https://araldev.github.io/english-web/exercises.html',
+    codeLink: 'https://github.com/araldev/english-web/blob/main/src/js/games/listening-maze.js'
   },
   {
     id: 3,
