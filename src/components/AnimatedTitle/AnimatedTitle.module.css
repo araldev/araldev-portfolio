@@ -166,7 +166,7 @@
 @media(max-width: 1050px) {
   .hero_img_container {
     top: 25%;
-    left: 85%;
+    left: 78%;
   }
 }
 @media (max-width: 900px) {
@@ -180,7 +180,7 @@
 
   .hero_img_container {
     top: 25%;
-    left: 85%;
+    left: 80%;
   }
 
   .overlay_copy {
@@ -188,6 +188,25 @@
   }
 }
 @media(max-width: 850px) {
+  .hero_img_container {
+    top: 25%;
+    left: 80%;
+
+    img {
+      mask-image: linear-gradient(
+        to bottom,
+        black 20%,
+        transparent 100%
+      );
+      -webkit-mask-image: linear-gradient(
+        to bottom,
+        black 20%, 
+        transparent 100% 
+      );
+    }
+  }
+}
+@media(max-width: 760px) {
   .hero_img_container {
     top: 3%;
     left: 80%;

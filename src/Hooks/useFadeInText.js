@@ -26,7 +26,7 @@ export function useFadeInText (textRef, triggerRef, splitType = 'chars', backgro
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger,
-        start: 'top top',
+        start: 'top center',
         toggleActions: 'play none none none'
       }
     })

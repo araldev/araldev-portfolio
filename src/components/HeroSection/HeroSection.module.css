@@ -46,6 +46,7 @@
     font-weight: var(--font-weight-paragraph);
     max-width: var(--paragraph-max-width);
     margin-bottom: 30px;
+    white-space: normal;
   }
 
   .socials_hero_container{
