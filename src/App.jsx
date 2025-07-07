@@ -18,6 +18,7 @@ export default function () {
   const navToTopRef = useRef()
   useAnimatedNavHeader({ mainRef, navHeaderRef })
   useAnimatedNavToTop({ mainRef, navToTopRef })
+
   return (
     <>
       <NavHeader ref={navHeaderRef} />

@@ -52,8 +52,8 @@ export function BackgroundHeroCanvas () {
       }
     })
 
-    function createRadialGradient (x0, y0, r0 = 0, x1, y2, r2, color1, color2) {
-      const gradient = ctx.createRadialGradient(x0, y0, r0, x1, y2, r2)
+    function createRadialGradient (x0, y0, r0 = 0, x1, y1, r1, color1, color2) {
+      const gradient = ctx.createRadialGradient(x0, y0, r0, x1, y1, r1)
       gradient.addColorStop(0, color1)
       gradient.addColorStop(1, color2)
       return gradient
