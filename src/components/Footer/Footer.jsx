@@ -9,7 +9,7 @@ export function Footer () {
   return (
     <footer className={styles.footer_container}>
       <div className={styles.footer_content}>
-        <section className={styles.contact_container}>
+        <nav className={styles.contact_container}>
 
           <h3>Contact</h3>
 
@@ -46,9 +46,9 @@ export function Footer () {
               </a>
             </li>
           </ul>
-        </section>
+        </nav>
 
-        <section className={styles.links_container}>
+        <nav className={styles.links_container}>
 
           <h3>Links</h3>
 
@@ -59,7 +59,7 @@ export function Footer () {
             <li><a data-id='contact' onClick={handleClick}>Contact</a></li>
           </ul>
 
-        </section>
+        </nav>
       </div>
 
       <div className={styles.brand}>
