@@ -13,7 +13,7 @@ export function Footer () {
 
           <h3>Contact</h3>
 
-          <ul>
+          <ul className={styles.ul_contact}>
             <li>
               <a href='https://www.linkedin.com/in/araldev/' target='_blank' rel='noopener noreferrer'>
                 {socialIcons.linkedin}
@@ -52,7 +52,7 @@ export function Footer () {
 
           <h3>Links</h3>
 
-          <ul>
+          <ul className={styles.ul_links}>
             <li><a data-id='home' onClick={handleClick}>Home</a></li>
             <li><a data-id='projects' onClick={handleClick}>Projects</a></li>
             <li><a data-id='about-me' onClick={handleClick}>About me</a></li>
