@@ -24,16 +24,16 @@ export function HeroSection () {
             Download CV
           </a>
           <div className={styles.social_icons_container}>
-            <a href='https://www.linkedin.com/in/araldev/' target='_blank' rel='noopener noreferrer' className={styles.linkedin}>
+            <a href='https://www.linkedin.com/in/araldev/' target='_blank' rel='noopener noreferrer'>
               {socialIcons.linkedin}
             </a>
-            <a href='mailto:arturo.r2d2.dev@gmail.com' target='_blank' rel='noopener noreferrer' className={styles.gmail}>
+            <a href='mailto:arturo.r2d2.dev@gmail.com' target='_blank' rel='noopener noreferrer'>
               {socialIcons.gmail}
             </a>
-            <a href='https://github.com/araldev' target='_blank' rel='noopener noreferrer' className={styles.gitHub}>
+            <a href='https://github.com/araldev' target='_blank' rel='noopener noreferrer'>
               {socialIcons.gitHub}
             </a>
-            <a href='https://discord.gg/jeTvBNjp' target='_blank' rel='noopener noreferrer' className={styles.discord}>
+            <a href='https://discord.gg/jeTvBNjp' target='_blank' rel='noopener noreferrer'>
               {socialIcons.discord}
             </a>
           </div>
