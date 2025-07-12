@@ -58,8 +58,15 @@
         > li {
           width: clamp(130px, 40%, 170px);
           height: max-content;
-          &:hover > a > svg {
-            transform: translateX(-50%);
+          @media (hover: hover) and (pointer: fine) {
+            &:hover > a > svg {
+              transform: translateX(-50%);
+            }
+          }
+          @media (hover: none) and (pointer: coarse) {
+            &:active > a > svg {
+              transform: translateX(-50%);
+            }
           }
 
           a {
@@ -127,9 +134,17 @@
           height: max-content;
           text-wrap: nowrap;
           cursor: pointer;
-          &:hover a {
-            color: #fff;
-            transform: translateX(-10px);
+          @media (hover: hover) and (pointer: fine) {
+            &:hover a {
+              color: #fff;
+              transform: translateX(-10px);
+            }
+          }
+          @media (hover: none) and (pointer: coarse) {
+            &:active a {
+              color: #fff;
+              transform: translateX(-10px);
+            }
           }
 
           a {

@@ -104,14 +104,28 @@
         transform: translateX(-102%);
         transition: transform .3s ease-in-out;
       }
-      &:hover {
-        background: var(--color-text-button-hover-gradient);
-        background-clip: text;
-        color: transparent;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        &::after {
-          transform: translateX(0%);
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          background: var(--color-text-button-hover-gradient);
+          background-clip: text;
+          color: transparent;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          &::after {
+            transform: translateX(0%);
+          }
+        }
+      }
+      @media (hover: none) and (pointer: coarse) {
+        &:active {
+          background: var(--color-text-button-hover-gradient);
+          background-clip: text;
+          color: transparent;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          &::after {
+            transform: translateX(0%);
+          }
         }
       }
     }
@@ -134,32 +148,60 @@
         text-decoration: none;
         transition: transform .2s ease-in-out;
         cursor: pointer;
-        &:hover {
-          transform: scale(1.2);
+        @media (hover: hover) and (pointer: fine) {
+          &:hover {
+            transform: scale(1.2);
+          }
+        }
+        @media (hover: none) and (pointer: coarse) {
+          &:active {
+            transform: scale(1.2);
+          }
         }
       }
       .gmail {
         text-decoration: none;
         transition: transform .2s ease-in-out;
         cursor: pointer;
-        &:hover {
-          transform: scale(1.2);
+        @media (hover: hover) and (pointer: fine) {
+          &:hover {
+            transform: scale(1.2);
+          }
+        }
+        @media (hover: none) and (pointer: coarse) {
+          &:active {
+            transform: scale(1.2);
+          }
         }
       }
       .gitHub {
         text-decoration: none;
         transition: transform .2s ease-in-out;
         cursor: pointer;
-        &:hover {
-          transform: scale(1.2);
+        @media (hover: hover) and (pointer: fine) {
+          &:hover {
+            transform: scale(1.2);
+          }
+        }
+        @media (hover: none) and (pointer: coarse) {
+          &:active {
+            transform: scale(1.2);
+          }
         }
       }
       .discord {
         text-decoration: none;
         transition: transform .2s ease-in-out;
         cursor: pointer;
-        &:hover {
-          transform: scale(1.2);
+        @media (hover: hover) and (pointer: fine) {
+          &:hover {
+            transform: scale(1.2);
+          }
+        }
+        @media (hover: none) and (pointer: coarse) {
+          &:active {
+            transform: scale(1.2);
+          }
         }
       }
     }

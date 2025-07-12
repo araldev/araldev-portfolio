@@ -44,8 +44,16 @@
     border-radius: var(--border-radius);
     transition: inset .2s ease-in-out;
   }
-  &:hover .project_card_overlay {
-    inset: .5%;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover .project_card_overlay {
+      inset: .5%;
+    }
+  }
+  @media (hover: none) and (pointer: coarse) {
+    &:active .project_card_overlay {
+      inset: .5%;
+    }
   }
 
   .project_image_container {
@@ -176,11 +184,21 @@
     svg {
       transition: stroke .2s ease-in-out, fill .2s ease-in-out;
     }
-    > *:hover svg[data-key="demo"] {
-      stroke: #181717;
+    @media (hover: hover) and (pointer: fine) {
+      > *:hover svg[data-key="demo"] {
+        stroke: #181717;
+      }
+      > *:hover svg[data-key="gitHub"] {
+        fill: #181717;
+      }
     }
-    > *:hover svg[data-key="gitHub"] {
-      fill: #181717;
+    @media (hover: none) and (pointer: coarse) {
+      > *:active svg[data-key="demo"] {
+        stroke: #181717;
+      }
+      > *:active svg[data-key="gitHub"] {
+        fill: #181717;
+      }
     }
   }
 }

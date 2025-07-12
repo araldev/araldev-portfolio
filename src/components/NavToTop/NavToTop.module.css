@@ -24,9 +24,16 @@
     border-radius: 50%;
     transition: transform .3s ease-in-out;
     stroke: #8fc6ff;
-    &:hover {
-    transform: scale(1.1);
-  }
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+    @media (hover: none) and (pointer: coarse) {
+      &:active {
+        transform: scale(1.1);
+      }
+    }
 
     > path:nth-child(1) {
       --circunference: 75.4088134765625;
