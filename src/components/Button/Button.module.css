@@ -46,15 +46,29 @@
     transition: transform .3s ease-in-out;
     pointer-events: none;
   }
-  &:hover {
-    background: var(--color-text-button-hover-gradient);
-    background-clip: text;
-    color: transparent;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    &::after {
-      transform: translateX(0%);
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background: var(--color-text-button-hover-gradient);
+      background-clip: text;
+      color: transparent;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      &::after {
+        transform: translateX(0%);
+      }
     }
+  }
+  @media (hover: none) and (pointer: coarse) {
+    &:active {
+        background: var(--color-text-button-hover-gradient);
+        background-clip: text;
+        color: transparent;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        &::after {
+          transform: translateX(0%);
+        }
+      }
   }
   &:disabled {
     /* opacity: .9; */
