@@ -85,45 +85,90 @@
       transition: transform .3s ease-in-out;
     }
 
-    &:hover .js > svg {
-      transform: scale(1.2);
-      color: #F7DF1E;
-    }
-    &:hover .react > svg {
-      transform: scale(1.2);
-      color: #61DAFB;
-    }
-    &:hover .css > svg {
-      transform: scale(1.2);
-      color: #1572B6;
-    }
-    &:hover .tailwind > svg {
-      transform: scale(1.2);
-      color: #06B6D4;
-    }
-    &:hover .html > svg {
-      transform: scale(1.2);
-      color: #E34F26;
-    }
-    &:hover .ts > svg {
-      transform: scale(1.2);
-      color: #3178C6;
-    }
-    &:hover .git > svg {
-      transform: scale(1.2);
-      stroke: #F05032;
-    }
-    &:hover .gitHub > svg {
-      transform: scale(1.2);
-      fill: #F05032;
-      circle {
-        fill: #181717;
+    @media (hover: hover) and (pointer: fine) {
+      &:hover .js > svg {
+        transform: scale(1.2);
+        color: #F7DF1E;
+      }
+      &:hover .react > svg {
+        transform: scale(1.2);
+        color: #61DAFB;
+      }
+      &:hover .css > svg {
+        transform: scale(1.2);
+        color: #1572B6;
+      }
+      &:hover .tailwind > svg {
+        transform: scale(1.2);
+        color: #06B6D4;
+      }
+      &:hover .html > svg {
+        transform: scale(1.2);
+        color: #E34F26;
+      }
+      &:hover .ts > svg {
+        transform: scale(1.2);
+        color: #3178C6;
+      }
+      &:hover .git > svg {
+        transform: scale(1.2);
+        stroke: #F05032;
+      }
+      &:hover .gitHub > svg {
+        transform: scale(1.2);
+        fill: #F05032;
+        circle {
+          fill: #181717;
+        }
+      }
+      &:hover .gsap > svg {
+        transform: scale(1.2);
+        > * {
+          fill: #0ae448;
+        }
       }
     }
-    &:hover .gsap > svg {
-      transform: scale(1.2);
-      > * {
-        fill: #0ae448;
+    @media (hover: none) and (pointer: coarse) {
+      &:active .js > svg {
+        transform: scale(1.2);
+        color: #F7DF1E;
+      }
+      &:active .react > svg {
+        transform: scale(1.2);
+        color: #61DAFB;
+      }
+      &:active .css > svg {
+        transform: scale(1.2);
+        color: #1572B6;
+      }
+      &:active .tailwind > svg {
+        transform: scale(1.2);
+        color: #06B6D4;
+      }
+      &:active .html > svg {
+        transform: scale(1.2);
+        color: #E34F26;
+      }
+      &:active .ts > svg {
+        transform: scale(1.2);
+        color: #3178C6;
+      }
+      &:active .git > svg {
+        transform: scale(1.2);
+        stroke: #F05032;
+      }
+      &:active .gitHub > svg {
+        transform: scale(1.2);
+        fill: #F05032;
+        circle {
+          fill: #181717;
+        }
+      }
+      &:active .gsap > svg {
+        transform: scale(1.2);
+        > * {
+          fill: #0ae448;
+        }
       }
     }
 
