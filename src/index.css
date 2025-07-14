@@ -73,6 +73,10 @@ html, body {
   z-index: -1;
 }
 
+strong, b {
+  font-weight: 700;
+}
+
 .container_main {
   max-width: 100%;
   width: 100%;

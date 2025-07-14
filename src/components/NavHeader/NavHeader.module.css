@@ -173,7 +173,7 @@
 }
 
 /* Menu Mobile */
-@media(width < 600px) {
+@media(width < 850px) {
   .overlay {
     position: fixed;
     top: 0;
@@ -201,8 +201,10 @@
     min-width: 280px;
     height: 100vh;
     opacity: 0;
+    background: var(--color-bg-button-gradient);
+    backdrop-filter: blur(20px) ;
     transform: translateX(100%);
-    transition: opacity .3s ease-in-out, background .3s ease-in-out, transform .3s ease-in-out,  visibility 0s linear 0.5s; 
+    transition: opacity .3s ease-in-out, background .3s ease-in-out, transform .3s ease-in-out,  visibility 0s linear 0.3s; 
   }
   .nav_header:has(.checkbox:checked) ~ .overlay {
     display: block;
@@ -210,13 +212,11 @@
   .nav_icon:has(.checkbox:checked) ~ .nav_links {
     visibility: visible;
     pointer-events: unset;
-    background: var(--color-bg-button-gradient);
-    backdrop-filter: blur(20px) ;
     opacity: 1;
     transform: translateX(0%);
     transition: opacity .3s ease-in-out, background .3s ease-in-out, transform .3s ease-in-out, visibility 0s linear 0s; 
   }
-  .nav_icon:has(.checkbox:checked) ~ .nav_links li {
+  .nav_icon:has(.checkbox) ~ .nav_links li {
     width: fit-content;
     height: 100px;
     a{
