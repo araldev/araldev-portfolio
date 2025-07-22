@@ -26,7 +26,7 @@ function TechIcons () {
           const styleForIcon = key ? styles[key] : ''
 
           return (
-            <label className={styles.filter_icon_label} key={index} htmlFor={idFilter}>
+            <label className={styles.filter_icon_label} key={`${index}-${key}`} htmlFor={idFilter}>
               <input
                 data-key={key}
                 onClick={handleClick}
