@@ -10,7 +10,9 @@ export const iconsColors = {
   gsap: '#0ae448',
   linkedin: '#0a66c2',
   discord: ['#5865F2', '#E0E3FF'],
-  gmail: ['#4285F4', '#34A853', '#FBBC04', '#EA4335', '#C5221F']
+  gmail: ['#4285F4', '#34A853', '#FBBC04', '#EA4335', '#C5221F'],
+  storybook: '#FF4785',
+  vite: '#646CFF'
 }
 
 export const allIconsDictionaryKey = {
@@ -27,6 +29,8 @@ export const allIconsDictionaryKey = {
   discord: 'discord',
   gmail: 'gmail',
   demo: 'demo',
+  storybook: 'storybook',
+  vite: 'vite',
   arrowUp: 'arrowUp',
   arrowDown: 'arrowDown'
 }

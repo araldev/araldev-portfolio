@@ -18,7 +18,9 @@ export const techIcons = {
   ts: ICONS.TYPESCRIPT_ICON,
   git: ICONS.GIT_ICON,
   gitHub: ICONS.GITHUB_ICON,
-  gsap: ICONS.GSAP_ICON
+  gsap: ICONS.GSAP_ICON,
+  storybook: ICONS.STORYBOOK_ICON,
+  vite: ICONS.VITE_ICON
 }
 
 export const utilsIcons = {

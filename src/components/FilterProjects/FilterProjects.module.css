@@ -84,6 +84,12 @@
     .gsap > svg {
       transition: transform .3s ease-in-out;
     }
+    .storybook > svg {
+      transition: transform .3s ease-in-out;
+    }
+    .vite > svg {
+      transition: transform .3s ease-in-out;
+    }
 
     @media (hover: hover) and (pointer: fine) {
       &:hover .js > svg {
@@ -125,6 +131,25 @@
         transform: scale(1.2);
         > * {
           fill: #0ae448;
+        }
+      }
+      &:hover .storybook > svg {
+        transform: scale(1.2);
+        path:nth-child(2) {
+          mask: none;
+          fill: #FF4785;
+        }
+        path:nth-child(3) {
+          fill: #fff;
+        }
+      }
+      &:hover .vite > svg {
+        transform: scale(1.2);
+        path:nth-child(1) {
+          fill: #ffcd25;
+        }
+        path:nth-child(2) {
+          fill: #8679fe;
         }
       }
     }
@@ -170,6 +195,25 @@
           fill: #0ae448;
         }
       }
+      &:active .storybook > svg {
+        transform: scale(1.2);
+        path:nth-child(2) {
+          mask: none;
+          fill: #FF4785;
+        }
+        path:nth-child(3) {
+          fill: #fff;
+        }
+      }
+      &:active .vite > svg {
+        transform: scale(1.2);
+        path:nth-child(1) {
+          fill: #ffcd25;
+        }
+        path:nth-child(2) {
+          fill: #8679fe;
+        }
+      }
     }
 
     .filter_icon_checkbox:checked ~ .js > svg {
@@ -201,6 +245,23 @@
     }
     .filter_icon_checkbox:checked ~ .gsap > svg > * {
       fill: #0ae448;
+    }
+    .filter_icon_checkbox:checked ~ .storybook > svg {
+      path:nth-child(2) {
+        mask: none;
+        fill: #FF4785;
+      }
+      path:nth-child(3) {
+        fill: #fff;
+      }
+    }
+    .filter_icon_checkbox:checked ~ .vite > svg {
+      path:nth-child(1) {
+          fill: #ffcd25;
+        }
+        path:nth-child(2) {
+          fill: #8679fe;
+        }
     }
   }
 }
