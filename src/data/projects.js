@@ -41,16 +41,19 @@ export const projects = [
   {
     id: 3,
     imgSrc: `${import.meta.env.BASE_URL}/images/shot-english-web.webp`,
-    title: 'Biblioteca de Componentes',
+    title: 'v12-ui',
     description: [
-      'Fue mi primer proyecto, en el cual puse en práctica lo que fuí aprendiendo.',
-      'Está desarrollado con js, CSS y HTML. Quise hacerlo así para aprender bien las bases antes de empezar a usar frameworks y librerías.'
+      'Es una librería de componentes UI autoresponsive, detecta el tema de la página y modifica los componentes automáticamente según la preferencia o el data-theme, gracias a un custom hook que usa new MutationObserver.',
+      'Se puede usar en cualquier proyecto de React, ya que es un paquete npm.',
+      'Requiere de 0 configuración, ya que se importa el componente que quieras usar en cada archivo y la stylesheet en el punto de entrada de tu app.'
     ],
     tech: {
       ts: techIcons.ts,
       react: techIcons.react,
       tailwind: techIcons.tailwind,
-      html: techIcons.html,
+      gsap: techIcons.gsap,
+      vite: techIcons.vite,
+      storybook: techIcons.storybook,
       gitHub: techIcons.gitHub,
       git: techIcons.git
     },
