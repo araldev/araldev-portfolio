@@ -238,6 +238,23 @@ stroke: #F05032;
 .gsap > svg > * {
 fill: #0ae448;
 }
+.storybook > svg {
+  path:nth-child(2) {
+    mask: none;
+    fill: #FF4785;
+  }
+  path:nth-child(3) {
+    fill: #fff;
+  }
+}
+.vite > svg {
+  path:nth-child(1) {
+    fill: #ffcd25;
+  }
+  path:nth-child(2) {
+    fill: #8679fe;
+  }
+}
 
 @media (max-width: 519px) {
   .projects_cards_container{
