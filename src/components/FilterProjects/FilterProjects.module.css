@@ -90,6 +90,10 @@
     .vite > svg {
       transition: transform .3s ease-in-out;
     }
+    .npm > svg {
+      transition: transform .3s ease-in-out;
+      max-width: 100%;
+    }
 
     @media (hover: hover) and (pointer: fine) {
       &:hover .js > svg {
@@ -102,7 +106,7 @@
       }
       &:hover .css > svg {
         transform: scale(1.2);
-        color: #1572B6;
+        color: #663399;
       }
       &:hover .tailwind > svg {
         transform: scale(1.2);
@@ -152,6 +156,13 @@
           fill: #8679fe;
         }
       }
+      &:hover .npm > svg {
+        transform: scale(1.2);
+        fill: #cc3534;
+        > path {
+          stroke: #000;
+        }
+      }
     }
     @media (hover: none) and (pointer: coarse) {
       &:active .js > svg {
@@ -164,7 +175,7 @@
       }
       &:active .css > svg {
         transform: scale(1.2);
-        color: #1572B6;
+        color: #663399;
       }
       &:active .tailwind > svg {
         transform: scale(1.2);
@@ -214,6 +225,13 @@
           fill: #8679fe;
         }
       }
+      &:active .npm > svg {
+        transform: scale(1.2);
+        fill: #cc3534;
+        > path {
+          stroke: #000;
+        }
+      }
     }
 
     .filter_icon_checkbox:checked ~ .js > svg {
@@ -223,7 +241,7 @@
       color: #61DAFB;
     }
     .filter_icon_checkbox:checked ~ .css > svg {
-      color: #1572B6;
+      color: #663399;
     }
     .filter_icon_checkbox:checked ~ .tailwind > svg {
       color: #06B6D4;
@@ -257,11 +275,17 @@
     }
     .filter_icon_checkbox:checked ~ .vite > svg {
       path:nth-child(1) {
-          fill: #ffcd25;
-        }
-        path:nth-child(2) {
-          fill: #8679fe;
-        }
+        fill: #ffcd25;
+      }
+      path:nth-child(2) {
+        fill: #8679fe;
+      }
+    }
+    .filter_icon_checkbox:checked ~ .npm > svg {
+      fill: #cc3534;
+      > path {
+        stroke: #000;
+      }
     }
   }
 }
