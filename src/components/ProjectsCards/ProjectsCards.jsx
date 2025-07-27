@@ -47,14 +47,22 @@ function ProjectCard ({ project }) {
       </div>
 
       <nav className={styles.links_container}>
-        <LinkButton href={project.demoLink}>
+        {project.npmLink && <LinkButton href={project.npmLink}>
+          npm package
+          {techIcons.npm}
+        </LinkButton>}
+        {project.storybookLink && <LinkButton href={project.storybookLink}>
+          Storybook Live
+          {techIcons.storybook}
+        </LinkButton>}
+        {project.demoLink && <LinkButton href={project.demoLink}>
           Demo
           {socialIcons.demo}
-        </LinkButton>
-        <LinkButton href={project.codeLink}>
+        </LinkButton>}
+        {project.codeLink && <LinkButton href={project.codeLink}>
           Code
           {techIcons.gitHub}
-        </LinkButton>
+        </LinkButton>}
       </nav>
     </article>
   )
