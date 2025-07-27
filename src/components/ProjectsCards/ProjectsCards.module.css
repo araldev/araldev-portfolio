@@ -159,17 +159,21 @@
     border-bottom-left-radius: var(--border-radius);
     border-bottom-right-radius: var(--border-radius);
     width: 100%;
-    height: 160px;
+    height: 260px;
     display: flex;
     justify-content: center;
     align-items: center;
+    align-content: center;
     position: relative;
     flex-wrap: wrap;
-    gap: 25px;
+    gap: 15px;
+    padding: 30px;
     background: var(--color-background-gradient);
     background-size: 300% 300%;
     animation: radialZoom 5s ease-in-out infinite alternate;
-    clip-path: path("M 0 6 L 19.2 8.3 C 38.4 10.7 76.8 15.3 114.9 22.5 C 153.1 29.7 191.0 39.3 229.2 41.7 C 267.4 44 305.8 39 343.9 33.7 C 382.0 28.3 420.0 22.7 458.2 17 C 496.3 11.3 534.8 5.7 553.9 2.8 L 573 0 L 573 160 L 553.9 162.8 C 534.8 165.7 496.3 171.3 458.2 177 C 420.0 182.7 382.0 188.3 343.9 193.7 C 305.8 199 267.4 204 229.2 201.7 C 191.0 199.3 153.1 189.7 114.9 182.5 C 76.8 175.3 38.4 170.7 19.2 168.3 L 0 166 Z");
+    clip-path: path(
+      "M0 6 L19.2 8.3 C38.4 10.7 76.8 15.3 114.9 22.5 C153.1 29.7 191 39.3 229.2 41.7 C267.4 44 305.8 39 343.9 33.7 C382 28.3 420 22.7 458.2 17 C496.3 11.3 534.8 5.7 553.9 2.8 L573 0 L573 260 L553.9 260 C534.8 260 496.3 260 458.2 260 C420 260 382 260 343.9 260 C305.8 260 267.4 260 229.2 260 C191 260 153.1 260 114.9 260 C76.8 260 38.4 260 19.2 260 L0 260 Z"
+    );
     &::after {
       content: "";
       position: absolute;
@@ -178,10 +182,18 @@
       z-index: -1;
     }
     > a {
+      width: 100%;
+    }
+    > a:first-child {
       margin-top: 30px;
     }
     svg {
+      width: 30px;
+      height: 30px;
       transition: stroke .2s ease-in-out, fill .2s ease-in-out;
+      &[data-key="npm"] {
+        width: 40px;
+      }
     }
     @media (hover: hover) and (pointer: fine) {
       > *:hover svg[data-key="demo"] {
@@ -189,6 +201,22 @@
       }
       > *:hover svg[data-key="gitHub"] {
         fill: #181717;
+      }
+      > *:hover svg[data-key="storybook"] {
+        transform: scale(1.2);
+        path:nth-child(2) {
+          mask: none;
+          fill: #FF4785;
+        }
+        path:nth-child(3) {
+          fill: #fff;
+        }
+      }
+      > *:hover svg[data-key="npm"] {
+        fill: #cc3534;
+        > path {
+          stroke: #000;
+        }
       }
     }
     @media (hover: none) and (pointer: coarse) {
@@ -215,7 +243,7 @@ color: #F7DF1E;
 color: #61DAFB;
 }
 .css > svg {
-color: #1572B6;
+color: #663399;
 }
 .tailwind > svg {
 color: #06B6D4;
@@ -255,6 +283,12 @@ fill: #0ae448;
     fill: #8679fe;
   }
 }
+.npm > svg {
+  fill: #cc3534;
+  > path {
+    stroke: #000;
+  }
+}
 
 @media (max-width: 519px) {
   .projects_cards_container{
@@ -268,9 +302,5 @@ fill: #0ae448;
   .project_card .project_icons_container span > * {
     width: 30px;
     height: 30px;
-  }
-
-  .project_card .links_container {
-    gap: 20px;
   }
 }
