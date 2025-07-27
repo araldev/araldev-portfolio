@@ -4,7 +4,7 @@ import { techIcons } from './icons'
 export const projects = [
   {
     id: 1,
-    imgSrc: `src/assets/shot-english-web.webp`,
+    imgSrc: `/araldev-portfolio/src/assets/shot-english-web.webp`,
     title: 'v12-ui',
     description: [
       'Librería de componentes UI autoresponsive, autoTheme y sin ninguna configuración.',
@@ -27,7 +27,7 @@ export const projects = [
   },
   {
     id: 2,
-    imgSrc: `src/assets/shot-english-web.webp`,
+    imgSrc: `/araldev-portfolio/src/assets/shot-english-web.webp`,
     title: 'Listening Maze',
     description: [
       'Juego de escucha activa, donde debes encontrar la salida de un laberinto.',
@@ -47,7 +47,7 @@ export const projects = [
   },
   {
     id: 3,
-    imgSrc: `src/assets/shot-english-web.webp`,
+    imgSrc: `/araldev-portfolio/src/assets/shot-english-web.webp`,
     title: 'English Web',
     description: [
       'Mi primer proyecto, el cual desarrollé sólo con JavaScript, CSS y HTML para poner en práctica las bases que aprendí antes de usar frameworks y librerías.',
