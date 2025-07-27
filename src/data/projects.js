@@ -4,80 +4,65 @@ import { techIcons } from './icons'
 export const projects = [
   {
     id: 1,
-    imgSrc: `${import.meta.env.BASE_URL}/images/shot-english-web.webp`,
-    title: 'English Web',
-    description: [
-      'Fue mi primer proyecto, en el cual puse en práctica lo que fuí aprendiendo.',
-      'Está desarrollado con js, CSS y HTML. Quise hacerlo así para aprender bien las bases antes de empezar a usar frameworks y librerías.'
-    ],
-    tech: {
-      js: techIcons.js,
-      css: techIcons.css,
-      html: techIcons.html,
-      gitHub: techIcons.gitHub,
-      git: techIcons.git
-    },
-    demoLink: 'https://araldev.github.io/english-web/index.html',
-    codeLink: 'https://github.com/araldev/english-web'
-  },
-  {
-    id: 2,
-    imgSrc: `${import.meta.env.BASE_URL}/images/shot-english-web.webp`,
-    title: 'Listening Maze',
-    description: [
-      'Fue mi primer proyecto, en el cual puse en práctica lo que fuí aprendiendo.',
-      'Está desarrollado con js, CSS y HTML. Quise hacerlo así para aprender bien las bases antes de empezar a usar frameworks y librerías.'
-    ],
-    tech: {
-      js: techIcons.js,
-      css: techIcons.css,
-      html: techIcons.html,
-      gitHub: techIcons.gitHub,
-      git: techIcons.git
-    },
-    demoLink: 'https://araldev.github.io/english-web/exercises.html',
-    codeLink: 'https://github.com/araldev/english-web/blob/main/src/js/games/listening-maze.js'
-  },
-  {
-    id: 3,
-    imgSrc: `${import.meta.env.BASE_URL}/images/shot-english-web.webp`,
+    imgSrc: `src/assets/shot-english-web.webp`,
     title: 'v12-ui',
     description: [
-      'Es una librería de componentes UI autoresponsive, detecta el tema de la página y modifica los componentes automáticamente según la preferencia o el data-theme, gracias a un custom hook que usa new MutationObserver.',
-      'Se puede usar en cualquier proyecto de React, ya que es un paquete npm.',
-      'Requiere de 0 configuración, ya que se importa el componente que quieras usar en cada archivo y la stylesheet en el punto de entrada de tu app.'
+      'Librería de componentes UI autoresponsive, autoTheme y sin ninguna configuración.',
+      'Se puede usar en cualquier proyecto de React, ya que es un paquete npm.'
     ],
     tech: {
       ts: techIcons.ts,
       react: techIcons.react,
       tailwind: techIcons.tailwind,
-      gsap: techIcons.gsap,
       vite: techIcons.vite,
+      npm: techIcons.npm,
       storybook: techIcons.storybook,
       gitHub: techIcons.gitHub,
       git: techIcons.git
     },
+    npmLink: '@/assets/shot-english-web.webp',
+    storybookLink: 'https://araldev.github.io/v12-ui/',
     demoLink: '',
-    codeLink: ''
+    codeLink: 'https://github.com/araldev/v12-ui'
   },
   {
-    id: 4,
-    imgSrc: `${import.meta.env.BASE_URL}/images/shot-english-web.webp`,
-    title: 'Red Social',
+    id: 2,
+    imgSrc: `src/assets/shot-english-web.webp`,
+    title: 'Listening Maze',
     description: [
-      'Fue mi primer proyecto, en el cual puse en práctica lo que fuí aprendiendo.',
-      'Está desarrollado con js, CSS y HTML. Quise hacerlo así para aprender bien las bases antes de empezar a usar frameworks y librerías.'
+      'Juego de escucha activa, donde debes encontrar la salida de un laberinto.',
+      "Está diseñado para ser escalable, añadiendo niveles al archivo json se crean automáticamente."
     ],
     tech: {
-      ts: techIcons.ts,
-      react: techIcons.react,
+      js: techIcons.js,
       css: techIcons.css,
       html: techIcons.html,
-      gsap: techIcons.gsap,
       gitHub: techIcons.gitHub,
       git: techIcons.git
     },
-    demoLink: '',
-    codeLink: ''
+    npmLink: '',
+    storybookLink: '',
+    demoLink: 'https://araldev.github.io/english-web/exercises.html',
+    codeLink: 'https://github.com/araldev/english-web/blob/main/src/js/games/listening-maze.js'
+  },
+  {
+    id: 3,
+    imgSrc: `src/assets/shot-english-web.webp`,
+    title: 'English Web',
+    description: [
+      'Mi primer proyecto, el cual desarrollé sólo con JavaScript, CSS y HTML para poner en práctica las bases que aprendí antes de usar frameworks y librerías.',
+      'Quise hacerlo así para aprender bien las bases antes de empezar a usar frameworks y librerías.'
+    ],
+    tech: {
+      js: techIcons.js,
+      css: techIcons.css,
+      html: techIcons.html,
+      gitHub: techIcons.gitHub,
+      git: techIcons.git
+    },
+    npmLink: '',
+    storybookLink: '',
+    demoLink: 'https://araldev.github.io/english-web/index.html',
+    codeLink: 'https://github.com/araldev/english-web'
   }
 ]
