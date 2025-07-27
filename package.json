@@ -39,6 +39,9 @@
     "extends": "./node_modules/standard/eslintrc.json",
     "env": {
       "browser": true
+    },
+    "rules": {
+      "react/jsx-closing-tag-location": "off"
     }
   }
 }
