@@ -20,7 +20,8 @@ export const techIcons = {
   gitHub: ICONS.GITHUB_ICON,
   gsap: ICONS.GSAP_ICON,
   storybook: ICONS.STORYBOOK_ICON,
-  vite: ICONS.VITE_ICON
+  vite: ICONS.VITE_ICON,
+  npm: ICONS.NPM_ICON
 }
 
 export const utilsIcons = {

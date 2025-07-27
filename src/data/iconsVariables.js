@@ -1,7 +1,7 @@
 export const iconsColors = {
   js: '#F7DF1E',
   react: '#61DAFB',
-  css: '#1572B6',
+  css: '#663399',
   tailwind: '#06B6D4',
   html: '#E34F26',
   ts: '#3178C6',
@@ -12,7 +12,8 @@ export const iconsColors = {
   discord: ['#5865F2', '#E0E3FF'],
   gmail: ['#4285F4', '#34A853', '#FBBC04', '#EA4335', '#C5221F'],
   storybook: '#FF4785',
-  vite: '#646CFF'
+  vite: '#646CFF',
+  npm: '#cc3534'
 }
 
 export const allIconsDictionaryKey = {
@@ -31,6 +32,7 @@ export const allIconsDictionaryKey = {
   demo: 'demo',
   storybook: 'storybook',
   vite: 'vite',
+  npm: 'npm',
   arrowUp: 'arrowUp',
   arrowDown: 'arrowDown'
 }
