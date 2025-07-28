@@ -20,7 +20,7 @@ export const projects = [
       gitHub: techIcons.gitHub,
       git: techIcons.git
     },
-    npmLink: '@/assets/shot-english-web.webp',
+    npmLink: 'https://www.npmjs.com/package/v12-ui',
     storybookLink: 'https://araldev.github.io/v12-ui/',
     demoLink: '',
     codeLink: 'https://github.com/araldev/v12-ui'
