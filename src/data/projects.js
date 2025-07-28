@@ -4,7 +4,7 @@ import { techIcons } from './icons'
 export const projects = [
   {
     id: 1,
-    imgSrc: new URL('/src/assets/shot-english-web.webp', import.meta.url).href,
+    imgSrc: new URL('/src/assets/screenshot-v12-ui.png', import.meta.url).href,
     title: 'v12-ui',
     description: [
       'Librería de componentes UI autoresponsive, autoTheme y sin ninguna configuración.',
@@ -27,7 +27,7 @@ export const projects = [
   },
   {
     id: 2,
-    imgSrc: new URL('/src/assets/shot-english-web.webp', import.meta.url).href,
+    imgSrc: new URL('/src/assets/screenshot-web-game.png', import.meta.url).href,
     title: 'Listening Maze',
     description: [
       'Juego de escucha activa, donde debes encontrar la salida de un laberinto.',
