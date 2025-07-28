@@ -7,35 +7,33 @@ export function useSortProjects () {
   const [sortProjects, setSortProjects] = useState(projects)
 
   useEffect(() => {
-    setSortProjects(prevState => {
-      const totalIndex = prevState.length
-      let newState = []
-      const indexUsed = []
-
+    setSortProjects(() => {
+    // Si no hay filtros activos, devolver proyectos originales
       if (Object.values(isIconCheck).every(value => value === false)) {
-        newState = projects
-        return newState
+        return projects.map(project => ({ ...project, techsCheked: 0 }))
       }
 
-      for (const key in isIconCheck) {
-        if (isIconCheck[key]) {
-          prevState.forEach((project, index) => {
-            if (!project.tech) return null
-            if (project?.tech?.[key] && !indexUsed.includes(index)) {
-              newState.push(project)
-              indexUsed.push(index)
-            }
-          })
+      // Crear nuevos proyectos y calcular techsCheked desde cero
+      const newProjects = projects.map(project => {
+        let techsCheked = 0
+
+        // Contar cuántas tecnologías seleccionadas tiene este proyecto
+        Object.entries(isIconCheck).forEach(([tech, isChecked]) => {
+          if (isChecked && project.tech[tech]) {
+            techsCheked++
+          }
+        })
+
+        return {
+          ...project,
+          techsCheked
         }
-      }
-
-      const indexUnused = Array.from({ length: totalIndex }, (_, i) => i).filter(i => !indexUsed.includes(i))
-
-      indexUnused.forEach(i => {
-        newState.push(prevState[i])
       })
 
-      return newState
+      // Ordenar por techsCheked (mayor a menor)
+      newProjects.sort((a, b) => b.techsCheked - a.techsCheked)
+
+      return newProjects
     })
   }, [isIconCheck])
 
