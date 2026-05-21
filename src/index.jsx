@@ -8,6 +8,9 @@ import App from './App.jsx'
 import { ReactLenis } from 'lenis/react'
 import { ScrollSync } from './components/ScrollSync.jsx'
 
+const isTouchDevice =
+  window.matchMedia('(pointer: coarse)').matches || navigator.maxTouchPoints > 0
+
 const lenisOptions = {
   autoRaf: false,
   smoothWheel: true,
@@ -15,8 +18,12 @@ const lenisOptions = {
 }
 
 createRoot(document.getElementById('root')).render(
-  <ReactLenis root options={lenisOptions}>
-    <ScrollSync />
-    <App />
-  </ReactLenis>
+  isTouchDevice
+    ? <App />
+    : (
+        <ReactLenis root options={lenisOptions}>
+          <ScrollSync />
+          <App />
+        </ReactLenis>
+      )
 )
