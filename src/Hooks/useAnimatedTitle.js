@@ -4,10 +4,10 @@ import { projectsDataSvg } from '../components/AnimatedTitle/titles'
 import { gsap } from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 
+gsap.registerPlugin(ScrollTrigger)
+
 export function useAnimatedTitle () {
   const timeoutId = useRef(null)
-  const lastWindowInnerHeightRef = useRef()
-  const lastWindowInnerWidthRef = useRef()
 
   const heroRef = useRef(null)
   const heroImgContainerRef = useRef(null)
@@ -21,15 +21,6 @@ export function useAnimatedTitle () {
   const titleMaskRef = useRef(null)
 
   useEffect(() => {
-    const isMobile =
-      window.matchMedia('(max-width: 850px)').matches ||
-      window.matchMedia('(pointer: coarse)').matches
-
-    let lastWindowInnerHeight = lastWindowInnerHeightRef.current
-    let lastWindowInnerWidth = lastWindowInnerWidthRef.current
-    lastWindowInnerHeight = window.innerHeight
-    lastWindowInnerWidth = window.innerWidth
-
     const hero = heroRef.current
     const heroImgContainer = heroImgContainerRef.current
     const heroImgTitle = heroImgTitleRef.current
@@ -41,139 +32,261 @@ export function useAnimatedTitle () {
     const titleContainer = titleContainerRef.current
     const titleMask = titleMaskRef.current
 
-    if (!hero || !heroImgContainer || !heroImgTitle || !titleMask || !overlayCopy || !overlayCopyContainer || !fadeOverlay || !svgOverlay || !titleContainer || !heroImgCopy) {
-      console.warn('GSAP/ScrollTrigger: Algunos elementos no se encontraron. La animación se intentará de nuevo cuando los refs se asignen.')
+    if (
+      !hero ||
+      !heroImgContainer ||
+      !heroImgTitle ||
+      !heroImgCopy ||
+      !fadeOverlay ||
+      !svgOverlay ||
+      !overlayCopy ||
+      !overlayCopyContainer ||
+      !titleContainer ||
+      !titleMask
+    ) {
+      console.warn(
+        'GSAP/ScrollTrigger: Algunos elementos no se encontraron.'
+      )
       return
     }
+
+    // =========================
+    // IMPORTANTÍSIMO PARA MÓVIL
+    // =========================
+
+    gsap.set(
+      [fadeOverlay, svgOverlay, overlayCopyContainer],
+      {
+        pointerEvents: 'none'
+      }
+    )
+
+    // =========================
+    // RESIZE DEBOUNCED
+    // =========================
 
     const handleResizeDebounce = () => {
       clearTimeout(timeoutId.current)
 
       timeoutId.current = setTimeout(() => {
-        const heightDiff = Math.abs(lastWindowInnerHeight - window.innerHeight)
-        const widthDiff = Math.abs(lastWindowInnerWidth - window.innerWidth)
-        if (heightDiff > 80 || widthDiff > 80) {
-          lastWindowInnerHeight = window.innerHeight
-          lastWindowInnerWidth = window.innerWidth
-          ScrollTrigger.refresh()
-        }
+        ScrollTrigger.refresh()
       }, 300)
     }
+
     window.addEventListener('resize', handleResizeDebounce)
 
-    const fadeInImg = gsap.fromTo(heroImgTitle, {
-      x: 60,
-      filter: 'blur(10px)'
-    }, {
-      x: 0,
-      filter: 'blur(0px)',
-      duration: 1
-    })
+    // =========================
+    // FADE IN INICIAL
+    // =========================
 
-    if (isMobile) {
-      ScrollTrigger.refresh()
-      return () => {
-        window.removeEventListener('resize', handleResizeDebounce)
-        if (fadeInImg) fadeInImg.kill()
+    const fadeInImg = gsap.fromTo(
+      heroImgTitle,
+      {
+        x: 60,
+        filter: 'blur(10px)'
+      },
+      {
+        x: 0,
+        filter: 'blur(0px)',
+        duration: 1
       }
+    )
+
+    // =========================
+    // CALCULAR SVG SOLO EN REFRESH
+    // =========================
+
+    const updateMaskPosition = () => {
+      titleMask.setAttribute('d', projectsDataSvg)
+
+      const titleDimensions =
+        titleContainer.getBoundingClientRect()
+
+      const titleBoundingBox = titleMask.getBBox()
+
+      const horizontalScaleRatio =
+        titleDimensions.width / titleBoundingBox.width
+
+      const verticalScaleRatio =
+        titleDimensions.height / titleBoundingBox.height
+
+      const titleScaleFactor = Math.min(
+        horizontalScaleRatio,
+        verticalScaleRatio
+      )
+
+      const titleHorizontalPosition =
+        titleDimensions.left +
+        (titleDimensions.width -
+          titleBoundingBox.width * titleScaleFactor) /
+          2 -
+        titleBoundingBox.x * titleScaleFactor
+
+      const titleVerticalPosition =
+        titleDimensions.top +
+        (titleDimensions.height -
+          titleBoundingBox.height * titleScaleFactor) /
+          2 -
+        titleBoundingBox.y * titleScaleFactor
+
+      titleMask.setAttribute(
+        'transform',
+        `
+        translate(${titleHorizontalPosition}, ${titleVerticalPosition})
+        scale(${titleScaleFactor})
+        `
+      )
     }
 
-    ScrollTrigger.create({
+    updateMaskPosition()
+
+    // =========================
+    // SCROLLTRIGGER
+    // =========================
+
+    const trigger = ScrollTrigger.create({
       id: 'hero-trigger',
+
       trigger: hero,
+
       start: 'top top',
-      end: () => `+=${window.innerHeight * 1.5}px`,
+
+      end: () => `+=${window.innerHeight * 1.5}`,
+
       pin: true,
+
       pinSpacing: true,
+
       scrub: 1,
+
       invalidateOnRefresh: true,
-      // markers: true,
+
+      pinType: 'transform',
+
+      onRefresh: () => {
+        updateMaskPosition()
+      },
+
       onUpdate: (self) => {
         const scrollProgress = self.progress
 
-        // SVG translate and scale
-        titleMask.setAttribute('d', projectsDataSvg)
+        // =========================
+        // FADE OUT TEXTO HERO
+        // =========================
 
-        const titleDimensions = titleContainer.getBoundingClientRect()
-        const titleBoundingBox = titleMask.getBBox()
+        const fadeOpacity =
+          1 - scrollProgress * (1 / 0.15)
 
-        const horizontalScaleRatio = titleDimensions.width / titleBoundingBox.width
-        const verticalScaleRatio = titleDimensions.height / titleBoundingBox.height
-        const titleScaleFactor = Math.min(horizontalScaleRatio, verticalScaleRatio)
-
-        const titleHorizontalPosition = titleDimensions.left + (titleDimensions.width - titleBoundingBox.width * titleScaleFactor) / 2 - titleBoundingBox.x * titleScaleFactor
-        const titleVerticalPosition = titleDimensions.top + (titleDimensions.height - titleBoundingBox.height * titleScaleFactor) / 2 - titleBoundingBox.y * titleScaleFactor
-
-        titleMask.setAttribute(
-          'transform',
-            `translate(${titleHorizontalPosition}, ${titleVerticalPosition}) 
-            scale(${titleScaleFactor})`
+        gsap.set(
+          [heroImgTitle, heroImgCopy],
+          {
+            opacity:
+              scrollProgress <= 0.15
+                ? fadeOpacity
+                : 0
+          }
         )
 
-        // Fade out heroImgTitle & heroImgCopy
-        const fadeOpacity = 1 - scrollProgress * (1 / 0.15)
-        gsap.set([heroImgTitle, heroImgCopy], {
-          opacity: scrollProgress <= 0.15 ? fadeOpacity : 0
-        })
+        // =========================
+        // ESCALADO
+        // =========================
 
         if (scrollProgress <= 0.85) {
           const numberScale =
-            window.innerWidth < 1500 && window.innerWidth > 1401
+            window.innerWidth < 1500 &&
+            window.innerWidth > 1401
               ? 1.1
-              : window.innerWidth < 1400 && window.innerWidth > 501
+              : window.innerWidth < 1400 &&
+                  window.innerWidth > 501
                 ? 1
                 : 1.1
 
           const initialOverlayScale = 350
-          const normalizedProgress = scrollProgress * (1 / 0.85)
-          const heroImgContainerScale = numberScale - 0.5 * normalizedProgress
+
+          const normalizedProgress =
+            scrollProgress * (1 / 0.85)
+
+          const heroImgContainerScale =
+            numberScale -
+            0.5 * normalizedProgress
+
           const overlayScale =
-              initialOverlayScale *
-              Math.pow(1 / initialOverlayScale, normalizedProgress)
+            initialOverlayScale *
+            Math.pow(
+              1 / initialOverlayScale,
+              normalizedProgress
+            )
 
-          gsap.set(heroImgContainer, { scale: heroImgContainerScale })
-          gsap.set(svgOverlay, { scale: overlayScale })
+          gsap.set(heroImgContainer, {
+            scale: heroImgContainerScale
+          })
 
-          const pointerState = scrollProgress >= 0.25 ? 'unset' : 'none'
+          gsap.set(svgOverlay, {
+            scale: overlayScale
+          })
+
+          // =========================
+          // OVERLAY OPACITY
+          // =========================
+
           let fadeOverlayOpacity = 0
 
           if (scrollProgress >= 0.25) {
-            fadeOverlayOpacity = Math.min(1, (scrollProgress - 0.25) * (1 / 0.4))
+            fadeOverlayOpacity = Math.min(
+              1,
+              (scrollProgress - 0.25) * (1 / 0.4)
+            )
           }
 
-          gsap.set([svgOverlay, overlayCopyContainer], {
-            pointerEvents: pointerState
-          })
-
           gsap.set(fadeOverlay, {
-            opacity: fadeOverlayOpacity,
-            pointerEvents: pointerState
+            opacity: fadeOverlayOpacity
           })
         }
 
-        // Overlay copy reveal
-        if (scrollProgress >= 0.6 && scrollProgress <= 0.85) {
-          const revealProgress = (scrollProgress - 0.6) * (1 / 0.25)
+        // =========================
+        // REVEAL COPY
+        // =========================
+
+        if (
+          scrollProgress >= 0.6 &&
+          scrollProgress <= 0.85
+        ) {
+          const revealProgress =
+            (scrollProgress - 0.6) * (1 / 0.25)
 
           const gradientSpread = 100
-          const gradientBottom = 240 - revealProgress * 280
-          const gradientTop = gradientBottom - gradientSpread
-          const overlayCopyScale = 1.25 - 0.45 * revealProgress
 
-          overlayCopy.style.background = `linear-gradient( to bottom,
-          #111117 0%,
-          #111117 ${gradientTop}%,
-          #8fc6ff ${gradientBottom}%, 
-          #5a9cff ${100 + gradientBottom}%)`
+          const gradientBottom =
+            240 - revealProgress * 280
+
+          const gradientTop =
+            gradientBottom - gradientSpread
+
+          const overlayCopyScale =
+            1.25 - 0.45 * revealProgress
+
+          overlayCopy.style.background = `
+            linear-gradient(
+              to bottom,
+              #111117 0%,
+              #111117 ${gradientTop}%,
+              #8fc6ff ${gradientBottom}%,
+              #5a9cff ${100 + gradientBottom}%
+            )
+          `
+
           overlayCopy.style.backgroundClip = 'text'
-          overlayCopy.style.webkitBackgroundClip = 'text'
+          overlayCopy.style.webkitBackgroundClip =
+            'text'
 
           gsap.set(overlayCopy, {
             scale: overlayCopyScale,
             opacity: revealProgress
           })
         } else if (scrollProgress < 0.6) {
-          gsap.set(overlayCopy, { opacity: 0 })
+          gsap.set(overlayCopy, {
+            opacity: 0
+          })
         }
       }
     })
@@ -181,12 +294,18 @@ export function useAnimatedTitle () {
     ScrollTrigger.refresh()
 
     return () => {
-      window.removeEventListener('resize', handleResizeDebounce)
-      const st = ScrollTrigger.getById('hero-trigger')
-      if (st) st.kill()
+      window.removeEventListener(
+        'resize',
+        handleResizeDebounce
+      )
+
+      clearTimeout(timeoutId.current)
+
+      if (trigger) trigger.kill()
+
       if (fadeInImg) fadeInImg.kill()
     }
-  }, [heroImgContainerRef, heroImgTitleRef, heroImgCopyRef, fadeOverlayRef, svgOverlayRef, overlayCopyRef, overlayCopyContainerRef, titleContainerRef, titleMaskRef])
+  }, [])
 
   return {
     heroRef,
