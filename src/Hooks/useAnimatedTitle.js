@@ -21,6 +21,10 @@ export function useAnimatedTitle () {
   const titleMaskRef = useRef(null)
 
   useEffect(() => {
+    const isMobile =
+      window.matchMedia('(max-width: 850px)').matches ||
+      window.matchMedia('(pointer: coarse)').matches
+
     let lastWindowInnerHeight = lastWindowInnerHeightRef.current
     let lastWindowInnerWidth = lastWindowInnerWidthRef.current
     lastWindowInnerHeight = window.innerHeight
@@ -65,6 +69,14 @@ export function useAnimatedTitle () {
       filter: 'blur(0px)',
       duration: 1
     })
+
+    if (isMobile) {
+      ScrollTrigger.refresh()
+      return () => {
+        window.removeEventListener('resize', handleResizeDebounce)
+        if (fadeInImg) fadeInImg.kill()
+      }
+    }
 
     ScrollTrigger.create({
       id: 'hero-trigger',
