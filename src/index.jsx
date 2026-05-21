@@ -8,8 +8,14 @@ import App from './App.jsx'
 import { ReactLenis } from 'lenis/react'
 import { ScrollSync } from './components/ScrollSync.jsx'
 
+const lenisOptions = {
+  autoRaf: false,
+  smoothWheel: true,
+  smoothTouch: false
+}
+
 createRoot(document.getElementById('root')).render(
-  <ReactLenis root options={{ autoRaf: false, smooth: true }}>
+  <ReactLenis root options={lenisOptions}>
     <ScrollSync />
     <App />
   </ReactLenis>

@@ -4,6 +4,7 @@ import { useAnimatedTitle } from '../../Hooks/useAnimatedTitle.js'
 import { usePreloadImg } from '../../Hooks/usePreloadImg.js'
 import avatar from '../../assets/yo-sin-fondo-M.webp'
 import { utilsIcons } from '../../data/icons.js'
+import { MagicLogo } from 'v12-ui'
 
 export function AnimatedTitle ({ children }) {
   const titleRevealMaskId = useId()
@@ -29,7 +30,7 @@ export function AnimatedTitle ({ children }) {
           {children}
 
           <div className={styles.hero_img_container} ref={heroImgTitleRef}>
-            <img src={avatar} alt='Profile Image' />
+            <MagicLogo className={styles.magicLogo} attractMode glow={false} dotSize={1} particles={9000} imageUrl={avatar} alt='Profile Image' />
           </div>
 
           <div className={styles.hero_img_copy} ref={heroImgCopyRef}>

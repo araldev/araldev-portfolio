@@ -6,7 +6,7 @@
   "main": "index.jsx",
   "type": "module",
   "author": "Araldev",
-  "license": "ISC",
+  "license": "MIT",
   "homepage": "https://araldev.github.io/araldev-portfolio/",
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
   "devDependencies": {
     "@vitejs/plugin-react-swc": "3.10.0",
     "standard": "17.1.2",
+    "v12-ui": "0.2.3",
     "vite": "6.3.5",
     "vite-plugin-gh-pages": "1.0.1"
   },
@@ -31,8 +32,8 @@
     "@fontsource/roboto": "5.2.6",
     "gsap": "3.13.0",
     "lenis": "1.3.3",
-    "react": "18.1.0",
-    "react-dom": "18.1.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.0",
     "react-google-recaptcha": "3.1.0"
   },
   "eslintConfig": {

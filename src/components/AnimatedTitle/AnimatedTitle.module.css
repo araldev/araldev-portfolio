@@ -10,7 +10,7 @@
 }
 
 .hero_container,
-.hero_container img,
+.hero_container .magicLogo,
 .fade_overlay {
   position: absolute;
   top: 0;
@@ -31,14 +31,14 @@
   top: 25%;
   left: 65%;
   transform: translate(-50%, -50%);
-  width: 350px;
+  width: 550px;
   height: auto;
   object-fit: contain;
   z-index: 1;
 
-  img {
-    width: 100%;
-    height: auto;
+  .magicLogo {
+    width: 500px;
+    height: 400px;
     mask-image: linear-gradient(
     to bottom,
     black 70%,
@@ -192,7 +192,7 @@
     top: 25%;
     left: 80%;
 
-    img {
+    .magicLogo {
       mask-image: linear-gradient(
         to bottom,
         black 20%,
@@ -211,7 +211,7 @@
     top: 3%;
     left: 80%;
 
-    img {
+    .magicLogo {
       mask-image: linear-gradient(
         to bottom,
         black 20%,
@@ -230,7 +230,7 @@
     top: 5%;
     left: 70%;
 
-    img {
+    .magicLogo {
       mask-image: linear-gradient(
         to bottom,
         black 20%,

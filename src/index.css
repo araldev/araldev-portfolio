@@ -64,6 +64,7 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 
   overscroll-behavior: none;
+  touch-action: pan-y;
   max-width: 100%;
   width: 100%;
   min-height: 100%;
