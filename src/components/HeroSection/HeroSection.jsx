@@ -20,7 +20,7 @@ export function HeroSection () {
         <h2 ref={subtitleRef} className={styles.subTitle_hero}>Frontend Developer</h2>
         <p ref={paragraphRef} className={styles.paragraph_hero}>Focused on crafting modern, visually engaging, and <br />animated web experiences.</p>
         <nav className={styles.socials_hero_container}>
-          <a className={styles.button_cv} href='../public/cv-araldev.pdf' download>
+          <a className={styles.button_cv} href='/cv-araldev.pdf' download>
             Download CV
           </a>
           <div className={styles.social_icons_container}>

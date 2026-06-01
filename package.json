@@ -23,7 +23,7 @@
   "devDependencies": {
     "@vitejs/plugin-react-swc": "3.10.0",
     "standard": "17.1.2",
-    "vite": "6.3.5",
+    "vite": "^6.4.2",
     "vite-plugin-gh-pages": "1.0.1"
   },
   "dependencies": {
