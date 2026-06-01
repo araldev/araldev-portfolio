@@ -7,12 +7,12 @@ Este documento define la gobernanza, las responsabilidades técnicas y el flujo 
 ## 🧭 Estado Global del Proyecto
 
 - **Proyecto:** araldev-portfolio
-- **Feature Activa:**
-- **Fase Actual:**
-- **Último agente activo:**
-- **Estado de la última tarea:**
-- **Siguiente agente a invocar:**
-- **Última actualización:**
+- **Feature Activa:** Ninguna (001-portfolio-docs completada)
+- **Fase Actual:**待机 (En espera de nuevas instrucciones)
+- **Último agente activo:** 08-deployer
+- **Estado de la última tarea:** Finalizado
+- **Siguiente agente a invocar:** Ninguno (pipeline completo)
+- **Última actualización:** 2026-06-01
 
 ---
 
@@ -61,9 +61,9 @@ Antes de realizar cualquier acción técnica, comando en terminal o modificació
 | **03** | **Arquitecto**    | `setup-plan.sh`         | `specs/[feature]/plan.md`       | Contratos de API, Modelos de Datos y SDD Técnico     |
 | **04** | **Desarrollador** | `setup-tasks.sh`        | Código Fuente / `tasks.md`      | Implementación Atómica Clean Code                    |
 | **05** | **Revisor**       |                         | Reporte de Código (PR)          | Linters, Formato, Refactorización y Buenas Prácticas |
-| **06** | **Seguridad**     | `pnpm audit`            | Parches de Seguridad            | Supply Chain, Secretos y Vulnerabilidades (SAST)     |
+| **06** | **Seguridad**     | `pnpm audit`            | Parches de Seguridad            | Supply Chain, Secretos y Vulnerabilidades (SAST)       |
 | **07** | **Tester**        | `pnpm test`             | Suites de Pruebas / Coverage    | Cobertura Mínima Constitucional (Ej: ≥ 80%)          |
-| **08** | **Desplegador**   | `pnpm run build`        | Dockerfile / CI-CD Workflow     | Contenerización Multi-stage y Variables de Entorno   |
+| **08** | **Desplegador**   | `pnpm run build`        | Dockerfile / CI-CD Workflow     | Contenerización Multi-stage y Variables de Entorno    |
 
 ---
 
