@@ -98,6 +98,7 @@ export function useAnimatedTitle () {
 
     const updateMaskPosition = () => {
       titleMask.setAttribute('d', projectsDataSvg)
+      titleMask.removeAttribute('transform')
 
       const titleDimensions =
         titleContainer.getBoundingClientRect()
@@ -168,6 +169,8 @@ export function useAnimatedTitle () {
       },
 
       onUpdate: (self) => {
+        updateMaskPosition()
+
         const scrollProgress = self.progress
 
         // =========================
