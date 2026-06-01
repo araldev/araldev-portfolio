@@ -1,8 +1,12 @@
+import { useState, useCallback } from 'react'
+import { useLenis } from 'lenis/react'
 import styles from './ProjectsCards.module.css'
 import { FilterProjects } from '../FilterProjects/FilterProjects.jsx'
 import { useIsIconCheckFilter } from '../../Hooks/useIsIconCheckFilter.js'
 import { useSortProjects } from '../../Hooks/useSortProjects.js'
 import { LinkButton } from '../LinkButton/LinkButton.jsx'
+import { Button } from '../Button/Button.jsx'
+import { ProjectModal } from '../ProjectModal/ProjectModal.jsx'
 import { techIcons, socialIcons } from '../../data/icons.js'
 
 function TechsIcons ({ project }) {
@@ -21,7 +25,7 @@ function TechsIcons ({ project }) {
   return <>{techIcons}</>
 }
 
-function ProjectCard ({ project }) {
+function ProjectCard ({ project, onShowMore }) {
   return (
     <article className={styles.project_card}>
       <div className={styles.project_card_overlay} />
@@ -47,22 +51,33 @@ function ProjectCard ({ project }) {
       </div>
 
       <nav className={styles.links_container}>
-        {project.npmLink && <LinkButton href={project.npmLink}>
-          npm package
-          {techIcons.npm}
-        </LinkButton>}
-        {project.storybookLink && <LinkButton href={project.storybookLink}>
-          Storybook Live
-          {techIcons.storybook}
-        </LinkButton>}
-        {project.demoLink && <LinkButton href={project.demoLink}>
-          Demo
-          {socialIcons.demo}
-        </LinkButton>}
-        {project.codeLink && <LinkButton href={project.codeLink}>
-          Code
-          {techIcons.gitHub}
-        </LinkButton>}
+        {project.npmLink && (
+          <LinkButton href={project.npmLink}>
+            npm package
+            {techIcons.npm}
+          </LinkButton>
+        )}
+        {project.storybookLink && (
+          <LinkButton href={project.storybookLink}>
+            Storybook Live
+            {techIcons.storybook}
+          </LinkButton>
+        )}
+        {project.demoLink && (
+          <LinkButton href={project.demoLink}>
+            Demo
+            {socialIcons.demo}
+          </LinkButton>
+        )}
+        {project.codeLink && (
+          <LinkButton href={project.codeLink}>
+            Code
+            {techIcons.gitHub}
+          </LinkButton>
+        )}
+        <Button onClick={() => onShowMore(project)}>
+          Mostrar más
+        </Button>
       </nav>
     </article>
   )
@@ -70,6 +85,18 @@ function ProjectCard ({ project }) {
 
 export function ProjectsCards () {
   const { sortProjects } = useSortProjects()
+  const lenis = useLenis()
+  const [selectedProject, setSelectedProject] = useState(null)
+
+  const openModal = useCallback((project) => {
+    if (lenis) lenis.stop()
+    setSelectedProject(project)
+  }, [lenis])
+
+  const closeModal = useCallback(() => {
+    setSelectedProject(null)
+    if (lenis) lenis.start()
+  }, [lenis])
 
   return (
     <section id='projects' className={styles.projects_section}>
@@ -78,10 +105,14 @@ export function ProjectsCards () {
       <div className={styles.projects_cards_container}>
         {
           sortProjects.map(project => (
-            <ProjectCard key={project.id} project={project} />
+            <ProjectCard key={project.id} project={project} onShowMore={openModal} />
           ))
         }
       </div>
+
+      {selectedProject && (
+        <ProjectModal project={selectedProject} onClose={closeModal} />
+      )}
     </section>
   )
 }
