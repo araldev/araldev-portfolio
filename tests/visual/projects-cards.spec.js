@@ -33,6 +33,21 @@ import { test, expect } from '@playwright/test'
 import AxeBuilder from '@axe-core/playwright'
 
 test.describe('SC-N1-05: ProjectsCards snapshot @ active viewport', () => {
+  // TODO T-308: regenerate the ProjectsCards baselines after T-304..T-307
+  // (N1 GREEN) delete + recreate ProjectsCards without absolute clip-paths
+  // (per FR-N1-05). The current baselines (captured in P1) reflect the
+  // broken source. The new v3 will render with border-radius + 1 SVG
+  // mask-image decorative cut (per OQ-N1-01 default: HYBRID shape), so
+  // ALL 4 chromium baselines will need to be regenerated:
+  //   - projects-desktop-1440-desktop-1440-linux.png
+  //   - projects-tablet-768-tablet-768-linux.png
+  //   - projects-mobile-375-mobile-375-linux.png
+  //   - projects-chromium-no-reduced-motion-chromium-no-reduced-motion-linux.png
+  // Command (run from project root):
+  //   pnpm test:visual projects-cards.spec.js --update-snapshots
+  // After T-308, the 3 chromium-no-reduced-motion RED tests flip GREEN
+  // (the ProjectsCards v3 has no GSAP animations, so SC-N2-01b
+  // transform:none assertion becomes trivially true on JobsCards too).
   test('snapshot + section visible', async ({ page }, testInfo) => {
     await page.goto('/#projects')
     await page.waitForLoadState('networkidle')
