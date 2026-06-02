@@ -22,7 +22,8 @@
   border-radius: 24px;
   box-shadow:
     0 0 40px rgba(0, 201, 255, 0.15),
-    0 0 80px rgba(0, 201, 255, 0.08);
+    0 0 80px rgba(0, 201, 255, 0.08),
+    0 25px 80px rgba(0, 0, 0, 0.5);
   overflow: hidden;
   visibility: hidden;
 }
@@ -32,13 +33,13 @@
   top: 24px;
   right: 24px;
   z-index: 1100;
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  border: 1.5px solid rgba(255, 255, 255, 0.2);
-  background: rgba(17, 17, 23, 0.7);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  background: rgba(17, 17, 23, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   color: #fff;
   cursor: pointer;
   display: flex;
@@ -46,11 +47,23 @@
   align-items: center;
   transition: all 0.25s ease;
   visibility: hidden;
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+  svg {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2.5;
+  }
 
   &:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.15);
     border-color: rgba(255, 255, 255, 0.5);
     transform: scale(1.08);
+    box-shadow:
+      0 8px 24px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
   }
 
   &:active {
@@ -99,17 +112,46 @@
   width: 100%;
   max-width: 800px;
   padding: 60px 40px 80px;
+
+  .hero_tags {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+
+    .hero_tag {
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      background: rgba(0, 201, 255, 0.15);
+      border: 1px solid rgba(0, 201, 255, 0.3);
+      color: rgba(0, 201, 255, 0.95);
+      backdrop-filter: blur(4px);
+    }
+  }
 }
 
 .hero_title {
-  font-size: clamp(2.5rem, 5vw + 0.5rem, 4.5rem);
-  font-weight: 700;
+  font-size: clamp(3rem, 6vw + 0.5rem, 5rem);
+  font-weight: 800;
   background: var(--color-text-gradient);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-bottom: 20px;
-  line-height: 1.1;
+  margin-bottom: 16px;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.hero_short_description {
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 24px;
+  line-height: 1.5;
 }
 
 .hero_description {
@@ -118,8 +160,8 @@
   p {
     font-size: var(--font-size-paragraph);
     font-weight: var(--font-weight-paragraph);
-    color: rgba(255, 255, 255, 0.8);
-    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.8;
 
     + p {
       margin-top: 1lh;
@@ -177,8 +219,8 @@
   border-radius: 16px;
   overflow: hidden;
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.3),
-    0 0 0 1px rgba(255, 255, 255, 0.06);
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.08);
 }
 
 .mock_image {
@@ -245,32 +287,54 @@
 
 .detail_text_wrapper {
   position: relative;
+  padding-left: 24px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 3px;
+    height: calc(100% - 16px);
+    background: linear-gradient(
+      180deg,
+      rgba(0, 201, 255, 0.5),
+      rgba(146, 254, 157, 0.3)
+    );
+    border-radius: 2px;
+  }
 }
 
 .detail_number {
-  font-size: 3rem;
+  font-size: 4rem;
   font-weight: 800;
   line-height: 1;
-  background: linear-gradient(135deg, rgba(0, 201, 255, 0.15), rgba(146, 254, 157, 0.15));
+  background: linear-gradient(
+    135deg,
+    rgba(0, 201, 255, 0.2),
+    rgba(146, 254, 157, 0.15)
+  );
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
+  letter-spacing: -0.03em;
 }
 
 .detail_title {
-  font-size: clamp(1.25rem, 2vw, 1.75rem);
-  font-weight: 600;
+  font-size: clamp(1.35rem, 2vw, 1.85rem);
+  font-weight: 700;
   color: #fff;
-  margin-bottom: 14px;
-  line-height: 1.3;
+  margin-bottom: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
 }
 
 .detail_text {
   font-size: var(--font-size-paragraph);
-  font-weight: var(--font-weight-paragraph);
-  color: rgba(255, 255, 255, 0.7);
-  line-height: 1.7;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.8;
   max-width: 45ch;
 }
 
@@ -280,11 +344,44 @@
   margin: 0 auto;
   padding: 40px;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(0, 201, 255, 0.02)
+  );
+
+  .footer_links {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-bottom: 24px;
+
+    a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: rgba(0, 201, 255, 0.9);
+      }
+
+      svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
 
   p {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: rgba(255, 255, 255, 0.25);
     text-align: center;
+    line-height: 1.6;
   }
 }
 
@@ -298,12 +395,24 @@
   .close_button {
     top: 16px;
     right: 16px;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
   }
 
   .hero_content {
     padding: 40px 24px 60px;
+
+    .hero_tags {
+      margin-bottom: 16px;
+    }
+  }
+
+  .hero_title {
+    font-size: clamp(2.2rem, 10vw, 3rem);
+  }
+
+  .hero_short_description {
+    font-size: 1rem;
   }
 
   .details_section {
@@ -320,12 +429,29 @@
     direction: ltr;
   }
 
+  .detail_text_wrapper {
+    padding-left: 20px;
+
+    &::before {
+      width: 2px;
+    }
+  }
+
+  .detail_number {
+    font-size: 3rem;
+  }
+
   .detail_text {
     max-width: 100%;
   }
 
   .modal_footer {
     padding: 24px;
+
+    .footer_links {
+      gap: 20px;
+      flex-wrap: wrap;
+    }
   }
 }
 
@@ -335,10 +461,22 @@
   }
 
   .hero_title {
-    font-size: clamp(1.8rem, 8vw, 2.5rem);
+    font-size: clamp(1.8rem, 12vw, 2.5rem);
   }
 
   .detail_number {
-    font-size: 2.2rem;
+    font-size: 2.4rem;
+  }
+
+  .close_button {
+    top: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
   }
 }

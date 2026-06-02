@@ -18,13 +18,23 @@
     "preview": "vite preview",
     "deploy": "vite build && gh-pages -d dist",
     "lint": "standard",
-    "lint:fix": "standard --fix"
+    "lint:fix": "standard --fix",
+    "test": "vitest",
+    "test:run": "vitest --run",
+    "test:coverage": "vitest --coverage"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
     "@vitejs/plugin-react-swc": "3.10.0",
+    "@vitest/coverage-v8": "^4.1.7",
+    "jest-axe": "^3.5.0",
+    "jsdom": "^25.0.1",
     "standard": "17.1.2",
-    "vite": "6.3.5",
-    "vite-plugin-gh-pages": "1.0.1"
+    "vite": "^6.4.2",
+    "vite-plugin-gh-pages": "1.0.1",
+    "vitest": "^4.1.7"
   },
   "dependencies": {
     "@emailjs/browser": "4.4.1",

@@ -33,6 +33,7 @@ export function ContactSection () {
         captcha.reset()
       }
     } catch (err) {
+      console.error('Error sending email:', err)
       captcha.reset()
     } finally {
       setIsLoading(false)
