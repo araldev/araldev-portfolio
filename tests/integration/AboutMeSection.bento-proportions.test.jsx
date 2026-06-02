@@ -94,7 +94,7 @@ describe('AboutMeSection Bento proportions — T-211 N3 RED contract', () => {
       // (the avatar/brand <img> tags are local WebP and decode
       // synchronously enough that waiting for the network is overkill).
       await page.waitForLoadState('domcontentloaded')
-      await page.waitForSelector('#about-me aside')
+      await page.waitForSelector('[data-testid="bento-grid"]')
 
       // 1. Bento row count per FR-N3-01 (desktop) / FR-N3-06
       //    (tablet ≤1450px / mobile ≤1000px). The current source uses
@@ -115,8 +115,9 @@ describe('AboutMeSection Bento proportions — T-211 N3 RED contract', () => {
       // 2. Avatar is square per FR-N3-03 (aspect-ratio: 1, max 360px).
       //    The current source has no aspect-ratio on .avatar_image,
       //    so the rendered image is whatever the source WebP's
-      //    natural ratio is.
-      const avatarBox = await page.locator('img[alt*="Arturo"]').boundingBox()
+      //    natural ratio is.  Selector scoped to #about-me to
+      //    avoid matching the NavHeader avatar.
+      const avatarBox = await page.locator('#about-me img[alt*="Arturo"]').boundingBox()
       expect(avatarBox, `[${vp.name}] avatar not visible`).not.toBeNull()
       const avatarRatio = avatarBox.width / avatarBox.height
       expect(
@@ -128,7 +129,9 @@ describe('AboutMeSection Bento proportions — T-211 N3 RED contract', () => {
       // 3. Brand is square per FR-N3-04 (aspect-ratio: 1, width 100px
       //    desktop). The current source has no aspect-ratio on
       //    .brand_image, so the rendered image may be rectangular.
-      const brandBox = await page.locator('img[alt*="Brand"]').boundingBox()
+      //    Selector scoped to #about-me to avoid matching the
+      //    NavHeader + Footer brand images.
+      const brandBox = await page.locator('#about-me img[alt*="Brand"]').boundingBox()
       expect(brandBox, `[${vp.name}] brand not visible`).not.toBeNull()
       const brandRatio = brandBox.width / brandBox.height
       expect(
