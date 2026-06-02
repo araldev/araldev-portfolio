@@ -53,9 +53,18 @@ vi.mock('lenis/react', () => ({
 
 beforeEach(() => {
   mockIsIconCheck = {
-    js: false, react: false, css: false, html: false, ts: false,
-    git: false, gitHub: false, gsap: false, tailwind: false,
-    storybook: false, vite: false, npm: false
+    js: false,
+    react: false,
+    css: false,
+    html: false,
+    ts: false,
+    git: false,
+    gitHub: false,
+    gsap: false,
+    tailwind: false,
+    storybook: false,
+    vite: false,
+    npm: false
   }
 })
 
