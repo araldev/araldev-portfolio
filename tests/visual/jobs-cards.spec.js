@@ -133,3 +133,71 @@ test.describe('SC-N2-04: axe-core 0 violations @ active viewport', () => {
     expect(results.violations).toEqual([])
   })
 })
+
+// SC-N2-01b: User-reported "relayout on reload" bug capture.
+//
+// Why this lives in a SEPARATE test from SC-N2-01 (height-delta):
+//   The height-delta test runs under `reducedMotion: 'reduce'`, which
+//   suppresses BOTH useFadeInJobCards (gsap.set then return) AND
+//   useFlipJobs (early return). Under those conditions, the cards
+//   have transform: 'none' from t=0 onward, and the height delta is
+//   trivially 0. The test PASSES — but it passes in a config that
+//   hides the very GSAP + FLIP animations that the user sees.
+//
+//   This test (SC-N2-01b) runs under `chromium-no-reduced-motion`
+//   which uses `reducedMotion: 'no-preference'` — the same as a real
+//   user. The GSAP `y: 30 → 0` entrance + the FLIP `absolute: true`
+//   reorder will run. By t=after-load+1500ms (well past the 0.9s
+//   fade-in + 0.12s stagger + 0.3s FLIP), no card should still
+//   have a transform applied. If it does, the user is seeing a
+//   visible "jump" — the bug the P1 diagnosis caught.
+//
+// Reference: specs/004-.../verify-p1-relayout-diagnosis.md §6.5.
+test.describe('SC-N2-01b: no in-progress transform @ t=after-load (real browser)', () => {
+  test('transform: none on every [data-job-card] 1500ms after window.load + img.decode()', async ({ page }, testInfo) => {
+    // Only run in the no-reduced-motion project. On reduced-motion
+    // projects the test is meaningless (GSAP is suppressed by the
+    // hook itself, so the assertion is trivially true).
+    test.skip(testInfo.project.name !== 'chromium-no-reduced-motion',
+      'SC-N2-01b only runs in chromium-no-reduced-motion (the real-browser project)')
+
+    // Navigate. page.goto() defaults to waitUntil: 'load', so by the
+    // time it returns window.load has fired.
+    await page.goto('/#experience')
+
+    // Mirror the production gate: Promise.all(img.decode()) on every
+    // in-grid image. The .catch(() => null) mirrors EC-N2-01 (silent
+    // swallow of broken images). This is the same pattern N2 will
+    // use in useFadeInJobCards to wait for layout to be stable.
+    await page.evaluate(() => Promise.all(
+      Array.from(document.querySelectorAll('[data-job-card] img'))
+        .map(img => img.decode().catch(() => null))
+    ))
+
+    // 1500ms = (0.9s fade-in duration) + (0.12s stagger × 4 cards)
+    //        + (0.3s FLIP duration) + (200ms settle margin).
+    // After this wait, all animations should be cleared and every
+    // card should report transform: 'none' from getComputedStyle.
+    await page.waitForTimeout(1500)
+
+    const transforms = await page.$$eval(
+      '[data-job-card]',
+      cards => cards.map(c => window.getComputedStyle(c).transform)
+    )
+
+    // Guard: at least one card must exist. A 0-card result here
+    // would make the per-card assertion trivially pass.
+    expect(transforms.length).toBeGreaterThan(0)
+
+    transforms.forEach((transform, i) => {
+      expect(
+        transform,
+        `Card #${i} still has transform "${transform}" 1500ms after ` +
+        'window.load + img.decode(). The GSAP entrance + FLIP reorder ' +
+        'should have completed and cleared all inline transforms. ' +
+        'If this fails, the user-reported "relayout on reload" is ' +
+        'still observable. See verify-p1-relayout-diagnosis.md §6.5.'
+      ).toBe('none')
+    })
+  })
+})
