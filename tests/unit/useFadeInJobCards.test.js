@@ -1,3 +1,4 @@
+/* global HTMLImageElement */
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { renderHook } from '@testing-library/react'
 import { useFadeInJobCards } from '../../src/Hooks/useFadeInJobCards.js'
@@ -61,9 +62,18 @@ function makeGrid (count = 3) {
 }
 
 describe('useFadeInJobCards', () => {
-  it('creates a ScrollTrigger on the grid when motion is allowed', () => {
+  it('creates a ScrollTrigger on the grid when motion is allowed', async () => {
     const { ref, cleanup } = makeGrid(3)
     renderHook(() => useFadeInJobCards(ref))
+    // N2 (T-203): the trigger is created asynchronously after the
+    // window.load + img.decode gate lifts. The grid has no images, so
+    // the decode step is a no-op; the load gate resolves immediately
+    // because document.readyState === 'complete' in jsdom. Flush
+    // microtasks to let the chain settle.
+    await Promise.resolve()
+    await Promise.resolve()
+    await Promise.resolve()
+    await Promise.resolve()
     expect(mocks.mockTriggerCreate).toHaveBeenCalledTimes(1)
     expect(mocks.mockTriggerCreate.mock.calls[0][0].trigger).toBe(ref.current)
     cleanup()
@@ -160,7 +170,7 @@ describe('useFadeInJobCards — T-202 N2 gate (window.load + img.decode + 5s tim
       const card = document.createElement('article')
       card.setAttribute('data-job-card', 'true')
       const img = document.createElement('img')
-      img.src = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"/>` // valid src
+      img.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"/>' // valid src
       card.appendChild(img)
       div.appendChild(card)
     }
@@ -172,10 +182,13 @@ describe('useFadeInJobCards — T-202 N2 gate (window.load + img.decode + 5s tim
   it('T-202.A: does NOT call ScrollTrigger.create until window.load fires AND all img.decode() resolve', async () => {
     const { ref, cleanup } = makeGridWithImages(3)
 
-    // Track per-call order of mocks. We'll use a manual resolve for
-    // img.decode() so we can control when the gate lifts.
+    // Use a single shared decode promise so every img.decode() call
+    // observes the same resolution. The implementation calls decode
+    // once per in-grid <img>, so the gate must wait for ALL of them
+    // to settle (Promise.all in the hook).
     let resolveDecode
-    decodeImpl.mockImplementation(() => new Promise((r) => { resolveDecode = r }))
+    const sharedDecode = new Promise((resolve) => { resolveDecode = resolve })
+    decodeImpl.mockImplementation(() => sharedDecode)
 
     renderHook(() => useFadeInJobCards(ref))
 
@@ -190,12 +203,13 @@ describe('useFadeInJobCards — T-202 N2 gate (window.load + img.decode + 5s tim
     expect(mocks.mockTriggerCreate).not.toHaveBeenCalled()
 
     // Only after BOTH load fired AND all img.decode() resolved does
-    // the trigger get created. Resolve the decode promise, flush
-    // microtasks, then assert.
+    // the trigger get created. Resolve the shared decode promise and
+    // flush microtasks for the full chain to settle:
+    //   sharedDecode → .catch × N → Promise.all → Promise.race → .then → outer.resolve → .then → createTrigger
     resolveDecode()
-    // 3 cards × 1 img each = 3 decodes. Resolving once resolves
-    // ALL of them (same mock instance is used by every img). Flush
-    // microtasks for Promise.all() to settle.
+    // Drain microtasks generously — the chain has multiple .then hops.
+    await Promise.resolve()
+    await Promise.resolve()
     await Promise.resolve()
     await Promise.resolve()
     await Promise.resolve()
@@ -218,17 +232,20 @@ describe('useFadeInJobCards — T-202 N2 gate (window.load + img.decode + 5s tim
     expect(mocks.mockTriggerCreate).not.toHaveBeenCalled()
     expect(capturedLoadHandler).toBeTypeOf('function')
 
-    // Advance time to 4999ms — still inside the window, must NOT fire.
+    // Advance time to 4999ms — still inside the window, the 5000ms
+    // fallback timer has NOT fired yet. We do NOT call runAllTimersAsync
+    // here because that would fire ALL pending timers regardless of
+    // their due time (including the 5000ms one).
     vi.advanceTimersByTime(4999)
-    // Flush the microtask queue so Promise.race has a chance to settle.
-    await vi.runAllTimersAsync()
-    // We have to re-flush because the Promise.race(..., setTimeout) is
-    // not fully resolved by runAllTimersAsync until the setTimeout cb runs.
+    // Drain microtasks so any synchronous promise resolutions land.
+    await Promise.resolve()
+    await Promise.resolve()
     expect(mocks.mockTriggerCreate).not.toHaveBeenCalled()
 
     // Cross the 5000ms threshold — fallback fires, ScrollTrigger.create
     // is called even though load never fired and decode never resolved.
     vi.advanceTimersByTime(2)
+    // Now runAllTimersAsync is safe: the 5000ms timer is due.
     await vi.runAllTimersAsync()
     // Drain any pending microtasks one more time
     await Promise.resolve()
@@ -252,7 +269,9 @@ describe('useFadeInJobCards — T-202 N2 gate (window.load + img.decode + 5s tim
     // Trigger the load handler — this should chain into Promise.all
     // which catches each decode rejection and resolves with a value.
     await capturedLoadHandler()
-    // Flush microtasks
+    // Flush microtasks generously — the chain has multiple .then hops.
+    await Promise.resolve()
+    await Promise.resolve()
     await Promise.resolve()
     await Promise.resolve()
     await Promise.resolve()
