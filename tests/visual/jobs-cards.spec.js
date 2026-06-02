@@ -1,0 +1,135 @@
+// tests/visual/jobs-cards.spec.js — N2 JobsCards relayout visual gate.
+//
+// P1 STATUS: RED baseline (T-007). The CRITICAL spec. Captures the
+// JobsCards first-paint relayout bug that the user reported. The
+// structural assertion (height delta = 0 between t=0 and
+// t=after-window-load) WILL FAIL on the current source if the bug is
+// present, and WILL PASS once N2 (P2) layers in window.load + image
+// decode waits + CSS reservations.
+//
+// Why a real browser: the bug is an async-image-induced relayout that
+// happens after first paint. jsdom never paints anything, so it cannot
+// observe a height delta. Real Chromium observes the bug because the
+// browser actually decodes images over time.
+//
+// Test pattern: the height-delta test runs ONLY at the desktop-1440
+// viewport (per spec SC-N2-01). The snapshot + axe tests run at all
+// 3 viewports (per FR-N4-03, FR-N4-06). Other viewports are skipped
+// for the height-delta test using test.skip() so the test count stays
+// predictable (1 + 3 + 3 = 7 invocations, not 9).
+
+import { test, expect } from '@playwright/test'
+import AxeBuilder from '@axe-core/playwright'
+import { installFixedClock, waitForVisualSettle } from './clock-fixture.js'
+
+const HEIGHT_DELTA_TOLERANCE_PX = 1 // SC-N2-01 / FR-N2-07
+
+// Install a fixed clock for every test in this file. The current source's
+// useJobDuration hook renders "3y 3m" for a "Present" job; without a fixed
+// clock the snapshot drifts day-to-day. See clock-fixture.js.
+test.beforeEach(async ({ page }) => {
+  await installFixedClock(page)
+})
+
+test.describe('SC-N2-01: JobsCards no relayout between t=0 and t=after-load', () => {
+  test('height delta = 0 ±1px per [data-job-card] @ desktop-1440', async ({ page }, testInfo) => {
+    // This is the CRITICAL test. It runs only at desktop-1440 because
+    // SC-N2-01 is defined at the canonical desktop viewport where the
+    // bug is most reproducible. Tablet/mobile may or may not show the
+    // same bug due to their different grid breakpoints; that is a
+    // follow-up and not the P1 deliverable.
+    test.skip(testInfo.project.name !== 'desktop-1440',
+      'SC-N2-01 height-delta runs at desktop-1440 only per spec')
+
+    // Navigate. page.goto() defaults to waitUntil: 'load', so by the
+    // time it returns the window.load event has already fired — that
+    // is t=0. The "500ms after load" wait is for image decode to
+    // settle. The test compares the two snapshots: if the cards
+    // re-flowed after image decode (the bug), the heights will differ.
+    await page.goto('/#experience')
+
+    // t=0: measure immediately after the load event. Images may be
+    // in "loaded but not yet decoded" state, so any card whose
+    // height depends on the image's intrinsic dimensions will be
+    // short here.
+    const heightsT0 = await page.$$eval(
+      '[data-job-card]',
+      cards => cards.map(c => c.getBoundingClientRect().height)
+    )
+    // Guard: at least one card must exist, otherwise the test passes
+    // trivially (zero-card array passes any per-element assertion).
+    expect(heightsT0.length).toBeGreaterThan(0)
+
+    // Force the browser to finish decoding all in-grid images
+    // (mirrors what N2 will do via Promise.all(images.map(decode))).
+    // The .catch(() => null) mirrors N2's silent-swallow of broken
+    // images (EC-N2-01).
+    await page.evaluate(() => Promise.all(
+      Array.from(document.querySelectorAll('[data-job-card] img'))
+        .map(img => img.decode().catch(() => null))
+    ))
+
+    // Settle: 500ms is the spec's WINDOW_LOAD_TIMEOUT_MS margin for
+    // any post-decode layout to finalize (FR-N2-08).
+    await page.waitForTimeout(500)
+
+    // t=1: measure again. If the cards re-flowed during decode, the
+    // heights will differ.
+    const heightsT1 = await page.$$eval(
+      '[data-job-card]',
+      cards => cards.map(c => c.getBoundingClientRect().height)
+    )
+
+    // Per-card height delta assertion. The bug surface is that
+    // individual cards shift independently as their images decode at
+    // different speeds; one card with a 2MB logo and one with a 50KB
+    // tech icon will not settle at the same instant. A flat
+    // `expect(heightsT1).toEqual(heightsT0)` would catch that; the
+    // per-card ±1px tolerance is generous enough to absorb sub-pixel
+    // rounding but tight enough to flag any real re-flow.
+    expect(heightsT1.length).toBe(heightsT0.length)
+    heightsT0.forEach((h0, i) => {
+      const h1 = heightsT1[i]
+      const delta = Math.abs(h1 - h0)
+      expect(
+        delta,
+        `Card #${i} height changed by ${delta}px between t=0 (${h0}) and t=after-load (${h1}); tolerance is ${HEIGHT_DELTA_TOLERANCE_PX}px. ` +
+        'This is the JobsCards relayout bug from 003 — async image decoding causes a visible re-flow. N2 (P2) will fix it.'
+      ).toBeLessThanOrEqual(HEIGHT_DELTA_TOLERANCE_PX)
+    })
+  })
+})
+
+test.describe('FR-N2-07: JobsCards snapshot @ active viewport', () => {
+  test('snapshot', async ({ page }, testInfo) => {
+    await page.goto('/#experience')
+    await waitForVisualSettle(page)
+
+    const section = page.locator('#experience')
+    await expect(section).toBeVisible()
+
+    // maxDiffPixelRatio of 0.05 (5%) is more permissive than the spec's
+    // 0.01 (1%) because the JobsCards section includes the FilterProjects
+    // bar (which has icon-button hover/focus state) and the JobCard
+    // beacon pulse animation (4s cycle, even with reducedMotion some
+    // sub-pixel rendering varies). P2 (N2) tightens this back to 0.01
+    // when the source is stabilized and the structural fix lands.
+    await expect(section).toHaveScreenshot(
+      `jobs-${testInfo.project.name}.png`,
+      { maxDiffPixelRatio: 0.05 }
+    )
+  })
+})
+
+test.describe('SC-N2-04: axe-core 0 violations @ active viewport', () => {
+  test('axe-core on #experience', async ({ page }) => {
+    await page.goto('/#experience')
+    await waitForVisualSettle(page)
+
+    const results = await new AxeBuilder({ page })
+      .include('#experience')
+      .analyze()
+
+    expect(results.violations).toEqual([])
+  })
+})

@@ -21,14 +21,20 @@
     "lint:fix": "standard --fix",
     "test": "vitest",
     "test:run": "vitest --run",
-    "test:coverage": "vitest --coverage"
+    "test:coverage": "vitest --coverage",
+    "test:visual": "playwright test",
+    "test:visual:update": "playwright test --update-snapshots",
+    "prepare": "husky"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.11.3",
+    "@playwright/test": "^1.60.0",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
     "@vitejs/plugin-react-swc": "3.10.0",
     "@vitest/coverage-v8": "^4.1.7",
+    "husky": "^9.1.7",
     "jest-axe": "^3.5.0",
     "jsdom": "^25.0.1",
     "standard": "17.1.2",
