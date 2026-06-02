@@ -70,6 +70,14 @@ export default defineConfig({
   // would be taken at random animation frames and the diff would
   // be noise. The behavioral tests (e.g. SC-N2-01 height-delta) are
   // not affected — they assert on layout, not on transform/opacity.
+  //
+  // The `chromium-no-reduced-motion` project (N2 SC-N2-01b) flips
+  // reducedMotion to 'no-preference' to mimic REAL user conditions.
+  // This is the project that catches the user-reported "relayout on
+  // reload" bug — see specs/004-ux-overhaul-and-relayout-root-fix/
+  // verify-p1-relayout-diagnosis.md §6.5. The default projects stay
+  // 'reduce' for snapshot stability; the no-rm project runs only
+  // behavioral tests (transform-value assertion) and never snapshots.
   projects: [
     {
       name: 'desktop-1440',
@@ -93,6 +101,14 @@ export default defineConfig({
         ...devices['Desktop Chrome'],
         viewport: { width: 375, height: 812 },
         reducedMotion: 'reduce'
+      }
+    },
+    {
+      name: 'chromium-no-reduced-motion',
+      use: {
+        ...devices['Desktop Chrome'],
+        viewport: { width: 1440, height: 900 },
+        reducedMotion: 'no-preference'
       }
     }
   ],

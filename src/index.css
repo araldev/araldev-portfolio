@@ -82,6 +82,16 @@
   /* Spacing & sizing */
   --job-card-padding: clamp(1.25rem, 2vw, 1.75rem);
   --job-card-gap: 1rem;
+  /* N2 (T-204 / OQ-N2-01 override): prevents the initial card collapse
+     while images load; matches the height at which the stagger animation
+     lands. See specs/004-.../tasks.md T-209. */
+  --job-card-min-height: 440px;
+  /* N3 (T-215): per-design track height for the AboutMe Bento grid.
+     Scales with viewport height (clamp 110-180px) so the 6/4/2-row
+     layouts at desktop/tablet/mobile stay proportional without ever
+     collapsing to 0 or growing past the section. See
+     specs/004-.../design.md §N3.5 and tasks.md T-215. */
+  --bento-row-height: clamp(110px, 14vh, 180px);
   --job-rail-width: 44px;
   --job-rail-dot-size: 10px;
   --job-rail-dot-size-featured: 14px;

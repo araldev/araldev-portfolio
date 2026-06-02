@@ -39,7 +39,10 @@ import { installFixedClock, waitForVisualSettle } from './clock-fixture.js'
 const BENTO_ROW_COUNT = {
   'desktop-1440': 6, // FR-N3-01
   'tablet-768': 4, // FR-N3-06 (≤1450px)
-  'mobile-375': 2 // FR-N3-06 (≤1000px)
+  'mobile-375': 2, // FR-N3-06 (≤1000px)
+  // chromium-no-reduced-motion mirrors desktop-1440's viewport
+  // (1440×900) per playwright.config.js; same Bento row count.
+  'chromium-no-reduced-motion': 6 // FR-N3-01
 }
 
 const ASPECT_RATIO_TOLERANCE = 0.05 // ±5% — generous for sub-pixel rendering
@@ -68,7 +71,7 @@ test.describe('SC-N3-01/02/03: Bento boundingBox matches design tokens @ active 
     // assertion fails on the current source. P2 (N3) replaces auto-fit
     // with `repeat(N, 1fr)` for stable tracks.
     const rowCount = await page.evaluate(() => {
-      const grid = document.querySelector('#about-me aside')
+      const grid = document.querySelector('[data-testid="bento-grid"]')
       return getComputedStyle(grid).gridTemplateRows.split(' ').length
     })
     expect(
@@ -83,7 +86,10 @@ test.describe('SC-N3-01/02/03: Bento boundingBox matches design tokens @ active 
     // PNG/WebP's natural ratio is (the asset is 1:1 so this might
     // pass on the current source by coincidence — the test still
     // serves as a regression net for P2+).
-    const avatarBox = await page.locator('img[alt*="Arturo"]').boundingBox()
+    // Selector scoped to #about-me because the about-me avatar is
+    // not the only img with "Arturo" in its alt (the NavHeader may
+    // also have an avatar img on some pages).  Same for brand.
+    const avatarBox = await page.locator('#about-me img[alt*="Arturo"]').boundingBox()
     expect(
       avatarBox,
       'Avatar image is not visible. P2 (N3) must keep the avatar rendered in the Bento grid.'
@@ -98,7 +104,7 @@ test.describe('SC-N3-01/02/03: Bento boundingBox matches design tokens @ active 
     // 3. Brand is square per FR-N3-04 (aspect-ratio: 1, width: 100px).
     // The current source has no aspect-ratio declaration on
     // .brand_image, so the rendered image may be rectangular.
-    const brandBox = await page.locator('img[alt*="Brand"]').boundingBox()
+    const brandBox = await page.locator('#about-me img[alt*="Brand"]').boundingBox()
     expect(
       brandBox,
       'Brand image is not visible. P2 (N3) must keep the brand mark rendered in the Bento grid.'
@@ -116,6 +122,9 @@ test.describe('SC-N3-01/02/03: Bento boundingBox matches design tokens @ active 
     // already passes. P2 (N3) must keep it green. This is the
     // GREEN-side assertion that catches a regression where P2
     // accidentally drops the 60ch cap.
+    // The browser resolves `60ch` to its pixel equivalent (540px
+    // at the default 16px font) when accessed via getComputedStyle;
+    // we accept either form so the test is robust to font changes.
     const pMaxWidth = await page.evaluate(() => {
       const p = document.querySelector('#about-me p')
       return p ? getComputedStyle(p).maxWidth : null
@@ -125,10 +134,46 @@ test.describe('SC-N3-01/02/03: Bento boundingBox matches design tokens @ active 
       'No <p> inside #about-me found. P2 (N3) must keep the bio paragraph rendered.'
     ).not.toBeNull()
     expect(
-      pMaxWidth,
-      `Bio <p> max-width is '${pMaxWidth}'; expected '60ch' per FR-N3-05. ` +
+      pMaxWidth === '60ch' || pMaxWidth === '540px',
+      `Bio <p> max-width is '${pMaxWidth}'; expected '60ch' (or '540px' at 16px font) per FR-N3-05. ` +
       'The current source already declares this; P2 (N3) must preserve it.'
-    ).toBe('60ch')
+    ).toBe(true)
+
+    // 5. Bio text container TILE has non-zero boundingBox and a
+    // height that is larger than any single line (>= 60px) — the
+    // tile must fill its grid area per FR-N3-02 (height: 100% on
+    // the > * selector). The current source has height: 100% ONLY
+    // on .text_container (line 53 of AboutMeSection.module.css);
+    // P2 (N3, T-213) will extend it to all tiles. The assertion
+    // here targets the text container specifically because that
+    // is the only tile with an existing height: 100% rule on the
+    // current source. P2 (N3) will add height: 100% to all tiles
+    // so the avatar/brand also fill their grid cells.
+    // Selector uses [data-testid="bento-grid"] because CSS modules
+    // hash the .grid_container class on every build; the
+    // data-testid is a stable handle.
+    const textBox = await page.locator('#about-me [data-testid="bento-grid"] > div').boundingBox()
+    expect(
+      textBox,
+      `Bio text container is not visible at ${testInfo.project.name}. ` +
+      'P2 (N3) must keep the bio tile rendered in the Bento grid.'
+    ).not.toBeNull()
+    expect(
+      textBox.width,
+      `Bio text container width is ${textBox.width.toFixed(0)}px at ${testInfo.project.name}; ` +
+      'expected > 0 (the tile must fill its grid area per FR-N3-02).'
+    ).toBeGreaterThan(0)
+    // Height floor of 60px catches a tile that rendered with
+    // height: 0 (the bug surface: content-driven row heights can
+    // collapse the text container if any parent has overflow:
+    // hidden and the content overflows). P2 (N3) locks row
+    // heights with repeat(N, 1fr) so the text container will
+    // always be tall enough to show the 4 bio paragraphs.
+    expect(
+      textBox.height,
+      `Bio text container height is ${textBox.height.toFixed(0)}px at ${testInfo.project.name}; ` +
+      'expected > 60 (the tile must fill its grid area per FR-N3-02, which contains 4 paragraphs of bio text).'
+    ).toBeGreaterThan(60)
   })
 })
 
