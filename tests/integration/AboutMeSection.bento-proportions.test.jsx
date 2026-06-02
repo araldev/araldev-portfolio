@@ -101,7 +101,7 @@ describe('AboutMeSection Bento proportions — T-211 N3 RED contract', () => {
       //    auto-fit which produces 1-3 rows. P2-B3 (T-213) replaces
       //    auto-fit with repeat(N, 1fr) for stable tracks.
       const rowCount = await page.evaluate(() => {
-        const grid = document.querySelector('#about-me aside')
+        const grid = document.querySelector('[data-testid="bento-grid"]')
         if (!grid) return 0
         const rows = window.getComputedStyle(grid).gridTemplateRows
         return rows.split(' ').filter(s => s.length > 0).length

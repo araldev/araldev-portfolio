@@ -16,7 +16,17 @@ export function AboutMeSection () {
     <section id='about-me' className={styles.about_me_container}>
       <h2>About Me</h2>
 
-      <aside className={styles.grid_container}>
+      {/*
+        P2-B3 / T-210 (a11y fix).  The previous <aside> wrapper made the
+        bento grid a complementary landmark; WAI-ARIA requires
+        complementary landmarks to be at the top level, so axe fired
+        `landmark-complementary-is-top-level` at all 3 viewports.  A
+        plain <div> has no implicit landmark role, so the rule is
+        satisfied.  The <section id="about-me"> remains the region's
+        primary landmark (FR-N3-08).  The data-testid stabilises the
+        selector for the visual + integration tests.
+      */}
+      <div data-testid='bento-grid' className={styles.grid_container}>
         <img ref={avatarRef} className={styles.avatar_image} src={avatar} alt={'Arturo\'s photo'} />
         <img ref={brandRef} className={styles.brand_image} src={brand} alt='Araldev Brand' />
         <div ref={textRef} className={styles.text_container}>
@@ -26,7 +36,7 @@ export function AboutMeSection () {
           <p>Además, soy una persona muy activa y deportista. Mantenerme en forma no solo me ayuda a estar bien físicamente, sino que también potencia mi enfoque, energía y claridad mental para afrontar cualquier desafío.</p>
         </div>
 
-      </aside>
+      </div>
     </section>
   )
 }

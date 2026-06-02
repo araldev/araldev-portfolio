@@ -68,7 +68,7 @@ test.describe('SC-N3-01/02/03: Bento boundingBox matches design tokens @ active 
     // assertion fails on the current source. P2 (N3) replaces auto-fit
     // with `repeat(N, 1fr)` for stable tracks.
     const rowCount = await page.evaluate(() => {
-      const grid = document.querySelector('#about-me aside')
+      const grid = document.querySelector('[data-testid="bento-grid"]')
       return getComputedStyle(grid).gridTemplateRows.split(' ').length
     })
     expect(
