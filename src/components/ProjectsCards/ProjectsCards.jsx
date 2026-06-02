@@ -42,6 +42,7 @@ import { useIsIconCheckFilter } from '../../Hooks/useIsIconCheckFilter.js'
 import { useSortProjects } from '../../Hooks/useSortProjects.js'
 import { Button } from '../Button/Button.jsx'
 import { ProjectModal } from '../ProjectModal/ProjectModal.jsx'
+import { StorybookIcon } from '../Icons/StorybookIcon.jsx'
 import { techIcons, socialIcons } from '../../data/icons.js'
 
 // --- Tech icon dimming sub-component (FR-N1-04, SC-N1-03) ---
@@ -159,6 +160,7 @@ function ProjectCard ({ project, onShowMore }) {
                 target='_blank'
                 rel='noopener noreferrer'
                 className={styles.link_button}
+                data-link-type='demo'
                 aria-label={`Live demo of ${project.title}`}
               >
                 <span className={styles.link_label}>Live Demo</span>
@@ -171,6 +173,7 @@ function ProjectCard ({ project, onShowMore }) {
                 target='_blank'
                 rel='noopener noreferrer'
                 className={styles.link_button}
+                data-link-type='npm'
                 aria-label={`npm package for ${project.title}`}
               >
                 <span className={styles.link_label}>npm Package</span>
@@ -183,9 +186,13 @@ function ProjectCard ({ project, onShowMore }) {
                 target='_blank'
                 rel='noopener noreferrer'
                 className={styles.link_button}
+                data-link-type='storybook'
                 aria-label={`Storybook for ${project.title}`}
               >
                 <span className={styles.link_label}>Storybook</span>
+                {/* P5: re-enabled after the S1 fix in StorybookIcon.jsx
+                   (unique mask id per instance via useId) */}
+                <StorybookIcon />
               </a>
             )}
             {project.codeLink && (
@@ -193,7 +200,8 @@ function ProjectCard ({ project, onShowMore }) {
                 href={project.codeLink}
                 target='_blank'
                 rel='noopener noreferrer'
-                className={`${styles.link_button} ${styles.code_button}`}
+                className={styles.link_button}
+                data-link-type='code'
                 aria-label={`Source code for ${project.title}`}
               >
                 {techIcons.gitHub}
