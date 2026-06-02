@@ -129,6 +129,39 @@ test.describe('SC-N3-01/02/03: Bento boundingBox matches design tokens @ active 
       `Bio <p> max-width is '${pMaxWidth}'; expected '60ch' per FR-N3-05. ` +
       'The current source already declares this; P2 (N3) must preserve it.'
     ).toBe('60ch')
+
+    // 5. Bio text container TILE has non-zero boundingBox and a
+    // height that is larger than any single line (>= 60px) — the
+    // tile must fill its grid area per FR-N3-02 (height: 100% on
+    // the > * selector). The current source has height: 100% ONLY
+    // on .text_container (line 53 of AboutMeSection.module.css);
+    // P2 (N3, T-213) will extend it to all tiles. The assertion
+    // here targets the text container specifically because that
+    // is the only tile with an existing height: 100% rule on the
+    // current source. P2 (N3) will add height: 100% to all tiles
+    // so the avatar/brand also fill their grid cells.
+    const textBox = await page.locator('#about-me .grid_container > div').boundingBox()
+    expect(
+      textBox,
+      `Bio text container is not visible at ${testInfo.project.name}. ` +
+      'P2 (N3) must keep the bio tile rendered in the Bento grid.'
+    ).not.toBeNull()
+    expect(
+      textBox.width,
+      `Bio text container width is ${textBox.width.toFixed(0)}px at ${testInfo.project.name}; ` +
+      'expected > 0 (the tile must fill its grid area per FR-N3-02).'
+    ).toBeGreaterThan(0)
+    // Height floor of 60px catches a tile that rendered with
+    // height: 0 (the bug surface: content-driven row heights can
+    // collapse the text container if any parent has overflow:
+    // hidden and the content overflows). P2 (N3) locks row
+    // heights with repeat(N, 1fr) so the text container will
+    // always be tall enough to show the 4 bio paragraphs.
+    expect(
+      textBox.height,
+      `Bio text container height is ${textBox.height.toFixed(0)}px at ${testInfo.project.name}; ` +
+      'expected > 60 (the tile must fill its grid area per FR-N3-02, which contains 4 paragraphs of bio text).'
+    ).toBeGreaterThan(60)
   })
 })
 
