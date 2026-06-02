@@ -349,6 +349,11 @@
   justify-content: center;
   width: 40px;
   height: 40px;
+  /* N2 (T-207 / FR-N2-05): aspect-ratio reserves the SVG icon's box
+     even when the <svg> has not yet mounted (LCP candidate paints the
+     wrapper before the SVG body is parsed). Prevents the icon from
+     contributing to the pre-load relayout flicker on hard reload. */
+  aspect-ratio: 1;
   border-radius: 6px;
   background: rgba(255, 255, 255, 0.04);
   transition: opacity 0.2s ease;
