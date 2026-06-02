@@ -82,6 +82,10 @@
   /* Spacing & sizing */
   --job-card-padding: clamp(1.25rem, 2vw, 1.75rem);
   --job-card-gap: 1rem;
+  /* N2 (T-204 / OQ-N2-01 override): prevents the initial card collapse
+     while images load; matches the height at which the stagger animation
+     lands. See specs/004-.../tasks.md T-209. */
+  --job-card-min-height: 440px;
   --job-rail-width: 44px;
   --job-rail-dot-size: 10px;
   --job-rail-dot-size-featured: 14px;
