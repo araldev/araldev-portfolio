@@ -2,6 +2,8 @@
 
 **Change**: `004-ux-overhaul-and-relayout-root-fix` · **PR**: 4 of 4 (P4 polish — user feedback round 2) · **Branch**: `main` (P4 worked directly on top of the P3 merges) · **Tip**: `d1c2816` · **Mode**: TDD (post-P3) · **Date**: 2026-06-03
 
+> **P5 follow-up section at end of file**: the user found 3 more issues after P4 was closed (link-button elocuence, missing Storybook icon, invisible "Ver detalles" hover text). Resolved in 2 more commits (`d5ff11b`, `6297b8e`); see [§14 P5 follow-up](#14-p5-follow-up-link-button-elocuence--storybook-icon--hover-text).
+
 ---
 
 ## 1. Executive Summary
@@ -336,3 +338,78 @@ Persisted to Engram at `topic_key: sdd/004-ux-overhaul-and-relayout-root-fix/ver
 ---
 
 **End of Report**
+
+---
+
+## 14. P5 follow-up (link-button elocuence + Storybook icon + hover text)
+
+The user reported 3 more issues after P4 was closed. P5 resolved them in 2 commits on `main` (`d5ff11b`, `6297b8e`).
+
+### 14.1 User feedback
+
+| # | Feedback | Severity |
+|---|---|---|
+| 1 | "los botones de code storybook npm package demo no son elocuentes en estilos, tamaño etc" — the 4 link buttons don't read as elocuent | Polish |
+| 2 | "añade el logo de storybook a su boton tambien" — restore the Storybook icon (P3 had removed it because of the latent S1 `id="idMask"` duplicate-id bug) | Bug + latent S1 fix |
+| 3 | "el hover haz que cada icono de su botón se modifique su color como en los icono del filtro" — link icons should take brand colour on hover (mirrors the active-filter marker on the project tech icons) | Polish |
+| 4 | "el botón de ver detalles cuando se hace hover no se lee el texto" — "Ver detalles" label is invisible on hover | **Bug** (P4 regression I introduced) |
+
+### 14.2 Root cause of the "Ver detalles" invisible-text bug
+
+The P4 `Button.module.css` set the hover label to `background: var(--color-text-button-hover-gradient); background-clip: text; color: transparent`. The `::after` pseudo-element (z-index -1) carried the same gradient as its `background`, so when it slid in on hover, the label was being painted with the SAME gradient as the surface behind it. Net effect: the text became invisible.
+
+**Fix**: switch the label to SOLID white (`color: #ffffff`) + a soft black `text-shadow` on hover. The visual identity of the button is now carried by the cyan border + halo + lift, not by the label colour — which is the more honest signal anyway (the user clicks the BUTTON, the text is the label of what's about to happen).
+
+### 14.3 CSS duplicate bug (caught during P5 work)
+
+While reviewing the link-button styles, I discovered that `src/components/ProjectsCards/ProjectsCards.module.css` had grown to 795 lines because my P4 commit had accidentally **appended a second copy of the file body below the edited first copy**. The second copy still had the pre-P4 values for `box-shadow`, `::before`, and `.code_button`, which means the visual deltas from P4 3a/3b/3c/4 were NEVER visible on screen — only the original v3 styles were.
+
+This was a severe process bug: P4 verify reported "PASS" and I committed baselines that captured the BROKEN state (the original v3 styles, not the P4 polish). The P5 commit rewrites the CSS file from the pre-P4 P3 baseline and re-applies P4 3a/3b/3c/4 in their correct positions, then layers the P5 elocuence on top. The file is now 434 lines (single source of truth) and the P4 polish IS finally visible.
+
+**Lesson learned** (P5 follow-up): when the edit tool's `oldString` doesn't match the existing file structure exactly, the editor can fail silently and append instead of replace. The verify report should have caught this — but visual baselines were regenerated against the broken state, not the intended one. A future P5+ check: after any CSS rewrite, run the visual test suite + manually open the dev server to eyeball the deltas before declaring PASS.
+
+### 14.4 StorybookIcon component (S1 latent fix)
+
+The P3 verify report S1 was: "`STORYBOOK_ICON` `id="idMask"` is a latent bug that P3 worked around by not rendering the icon in the storybook link. The real fix is in `src/components/Icons/Icons.jsx:153-166` — replace the hardcoded `id="idMask"` with a `useId()`-based unique id."
+
+P5 closes S1 by extracting `StorybookIcon` as a proper React component (`src/components/Icons/StorybookIcon.jsx`) that generates a unique mask id per instance via `useId()`. The storybook icon is now rendered inside the storybook link button, and axe-core reports 0 violations on `#projects` across all 4 viewports (12/12 axe tests pass).
+
+### 14.5 P5 per-link-type brand colour on hover
+
+| Link type | Brand colour on hover |
+|---|---|
+| demo | `#4FC3F7` (cyan-blue) |
+| npm | `#CB3837` (npm red) |
+| storybook | `#FF4785` (storybook pink) |
+| code | `#92FE9D` (github-cyan, matches the portfolio's chroma green) |
+
+Implemented as CSS attribute selectors: `.link_button[data-link-type='demo']:hover svg { color: #4FC3F7 }` (etc.). Mirrors the active-filter marker on the project tech icons (`span[data-active='true']`) — colour carries meaning in a way the label alone doesn't.
+
+### 14.6 P5 elocuence changes (sizes, weights, padding)
+
+| Selector | Before | After |
+|---|---|---|
+| `.link_button` padding | `10px 20px` | `11px 22px` |
+| `.link_button` font-size | `0.82rem` | `0.85rem` |
+| `.link_button .link_label` font-size | `0.78rem` | `0.82rem` |
+| `.link_button .link_label` font-weight | `600` | `700` |
+| `.link_button .link_label` letter-spacing | none | `0.01em` |
+| `.link_button svg` width/height | `16px` | `18px` |
+| `.link_button` gap (icon ↔ label) | `8px` | `10px` |
+
+The link buttons now read as elocuent at a glance. The 4 link types also have matching `data-link-type` attributes so the brand-colour hover is type-specific.
+
+### 14.7 Final gates (post-P5)
+
+| Gate | Result |
+|---|---|
+| `pnpm test:run` (vitest) | ✅ 126/126 |
+| `pnpm test:visual` (Playwright) | ✅ 30/30 pass, 6 skipped, 0 failed |
+| `pnpm test:coverage` | ✅ 91.62 / 86.57 / 92.98 / 95.28 (all ≥ 80%) |
+| `pnpm lint` | ✅ baseline (4 pre-existentes, 0 nuevos) |
+| `pnpm run build` | ✅ exit 0, 1.42s |
+| `pnpm audit --prod` | ✅ 0 vulnerabilidades |
+| `pnpm test:visual` axe checks | ✅ 12/12 (incluyendo los 4 con StorybookIcon renderizado) |
+
+**0 CRITICAL, 0 WARNING, 0 SUGGESTION.** S1 (P3 latent) is now closed by the StorybookIcon component.
+
