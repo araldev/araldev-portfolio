@@ -12,6 +12,7 @@
   flex-direction: column;
   width: 100%;
   max-width: 100%;
+  min-height: var(--job-card-min-height);
   border-radius: var(--border-radius);
   background: var(--color-bg-web);
   box-shadow: var(--shadow-job-card-default);
