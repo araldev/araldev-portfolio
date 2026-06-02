@@ -29,12 +29,15 @@ export default defineConfig({
   expect: { timeout: 5_000 },
 
   // CI tuning: serialize (workers=1) and retry transient failures twice
-  // to absorb the rare flake of a dev-server compile. Locally we run
-  // fully parallel with no retries for tight feedback.
+  // to absorb the rare flake of a dev-server compile. Locally we cap
+  // workers at 4 to keep the Vite dev server responsive under the
+  // 9 simultaneous tests (3 specs x 3 viewports); going wider causes
+  // HMR + image-decodes to keep the network active past the
+  // networkidle timeout.
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI ? 1 : 4,
   reporter: process.env.CI ? 'github' : 'list',
 
   use: {

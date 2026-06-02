@@ -43,15 +43,23 @@ export async function installFixedClock (page) {
 
 /**
  * Wait for the page to be visually stable before taking a snapshot.
- * Combines networkidle (no in-flight requests) with a 600ms post-load
- * idle to absorb Lenis smooth-scroll settling and any deferred CSS
- * recalc (e.g. font swap on Roboto 700/600).
+ * Uses 'domcontentloaded' (not 'networkidle') because:
+ *   - In a parallel run with N workers, Vite dev server HMR + image
+ *     decodes can keep the network mildly active for >10s and
+ *     networkidle hits Playwright's 10s default timeout.
+ *   - DOMContentLoaded fires when the HTML is parsed and React has
+ *     mounted; for visual regression that's all we need (images
+ *     are then decoded by the browser at its own pace and our
+ *     600ms post-load wait absorbs the settle).
+ * The 600ms post-load wait is for Lenis smooth-scroll + font swap
+ * on Roboto 700/600 + any deferred CSS recalc.
  *
  * @param {import('@playwright/test').Page} page
  */
 export async function waitForVisualSettle (page) {
-  await page.waitForLoadState('networkidle')
+  await page.waitForLoadState('domcontentloaded')
   // Lenis uses requestAnimationFrame for its scroll loop; give it
   // ~12 frames at 60fps (200ms) to settle into the anchor position.
+  // Plus ~10 frames for the longest-running font swap or image decode.
   await page.waitForTimeout(600)
 }
