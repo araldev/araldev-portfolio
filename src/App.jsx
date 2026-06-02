@@ -3,6 +3,7 @@ import { AnimatedTitle } from './components/AnimatedTitle/AnimatedTitle.jsx'
 import { HeroSection } from './components/HeroSection/HeroSection.jsx'
 import { NavHeader } from './components/NavHeader/NavHeader.jsx'
 import { ProjectsCards } from './components/ProjectsCards/ProjectsCards.jsx'
+import { JobsCards } from './components/JobsCards/JobsCards.jsx'
 import { useAnimatedNavHeader } from './Hooks/useAnimatedNavHeader.js'
 import { BackgroundHeroCanvas } from './components/Backgrounds/BackgroundHeroCanvas.jsx'
 import { IsIconCheckFilterProvider } from './contexts/IsIconCheckFilter.jsx'
@@ -29,6 +30,7 @@ export default function () {
       <main ref={mainRef} className='container_main '>
         <IsIconCheckFilterProvider>
           <ProjectsCards />
+          <JobsCards />
         </IsIconCheckFilterProvider>
         <AboutMeSection />
         <ContactSection />

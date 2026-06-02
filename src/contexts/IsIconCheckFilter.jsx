@@ -11,7 +11,11 @@ export function IsIconCheckFilterProvider ({ children }) {
     ts: false,
     git: false,
     gitHub: false,
-    gsap: false
+    gsap: false,
+    tailwind: false,
+    storybook: false,
+    vite: false,
+    npm: false
   })
 
   return (

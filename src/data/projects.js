@@ -39,9 +39,10 @@ export const projects = [
     id: 1,
     imgSrc: new URL('/src/assets/screenshot-v12-ui.png', import.meta.url).href,
     title: 'v12-ui',
+    shortDescription: 'Librería de componentes UI autoresponsive y autoTheme para React',
     description: [
-      'Librería de componentes UI autoresponsive, autoTheme y sin ninguna configuración.',
-      'Se puede usar en cualquier proyecto de React, ya que es un paquete npm.'
+      'Sistema de componentes React con tipado completo en TypeScript. Construcción profesional con tree-shaking, builds ESM & CJS, y GSAP + Lenis integrados para animaciones fluidas.',
+      '4 componentes core (Button, Stack, AnimatedBackground, Text) + 1 custom hook. Documentación interactiva en Storybook y publicación oficial en npm.'
     ],
     tech: {
       ts: techIcons.ts,
@@ -53,6 +54,7 @@ export const projects = [
       gitHub: techIcons.gitHub,
       git: techIcons.git
     },
+    tags: ['TypeScript', 'React', 'Storybook'],
     npmLink: 'https://www.npmjs.com/package/v12-ui',
     storybookLink: 'https://araldev.github.io/v12-ui/',
     demoLink: '',
@@ -61,26 +63,26 @@ export const projects = [
       {
         id: genId(),
         imgIndex: 0,
-        title: 'Componentes Autoresponsive',
-        text: 'Cada componente se adapta automáticamente al viewport sin necesidad de media queries. Los estilos se calculan en tiempo real usando unidades relativas y contenedores flexibles que responden al tamaño del contenedor padre.'
+        title: 'Componentes Polimórficos',
+        text: 'Button y Text son componentes polimórficos que adaptan su estructura HTML según el contexto (button, a, div, span...). Stack proporciona un container Flex flexible con control total sobre dirección, gap y alineación.'
       },
       {
         id: genId(),
         imgIndex: 1,
-        title: 'AutoTheme sin Configuración',
-        text: 'El sistema de theming detecta automáticamente la preferencia del usuario (claro/oscuro) y aplica los colores adecuados. No requiere Providers, Context ni configuración inicial — simplemente importa el componente y funciona.'
+        title: 'AnimatedBackground Canvas',
+        text: 'Componente canvas que genera animaciones de partículas abstractas. Configurable en duración, densidad y colores. Integrado con GSAP para control preciso del timeline y transiciones suaves.'
       },
       {
         id: genId(),
         imgIndex: 2,
-        title: 'Storybook Integrado',
-        text: 'Todos los componentes están documentados en Storybook con ejemplos interactivos, variaciones de props y estados. Ideal para desarrollo, testing visual y colaboración en equipo.'
+        title: 'Tree-shakable & Dual Builds',
+        text: 'Paquete optimizado para producción: exports ESM para bundlers modernos y CJS para compatibilidad legacy. Tree-shaking garantiza que solo el código usado llega a producción.'
       },
       {
         id: genId(),
         imgIndex: 3,
-        title: 'Publicado en npm',
-        text: 'Disponible como paquete npm listo para instalar en cualquier proyecto React. Con tipado completo en TypeScript y soporte para Tailwind CSS out of the box.'
+        title: 'Stack Tecnológico',
+        text: 'TypeScript 79% · CSS 19.4% · JS 1.6%. 147 commits, 9 releases (última v0.2.5 ago 2025). Licencia MIT. Integración directa con Tailwind CSS y soporte para autoTheme sin configuración.'
       }
     ]
   },
@@ -88,9 +90,10 @@ export const projects = [
     id: 2,
     imgSrc: new URL('/src/assets/screenshot-web-game.png', import.meta.url).href,
     title: 'Listening Maze',
+    shortDescription: 'Juego de escucha activa en inglés con niveles escalables via JSON',
     description: [
-      'Juego de escucha activa, donde debes encontrar la salida de un laberinto.',
-      "Está diseñado para ser escalable, añadiendo niveles al archivo json se crean automáticamente."
+      'Game de navegación auditiva donde el jugador sigue instrucciones en inglés para encontrar la salida del laberinto. Sistema de niveles driven por JSON para máxima escalabilidad.',
+      'Diseñado táctil y responsive. Feedback visual inmediato para cada acción del jugador. Integración en English Web como ejercicio principal del Game Center.'
     ],
     tech: {
       js: techIcons.js,
@@ -99,6 +102,7 @@ export const projects = [
       gitHub: techIcons.gitHub,
       git: techIcons.git
     },
+    tags: ['Vanilla JS', 'CSS', 'Game'],
     npmLink: '',
     storybookLink: '',
     demoLink: 'https://araldev.github.io/english-web/exercises.html',
@@ -107,26 +111,26 @@ export const projects = [
       {
         id: genId(),
         imgIndex: 4,
-        title: 'Mecánica del Juego',
-        text: 'El jugador escucha instrucciones en inglés y debe navegar por un laberinto hasta encontrar la salida. Cada nivel aumenta en complejidad, entrenando el oído y la comprensión auditiva de forma progresiva.'
+        title: 'Niveles Escalables via JSON',
+        text: 'Cada nivel se define en un archivo JSON con estructura de laberinto, instrucciones auditivas y metadata. Añadir nuevos niveles no requiere cambios en código — solo agregar una entrada al array.'
       },
       {
         id: genId(),
         imgIndex: 5,
-        title: 'Niveles Escalables',
-        text: 'Los niveles se definen en un archivo JSON. Añadir nuevos mapas, instrucciones y obstáculos es tan simple como agregar una nueva entrada al array. El motor del juego renderiza automáticamente cada nivel.'
+        title: 'Audio Guidance en Inglés',
+        text: 'Instrucciones spoken en inglés guían al jugador por el laberinto. Sistema de audio integrado que reproduce indicaciones claras y progresivamente más complejas según el nivel.'
       },
       {
         id: genId(),
         imgIndex: 0,
-        title: 'Feedback Visual',
-        text: 'Cada acción del jugador tiene retroalimentación visual inmediata: caminos correctos se iluminan, errores muestran animaciones y la salida brilla al ser descubierta. Todo construido con CSS y JavaScript vanilla.'
+        title: 'Interactive Grammar Cards',
+        text: 'Después de completar cada laberinto, se muestran grammar cards con el vocabulario y estructuras usadas. Refuerzo positivo que conecta el juego con el aprendizaje.'
       },
       {
         id: genId(),
         imgIndex: 1,
-        title: 'Responsive y Táctil',
-        text: 'Diseñado para funcionar tanto en desktop como en dispositivos móviles. Los controles táctiles permiten jugar en tablets y smartphones sin perder precisión ni experiencia de usuario.'
+        title: 'Responsive & Touch-friendly',
+        text: 'Controles táctiles optimizados para tablets y smartphones. D-pad virtual y botones de acción adaptados para pantalla táctil sin perder precisión en la navegación.'
       }
     ]
   },
@@ -134,9 +138,10 @@ export const projects = [
     id: 3,
     imgSrc: new URL('/src/assets/shot-english-web.webp', import.meta.url).href,
     title: 'English Web',
+    shortDescription: 'Plataforma educativa vanilla HTML/CSS/JS para aprender inglés',
     description: [
-      'Mi primer proyecto, el cual desarrollé sólo con JavaScript, CSS y HTML para poner en práctica las bases que aprendí antes de usar frameworks y librerías.',
-      'Quise hacerlo así para aprender bien las bases antes de empezar a usar frameworks y librerías.'
+      'Mi primer proyecto completo: plataforma de ejercicios interactivos y juegos educativos construidos 100% con vanilla HTML, CSS y JavaScript. Arquitectura JSON-driven para escalabilidad sin dependencias.',
+      '104 commits de código escrito a mano. Incluye ejercicios de gramática, vocabulario, comprensión auditiva y el Game Center con Listening Maze como flagship feature.'
     ],
     tech: {
       js: techIcons.js,
@@ -145,6 +150,7 @@ export const projects = [
       gitHub: techIcons.gitHub,
       git: techIcons.git
     },
+    tags: ['Vanilla JS', 'HTML', 'CSS'],
     npmLink: '',
     storybookLink: '',
     demoLink: 'https://araldev.github.io/english-web/index.html',
@@ -153,26 +159,26 @@ export const projects = [
       {
         id: genId(),
         imgIndex: 2,
-        title: 'Fundamentos Sólidos',
-        text: 'Construido desde cero con HTML semántico, CSS moderno (Flexbox, Grid, variables) y JavaScript puro. Fue mi proyecto de aprendizaje para dominar las bases antes de saltar a frameworks.'
+        title: 'Vanilla Architecture',
+        text: 'HTML 37.1% · CSS 32.4% · JS 30.5%. Cero dependencias externas. Todo escrito desde cero para dominar los fundamentos antes de usar frameworks o librerías. Rendimiento óptimo y tamaño mínimo.'
       },
       {
         id: genId(),
         imgIndex: 3,
-        title: 'Ejercicios Interactivos',
-        text: 'La plataforma incluye ejercicios de gramática, vocabulario y comprensión auditiva. Cada ejercicio se genera dinámicamente desde estructuras de datos, permitiendo añadir nuevo contenido sin tocar el HTML.'
+        title: 'JSON-driven Game Levels',
+        text: 'El contenido de ejercicios y niveles se almacena en estructuras JSON. Agregar nuevo contenido (preguntas, vocabulario, mapas) no requiere modificar HTML — solo actualizar los datos.'
       },
       {
         id: genId(),
         imgIndex: 4,
-        title: 'Game Center',
-        text: 'Además de los ejercicios tradicionales, incluye juegos educativos como el Listening Maze. Todo integrado en una misma plataforma con navegación unificada y progresión de dificultad.'
+        title: 'Game Center Integration',
+        text: 'English Web integra múltiples juegos educativos bajo una navegación unificada. Listening Maze es el flagship, con grammar cards y tracking de progreso por sesión.'
       },
       {
         id: genId(),
         imgIndex: 5,
-        title: 'Sin Dependencias',
-        text: 'Cero dependencias externas. Todo el CSS y JavaScript está escrito a mano, lo que garantiza un rendimiento óptimo, tamaño mínimo y comprensión total del código. Ideal para aprender y para producción.'
+        title: 'Learning-first Design',
+        text: 'Cada interacción está diseñada para reforzar el aprendizaje: feedback inmediato, progresión de dificultad, y repetición espaciada. Interfaz clara que prioriza la educación sobre lo visual.'
       }
     ]
   }

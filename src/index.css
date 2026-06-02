@@ -54,6 +54,47 @@
   --button-border-radius: 10px;
   --button-padding: clamp(0.6rem, 1vw, 0.75rem) clamp(1rem, 2vw, 2rem);
   --paragraph-max-width: 60ch;
+
+  /* === JobCard — Feature 002 (Holo-Log Career) === */
+  /* Colores semánticos por tipo de empleo */
+  --color-job-type-fulltime: #00C9FF;
+  --color-job-type-contract: #92FE9D;
+  --color-job-type-freelance: #FFD166;
+  --color-job-type-parttime: #8fc6ff;
+  --color-job-type-internship: #c4b5fd;
+  /* Faro de pulso (current: true) */
+  --color-job-beacon: #00C9FF;
+  --color-job-beacon-glow: rgba(0, 201, 255, 0.6);
+  --color-job-beacon-bg: rgba(0, 201, 255, 0.04);
+  /* Conector cronológico */
+  --color-job-connector: rgba(125, 156, 184, 0.35);
+  --color-job-connector-active: rgba(0, 201, 255, 0.7);
+  /* Placeholder de logo (EC-005) */
+  --color-job-placeholder-bg: linear-gradient(135deg, #00C9FF 0%, #92FE9D 100%);
+  /* Divider interno */
+  --color-job-divider: linear-gradient(90deg, transparent, rgba(0, 201, 255, 0.4), transparent);
+  /* Sombras (extensión) */
+  --shadow-job-card-default: 0 0 0 1px var(--border-color), 0 0 20px -5px rgba(0, 201, 255, 0.15);
+  --shadow-job-card-hover: 0 0 0 1px rgba(0, 201, 255, 0.5), 0 0 35px -5px rgba(0, 201, 255, 0.55);
+  --shadow-job-beacon-core: 0 0 8px 2px var(--color-job-beacon);
+  --shadow-job-beacon-halo: 0 0 16px 6px var(--color-job-beacon-glow);
+  --shadow-job-expand: 0 20px 60px -10px rgba(0, 0, 0, 0.7);
+  /* Spacing & sizing */
+  --job-card-padding: clamp(1.25rem, 2vw, 1.75rem);
+  --job-card-gap: 1rem;
+  --job-rail-width: 44px;
+  --job-rail-dot-size: 10px;
+  --job-rail-dot-size-featured: 14px;
+  --job-beacon-size: 8px;
+  --job-beacon-glow-size: 24px;
+  --job-section-gap-mobile: 60px;
+  --job-section-gap-desktop: 100px;
+  /* Animation timings */
+  --job-expand-duration: 320ms;
+  --job-expand-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --job-beacon-pulse-duration: 1.8s;
+  --job-connector-animation-duration: 600ms;
+  --job-reorder-duration: 300ms;
 }
 
 html, body {

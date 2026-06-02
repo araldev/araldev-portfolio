@@ -1,0 +1,84 @@
+/* ============================================================
+   JobsCards — section container with chronological grid
+   + the central timeline rail (desktop ≥1200px, ≥3 cards)
+   ============================================================ */
+
+.experience_section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+  width: 100%;
+  max-width: var(--width-web-content);
+  padding: 0 var(--padding-web-content);
+  margin-top: var(--job-section-gap-mobile);
+  margin-bottom: var(--job-section-gap-mobile);
+}
+
+.experience_title {
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-title);
+  background: var(--color-text-gradient);
+  background-clip: text;
+  color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.experience_cards_container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  width: 100%;
+  position: relative;
+}
+
+@media (min-width: 520px) {
+  .experience_cards_container {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 28px;
+  }
+}
+@media (min-width: 1024px) {
+  .experience_cards_container {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 32px;
+  }
+}
+@media (min-width: 1440px) {
+  .experience_cards_container {
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 36px;
+  }
+}
+
+/* Central chronological rail (desktop ≥1200px + ≥3 cards) */
+.experience_section--has-min-3::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 80px;
+  bottom: 80px;
+  width: 1px;
+  background: linear-gradient(180deg, transparent 0%, var(--color-job-connector) 10%, var(--color-job-connector) 90%, transparent 100%);
+  z-index: -2;
+  display: none;
+}
+@media (min-width: 1200px) {
+  .experience_section--has-min-3::before { display: block; }
+}
+
+/* Empty state */
+.experience_empty {
+  font-size: var(--font-size-paragraph);
+  color: rgba(255, 255, 255, 0.78);
+  text-align: center;
+  padding: 2rem;
+  background: rgba(0, 201, 255, 0.04);
+  border: 1px dashed rgba(0, 201, 255, 0.3);
+  border-radius: var(--border-radius);
+}
