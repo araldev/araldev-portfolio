@@ -11,6 +11,10 @@ node_modules
 dist
 dist-ssr
 *.local
+# npm lock files — this project uses pnpm, see pnpm-lock.yaml.
+# Created by accident by some sub-tool that runs npm install.
+package-lock.json
+npm-shrinkwrap.json
 
 # Editor directories and files
 .vscode/*

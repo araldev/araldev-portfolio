@@ -22,6 +22,13 @@
 // Test pattern: each test runs at the active viewport (3 viewports
 // defined in playwright.config.js projects). No inner for-loop.
 
+/* global getComputedStyle */
+// StandardJS no-undef sees getComputedStyle in page.evaluate() callbacks
+// as an undefined global even though the callback executes in the
+// browser context. The env: { browser: true } in package.json does not
+// cover Playwright's page.evaluate callback scope. This explicit global
+// declaration is the documented escape hatch.
+
 import { test, expect } from '@playwright/test'
 import AxeBuilder from '@axe-core/playwright'
 import { installFixedClock, waitForVisualSettle } from './clock-fixture.js'
