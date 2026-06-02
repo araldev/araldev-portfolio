@@ -1,7 +1,420 @@
 /* ============================================================
-   ProjectsCards.module.css — placeholder (T-305)
-   ============================================================
-   Empty placeholder created alongside ProjectsCards.jsx so the
-   Vite import-analysis can resolve the file. The visual contract
-   (glass, chroma, Vision Pro spring, mask-image, 3 breakpoints)
-   lands in the T-306 commit which replaces this file's content. */
+   ProjectsCards.module.css — N1 ProjectsCards v3 (P3 GREEN).
+
+   Replaces the 003 CSS that hardcoded 4 absolute clip-paths
+   (clip-path: path("M 0 40 L 20 42 C 40 44 ... 573 64 Z")) and
+   a typo (projec_text_container) with the v2 visual language
+   applied via GPU-cheap, responsive-friendly properties.
+
+   Design language (per design.md §N1.1 "Refractive Lens"):
+     - border-radius: var(--border-radius) (12px, matches JobCard)
+     - 1 SVG mask-image decorative element per card (top-right corner
+       cut via /masks/card-organic.svg)
+     - Glass surface (rgba + backdrop-filter)
+     - Chroma-text on the title (background-clip: text)
+     - Vision Pro spring on hover (--ease-vision-pro)
+
+   3 responsive breakpoints:
+     - 0–519px   (mobile):  1 column, condensed padding
+     - 520–1023px (tablet):  1–2 columns
+     - 1024px+   (desktop): 2–3 columns, full padding
+
+   FR-N1-05: NO clip-path with absolute coordinates. NO
+   path("M ... 573 64 ...") style shape-fitters. The card shape
+   is fully responsive: border-radius scales via the v2 token
+   and the only mask is a viewBox-relative SVG that uses
+   `preserveAspectRatio="none"`.
+   ============================================================ */
+
+.projects_section {
+  max-width: 80%;
+  width: var(--width-web-content);
+  height: auto;
+  position: relative;
+  gap: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.projects_cards_container {
+  display: grid;
+  max-width: 100%;
+  width: var(--width-web-content);
+  height: auto;
+  gap: 50px;
+  justify-content: center;
+  /* N1 (FR-N1-05): align-items: stretch so all cards in a row
+     share the tallest card's height. The v2 used `center` which
+     produced uneven bottoms when one card had a longer description. */
+  align-items: stretch;
+  grid-template-columns: repeat(auto-fit, minmax(425px, 575px));
+  grid-template-rows: auto;
+}
+
+/* ---------- Project card root ---------- */
+
+.project_card {
+  position: relative;
+  width: 100%;
+  min-height: var(--project-card-min-height);   /* 520px */
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--border-radius);          /* 12px */
+  border: 0.5px solid var(--border-color);
+  background-color: var(--color-bg-web);
+  box-shadow: var(--shadow-bg-obj1);
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    box-shadow 0.25s var(--ease-vision-pro),
+    transform 0.25s var(--ease-vision-pro),
+    border-color 0.25s ease;
+
+  /* Decorative refraction cut (top-right corner). The mask
+     shapes a 56×56 gradient overlay into a small diagonal
+     "lens flare" — the visible artefact of the "Refractive Lens"
+     metaphor (design.md §N1.1). */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 56px;
+    height: 56px;
+    background: var(--color-text-gradient);
+    -webkit-mask-image: url('/masks/card-organic.svg');
+            mask-image: url('/masks/card-organic.svg');
+    -webkit-mask-size: cover;
+            mask-size: cover;
+    -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+    -webkit-mask-position: top right;
+            mask-position: top right;
+    pointer-events: none;
+    z-index: 3;
+    opacity: 0.85;
+    transition: opacity 0.25s var(--ease-vision-pro);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .project_card:hover {
+    box-shadow: 0 0 0 1px rgba(0, 201, 255, 0.5), 0 0 35px -5px rgba(0, 201, 255, 0.55);
+    transform: translateY(-2px);
+    border-color: rgba(0, 201, 255, 0.6);
+  }
+  .project_card:hover::before {
+    opacity: 1;
+  }
+}
+@media (hover: none) and (pointer: coarse) {
+  .project_card:active {
+    box-shadow: 0 0 0 1px rgba(0, 201, 255, 0.5), 0 0 35px -5px rgba(0, 201, 255, 0.55);
+    transform: scale(0.99);
+    transition: 0.15s ease-out;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .project_card,
+  .project_card::before {
+    transition: none;
+  }
+}
+
+/* ---------- Project image container ---------- */
+
+.project_image_container {
+  width: 100%;
+  aspect-ratio: var(--project-image-aspect);   /* 4/3 */
+  min-height: 200px;                           /* belt + suspenders */
+  overflow: hidden;
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
+  background: linear-gradient(180deg, #1a2a6c 0%, #111117 100%);
+  flex-shrink: 0;
+
+  > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.4s ease, filter 0.4s ease;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .project_card:hover .project_image_container > img {
+    transform: scale(1.04);
+    filter: brightness(1.06);
+  }
+}
+@media (hover: none) and (pointer: coarse) {
+  .project_card:active .project_image_container > img {
+    transform: scale(1.02);
+    filter: brightness(1.04);
+  }
+}
+
+/* ---------- Project text container (radialZoom body) ---------- */
+
+.project_text_container {
+  width: 100%;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  padding: 40px 32px;
+  background: var(--color-background-gradient);
+  background-size: 300% 300%;
+  animation: radialZoom 5s ease-in-out infinite alternate;
+}
+
+.project_title {
+  font-size: var(--font-size-subtitle);
+  font-weight: 700;
+  background: var(--color-text-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  margin: 0;
+  text-wrap: balance;
+  /* Roboto Flex stretch trick: gives the title a wider, more
+     designed display feel without custom font loading. */
+  font-stretch: 75%;
+  font-variation-settings: 'wght' 900, 'wdth' 75;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  /* Hover-only chroma: default = solid white, hover = gradient */
+  transition: background 0.25s var(--ease-vision-pro);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .project_card:hover .project_title {
+    background: var(--color-text-gradient);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 8px rgba(0, 201, 255, 0.45));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .project_title { filter: none; }
+}
+
+.short_description {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.78);
+  text-align: center;
+  margin: 0;
+  line-height: 1.4;
+  max-width: 52ch;
+}
+
+.description_list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6lh;
+
+  p {
+    text-align: left;
+    max-width: 100%;
+    width: 52ch;
+    font-size: var(--font-size-paragraph);
+    font-weight: var(--font-weight-paragraph);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.78);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin: 0;
+  }
+}
+
+@keyframes radialZoom {
+  0%   { background-size: 200% 200%; }
+  100% { background-size: 400% 400%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .project_text_container { animation: none; }
+}
+
+/* ---------- Project tech icons row ---------- */
+
+.project_icons_container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  padding: 22px 24px;
+  background: var(--color-background-gradient);
+  background-size: 300% 300%;
+  animation: radialZoom 5s ease-in-out infinite alternate;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+  span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.04);
+    transition:
+      opacity 0.25s var(--ease-vision-pro),
+      background 0.25s var(--ease-vision-pro),
+      transform 0.25s var(--ease-vision-pro);
+
+    > * {
+      width: 24px;
+      height: 24px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+  }
+
+  /* N1 (SC-N1-03, FR-N1-04): filter dimming. When the active
+     filter does NOT include this tech, the .dim class is applied
+     and opacity drops to 0.35. The transition uses the Vision Pro
+     spring so the dim/un-dim feels deliberate, not abrupt. */
+  span[data-dimmed='true'] {
+    opacity: 0.35;
+    background: rgba(255, 255, 255, 0.02);
+    transform: scale(0.94);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .project_icons_container span { transition: opacity 0.15s ease; }
+  .project_icons_container span[data-dimmed='true'] { transform: none; }
+}
+
+/* ---------- Links container (nav) + action buttons ---------- */
+
+.links_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding: 24px 24px 28px;
+  background: var(--color-bg-web);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom-left-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+}
+
+.action_links_row {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.link_button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  background: linear-gradient(135deg, rgba(0, 201, 255, 0.18), rgba(146, 254, 157, 0.12));
+  border: 1px solid rgba(0, 201, 255, 0.4);
+  border-radius: 12px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition:
+    background 0.25s var(--ease-vision-pro),
+    border-color 0.25s var(--ease-vision-pro),
+    transform 0.25s var(--ease-vision-pro),
+    box-shadow 0.25s var(--ease-vision-pro);
+
+  &:hover {
+    background: linear-gradient(135deg, rgba(0, 201, 255, 0.32), rgba(146, 254, 157, 0.24));
+    border-color: rgba(0, 201, 255, 0.65);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 201, 255, 0.22);
+  }
+
+  &:active {
+    transform: scale(0.97);
+    transition: transform 0.1s ease-out;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #92FE9D;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  .link_label {
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.code_button {
+  padding: 7px 14px;
+  font-size: 0.74rem;
+  .link_label { font-size: 0.7rem; }
+}
+
+.cta_row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 24px 20px;
+  background: var(--color-bg-web);
+
+  /* The "Ver detalles" button (rendered without a links nav, e.g. when
+     the project has no link types) gets the same bottom radius as the
+     card so it doesn't visually detach. */
+  &:last-child { border-bottom-left-radius: var(--border-radius); border-bottom-right-radius: var(--border-radius); }
+}
+
+/* ---------- Breakpoints ---------- */
+
+@media (max-width: 1023px) {
+  .projects_cards_container {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+  }
+  .project_text_container { padding: 32px 24px; }
+  .links_container { padding: 20px 18px 24px; }
+}
+
+@media (max-width: 519px) {
+  .projects_section { max-width: 95%; }
+  .projects_cards_container {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .project_text_container { padding: 26px 20px; gap: 12px; }
+  .description_list p { -webkit-line-clamp: 4; }
+  .links_container { padding: 18px 14px 22px; gap: 14px; }
+  .action_links_row { gap: 10px; }
+  .link_button { padding: 8px 14px; font-size: 0.76rem; }
+  .code_button { padding: 6px 12px; font-size: 0.7rem; }
+  .project_icons_container { padding: 18px 18px; gap: 8px 10px; }
+  .project_icons_container span { width: 36px; height: 36px; }
+}
