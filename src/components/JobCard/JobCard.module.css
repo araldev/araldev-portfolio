@@ -79,6 +79,13 @@
 .job_card_logo_wrapper {
   width: 56px;
   height: 56px;
+  /* N2 (T-206 / FR-N2-04): aspect-ratio reserves the logo's box even when
+     the <img> src has not loaded yet (placeholder initials case) and when
+     the image's natural ratio is not 1:1. Without this, the wrapper
+     collapses to 0×0 until the <img> paints, contributing to the
+     pre-load relayout flicker on hard reload (see verify-p1-relayout-
+     diagnosis.md §6.5). */
+  aspect-ratio: 1;
   border-radius: var(--border-radius);
   overflow: hidden;
   display: flex;
