@@ -53,6 +53,12 @@ import { techIcons, socialIcons } from '../../data/icons.js'
 // artefact. The test asserts this exact behaviour:
 //   - { react: true, ts: false, vite: false }  →  react NOT dim, ts+vite dim
 //   - all false                                →  no tech dimmed
+//
+// P4 (3b): the matching tech ALSO gets a `data-active="true"` marker so
+// the CSS can layer a cyan halo + border + scale-up on top. That gives
+// the active filter a clear "selected" reading instead of just "less
+// dim than the others". The dim/active pair is what carries the whole
+// filter signal now.
 function TechsIcons ({ project }) {
   const { isIconCheck } = useIsIconCheckFilter()
   const isFilterActive = Object.values(isIconCheck).some(Boolean)
@@ -69,6 +75,7 @@ function TechsIcons ({ project }) {
         className={className}
         data-tech-key={key}
         data-dimmed={shouldDim ? 'true' : 'false'}
+        data-active={isFilterActive && isActive ? 'true' : 'false'}
       >
         {project.tech[key]}
       </span>

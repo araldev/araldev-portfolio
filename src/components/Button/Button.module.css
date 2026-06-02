@@ -1,81 +1,127 @@
+/* Button.module.css — P4 (3c) redesign.
+ *
+ * The v3 button was almost-invisible: it used `background-clip: text`
+ * with a transparent body, hiding the click target behind a wash of
+ * colour from the page background. It looked futuristic but felt
+ * weak — users couldn't tell it was a button.
+ *
+ * P4 keeps the gradient text (it IS the portfolio's identity) but
+ * adds a real, opaque glassmorphic surface underneath it:
+ *   - solid translucent gradient background (the "Ver detalles" CTA
+ *     has to read as a button, not a label)
+ *   - cyan border + soft neon halo at rest (signals interactivity
+ *     without screaming)
+ *   - gradient text remains as the high-contrast label
+ *   - on hover: halo intensifies, scale-up, gradient text brightens
+ *   - the `::before` is the resting surface, `::after` is the hover
+ *     wash that slides in from the left (same as v3)
+ *
+ * The component is shared by "Ver detalles" (the ProjectsCard CTA)
+ * and any future call-to-action. Token-driven so the visual identity
+ * stays coherent with JobCard and the rest of the v2 design language.
+ */
+
 .button {
   cursor: pointer;
   border: none;
   position: relative;
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
   text-decoration: none;
   width: fit-content;
+  min-width: 180px;
   height: auto;
-  min-height: 40px;
+  min-height: 44px;
   border-radius: var(--button-border-radius);
-  padding: var(--button-padding);
+  padding: 12px 28px;
   font-size: var(--font-size-button);
   font-weight: var(--font-weight-button);
+  color: #fff;
+  letter-spacing: 0.02em;
+  /* The label is still painted with the brand gradient — that is
+     the v2 design language. But now there is a real surface
+     underneath, so the gradient is layered, not freestanding. */
   background: var(--color-text-button-gradient);
   background-clip: text;
-  color: transparent;
   -webkit-background-clip: text;
+  color: transparent;
   -webkit-text-fill-color: transparent;
-  box-shadow: var(--shadow-button-box);
+  /* Border + halo at rest: the button reads as interactive from
+     the moment it appears, no hover required. */
+  border: 1.5px solid rgba(0, 201, 255, 0.55);
+  box-shadow:
+    0 0 18px -4px rgba(0, 201, 255, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
   overflow: hidden;
+  transition:
+    transform 0.25s var(--ease-vision-pro),
+    border-color 0.25s var(--ease-vision-pro),
+    box-shadow 0.25s var(--ease-vision-pro),
+    background 0.25s var(--ease-vision-pro);
+
   &::before {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     background: var(--color-bg-button-gradient);
     border-radius: var(--button-border-radius);
-    z-index: -3;
+    z-index: -2;
     pointer-events: none;
   }
   &::after {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     background: var(--color-bg-button-hover-gradient);
     border-radius: var(--button-border-radius);
-    z-index: -2;
+    z-index: -1;
     transform: translateX(-102%);
-    transition: transform .3s ease-in-out;
+    transition: transform 0.35s var(--ease-vision-pro);
     pointer-events: none;
   }
+
   @media (hover: hover) and (pointer: fine) {
     &:hover {
+      /* Gradient text gets a brighter variant on hover. */
       background: var(--color-text-button-hover-gradient);
       background-clip: text;
-      color: transparent;
       -webkit-background-clip: text;
+      color: transparent;
       -webkit-text-fill-color: transparent;
-      &::after {
-        transform: translateX(0%);
-      }
+      border-color: rgba(0, 201, 255, 0.85);
+      box-shadow:
+        0 0 28px -2px rgba(0, 201, 255, 0.65),
+        0 0 0 1px rgba(146, 254, 157, 0.18) inset;
+      transform: translateY(-2px);
+      &::after { transform: translateX(0%); }
     }
   }
   @media (hover: none) and (pointer: coarse) {
     &:active {
-        background: var(--color-text-button-hover-gradient);
-        background-clip: text;
-        color: transparent;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        &::after {
-          transform: translateX(0%);
-        }
-      }
+      background: var(--color-text-button-hover-gradient);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+      border-color: rgba(0, 201, 255, 0.85);
+      box-shadow:
+        0 0 28px -2px rgba(0, 201, 255, 0.65),
+        0 0 0 1px rgba(146, 254, 157, 0.18) inset;
+      &::after { transform: translateX(0%); }
+    }
   }
+
+  &:focus-visible {
+    outline: 2px solid #92FE9D;
+    outline-offset: 3px;
+  }
+
   &:disabled {
-    /* opacity: .9; */
     cursor: not-allowed;
     pointer-events: none;
-    &::before {
-      background: var(--color-disabled);
-    }
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: none;
+    &::before { background: var(--color-disabled); }
   }
 }
