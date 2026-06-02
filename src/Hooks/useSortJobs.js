@@ -1,50 +1,23 @@
-import { useEffect, useState } from 'react'
-import { useIsIconCheckFilter } from './useIsIconCheckFilter.js'
+import { useMemo } from 'react'
 import { jobs } from '../data/jobs.js'
 
 /**
- * Mirror of useSortProjects. Consumes the same IsIconCheckFilter context
- * (shared between Projects and Jobs — see plan.md DA-02).
+ * P4 simplification: filter logic removed per user feedback (filtering
+ * JobsCards + page reload caused a visual regression in the layout, see
+ * verify-report-p4.md). Jobs are now sorted solely by:
+ *   1. `current: true` always wins over `current: false` (R8 of plan.md)
+ *   2. `startDate` descending within the same `current` bucket
  *
- * Logic:
- *  - If no filter is active, return jobs sorted by startDate desc.
- *  - Otherwise, attach `techsCheked` (count of matching active filters) to each job
- *    and sort by it desc, breaking ties by startDate desc.
- *  - `current: true` always wins over `current: false` regardless of startDate
- *    (R8 of plan.md mitigation).
+ * The `useIsIconCheckFilter` import is gone. The hook returns the
+ * statically-sorted list with `useMemo` (no re-sort on render, no
+ * identity change after mount) — this matters because `useFlipJobs`
+ * depends on the array identity; an extra `setSortJobs` on mount
+ * would have triggered a phantom FLIP on first paint.
  *
  * @returns {{ sortJobs: Object[] }}
  */
 export function useSortJobs () {
-  const { isIconCheck } = useIsIconCheckFilter()
-  const [sortJobs, setSortJobs] = useState(jobs)
-
-  useEffect(() => {
-    setSortJobs(() => {
-      const noFilters = Object.values(isIconCheck).every(v => v === false)
-      if (noFilters) {
-        return sortByCurrentAndDate(jobs).map(j => ({ ...j, techsCheked: 0 }))
-      }
-
-      const computed = jobs.map(job => {
-        let techsCheked = 0
-        for (const [tech, checked] of Object.entries(isIconCheck)) {
-          if (checked && job.stack && job.stack[tech]) techsCheked++
-        }
-        return { ...job, techsCheked }
-      })
-
-      computed.sort((a, b) => {
-        if (a.current && !b.current) return -1
-        if (!a.current && b.current) return 1
-        if (a.techsCheked !== b.techsCheked) return b.techsCheked - a.techsCheked
-        return b.startDate.localeCompare(a.startDate)
-      })
-
-      return computed
-    })
-  }, [isIconCheck])
-
+  const sortJobs = useMemo(() => sortByCurrentAndDate(jobs), [])
   return { sortJobs }
 }
 

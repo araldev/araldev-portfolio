@@ -1,17 +1,17 @@
 import { useRef } from 'react'
 import styles from './JobsCards.module.css'
 import { JobCard } from '../JobCard/JobCard.jsx'
-import { FilterProjects } from '../FilterProjects/FilterProjects.jsx'
 import { useSortJobs } from '../../Hooks/useSortJobs.js'
 import { useFadeInJobCards } from '../../Hooks/useFadeInJobCards.js'
 import { useFlipJobs } from '../../Hooks/useFlipJobs.js'
 
 /**
  * JobsCards — <section id="experience"> wrapper.
- *  - Reuses the existing <FilterProjects /> (DA-02)
- *  - Calls useSortJobs() to mirror the Projects sort/filter flow
- *  - Animates entrance via useFadeInJobCards (stagger)
- *  - Animates reorder via useFlipJobs (FLIP technique, <300ms)
+ *  - Calls useSortJobs() to sort jobs by current/date (filter UI removed P4
+ *    per user feedback: filtering JobsCards + page reload caused visual
+ *    regression; the FilterProjects UI now only renders in ProjectsCards)
+ *  - useFadeInJobCards + useFlipJobs are both P4 no-ops (kept for JobsCards
+ *    import stability) since the entrance + reorder animations are gone
  *  - Renders the empty-state fallback when jobs === [] (EC-006)
  *
  * Placement (DA-06): between Projects and AboutMe. Mounted in App.jsx.
@@ -20,9 +20,9 @@ export function JobsCards () {
   const gridRef = useRef(null)
   const { sortJobs } = useSortJobs()
 
-  // Entrance animation: stagger when section enters the viewport
+  // Both hooks are P4 no-ops; the gridRef is kept as a local ref in case
+  // a future P5 brings back an animation that needs it.
   useFadeInJobCards(gridRef)
-  // Reorder animation: when sortJobs identity changes
   useFlipJobs(gridRef, sortJobs)
 
   if (!sortJobs || sortJobs.length === 0) {
@@ -51,8 +51,6 @@ export function JobsCards () {
       <h2 id='experience-title' className={styles.experience_title}>
         Experience — A Holo-Log of my Career
       </h2>
-
-      <FilterProjects />
 
       <div className={styles.experience_cards_container} ref={gridRef}>
         {sortJobs.map(job => (

@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { JobCardStack } from '../../src/components/JobCard/JobCardStack.jsx'
 
@@ -6,27 +6,10 @@ vi.mock('../../src/components/JobCard/JobCard.module.css', () => ({
   default: new Proxy({}, { get: (_, key) => String(key) })
 }))
 
-let mockIsIconCheck = {}
-vi.mock('../../src/Hooks/useIsIconCheckFilter.js', () => ({
-  useIsIconCheckFilter: () => ({ isIconCheck: mockIsIconCheck, setIsIconCheck: vi.fn() })
-}))
-
-beforeEach(() => {
-  mockIsIconCheck = {
-    js: false,
-    react: false,
-    css: false,
-    html: false,
-    ts: false,
-    git: false,
-    gitHub: false,
-    gsap: false,
-    tailwind: false,
-    storybook: false,
-    vite: false,
-    npm: false
-  }
-})
+// P4: useIsIconCheckFilter mock removed — JobCardStack no longer reads
+// the filter context. The dim logic is gone (per user feedback: filter
+// dimming on JobsCards + reload caused visual regression). Icons render
+// at full opacity unconditionally.
 
 const stack = {
   js: <svg data-testid='svg-js' />,

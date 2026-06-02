@@ -1,10 +1,15 @@
-import { useIsIconCheckFilter } from '../../Hooks/useIsIconCheckFilter.js'
 import styles from './JobCard.module.css'
 
 /**
- * JobCardStack — reuses the same pattern as TechsIcons in ProjectsCards.
- * Renders each entry of job.stack as a span; adds the tech-key className
- * when the corresponding filter is active so the icon gets the brand color.
+ * JobCardStack — renders each entry of job.stack as a span with the
+ * tech-key className so the icon gets the brand color.
+ *
+ * P4: filter-driven dimming has been removed. The JobsCards section no
+ * longer exposes a filter UI (per user feedback: filter+reload caused a
+ * visual regression). The `useIsIconCheckFilter` import is gone, and
+ * icons render at full opacity unconditionally. The brand-color
+ * className (`tech_icon--${key}`) is preserved so the visual identity
+ * of each tech icon is unchanged.
  *
  * @param {Object} props
  * @param {Object} props.stack - the Job's stack object { [techKey]: ReactNode }
@@ -15,7 +20,6 @@ import styles from './JobCard.module.css'
  *   would flag 3 duplicates).
  */
 export function JobCardStack ({ stack, companyLabel }) {
-  const { isIconCheck } = useIsIconCheckFilter()
   const entries = Object.keys(stack || {})
 
   if (entries.length === 0) return null
@@ -24,12 +28,8 @@ export function JobCardStack ({ stack, companyLabel }) {
   return (
     <section className={styles.job_card_stack} aria-label={`Technologies used in this role${labelSuffix}`}>
       {entries.map(key => {
-        const isActive = isIconCheck[key]
         const colorClass = styles[`tech_icon--${key}`] || ''
-        const dimClass = Object.values(isIconCheck).some(v => v) && !isActive
-          ? styles.job_card_stack_dim
-          : ''
-        const className = [styles.tech_icon, colorClass, dimClass].filter(Boolean).join(' ')
+        const className = [styles.tech_icon, colorClass].filter(Boolean).join(' ')
         return (
           <span key={key} className={className}>
             {stack[key]}

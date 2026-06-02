@@ -9,9 +9,8 @@ vi.mock('../../src/components/JobCard/JobCard.module.css', () => ({
   default: new Proxy({}, { get: (_, key) => String(key) })
 }))
 
-vi.mock('../../src/Hooks/useIsIconCheckFilter.js', () => ({
-  useIsIconCheckFilter: () => ({ isIconCheck: {}, setIsIconCheck: vi.fn() })
-}))
+// P4: useIsIconCheckFilter mock removed — JobCardStack no longer reads
+// the filter context (filter UI + dim logic removed from JobsCards).
 
 const baseJob = {
   id: 'job-1',
