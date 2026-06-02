@@ -78,6 +78,7 @@ export function JobCard ({
             <span
               ref={beaconRef}
               className={styles.job_card_beacon}
+              role='img'
               aria-label='Currently active position'
             >
               <span className={styles.job_card_beacon_core} data-beacon-core='true' />
@@ -110,7 +111,7 @@ export function JobCard ({
         {Object.keys(job.stack || {}).length > 0 && (
           <>
             <div className={styles.job_card_divider} aria-hidden='true' />
-            <JobCardStack stack={job.stack} />
+            <JobCardStack stack={job.stack} companyLabel={job.company} />
           </>
         )}
 

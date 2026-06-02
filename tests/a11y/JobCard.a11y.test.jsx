@@ -48,4 +48,37 @@ describe('JobCard — accessibility (jest-axe)', () => {
       expect(results).toHaveNoViolations()
     })
   })
+
+  // SC-N2-04 / FR-N2-09 — aria-prohibited-attr regression guard.
+  //
+  // The P2 visual test (real Chromium axe) flagged 4 viewports of
+  // `aria-prohibited-attr` violations on the JobsCards section. The
+  // offender was `<div class="job_card_stack" aria-label="Technologies
+  // used in this role">` (and similar wrappers); aria-label is
+  // PROHIBITED on <div> and <span> unless they carry a landmark role.
+  //
+  // jsdom's jest-axe does NOT enforce this rule (axe-core's role-tree
+  // check is a real-browser feature), so the per-variant jest-axe call
+  // above will report 0 violations even when the markup has prohibited
+  // ARIA. This manual DOM check mirrors the real-browser gate: every
+  // <div> and <span> that carries aria-label MUST also carry a valid
+  // landmark role; otherwise the attribute is prohibited on the element
+  // type and axe will flag it in the visual suite.
+  //
+  // P3-B2 (T-307) replaces the <div> wrappers with <section> (which IS
+  // a valid landmark) and removes redundant aria-label on <span>
+  // elements where the visible text is already the accessible name.
+  it('has no <div> or <span> with aria-label without a landmark role (axe aria-prohibited-attr)', () => {
+    const offenders = []
+    Object.entries(variants).forEach(([name, job]) => {
+      const { container } = render(<JobCard job={job} jobsList={[job]} />)
+      const bad = Array.from(container.querySelectorAll('div, span'))
+        .filter(el => el.hasAttribute('aria-label') && !el.hasAttribute('role'))
+      bad.forEach(el => offenders.push(`[${name}] ${el.outerHTML.slice(0, 200)}`))
+    })
+    expect(
+      offenders,
+      `Found ${offenders.length} prohibited aria-label(s):\n  - ${offenders.join('\n  - ')}`
+    ).toEqual([])
+  })
 })

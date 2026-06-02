@@ -22,9 +22,12 @@ describe('JobCardMeta', () => {
     expect(time).toHaveAttribute('datetime', '2023-03')
   })
 
-  it('renders the duration with descriptive aria-label', () => {
+  it('renders the duration as visible text (SC-N2-04 regression — aria-prohibited-attr fix)', () => {
+    // After T-307, the duration span has no aria-label. The accessible
+    // name resolves to the text content (e.g. "3y 3m"). The previous
+    // "Duration: 3y 3m" aria-label was prohibited on <span>.
     render(<JobCardMeta job={job} />)
-    expect(screen.getByLabelText(/Duration:/)).toBeInTheDocument()
+    expect(screen.getByText('3y 3m')).toBeInTheDocument()
   })
 
   it('renders the location', () => {

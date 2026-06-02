@@ -18,10 +18,7 @@ export function JobCardMeta ({ job }) {
       <time className={styles.job_card_period} dateTime={job.startDate}>
         {job.period}
       </time>
-      <span
-        className={styles.job_card_duration}
-        aria-label={`Duration: ${duration}`}
-      >
+      <span className={styles.job_card_duration}>
         {duration}
       </span>
       <span className={styles.job_card_location}>
@@ -29,6 +26,7 @@ export function JobCardMeta ({ job }) {
         {job.remote && (
           <span
             className={styles.job_card_remote_dot}
+            role='img'
             aria-label='Remote'
           />
         )}
