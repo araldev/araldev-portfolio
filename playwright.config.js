@@ -59,18 +59,38 @@ export default defineConfig({
   // of the device's typical first paint (desktop 900, tablet 1024,
   // iPhone 13/14 812). We use plain Desktop Chrome (not HiDPI) so
   // screenshots are 1× — easier to diff in code review.
+  //
+  // reducedMotion: 'reduce' is REQUIRED for deterministic snapshots.
+  // The app uses usePrefersReducedMotion() to skip the GSAP entrance
+  // animation and the featured-card beacon pulse when the user (or
+  // the test runner) prefers reduced motion. Without this, snapshots
+  // would be taken at random animation frames and the diff would
+  // be noise. The behavioral tests (e.g. SC-N2-01 height-delta) are
+  // not affected — they assert on layout, not on transform/opacity.
   projects: [
     {
       name: 'desktop-1440',
-      use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 900 } }
+      use: {
+        ...devices['Desktop Chrome'],
+        viewport: { width: 1440, height: 900 },
+        reducedMotion: 'reduce'
+      }
     },
     {
       name: 'tablet-768',
-      use: { ...devices['Desktop Chrome'], viewport: { width: 768, height: 1024 } }
+      use: {
+        ...devices['Desktop Chrome'],
+        viewport: { width: 768, height: 1024 },
+        reducedMotion: 'reduce'
+      }
     },
     {
       name: 'mobile-375',
-      use: { ...devices['Desktop Chrome'], viewport: { width: 375, height: 812 } }
+      use: {
+        ...devices['Desktop Chrome'],
+        viewport: { width: 375, height: 812 },
+        reducedMotion: 'reduce'
+      }
     }
   ],
 
