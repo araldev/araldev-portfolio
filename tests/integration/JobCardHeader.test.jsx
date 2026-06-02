@@ -27,9 +27,14 @@ describe('JobCardHeader', () => {
     expect(screen.getByRole('heading', { level: 4, name: 'Tech Lead' })).toBeInTheDocument()
   })
 
-  it('renders the type badge with descriptive aria-label', () => {
+  it('renders the type badge as visible text (SC-N2-04 regression — aria-prohibited-attr fix)', () => {
+    // After T-307, the type badge is a plain <span> with the type label
+    // as its visible text. The accessible name resolves to the text
+    // content (no aria-label). The previous "Full-time employment"
+    // aria-label was prohibited on <span> per the axe aria-prohibited-attr
+    // rule, so the original markup violated WCAG 4.1.2.
     render(<JobCardHeader job={baseJob} id='job-1' />)
-    expect(screen.getByLabelText('Full-time employment')).toBeInTheDocument()
+    expect(screen.getByText('Full-time')).toBeInTheDocument()
   })
 
   it('handles all valid job types', () => {
@@ -37,7 +42,7 @@ describe('JobCardHeader', () => {
     const expected = ['Full-time', 'Part-time', 'Contract', 'Freelance', 'Internship']
     types.forEach((type, i) => {
       const { unmount } = render(<JobCardHeader job={{ ...baseJob, type }} id={`x${i}`} />)
-      expect(screen.getByLabelText(`${expected[i]} employment`)).toBeInTheDocument()
+      expect(screen.getByText(expected[i])).toBeInTheDocument()
       unmount()
     })
   })

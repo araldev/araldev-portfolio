@@ -23,7 +23,10 @@ describe('JobCardFooter', () => {
     render(<JobCardFooter job={baseJob} id='j1' isExpanded={false} onToggleExpand={vi.fn()} expandTriggerRef={createRef()} />)
     expect(screen.getByText('React')).toBeInTheDocument()
     expect(screen.getByText('FinTech')).toBeInTheDocument()
-    expect(screen.getByLabelText('Tags for this position')).toBeInTheDocument()
+    // T-307: tags section now uses aria-label="Tags for {company}" so
+    // each card's section has a unique accessible name (no landmark-unique
+    // violation when 3+ JobCards render on the same #experience section).
+    expect(screen.getByLabelText('Tags for Acme')).toBeInTheDocument()
   })
 
   it('omits the tags block when tags is undefined (EC-011 friendly)', () => {

@@ -112,7 +112,7 @@ describe('JobCard — main composition', () => {
 
   it('hides the stack row when stack is empty (FR-005)', () => {
     render(<JobCard job={historicalJob} jobsList={[historicalJob]} />)
-    expect(screen.queryByLabelText('Technologies used in this role')).not.toBeInTheDocument()
+    expect(screen.queryByLabelText(/Technologies used in this role/)).not.toBeInTheDocument()
   })
 
   it('hides the tags row when tags is undefined (EC-011 friendly)', () => {
@@ -120,9 +120,9 @@ describe('JobCard — main composition', () => {
     expect(screen.queryByText('React')).not.toBeInTheDocument()
   })
 
-  it('uses the type-specific badge class (FR-007)', () => {
+  it('uses the type-specific badge class (FR-007) — visible text "Full-time" (T-307 aria-prohibited-attr fix)', () => {
     render(<JobCard job={fullJob} jobsList={[fullJob]} />)
-    const badge = screen.getByLabelText('Full-time employment')
+    const badge = screen.getByText('Full-time')
     expect(badge).toBeInTheDocument()
   })
 

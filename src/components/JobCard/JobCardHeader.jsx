@@ -22,10 +22,7 @@ export function JobCardHeader ({ job, id }) {
       <h3 id={`job-${id}-company`} className={styles.job_card_company}>{job.company}</h3>
       <h4 className={styles.job_card_role}>{job.role}</h4>
 
-      <span
-        className={badgeClass}
-        aria-label={`${typeLabel} employment`}
-      >
+      <span className={badgeClass}>
         {typeLabel}
       </span>
     </header>

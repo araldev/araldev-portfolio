@@ -28,11 +28,11 @@ export function JobCardFooter ({
   return (
     <footer className={styles.job_card_footer}>
       {job.tags && job.tags.length > 0 && (
-        <div className={styles.job_card_tags} aria-label='Tags for this position'>
+        <section className={styles.job_card_tags} aria-label={`Tags for ${job.company}`}>
           {job.tags.map((t, i) => (
             <span key={i} className={styles.job_card_tag_pill}>{t}</span>
           ))}
-        </div>
+        </section>
       )}
 
       {job.links && (job.links.companyLink || job.links.projectLink || job.links.referenceLink) && (
