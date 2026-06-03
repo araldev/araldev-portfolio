@@ -87,18 +87,30 @@
       background-clip: text;
       -webkit-background-clip: text;
       transition: transform .2s ease-in-out;
-
-      @media (hover: hover) and (pointer: fine) {
-        &:hover {
-          transform: scale(1.2);
-        }
-      }
-      @media (hover: none) and (pointer: coarse) {
-        &:active {
-          transform: scale(1.2);
-        }
-      }
+      /* P5 follow-up: the link's transform previously only fired
+         when the mouse was physically over the <a>'s own hit area.
+         The user reported this as a bug — the <a> is a flex child
+         centered in a wider <li>, so the "empty" space around the
+         text wasn't part of the hover surface. The selectors
+         `.nav_links li:hover a` (and the coarse-pointer active
+         equivalent) below fire the transform from the <li>'s
+         hover, so the whole list item acts as the hit area
+         (matches the outline + box-shadow hover that the <li>
+         already had). */
     }  
+  }
+}
+
+/* P5 follow-up: explicit (non-nested) selectors for the link
+   transform on parent-hover, so PostCSS / standardjs parse the
+   selector reliably. Kept outside the .nav_links block for
+   selector clarity. */
+.nav_links li:hover a {
+  transform: scale(1.2);
+}
+@media (hover: none) and (pointer: coarse) {
+  .nav_links li:active a {
+    transform: scale(1.2);
   }
 }
 
