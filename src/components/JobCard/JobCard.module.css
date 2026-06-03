@@ -94,6 +94,14 @@
   background: var(--color-job-placeholder-bg);
   flex-shrink: 0;
   position: relative;
+  /* P5 follow-up: the transition lives in the BASE selector, not in
+     the :hover rule. This is the CSS pattern recommended by every
+     modern style guide (Google, MDN, css-tricks): put the transition
+     on the element that will be transitioned, and only toggle the
+     target property in :hover. The :hover then just changes the
+     final value (e.g. `transform: scale(1.05)`) and the transition
+     runs BOTH on hover-in AND on hover-out without a flash. */
+  transition: transform 0.25s ease;
 }
 .job_card_logo_wrapper > img,
 .job_card_logo_wrapper .job_card_logo_img {
@@ -118,7 +126,6 @@
 @media (hover: hover) and (pointer: fine) {
   .job_card:hover .job_card_logo_wrapper {
     transform: scale(1.05);
-    transition: transform 0.25s ease;
   }
 }
 
@@ -175,6 +182,9 @@
   border: 1px solid currentColor;
   width: fit-content;
   margin-top: 0.35rem;
+  /* P5 follow-up: transition in BASE so the hover-in/hover-out animation
+     is smooth in both directions. See .job_card_logo_wrapper comment. */
+  transition: background 0.2s ease;
 }
 .job_card_type_badge--full-time   { color: var(--color-job-type-fulltime); }
 .job_card_type_badge--part-time   { color: var(--color-job-type-parttime); }
@@ -382,6 +392,17 @@
 .job_card_stack .tech_icon--vite        > svg path:nth-child(2) { fill: #8679fe; }
 .job_card_stack .tech_icon--npm         > svg { fill: #cc3534; }
 .job_card_stack .tech_icon--npm         > svg > path { stroke: #000; }
+
+/* P5 follow-up (NTT DATA stack) — brand colours for the new
+   generic icons added in Icons.jsx. CSS drives the colour via
+   `color` / `stroke` / `fill` so the SVGs stay neutral. */
+.job_card_stack .tech_icon--java      > svg { color: #E76F00; }
+.job_card_stack .tech_icon--spring    > svg { color: #6DB33F; }
+.job_card_stack .tech_icon--postgres  > svg { color: #336791; }
+.job_card_stack .tech_icon--angular   > svg { color: #DD0031; }
+.job_card_stack .tech_icon--junit     > svg { color: #25A162; }
+.job_card_stack .tech_icon--rxjs      > svg { color: #B7178C; }
+.job_card_stack .tech_icon--ia        > svg { color: #7C3AED; }
 
 /* ---------- Footer ---------- */
 .job_card_footer {
