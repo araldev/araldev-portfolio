@@ -74,143 +74,56 @@ export function validateJobContract (job, index = 0) {
 }
 
 /**
- * Static job data. 3-8 entries expected (A10 of spec).
- * Covers all 12 edge cases from spec §1.
+ * Static job data. Single entry — the NTT DATA internship
+ * (April 2026 — May 2026) sourced from the candidate's CV.
+ *
+ * The previous 4-entry mock history (Araldev Tech Lead,
+ * Independent, PrevSaaS, EdTech Lab) was removed in this
+ * revision because those were placeholder data, not actual
+ * work history. The JobCard section now shows the only
+ * real professional experience on the CV.
+ *
  * @type {Job[]}
  */
 export const jobs = [
   {
-    id: 'araldev-tech-lead-2023',
-    company: 'Araldev',
+    id: 'ntt-data-practicas-2026',
+    company: 'NTT DATA',
     companyLogo: undefined,
-    role: 'Frontend Tech Lead',
-    type: 'full-time',
-    period: 'Mar 2023 — Present',
-    startDate: '2023-03',
-    endDate: undefined,
-    current: true,
-    location: 'Madrid, Spain',
-    remote: true,
-    description: [
-      'Lead the frontend architecture and tooling for the core product. Define the long-term technical roadmap with the CTO and coordinate a team of 4 engineers across two time zones.',
-      'Own the design system, code quality, and performance budgets. Drive the migration to a micro-frontend architecture and ship a Storybook-driven component library used by 6 internal apps.'
-    ],
-    achievements: [
-      'Reduced LCP from 4.2s to 1.8s across the marketing site and main app',
-      'Shipped 12 production-ready micro-frontends in 18 months',
-      'Mentored 3 junior developers on GSAP, accessibility and clean architecture',
-      'Created the internal Storybook kit adopted by 4 teams'
-    ],
-    stack: {
-      react: techIcons.react,
-      ts: techIcons.ts,
-      tailwind: techIcons.tailwind,
-      storybook: techIcons.storybook,
-      vite: techIcons.vite,
-      gsap: techIcons.gsap
-    },
-    tags: ['React', 'Leadership', 'FinTech', 'A11y'],
-    links: {
-      companyLink: 'https://github.com/araldev',
-      projectLink: 'https://github.com/araldev/v12-ui'
-    }
-  },
-  {
-    id: 'freelance-design-engineer-2022',
-    company: 'Independent',
-    companyLogo: undefined,
-    role: 'Design Engineer',
-    type: 'freelance',
-    period: 'Sep 2022 — Feb 2023',
-    startDate: '2022-09',
-    endDate: '2023-02',
-    current: false,
-    location: 'Remote',
-    remote: true,
-    description: [
-      'Delivered design-engineering contracts for two SaaS startups: GSAP-driven landing animations, custom illustration pipelines and Storybook documentation.',
-      'Worked async-first, shipping every Friday with a recorded walkthrough. Clients reported a 30% lift in landing-page conversion after the visual refresh.'
-    ],
-    achievements: [
-      'Delivered 3 MVPs in 5 months',
-      'Authored 2 open-source GSAP utilities (100+ GitHub stars combined)'
-    ],
-    stack: {
-      js: techIcons.js,
-      react: techIcons.react,
-      gsap: techIcons.gsap,
-      tailwind: techIcons.tailwind,
-      git: techIcons.git,
-      gitHub: techIcons.gitHub
-    },
-    tags: ['Freelance', 'GSAP', 'SaaS'],
-    links: {
-      projectLink: 'https://github.com/araldev',
-      referenceLink: 'https://www.linkedin.com/in/araldev'
-    }
-  },
-  {
-    id: 'prevsaas-frontend-2021',
-    company: 'PrevSaaS',
-    companyLogo: undefined,
-    role: 'Frontend Engineer',
-    type: 'full-time',
-    period: 'Mar 2021 — Aug 2022',
-    startDate: '2021-03',
-    endDate: '2022-08',
-    current: false,
-    location: 'Barcelona, Spain',
-    remote: false,
-    description: [
-      'Built the customer-facing dashboard for a B2B SaaS analytics product. Owned the data-visualization layer (D3 + custom canvas charts) and the accessibility audit process.',
-      'Collaborated with a product designer in a tight 2-week cadence. Introduced a custom in-house React component library and Vite-based tooling to replace the legacy Webpack pipeline.'
-    ],
-    achievements: [
-      'Cut dashboard time-to-interactive by 45%',
-      'Achieved WCAG 2.1 AA compliance across 30+ screens',
-      'Migrated the build pipeline from Webpack to Vite, reducing CI time by 60%'
-    ],
-    stack: {
-      react: techIcons.react,
-      js: techIcons.js,
-      css: techIcons.css,
-      html: techIcons.html,
-      vite: techIcons.vite,
-      git: techIcons.git,
-      gitHub: techIcons.gitHub
-    },
-    tags: ['React', 'D3', 'Analytics'],
-    links: {
-      companyLink: 'https://example.com/prevsaas'
-    }
-  },
-  {
-    id: 'edtech-frontend-intern-2020',
-    company: 'EdTech Lab',
-    companyLogo: undefined,
-    role: 'Frontend Intern',
+    role: 'Backend & Full-Stack Developer (Prácticas)',
     type: 'internship',
-    period: 'Jun 2020 — Feb 2021',
-    startDate: '2020-06',
-    endDate: '2021-02',
+    period: 'Abril 2026 — Mayo 2026',
+    startDate: '2026-04',
+    endDate: '2026-05',
     current: false,
-    location: 'Madrid, Spain',
+    location: 'Málaga, Spain',
     remote: false,
     description: [
-      'First professional role: built interactive HTML/CSS/JS exercises for an English-learning web app. Worked closely with the lead engineer and a content team.',
-      'Created the JSON-driven level system that the team continued to extend after my internship ended.'
+      'Prácticas profesionales en NTT DATA dentro del programa de formación Java SE + Spring Boot. El programa cubrió 6 áreas técnicas (Backend, Testing, Datos, Frontend, IA, Liderazgo técnico) con foco en el ecosistema empresarial Java y la entrega de un proyecto final integrador.',
+      'Trabajo en equipo interdisciplinario bajo metodologías ágiles, con pair-programing, code reviews y ceremonias Scrum como práctica diaria. El proyecto final consistió en una solución integral de principio a fin, coordinando el ciclo de vida completo (SDLC) desde los requerimientos hasta el despliegue.'
+    ],
+    achievements: [
+      'Desarrollo Backend con Java + Spring Boot: implementación de servicios RESTful robustos, optimizando la lógica de negocio y asegurando la escalabilidad del sistema. Dominio profundo del ecosistema Spring (Boot, Data, Security), arquitectura de microservicios y gestión del ciclo de vida de aplicaciones empresariales.',
+      'Calidad de Software (Testing): creación de suites de pruebas unitarias e integración con JUnit 5 y Mockito, garantizando una cobertura de código superior al 85%. Mentalidad Testing-First, capacidad de aislar dependencias para pruebas unitarias y depuración eficiente de errores complejos.',
+      'Gestión de Datos: modelado y administración de esquemas en PostgreSQL, optimizando consultas SQL complejas para mejorar el tiempo de respuesta. Optimización de bases de datos relacionales, diseño de esquemas normalizados y gestión de transacciones.',
+      'Desarrollo Frontend con Angular: creación de interfaces de usuario dinámicas, receptivas y basadas en componentes, conectadas a APIs mediante servicios. Programación reactiva (RxJS), gestión de estado en frontend y creación de Single Page Applications (SPA).',
+      'Integración de Inteligencia Artificial: exploración e implementación de soluciones basadas en IA para automatización de tareas y análisis de datos en el entorno del proyecto. Integración de LLMs, diseño de prompts efectivos y flujo de trabajo con APIs de IA generativa.',
+      'Proyecto Final: liderazgo técnico en el desarrollo de una solución integral de principio a fin, coordinando el ciclo de vida completo (SDLC), desde los requerimientos hasta el despliegue. Resolución de problemas complejos bajo metodologías ágiles, trabajo en equipo interdisciplinario y visión integral del software.',
+      'Java SE Programmer Certification Preparation (NTT DATA / Oracle Training): formación avanzada orientada a la Certificación Profesional de Oracle. Conocimiento profundo del núcleo de Java (multihilo, lambdas, streams, concurrencia, gestión de memoria) y buenas prácticas de programación bajo estándares internacionales.'
     ],
     stack: {
-      js: techIcons.js,
-      css: techIcons.css,
-      html: techIcons.html,
+      java: techIcons.java,
+      spring: techIcons.spring,
+      postgres: techIcons.postgres,
+      angular: techIcons.angular,
+      junit: techIcons.junit,
+      rxjs: techIcons.rxjs,
+      ia: techIcons.ia,
       git: techIcons.git,
       gitHub: techIcons.gitHub
     },
-    tags: ['Internship', 'EdTech'],
-    links: {
-      projectLink: 'https://araldev.github.io/english-web/'
-    }
+    tags: ['Prácticas', 'NTT DATA', 'Java', 'Spring Boot', 'Angular', 'IA', 'SDLC'],
+    links: {}
   }
 ]
 
