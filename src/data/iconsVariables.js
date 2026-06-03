@@ -13,7 +13,14 @@ export const iconsColors = {
   gmail: ['#4285F4', '#34A853', '#FBBC04', '#EA4335', '#C5221F'],
   storybook: '#FF4785',
   vite: '#646CFF',
-  npm: '#cc3534'
+  npm: '#cc3534',
+  java: '#E76F00',
+  spring: '#6DB33F',
+  postgres: '#336791',
+  angular: '#DD0031',
+  junit: '#25A162',
+  rxjs: '#B7178C',
+  ia: '#7C3AED'
 }
 
 export const allIconsDictionaryKey = {
@@ -33,6 +40,13 @@ export const allIconsDictionaryKey = {
   storybook: 'storybook',
   vite: 'vite',
   npm: 'npm',
+  java: 'java',
+  spring: 'spring',
+  postgres: 'postgres',
+  angular: 'angular',
+  junit: 'junit',
+  rxjs: 'rxjs',
+  ia: 'ia',
   arrowUp: 'arrowUp',
   arrowDown: 'arrowDown'
 }

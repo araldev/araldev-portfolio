@@ -21,7 +21,14 @@ export const techIcons = {
   gsap: ICONS.GSAP_ICON,
   storybook: ICONS.STORYBOOK_ICON,
   vite: ICONS.VITE_ICON,
-  npm: ICONS.NPM_ICON
+  npm: ICONS.NPM_ICON,
+  java: ICONS.JAVA_ICON,
+  spring: ICONS.SPRING_ICON,
+  postgres: ICONS.POSTGRES_ICON,
+  angular: ICONS.ANGULAR_ICON,
+  junit: ICONS.JUNIT_ICON,
+  rxjs: ICONS.RXJS_ICON,
+  ia: ICONS.IA_ICON
 }
 
 export const utilsIcons = {

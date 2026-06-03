@@ -184,3 +184,87 @@ export const ARROW_DOWN = (
     <path d='M7 13v-6l5 4l5 -4v6l-5 4z' />
   </svg>
 )
+
+// ============================================================
+// P5 follow-up (NTT DATA stack) — minimal generic icons.
+// NOT brand replicas: drawn from scratch as abstract glyphs so
+// no third-party trademark is reused. CSS drives the brand
+// colour via the .tech_icon--{key} class in JobCard.module.css.
+// ============================================================
+
+// JAVA_ICON — generic "cup" silhouette (the Java ecosystem
+// metaphor is widely known; we use a neutral cup + steam).
+export const JAVA_ICON = (
+  <svg data-key={key.java} xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round'>
+    <path d='M4 8h13a3 3 0 0 1 3 3v2a3 3 0 0 1-3 3H4z' />
+    <path d='M4 16l-1 3a1 1 0 0 0 1 1h4' />
+    <path d='M17 5c0-1 1-2 2-2' />
+    <path d='M20 8c0-1 1-2 2-2' />
+    <path d='M9 3a3 3 0 0 1 6 0' />
+  </svg>
+)
+
+// SPRING_ICON — generic leaf glyph (the Spring framework logo is
+// a leaf; we use a simple symmetric leaf shape).
+export const SPRING_ICON = (
+  <svg data-key={key.spring} xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round'>
+    <path d='M12 2c-3 3-6 6-6 11a6 6 0 0 0 12 0c0-5-3-8-6-11z' />
+    <path d='M12 22V12' />
+    <path d='M9 14l3-2 3 2' />
+  </svg>
+)
+
+// POSTGRES_ICON — generic cylinder (the universal database
+// glyph; not the elephant logo, just the standard data shape).
+export const POSTGRES_ICON = (
+  <svg data-key={key.postgres} xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round'>
+    <ellipse cx='12' cy='6' rx='8' ry='3' />
+    <path d='M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6' />
+    <path d='M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6' />
+  </svg>
+)
+
+// ANGULAR_ICON — generic shield with an A (a simplified
+// reference to the Angular shield, not a brand replica).
+export const ANGULAR_ICON = (
+  <svg data-key={key.angular} xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round'>
+    <path d='M12 3l-7 2v6c0 5 3 8 7 10 4-2 7-5 7-10V5z' />
+    <path d='M9 15l3-7 3 7' />
+    <path d='M10 13h4' />
+  </svg>
+)
+
+// JUNIT_ICON — generic "test tube" glyph for the JUnit testing
+// framework (the official logo is a coffee cup + checkmark;
+// we use a neutral lab tube to convey "tests" without copying).
+export const JUNIT_ICON = (
+  <svg data-key={key.junit} xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round'>
+    <path d='M9 2v6L4 18a2 2 0 0 0 2 3h12a2 2 0 0 0 2-3l-5-10V2' />
+    <path d='M9 2h6' />
+    <path d='M7 14h10' />
+  </svg>
+)
+
+// RXJS_ICON — generic "stream" arcs (the RxJS logo is a
+// reactive stream shape; we use concentric arcs as a neutral
+// reference to "reactive / streams").
+export const RXJS_ICON = (
+  <svg data-key={key.rxjs} xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round'>
+    <path d='M3 12c2 0 4-2 6-2s4 2 6 2 4-2 6-2' />
+    <path d='M3 16c2 0 4-2 6-2s4 2 6 2 4-2 6-2' />
+    <path d='M3 8c2 0 4-2 6-2s4 2 6 2 4-2 6-2' />
+  </svg>
+)
+
+// IA_ICON — generic "neural net" glyph (3 dots connected,
+// representing AI / ML; not any specific brand logo).
+export const IA_ICON = (
+  <svg data-key={key.ia} xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round'>
+    <circle cx='6' cy='6' r='2' />
+    <circle cx='18' cy='6' r='2' />
+    <circle cx='12' cy='18' r='2' />
+    <path d='M8 7l8 0' />
+    <path d='M7 8l4 8' />
+    <path d='M17 8l-4 8' />
+  </svg>
+)
