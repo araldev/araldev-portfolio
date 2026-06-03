@@ -40,8 +40,20 @@
    ============================================================ */
 
 .projects_section {
-  max-width: 80%;
-  width: var(--width-web-content);
+  /* P6 follow-up: section width is now consistent with JobsCards,
+     AboutMeSection, and ContactSection. All 4 sections use the
+     same recipe:
+         max-width: var(--width-web-content)  (1200px cap)
+         width: 100%                            (fill parent main)
+         margin: 0 auto                         (centre when capped)
+         padding: 0 var(--padding-web-content)  (uniform gutter)
+     Previously ProjectsCards used max-width: 80 percent which
+     made it visibly narrower than JobsCards on a 1440px viewport.
+     Same change applied to the inner grid wrapper below. */
+  max-width: var(--width-web-content);
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--padding-web-content);
   height: auto;
   position: relative;
   gap: 40px;
@@ -54,14 +66,15 @@
 .projects_cards_container {
   display: grid;
   max-width: 100%;
-  width: var(--width-web-content);
+  width: 100%;
   height: auto;
   gap: 50px;
   justify-content: center;
   /* N1 (FR-N1-05): align-items: stretch so all cards in a row
-     share the tallest card's height. */
+     share the tallest card's height. The v2 used `center` which
+     produced uneven bottoms when one card had a longer description. */
   align-items: stretch;
-  grid-template-columns: repeat(auto-fit, minmax(425px, 575px));
+  grid-template-columns: repeat(auto-fit, minmax(425px, 1fr));
   grid-template-rows: auto;
 }
 

@@ -70,7 +70,10 @@ beforeAll(async () => {
   }
   browser = await chromium.launch()
   context = await browser.newContext()
-}, 30_000)
+  // P6: extended beforeAll timeout from 30s → 60s. chromium.launch()
+  // on slower machines can take 15-25s alone; the original 30s
+  // budget left no headroom for the per-viewport Playwright work.
+}, 60_000)
 
 afterAll(async () => {
   if (context) await context.close()
@@ -78,6 +81,11 @@ afterAll(async () => {
 })
 
 describe('AboutMeSection Bento proportions — T-211 N3 RED contract', () => {
+  // P6: extended the per-test timeout from 30s → 60s. The test boots
+  // a real chromium instance per `it` and runs Playwright across 3
+  // viewports; on slower machines (CI, devs with antivirus) the 30s
+  // budget was tight and produced flaky timeouts. 60s gives a
+  // comfortable headroom without changing the assertions.
   it('row count + per-tile boundingBox at 3 viewports matches the design tokens (FR-N3-01..06)', async () => {
     if (!serverReachable) {
       // Skip the real-browser path. The P2-B3 fix-forwards (T-210,
@@ -158,5 +166,9 @@ describe('AboutMeSection Bento proportions — T-211 N3 RED contract', () => {
     }
 
     await page.close()
-  }, 30_000)
+  // P6: extended the per-test timeout from 30s → 60s. The test
+  // boots a real chromium instance per `it` and runs Playwright
+  // across 3 viewports; on slower machines the 30s budget was
+  // tight and produced flaky timeouts. 60s gives headroom.
+  }, 60_000)
 })

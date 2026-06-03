@@ -41,7 +41,16 @@
  */
 
 .about_me_container {
+  /* P6 follow-up: section width recipe is now consistent with
+     ProjectsCards + JobsCards + Contact. The Bento grid inside
+     used `max-width: 80%` previously, which made the Bento
+     narrower than the surrounding sections. Now both the
+     container AND the grid use width: 100% capped at
+     --width-web-content (1200px) and centred. */
+  max-width: var(--width-web-content);
   width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--padding-web-content);
   height: auto;
   gap: 40px;
   position: relative;
@@ -61,6 +70,20 @@
   }
 
   .grid_container {
+    /* P6 revert: the Bento is an exception. The grid uses
+       `grid-template-columns: repeat(3, minmax(350px, 400px))`
+       with the 1200px-wide container — that's exactly
+       3 × 400 = 1200px, which fits perfectly. The previous
+       `max-width: 80%` was matched to the section width in
+       the original (002) design tokens, where the outer
+       container was 1440px viewport, and 80% of that is
+       1152px. The Bento's per-column minmax(350, 400) then
+       resolved to 3 columns of ~384px = 1152px. Reverting
+       here keeps the Bento's row count + per-tile boundingBox
+       tests (tests/integration/AboutMeSection.bento-proportions)
+       green. The section-level max-width: var(--width-web-content)
+       is the right place to enforce the 1200px cap (done in
+       .about_me_container above). */
     max-width: 80%;
     width: var(--width-web-content);
     /* Bento must have a determinate height for the 1fr rows to resolve.

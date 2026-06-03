@@ -1,5 +1,12 @@
 .contact_container {
+  /* P6 follow-up: same width recipe as ProjectsCards + JobsCards
+     + AboutMeSection. Was `width: 100%` (no max-width, no
+     margin: auto, no padding gutter) so on >1200px viewports the
+     form stretched beyond the other sections. */
+  max-width: var(--width-web-content);
   width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--padding-web-content);
   height: auto;
   display: flex;
   flex-direction: column;
@@ -20,8 +27,11 @@
 }
 
 .form {
-  max-width: 90%;
-  width: var(--width-web-content);
+  /* P6 follow-up: form is the inner wrapper of the contact
+     section; the outer .contact_container now provides the
+     1200px cap + centre + gutter. The form just fills it. */
+  max-width: 100%;
+  width: 100%;
   height: auto;
   display: flex;
   flex-direction: column;
