@@ -99,8 +99,8 @@ export const jobs = [
     location: 'Málaga, Spain',
     remote: false,
     description: [
-      'Prácticas profesionales en NTT DATA dentro del programa de formación Java SE + Spring Boot. El programa cubrió 6 áreas técnicas (Backend, Testing, Datos, Frontend, IA, Liderazgo técnico) con foco en el ecosistema empresarial Java y la entrega de un proyecto final integrador.',
-      'Trabajo en equipo interdisciplinario bajo metodologías ágiles, con pair-programing, code reviews y ceremonias Scrum como práctica diaria. El proyecto final consistió en una solución integral de principio a fin, coordinando el ciclo de vida completo (SDLC) desde los requerimientos hasta el despliegue.'
+      'Prácticas profesionales en NTT DATA dentro del programa de formación Java SE + Spring Boot. El programa cubrió seis áreas técnicas: desarrollo backend con Java y Spring Boot (servicios RESTful), calidad de software con JUnit 5 y Mockito (cobertura superior al 85%), gestión de datos en PostgreSQL, frontend con Angular, integración de IA y un proyecto final integrador.',
+      'El proyecto final consistió en liderar técnicamente el desarrollo de una solución completa, coordinando el ciclo de vida (SDLC) desde los requerimientos hasta el despliegue. En paralelo participé en la formación Java SE Programmer Certification Preparation de NTT DATA / Oracle, profundizando en el núcleo de Java (multihilo, lambdas, streams, concurrencia y gestión de memoria).'
     ],
     achievements: [
       'Desarrollo Backend con Java + Spring Boot: implementación de servicios RESTful robustos, optimizando la lógica de negocio y asegurando la escalabilidad del sistema. Dominio profundo del ecosistema Spring (Boot, Data, Security), arquitectura de microservicios y gestión del ciclo de vida de aplicaciones empresariales.',

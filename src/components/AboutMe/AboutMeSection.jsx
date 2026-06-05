@@ -1,5 +1,5 @@
 import styles from './AboutMeSection.module.css'
-import avatar from '../../assets/yo-sin-fondo-M.webp'
+import avatar from '../../assets/perfil_2_sin_fondo.webp'
 import brand from '../../assets/brand-araldev.webp'
 import { useFadeInElement } from '../../Hooks/useFadeInElement'
 import { useRef } from 'react'
