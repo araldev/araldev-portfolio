@@ -393,16 +393,14 @@
 .job_card_stack .tech_icon--npm         > svg { fill: #cc3534; }
 .job_card_stack .tech_icon--npm         > svg > path { stroke: #000; }
 
-/* P5 follow-up (NTT DATA stack) — brand colours for the new
-   generic icons added in Icons.jsx. CSS drives the colour via
-   `color` / `stroke` / `fill` so the SVGs stay neutral. */
-.job_card_stack .tech_icon--java      > svg { color: #E76F00; }
-.job_card_stack .tech_icon--spring    > svg { color: #6DB33F; }
-.job_card_stack .tech_icon--postgres  > svg { color: #336791; }
-.job_card_stack .tech_icon--angular   > svg { color: #DD0031; }
-.job_card_stack .tech_icon--junit     > svg { color: #25A162; }
-.job_card_stack .tech_icon--rxjs      > svg { color: #B7178C; }
-.job_card_stack .tech_icon--ia        > svg { color: #7C3AED; }
+/* P6 follow-up (NTT DATA stack) — the 7 brand SVGs (Java, Spring,
+   Postgres, Angular, JUnit, RxJS, IA) now ship with their native
+   brand colours HARDCODED in the <path fill="..."> attributes, so
+   CSS `color:` / `stroke:` / `fill:` overrides have no effect on
+   them and were removed. The .tech_icon--{key} class is still
+   applied to the wrapper <span> in JobCardStack.jsx, kept as a
+   hook for future sizing/animation/hover styles. The brand palette
+   reference now lives in src/data/iconsVariables.js (iconsColors). */
 
 /* ---------- Footer ---------- */
 .job_card_footer {

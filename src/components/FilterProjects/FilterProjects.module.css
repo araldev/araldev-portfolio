@@ -289,3 +289,196 @@
     }
   }
 }
+
+/* =================================================================
+   P6 follow-up (NTT DATA stack) — FilterProjects behavior.
+
+   The 7 brand SVGs (Java, Spring, Postgres, Angular, JUnit, RxJS, IA)
+   were swapped in Icons.jsx from simple-icons monochrome
+   (fill="currentColor") to official full-colour hardcoded brand SVGs
+   (fill="#xxx" on each <path>). The P6 icons used to be rendered in
+   their default `currentColor` (which fell back to the inherited
+   text colour, often white in the dark sections) and then
+   recoloured on :hover / :active / :checked by the CSS rules above
+   (using `color:`, `fill:`, or `stroke:`).
+
+   After the icon swap, those CSS rules still work for the 12 older
+   icons (which keep `currentColor`). But the 7 P6 icons need new
+   rules that:
+     1. Default to WHITE (so the dark sections stay cohesive) — except
+        IA, whose default IS its brand identity (a futuristic
+        cyan→violet→pink diagonal gradient) and never goes white.
+     2. On :hover (desktop) and :active (touch): `transform: scale(1.2)`
+        + the real brand colours per <path>.
+     3. On :checked (icon is part of the active filter): the real
+        brand colours per <path>, no scale.
+
+   Multi-path icons (Java 5, Postgres 4, Angular 3, Spring 2, JUnit 2,
+   RxJS 4) target each <path> via :nth-child. JUnit was previously
+   inline-styled (`style={{fill: '#dc514a', ...}}`) which would WIN
+   over any external CSS — JUnit_ICON in Icons.jsx was converted to
+   use the `fill` presentation attribute so the override works.
+   IA has a single <path> and references the gradient via `url(#ia-futuristic-grad)`.
+   ================================================================= */
+
+/* Default state: all P6 paths WHITE (IA exception: gradient) + smooth
+   transition on fill so the colour blends in over 300ms. */
+.filter_icon_label .java > svg path,
+.filter_icon_label .spring > svg path,
+.filter_icon_label .postgres > svg path,
+.filter_icon_label .angular > svg path,
+.filter_icon_label .junit > svg path,
+.filter_icon_label .rxjs > svg path,
+.filter_icon_label .ia > svg path {
+  fill: #ffffff;
+  transition: fill .3s ease-in-out;
+}
+
+.filter_icon_label:hover .ia > svg path {
+  fill: url(#ia-futuristic-grad);
+}
+
+/* Targeted inner-detail overrides for the 3 P6 icons whose brand
+   silhouette is lost when all paths go white. The outer body stays
+   white (recognisable brand shape); the inner detail goes transparent
+   (dark background shows through, so it doesn't look like a solid
+   blob). Each override reverts to its brand colour on :hover /
+   :active / :checked via the per-icon rules below.
+     - Angular path 3: the white "A" letter inside the shield.
+     - Postgres paths 3, 4: the thin white highlight strokes on the
+       elephant.
+     - Spring path 2: the inner cutout that draws the leaf veins
+       and the small dot inside the green leaf. */
+.filter_icon_label .angular  > svg path:nth-of-type(3),
+.filter_icon_label .postgres > svg path:nth-of-type(3),
+.filter_icon_label .postgres > svg path:nth-of-type(4),
+.filter_icon_label .spring   > svg path:nth-of-type(1) {
+  fill: #111117;
+}
+
+/* Transform transition on the <svg> — same pattern as the 12 older
+   icons (`.js > svg { transition: transform .3s ease-in-out; }`).
+   Required so the `transform: scale(1.2)` declared on :hover and
+   :active actually animates smoothly. Putting the transition on the
+   <path> is useless because path transforms are never animated here. */
+.filter_icon_label .java   > svg,
+.filter_icon_label .spring > svg,
+.filter_icon_label .postgres > svg,
+.filter_icon_label .angular > svg,
+.filter_icon_label .junit  > svg,
+.filter_icon_label .rxjs   > svg,
+.filter_icon_label .ia     > svg {
+  transition: transform .3s ease-in-out;
+}
+
+/* Hover (desktop with hover-capable pointer) — scale(1.2) + brand colours
+   NOTE: we use :nth-of-type(N) NOT :nth-child(N) because some P6 SVGs
+   (RxJS, IA) have a <defs> as their first child. :nth-child counts ALL
+   siblings including <defs>, so the path indices shift. :nth-of-type
+   counts only <path> elements and is robust to <defs>. */
+@media (hover: hover) and (pointer: fine) {
+  .filter_icon_label:hover .java > svg,
+  .filter_icon_label:hover .spring > svg,
+  .filter_icon_label:hover .postgres > svg,
+  .filter_icon_label:hover .angular > svg,
+  .filter_icon_label:hover .junit > svg,
+  .filter_icon_label:hover .rxjs > svg,
+  .filter_icon_label:hover .ia > svg {
+    transform: scale(1.2);
+  }
+
+  .filter_icon_label:hover .java > svg path:nth-of-type(1) { fill: #0074BD; }
+  .filter_icon_label:hover .java > svg path:nth-of-type(2) { fill: #EA2D2E; }
+  .filter_icon_label:hover .java > svg path:nth-of-type(3) { fill: #0074BD; }
+  .filter_icon_label:hover .java > svg path:nth-of-type(4) { fill: #EA2D2E; }
+  .filter_icon_label:hover .java > svg path:nth-of-type(5) { fill: #0074BD; }
+
+  .filter_icon_label:hover .spring > svg path:nth-of-type(1) { fill: #8bc34a; }
+  .filter_icon_label:hover .spring > svg path:nth-of-type(2) { fill: #fff; }
+
+  .filter_icon_label:hover .postgres > svg path:nth-of-type(1) { fill: #336791; }
+  .filter_icon_label:hover .postgres > svg path:nth-of-type(2) { fill: #336791; }
+  .filter_icon_label:hover .postgres > svg path:nth-of-type(3) { fill: #FFFFFF; }
+  .filter_icon_label:hover .postgres > svg path:nth-of-type(4) { fill: #FFFFFF; }
+
+  .filter_icon_label:hover .angular > svg path:nth-of-type(1) { fill: #E23237; }
+  .filter_icon_label:hover .angular > svg path:nth-of-type(2) { fill: #B52E31; }
+  .filter_icon_label:hover .angular > svg path:nth-of-type(3) { fill: #FFFFFF; }
+
+  .filter_icon_label:hover .junit > svg path:nth-of-type(1) { fill: #dc514a; }
+  .filter_icon_label:hover .junit > svg path:nth-of-type(2) { fill: #23a161; }
+
+  .filter_icon_label:hover .rxjs > svg path:nth-of-type(1) { fill: #e32286; }
+  .filter_icon_label:hover .rxjs > svg path:nth-of-type(2) { fill: url(#rxjs-grad-a); }
+  .filter_icon_label:hover .rxjs > svg path:nth-of-type(3) { fill: url(#rxjs-grad-b); }
+  .filter_icon_label:hover .rxjs > svg path:nth-of-type(4) { fill: url(#rxjs-grad-c); }
+  /* IA: no fill change on hover — the gradient IS its brand identity */
+}
+
+/* Active (touch / no hover capability) — same colours as :hover, scale via :active */
+@media (hover: none) and (pointer: coarse) {
+  .filter_icon_label:active .java > svg,
+  .filter_icon_label:active .spring > svg,
+  .filter_icon_label:active .postgres > svg,
+  .filter_icon_label:active .angular > svg,
+  .filter_icon_label:active .junit > svg,
+  .filter_icon_label:active .rxjs > svg,
+  .filter_icon_label:active .ia > svg {
+    transform: scale(1.2);
+  }
+
+  .filter_icon_label:active .java > svg path:nth-of-type(1) { fill: #0074BD; }
+  .filter_icon_label:active .java > svg path:nth-of-type(2) { fill: #EA2D2E; }
+  .filter_icon_label:active .java > svg path:nth-of-type(3) { fill: #0074BD; }
+  .filter_icon_label:active .java > svg path:nth-of-type(4) { fill: #EA2D2E; }
+  .filter_icon_label:active .java > svg path:nth-of-type(5) { fill: #0074BD; }
+
+  .filter_icon_label:active .spring > svg path:nth-of-type(1) { fill: #8bc34a; }
+  .filter_icon_label:active .spring > svg path:nth-of-type(2) { fill: #fff; }
+
+  .filter_icon_label:active .postgres > svg path:nth-of-type(1) { fill: #336791; }
+  .filter_icon_label:active .postgres > svg path:nth-of-type(2) { fill: #336791; }
+  .filter_icon_label:active .postgres > svg path:nth-of-type(3) { fill: #FFFFFF; }
+  .filter_icon_label:active .postgres > svg path:nth-of-type(4) { fill: #FFFFFF; }
+
+  .filter_icon_label:active .angular > svg path:nth-of-type(1) { fill: #E23237; }
+  .filter_icon_label:active .angular > svg path:nth-of-type(2) { fill: #B52E31; }
+  .filter_icon_label:active .angular > svg path:nth-of-type(3) { fill: #FFFFFF; }
+
+  .filter_icon_label:active .junit > svg path:nth-of-type(1) { fill: #dc514a; }
+  .filter_icon_label:active .junit > svg path:nth-of-type(2) { fill: #23a161; }
+
+  .filter_icon_label:active .rxjs > svg path:nth-of-type(1) { fill: #e32286; }
+  .filter_icon_label:active .rxjs > svg path:nth-of-type(2) { fill: url(#rxjs-grad-a); }
+  .filter_icon_label:active .rxjs > svg path:nth-of-type(3) { fill: url(#rxjs-grad-b); }
+  .filter_icon_label:active .rxjs > svg path:nth-of-type(4) { fill: url(#rxjs-grad-c); }
+}
+
+/* Checked (icon is part of the active filter) — real colours, NO scale */
+.filter_icon_checkbox:checked ~ .java > svg path:nth-of-type(1) { fill: #0074BD; }
+.filter_icon_checkbox:checked ~ .java > svg path:nth-of-type(2) { fill: #EA2D2E; }
+.filter_icon_checkbox:checked ~ .java > svg path:nth-of-type(3) { fill: #0074BD; }
+.filter_icon_checkbox:checked ~ .java > svg path:nth-of-type(4) { fill: #EA2D2E; }
+.filter_icon_checkbox:checked ~ .java > svg path:nth-of-type(5) { fill: #0074BD; }
+
+.filter_icon_checkbox:checked ~ .spring > svg path:nth-of-type(1) { fill: #8bc34a; }
+.filter_icon_checkbox:checked ~ .spring > svg path:nth-of-type(2) { fill: #fff; }
+
+.filter_icon_checkbox:checked ~ .postgres > svg path:nth-of-type(1) { fill: #336791; }
+.filter_icon_checkbox:checked ~ .postgres > svg path:nth-of-type(2) { fill: #336791; }
+.filter_icon_checkbox:checked ~ .postgres > svg path:nth-of-type(3) { fill: #FFFFFF; }
+.filter_icon_checkbox:checked ~ .postgres > svg path:nth-of-type(4) { fill: #FFFFFF; }
+
+.filter_icon_checkbox:checked ~ .angular > svg path:nth-of-type(1) { fill: #E23237; }
+.filter_icon_checkbox:checked ~ .angular > svg path:nth-of-type(2) { fill: #B52E31; }
+.filter_icon_checkbox:checked ~ .angular > svg path:nth-of-type(3) { fill: #FFFFFF; }
+
+.filter_icon_checkbox:checked ~ .junit > svg path:nth-of-type(1) { fill: #dc514a; }
+.filter_icon_checkbox:checked ~ .junit > svg path:nth-of-type(2) { fill: #23a161; }
+
+.filter_icon_checkbox:checked ~ .rxjs > svg path:nth-of-type(1) { fill: #e32286; }
+.filter_icon_checkbox:checked ~ .rxjs > svg path:nth-of-type(2) { fill: url(#rxjs-grad-a); }
+.filter_icon_checkbox:checked ~ .rxjs > svg path:nth-of-type(3) { fill: url(#rxjs-grad-b); }
+.filter_icon_checkbox:checked ~ .rxjs > svg path:nth-of-type(4) { fill: url(#rxjs-grad-c); }
+
+/* IA: checked keeps the futuristic gradient as its brand identity */
