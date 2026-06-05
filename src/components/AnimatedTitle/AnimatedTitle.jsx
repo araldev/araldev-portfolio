@@ -2,7 +2,7 @@ import styles from './AnimatedTitle.module.css'
 import { useId } from 'react'
 import { useAnimatedTitle } from '../../Hooks/useAnimatedTitle.js'
 import { usePreloadImg } from '../../Hooks/usePreloadImg.js'
-import avatar from '../../assets/yo-sin-fondo-M.webp'
+import avatar from '../../assets/perfil_2_sin_fondo.webp'
 import { utilsIcons } from '../../data/icons.js'
 
 export function AnimatedTitle ({ children }) {
