@@ -1,5 +1,6 @@
 import styles from './JobCard.module.css'
 import { LinkButton } from '../LinkButton/LinkButton.jsx'
+import { useLanguage } from '../../i18n/useLanguage.js'
 
 /**
  * JobCardFooter — tags (pills) + LinkButtons + optional expand trigger.
@@ -26,13 +27,17 @@ export function JobCardFooter ({
   // fallback so the component is safe to render in isolation
   // (Storybook, tests). The default render path always supplies
   // real labels from JobCard using t('experience.seeMore/seeLess').
+  const { t } = useLanguage()
   const hasAchievements = job.achievements && job.achievements.length > 0
   const achievementsId = `job-${id}-achievements`
 
   return (
     <footer className={styles.job_card_footer}>
       {job.tags && job.tags.length > 0 && (
-        <section className={styles.job_card_tags} aria-label={`Tags for ${job.company}`}>
+        <section
+          className={styles.job_card_tags}
+          aria-label={t('job.tagsFor', null, { company: job.company })}
+        >
           {job.tags.map((t, i) => (
             <span key={i} className={styles.job_card_tag_pill}>{t}</span>
           ))}
@@ -40,15 +45,18 @@ export function JobCardFooter ({
       )}
 
       {job.links && (job.links.companyLink || job.links.projectLink || job.links.referenceLink) && (
-        <nav className={styles.job_card_links} aria-label={`External references for ${job.company}`}>
+        <nav
+          className={styles.job_card_links}
+          aria-label={t('job.referencesFor', null, { company: job.company })}
+        >
           {job.links.companyLink && (
-            <LinkButton href={job.links.companyLink}>Company ↗</LinkButton>
+            <LinkButton href={job.links.companyLink}>{t('job.company')}</LinkButton>
           )}
           {job.links.projectLink && (
-            <LinkButton href={job.links.projectLink}>Project ↗</LinkButton>
+            <LinkButton href={job.links.projectLink}>{t('job.project')}</LinkButton>
           )}
           {job.links.referenceLink && (
-            <LinkButton href={job.links.referenceLink}>Reference ↗</LinkButton>
+            <LinkButton href={job.links.referenceLink}>{t('job.reference')}</LinkButton>
           )}
         </nav>
       )}
@@ -70,7 +78,9 @@ export function JobCardFooter ({
             data-expanded={isExpanded}
             aria-hidden='true'
           >
-            {isExpanded ? '▴' : '▾'}
+            {/* Single glyph, rotated via CSS when expanded so the
+                transition is animated rather than a hard glyph swap. */}
+            ▾
           </span>
         </button>
       )}

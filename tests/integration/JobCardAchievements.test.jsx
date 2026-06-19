@@ -2,6 +2,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { render, screen, fireEvent, act } from '@testing-library/react'
 import { createRef } from 'react'
 import { JobCardAchievements } from '../../src/components/JobCard/JobCardAchievements.jsx'
+import { LanguageProvider } from '../../src/i18n/LanguageContext.jsx'
 
 vi.mock('../../src/components/JobCard/JobCard.module.css', () => ({
   default: new Proxy({}, { get: (_, key) => String(key) })
@@ -12,6 +13,10 @@ vi.mock('../../src/Hooks/usePrefersReducedMotion.js', () => ({
   usePrefersReducedMotion: () => mockPrefers
 }))
 
+function renderWithLang (ui) {
+  return render(<LanguageProvider initialLang='en'>{ui}</LanguageProvider>)
+}
+
 beforeEach(() => { mockPrefers = false })
 afterEach(() => { vi.restoreAllMocks() })
 
@@ -19,21 +24,21 @@ const achievements = ['Shipped feature X', 'Mentored 2 juniors', 'Wrote blog pos
 
 describe('JobCardAchievements', () => {
   it('renders nothing when achievements is undefined (EC-001)', () => {
-    const { container } = render(
+    const { container } = renderWithLang(
       <JobCardAchievements achievements={undefined} isExpanded={false} />
     )
     expect(container.firstChild).toBeNull()
   })
 
   it('renders nothing when achievements is empty (EC-001)', () => {
-    const { container } = render(
+    const { container } = renderWithLang(
       <JobCardAchievements achievements={[]} isExpanded={false} />
     )
     expect(container.firstChild).toBeNull()
   })
 
   it('renders the <section> when achievements is non-empty', () => {
-    render(
+    renderWithLang(
       <JobCardAchievements
         achievements={achievements}
         isExpanded
@@ -47,7 +52,7 @@ describe('JobCardAchievements', () => {
   })
 
   it('sets aria-hidden=true and the hidden attribute when collapsed', () => {
-    render(
+    renderWithLang(
       <JobCardAchievements
         achievements={achievements}
         isExpanded={false}
@@ -60,7 +65,7 @@ describe('JobCardAchievements', () => {
   })
 
   it('sets aria-hidden=false and omits the hidden attribute when expanded', () => {
-    render(
+    renderWithLang(
       <JobCardAchievements
         achievements={achievements}
         isExpanded
@@ -75,7 +80,7 @@ describe('JobCardAchievements', () => {
   it('Escape key triggers the onToggleExpand callback', () => {
     const onToggle = vi.fn()
     const triggerRef = createRef()
-    render(
+    renderWithLang(
       <>
         <button ref={triggerRef}>trigger</button>
         <JobCardAchievements
@@ -96,7 +101,7 @@ describe('JobCardAchievements', () => {
   it('does NOT listen for Escape when collapsed', () => {
     const onToggle = vi.fn()
     const triggerRef = createRef()
-    render(
+    renderWithLang(
       <>
         <button ref={triggerRef}>trigger</button>
         <JobCardAchievements

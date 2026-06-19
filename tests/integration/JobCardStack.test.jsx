@@ -1,6 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { JobCardStack } from '../../src/components/JobCard/JobCardStack.jsx'
+import { LanguageProvider } from '../../src/i18n/LanguageContext.jsx'
 
 vi.mock('../../src/components/JobCard/JobCard.module.css', () => ({
   default: new Proxy({}, { get: (_, key) => String(key) })
@@ -11,6 +12,10 @@ vi.mock('../../src/components/JobCard/JobCard.module.css', () => ({
 // dimming on JobsCards + reload caused visual regression). Icons render
 // at full opacity unconditionally.
 
+function renderWithLang (ui) {
+  return render(<LanguageProvider initialLang='en'>{ui}</LanguageProvider>)
+}
+
 const stack = {
   js: <svg data-testid='svg-js' />,
   react: <svg data-testid='svg-react' />,
@@ -19,24 +24,24 @@ const stack = {
 
 describe('JobCardStack', () => {
   it('renders one span per stack key', () => {
-    render(<JobCardStack stack={stack} />)
+    renderWithLang(<JobCardStack stack={stack} />)
     expect(screen.getByTestId('svg-js')).toBeInTheDocument()
     expect(screen.getByTestId('svg-react')).toBeInTheDocument()
     expect(screen.getByTestId('svg-ts')).toBeInTheDocument()
   })
 
   it('hides entirely when stack is empty (FR-005)', () => {
-    const { container } = render(<JobCardStack stack={{}} />)
+    const { container } = renderWithLang(<JobCardStack stack={{}} />)
     expect(container.firstChild).toBeNull()
   })
 
   it('hides entirely when stack is undefined (FR-005 edge case)', () => {
-    const { container } = render(<JobCardStack stack={undefined} />)
+    const { container } = renderWithLang(<JobCardStack stack={undefined} />)
     expect(container.firstChild).toBeNull()
   })
 
   it('exposes a descriptive aria-label on the container', () => {
-    render(<JobCardStack stack={stack} />)
+    renderWithLang(<JobCardStack stack={stack} />)
     expect(screen.getByLabelText('Technologies used in this role')).toBeInTheDocument()
   })
 })

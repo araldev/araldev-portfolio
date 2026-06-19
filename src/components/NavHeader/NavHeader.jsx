@@ -14,7 +14,7 @@ export const NavHeader = forwardRef((props, ref) => {
     <>
       <nav ref={ref} className={styles.nav_header}>
         <div className={styles.nav_logo}>
-          <img src={brand} alt='Brand Araldev' />
+          <img src={brand} alt={t('images.brandAraldev')} />
         </div>
 
         <label htmlFor={idNavIcon} className={styles.nav_icon}>

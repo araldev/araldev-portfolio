@@ -5,9 +5,6 @@
     "aboutMe": "Sobre Mí",
     "contact": "Contacto"
   },
-  "projects": {
-    "filterLegend": "Selecciona y filtra proyectos por tecnología usada"
-  },
   "hero": {
     "title": "Desarrollador Frontend",
     "description": "Enfocado en crear experiencias web modernas, visualmente atractivas y animadas.",
@@ -24,7 +21,46 @@
     "subtitle": "Experiencia — Un Holo-Log de mi Carrera",
     "empty": "No hay entradas de experiencia disponibles.",
     "seeMore": "Ver más",
-    "seeLess": "Ver menos"
+    "seeLess": "Ver menos",
+    "keyAchievements": "Logros clave"
+  },
+  "job": {
+    "remote": "Remoto",
+    "currentlyActive": "Puesto actual activo",
+    "technologiesUsed": "Tecnologías usadas en este puesto",
+    "tagsFor": "Etiquetas de {company}",
+    "referencesFor": "Referencias externas de {company}",
+    "company": "Empresa ↗",
+    "project": "Proyecto ↗",
+    "reference": "Referencia ↗"
+  },
+  "projects": {
+    "filterLegend": "Selecciona y filtra proyectos por tecnología usada",
+    "seeDetails": "Ver detalles",
+    "links": {
+      "liveDemo": "Demo en vivo",
+      "npmPackage": "Paquete npm",
+      "storybook": "Storybook",
+      "code": "Código",
+      "liveDemoOf": "Demo en vivo de {title}",
+      "npmPackageOf": "Paquete npm de {title}",
+      "storybookOf": "Storybook de {title}",
+      "sourceCodeOf": "Código fuente de {title}",
+      "thumbnailOf": "Miniatura de {title}",
+      "externalLinksFor": "Enlaces externos de {title}"
+    }
+  },
+  "projectModal": {
+    "detailsOf": "Detalles de {title}",
+    "close": "Cerrar",
+    "characteristics": "Características",
+    "footerCopyright": "© {year} araldev — {title}",
+    "links": {
+      "liveDemo": "Live Demo",
+      "npm": "npm",
+      "storybook": "Storybook",
+      "sourceCode": "Código fuente"
+    }
   },
   "about": {
     "title": "Sobre Mí",
@@ -62,5 +98,13 @@
       "github": "GitHub",
       "discord": "Discord"
     }
+  },
+  "language": {
+    "switcher": "Idioma"
+  },
+  "images": {
+    "brandAraldev": "Logo de Araldev",
+    "profile": "Foto de Arturo",
+    "profileHero": "Foto de perfil"
   }
 }

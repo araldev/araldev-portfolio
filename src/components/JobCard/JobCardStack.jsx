@@ -1,4 +1,5 @@
 import styles from './JobCard.module.css'
+import { useLanguage } from '../../i18n/useLanguage.js'
 
 /**
  * JobCardStack — renders each entry of job.stack as a span with the
@@ -20,13 +21,14 @@ import styles from './JobCard.module.css'
  *   would flag 3 duplicates).
  */
 export function JobCardStack ({ stack, companyLabel }) {
+  const { t } = useLanguage()
   const entries = Object.keys(stack || {})
 
   if (entries.length === 0) return null
 
   const labelSuffix = companyLabel ? ` at ${companyLabel}` : ''
   return (
-    <section className={styles.job_card_stack} aria-label={`Technologies used in this role${labelSuffix}`}>
+    <section className={styles.job_card_stack} aria-label={`${t('job.technologiesUsed')}${labelSuffix}`}>
       {entries.map(key => {
         const colorClass = styles[`tech_icon--${key}`] || ''
         const className = [styles.tech_icon, colorClass].filter(Boolean).join(' ')

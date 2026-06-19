@@ -33,6 +33,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
 import { ProjectsCards } from '../../src/components/ProjectsCards/ProjectsCards.jsx'
 import { IsIconCheckFilterProvider } from '../../src/contexts/IsIconCheckFilter.jsx'
+import { LanguageProvider } from '../../src/i18n/LanguageContext.jsx'
 
 // CSS module proxy (deterministic class names for assertions)
 vi.mock('../../src/components/ProjectsCards/ProjectsCards.module.css', () => ({
@@ -86,6 +87,14 @@ beforeEach(() => {
   }
 })
 
+function renderWithProviders (ui) {
+  return render(
+    <LanguageProvider initialLang='en'>
+      <IsIconCheckFilterProvider>{ui}</IsIconCheckFilterProvider>
+    </LanguageProvider>
+  )
+}
+
 // Mock project fixture with all 4 link types present
 const fullProject = {
   id: 'test-project-1',
@@ -111,10 +120,6 @@ const noLinksProject = {
   shortDescription: 'No links at all',
   description: ['Just text'],
   tech: { js: <svg data-testid='svg-js' /> }
-}
-
-function renderWithProviders (ui) {
-  return render(<IsIconCheckFilterProvider>{ui}</IsIconCheckFilterProvider>)
 }
 
 describe('ProjectsCards v3 — data contract (FR-N1-01..08)', () => {
@@ -161,8 +166,8 @@ describe('ProjectsCards v3 — data contract (FR-N1-01..08)', () => {
   it('does NOT render the action_links_row / links container when no link types are present (SC-N1-02)', () => {
     mockSortProjects = [noLinksProject]
     renderWithProviders(<ProjectsCards />)
-    // The "Ver detalles" CTA must STILL be present (SC-N1-02)
-    expect(screen.getByRole('button', { name: /ver detalles/i })).toBeInTheDocument()
+    // The "See details" CTA must STILL be present (SC-N1-02)
+    expect(screen.getByRole('button', { name: /see details/i })).toBeInTheDocument()
     // No anchors at all
     expect(screen.queryByRole('link')).not.toBeInTheDocument()
   })
@@ -187,7 +192,7 @@ describe('ProjectsCards v3 — data contract (FR-N1-01..08)', () => {
   it('renders one Ver detalles button per project (FR-N1-04, EC-N1-03)', () => {
     mockSortProjects = [fullProject, noLinksProject]
     renderWithProviders(<ProjectsCards />)
-    const buttons = screen.getAllByRole('button', { name: /ver detalles/i })
+    const buttons = screen.getAllByRole('button', { name: /see details/i })
     expect(buttons).toHaveLength(2)
   })
 
@@ -223,7 +228,7 @@ describe('ProjectsCards v3 — modal integration (SC-N1-04)', () => {
     mockSortProjects = [fullProject]
     renderWithProviders(<ProjectsCards />)
     expect(screen.queryByTestId('project-modal-mock')).not.toBeInTheDocument()
-    fireEvent.click(screen.getByRole('button', { name: /ver detalles/i }))
+    fireEvent.click(screen.getByRole('button', { name: /see details/i }))
     expect(screen.getByTestId('project-modal-mock')).toBeInTheDocument()
     expect(screen.getByTestId('project-modal-mock')).toHaveTextContent('Modal for Test Project')
   })
@@ -233,7 +238,7 @@ describe('ProjectsCards v3 — modal integration (SC-N1-04)', () => {
     // We assert the modal receives the same object passed to the card.
     mockSortProjects = [fullProject]
     renderWithProviders(<ProjectsCards />)
-    fireEvent.click(screen.getByRole('button', { name: /ver detalles/i }))
+    fireEvent.click(screen.getByRole('button', { name: /see details/i }))
     expect(screen.getByTestId('project-modal-mock')).toHaveTextContent('Test Project')
   })
 })

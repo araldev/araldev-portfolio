@@ -35,3 +35,19 @@ export function getValue (dict, path, fallback) {
   }
   return current === undefined ? fallback : current
 }
+
+/**
+ * Replace `{key}` placeholders in a string with values from the
+ * `vars` object. Unknown placeholders are left as-is so a missing
+ * translation doesn't silently swallow the token.
+ *
+ * @param {string} template
+ * @param {object} [vars]
+ * @returns {string}
+ */
+export function interpolate (template, vars) {
+  if (typeof template !== 'string' || !vars) return template
+  return template.replace(/\{(\w+)\}/g, (match, key) => (
+    Object.prototype.hasOwnProperty.call(vars, key) ? String(vars[key]) : match
+  ))
+}

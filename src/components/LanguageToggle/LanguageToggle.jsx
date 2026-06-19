@@ -34,10 +34,10 @@ const LANG_META = {
  *    aria-label expands to the full language name for screen readers.
  */
 export function LanguageToggle () {
-  const { lang, setLang } = useLanguage()
+  const { lang, setLang, t } = useLanguage()
 
   return (
-    <div role='group' aria-label='Language' className={styles.toggle}>
+    <div role='group' aria-label={t('language.switcher')} className={styles.toggle}>
       {SUPPORTED_LANGS.map((code) => {
         const isActive = code === lang
         const meta = LANG_META[code] ?? { flagClass: '', code: code.toUpperCase(), label: code }

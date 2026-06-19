@@ -2,10 +2,15 @@ import { describe, it, expect, vi } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
 import { createRef } from 'react'
 import { JobCardFooter } from '../../src/components/JobCard/JobCardFooter.jsx'
+import { LanguageProvider } from '../../src/i18n/LanguageContext.jsx'
 
 vi.mock('../../src/components/JobCard/JobCard.module.css', () => ({
   default: new Proxy({}, { get: (_, key) => String(key) })
 }))
+
+function renderWithLang (ui) {
+  return render(<LanguageProvider initialLang='en'>{ui}</LanguageProvider>)
+}
 
 const baseJob = {
   id: 'j1',
@@ -20,7 +25,7 @@ const baseJob = {
 
 describe('JobCardFooter', () => {
   it('renders tag pills', () => {
-    render(<JobCardFooter job={baseJob} id='j1' isExpanded={false} onToggleExpand={vi.fn()} expandTriggerRef={createRef()} />)
+    renderWithLang(<JobCardFooter job={baseJob} id='j1' isExpanded={false} onToggleExpand={vi.fn()} expandTriggerRef={createRef()} />)
     expect(screen.getByText('React')).toBeInTheDocument()
     expect(screen.getByText('FinTech')).toBeInTheDocument()
     // T-307: tags section now uses aria-label="Tags for {company}" so
@@ -30,36 +35,36 @@ describe('JobCardFooter', () => {
   })
 
   it('omits the tags block when tags is undefined (EC-011 friendly)', () => {
-    render(<JobCardFooter job={{ ...baseJob, tags: undefined }} id='j1' isExpanded={false} onToggleExpand={vi.fn()} expandTriggerRef={createRef()} />)
+    renderWithLang(<JobCardFooter job={{ ...baseJob, tags: undefined }} id='j1' isExpanded={false} onToggleExpand={vi.fn()} expandTriggerRef={createRef()} />)
     expect(screen.queryByText('React')).not.toBeInTheDocument()
   })
 
   it('renders LinkButtons for each present link', () => {
-    render(<JobCardFooter job={baseJob} id='j1' isExpanded={false} onToggleExpand={vi.fn()} expandTriggerRef={createRef()} />)
+    renderWithLang(<JobCardFooter job={baseJob} id='j1' isExpanded={false} onToggleExpand={vi.fn()} expandTriggerRef={createRef()} />)
     expect(screen.getByText(/Company/)).toHaveAttribute('href', 'https://acme.com')
     expect(screen.getByText(/Project/)).toHaveAttribute('href', 'https://github.com/acme/x')
   })
 
   it('does not render the expand trigger when there are no achievements (EC-001)', () => {
-    render(<JobCardFooter job={{ ...baseJob, achievements: [] }} id='j1' isExpanded={false} onToggleExpand={vi.fn()} expandTriggerRef={createRef()} />)
+    renderWithLang(<JobCardFooter job={{ ...baseJob, achievements: [] }} id='j1' isExpanded={false} onToggleExpand={vi.fn()} expandTriggerRef={createRef()} />)
     expect(screen.queryByRole('button')).not.toBeInTheDocument()
   })
 
   it('renders the expand trigger with aria-expanded=false when collapsed', () => {
-    render(<JobCardFooter job={baseJob} id='j1' isExpanded={false} onToggleExpand={vi.fn()} expandTriggerRef={createRef()} />)
+    renderWithLang(<JobCardFooter job={baseJob} id='j1' isExpanded={false} onToggleExpand={vi.fn()} expandTriggerRef={createRef()} />)
     const trigger = screen.getByRole('button')
     expect(trigger).toHaveAttribute('aria-expanded', 'false')
     expect(trigger).toHaveAttribute('aria-controls', 'job-j1-achievements')
   })
 
   it('renders the expand trigger with aria-expanded=true when expanded', () => {
-    render(<JobCardFooter job={baseJob} id='j1' isExpanded onToggleExpand={vi.fn()} expandTriggerRef={createRef()} />)
+    renderWithLang(<JobCardFooter job={baseJob} id='j1' isExpanded onToggleExpand={vi.fn()} expandTriggerRef={createRef()} />)
     expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true')
   })
 
   it('calls onToggleExpand when the trigger is clicked', () => {
     const cb = vi.fn()
-    render(<JobCardFooter job={baseJob} id='j1' isExpanded={false} onToggleExpand={cb} expandTriggerRef={createRef()} />)
+    renderWithLang(<JobCardFooter job={baseJob} id='j1' isExpanded={false} onToggleExpand={cb} expandTriggerRef={createRef()} />)
     fireEvent.click(screen.getByRole('button'))
     expect(cb).toHaveBeenCalledTimes(1)
   })

@@ -26,6 +26,7 @@ import { render, screen } from '@testing-library/react'
 import { axe, toHaveNoViolations } from 'jest-axe'
 import { ProjectsCards } from '../../src/components/ProjectsCards/ProjectsCards.jsx'
 import { IsIconCheckFilterProvider } from '../../src/contexts/IsIconCheckFilter.jsx'
+import { LanguageProvider } from '../../src/i18n/LanguageContext.jsx'
 
 expect.extend(toHaveNoViolations)
 
@@ -91,7 +92,11 @@ const project2 = {
 }
 
 function renderWithProviders (ui) {
-  return render(<IsIconCheckFilterProvider>{ui}</IsIconCheckFilterProvider>)
+  return render(
+    <LanguageProvider initialLang='en'>
+      <IsIconCheckFilterProvider>{ui}</IsIconCheckFilterProvider>
+    </LanguageProvider>
+  )
 }
 
 describe('ProjectsCards v3 — accessibility (jest-axe)', () => {
@@ -126,7 +131,7 @@ describe('ProjectsCards v3 — accessibility (jest-axe)', () => {
   it('renders the "Ver detalles" CTA as a semantic <button> (FR-N1-08)', () => {
     mockSortProjects = [project1]
     renderWithProviders(<ProjectsCards />)
-    const btn = screen.getByRole('button', { name: /ver detalles/i })
+    const btn = screen.getByRole('button', { name: /see details/i })
     expect(btn.tagName).toBe('BUTTON')
   })
 

@@ -52,8 +52,14 @@ describe('LanguageToggle', () => {
     expect(window.localStorage.getItem(LANGUAGE_STORAGE_KEY)).toBe('en')
   })
 
-  it('exposes an aria-label on the wrapper describing the role', () => {
-    renderWithProvider(<LanguageToggle />)
+  it('exposes an aria-label on the wrapper describing the role (ES)', () => {
+    renderWithProvider(<LanguageToggle />, 'es')
+    const group = screen.getByRole('group', { name: /Idioma/i })
+    expect(group).toBeInTheDocument()
+  })
+
+  it('exposes an aria-label on the wrapper describing the role (EN)', () => {
+    renderWithProvider(<LanguageToggle />, 'en')
     const group = screen.getByRole('group', { name: /Language/i })
     expect(group).toBeInTheDocument()
   })

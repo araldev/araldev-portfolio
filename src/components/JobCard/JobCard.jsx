@@ -84,7 +84,7 @@ export function JobCard ({
               ref={beaconRef}
               className={styles.job_card_beacon}
               role='img'
-              aria-label='Currently active position'
+              aria-label={t('job.currentlyActive')}
             >
               <span className={styles.job_card_beacon_core} data-beacon-core='true' />
               <span className={styles.job_card_beacon_halo} data-beacon-halo='true' />

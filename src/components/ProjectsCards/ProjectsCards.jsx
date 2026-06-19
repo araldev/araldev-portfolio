@@ -44,6 +44,7 @@ import { Button } from '../Button/Button.jsx'
 import { ProjectModal } from '../ProjectModal/ProjectModal.jsx'
 import { StorybookIcon } from '../Icons/StorybookIcon.jsx'
 import { techIcons, socialIcons } from '../../data/icons.js'
+import { useLanguage } from '../../i18n/useLanguage.js'
 
 // --- Tech icon dimming sub-component (FR-N1-04, SC-N1-03) ---
 //
@@ -100,10 +101,12 @@ function ProjectCard ({ project, onShowMore }) {
   // somehow lacks an id (a11y gate still passes because `id=""` is
   // unresolvable but axe only checks for duplicates, not for the
   // existence of every labelledby).
+  const { t } = useLanguage()
   const titleId = project.id ? `project-${project.id}-title` : 'project-title'
   const hasAnyLink = Boolean(
     project.demoLink || project.npmLink || project.storybookLink || project.codeLink
   )
+  const titleVars = { title: project.title }
 
   return (
     <article
@@ -114,7 +117,7 @@ function ProjectCard ({ project, onShowMore }) {
       <div className={styles.project_image_container}>
         <img
           src={project.imgSrc}
-          alt={`Thumbnail of ${project.title}`}
+          alt={t('projects.links.thumbnailOf', null, titleVars)}
           loading='lazy'
           decoding='async'
         />
@@ -151,7 +154,7 @@ function ProjectCard ({ project, onShowMore }) {
       {hasAnyLink && (
         <nav
           className={styles.links_container}
-          aria-label={`External links for ${project.title}`}
+          aria-label={t('projects.links.externalLinksFor', null, titleVars)}
         >
           <div className={styles.action_links_row}>
             {project.demoLink && (
@@ -161,9 +164,9 @@ function ProjectCard ({ project, onShowMore }) {
                 rel='noopener noreferrer'
                 className={styles.link_button}
                 data-link-type='demo'
-                aria-label={`Live demo of ${project.title}`}
+                aria-label={t('projects.links.liveDemoOf', null, titleVars)}
               >
-                <span className={styles.link_label}>Live Demo</span>
+                <span className={styles.link_label}>{t('projects.links.liveDemo')}</span>
                 {socialIcons.demo}
               </a>
             )}
@@ -174,9 +177,9 @@ function ProjectCard ({ project, onShowMore }) {
                 rel='noopener noreferrer'
                 className={styles.link_button}
                 data-link-type='npm'
-                aria-label={`npm package for ${project.title}`}
+                aria-label={t('projects.links.npmPackageOf', null, titleVars)}
               >
-                <span className={styles.link_label}>npm Package</span>
+                <span className={styles.link_label}>{t('projects.links.npmPackage')}</span>
                 {techIcons.npm}
               </a>
             )}
@@ -187,9 +190,9 @@ function ProjectCard ({ project, onShowMore }) {
                 rel='noopener noreferrer'
                 className={styles.link_button}
                 data-link-type='storybook'
-                aria-label={`Storybook for ${project.title}`}
+                aria-label={t('projects.links.storybookOf', null, titleVars)}
               >
-                <span className={styles.link_label}>Storybook</span>
+                <span className={styles.link_label}>{t('projects.links.storybook')}</span>
                 {/* P5: re-enabled after the S1 fix in StorybookIcon.jsx
                    (unique mask id per instance via useId) */}
                 <StorybookIcon />
@@ -202,17 +205,17 @@ function ProjectCard ({ project, onShowMore }) {
                 rel='noopener noreferrer'
                 className={styles.link_button}
                 data-link-type='code'
-                aria-label={`Source code for ${project.title}`}
+                aria-label={t('projects.links.sourceCodeOf', null, titleVars)}
               >
                 {techIcons.gitHub}
-                <span className={styles.link_label}>Code</span>
+                <span className={styles.link_label}>{t('projects.links.code')}</span>
               </a>
             )}
           </div>
 
           <div className={styles.cta_row}>
             <Button onClick={() => onShowMore(project)}>
-              Ver detalles
+              {t('projects.seeDetails')}
             </Button>
           </div>
         </nav>
@@ -223,7 +226,7 @@ function ProjectCard ({ project, onShowMore }) {
       {!hasAnyLink && (
         <div className={styles.cta_row}>
           <Button onClick={() => onShowMore(project)}>
-            Ver detalles
+            {t('projects.seeDetails')}
           </Button>
         </div>
       )}

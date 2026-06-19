@@ -2,6 +2,7 @@ import { useRef, useEffect, useCallback } from 'react'
 import { gsap } from 'gsap'
 import styles from './JobCard.module.css'
 import { usePrefersReducedMotion } from '../../Hooks/usePrefersReducedMotion.js'
+import { useLanguage } from '../../i18n/useLanguage.js'
 
 /**
  * JobCardAchievements — disclosure widget for the optional achievements list.
@@ -30,6 +31,7 @@ export function JobCardAchievements ({
 }) {
   const sectionRef = useRef(null)
   const prefersReducedMotion = usePrefersReducedMotion()
+  const { t } = useLanguage()
 
   // Animate height on expand/collapse
   useEffect(() => {
@@ -94,7 +96,7 @@ export function JobCardAchievements ({
       hidden={!isExpanded}
       aria-hidden={!isExpanded}
     >
-      <h5 className={styles.job_card_achievements_title}>Key achievements</h5>
+      <h5 className={styles.job_card_achievements_title}>{t('experience.keyAchievements')}</h5>
       <ul className={styles.job_card_achievements_list}>
         {achievements.map((a, i) => (
           <li key={i} className={styles.job_card_achievement_item}>{a}</li>

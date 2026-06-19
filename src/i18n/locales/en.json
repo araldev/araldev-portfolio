@@ -5,9 +5,6 @@
     "aboutMe": "About Me",
     "contact": "Contact"
   },
-  "projects": {
-    "filterLegend": "Select and search projects by technology used"
-  },
   "hero": {
     "title": "Frontend Developer",
     "description": "Focused on crafting modern, visually engaging, and animated web experiences.",
@@ -24,7 +21,46 @@
     "subtitle": "Experience — A Holo-Log of my Career",
     "empty": "No experience entries available.",
     "seeMore": "See more",
-    "seeLess": "See less"
+    "seeLess": "See less",
+    "keyAchievements": "Key achievements"
+  },
+  "job": {
+    "remote": "Remote",
+    "currentlyActive": "Currently active position",
+    "technologiesUsed": "Technologies used in this role",
+    "tagsFor": "Tags for {company}",
+    "referencesFor": "External references for {company}",
+    "company": "Company ↗",
+    "project": "Project ↗",
+    "reference": "Reference ↗"
+  },
+  "projects": {
+    "filterLegend": "Select and search projects by technology used",
+    "seeDetails": "See details",
+    "links": {
+      "liveDemo": "Live Demo",
+      "npmPackage": "npm Package",
+      "storybook": "Storybook",
+      "code": "Code",
+      "liveDemoOf": "Live demo of {title}",
+      "npmPackageOf": "npm package for {title}",
+      "storybookOf": "Storybook for {title}",
+      "sourceCodeOf": "Source code for {title}",
+      "thumbnailOf": "Thumbnail of {title}",
+      "externalLinksFor": "External links for {title}"
+    }
+  },
+  "projectModal": {
+    "detailsOf": "Details of {title}",
+    "close": "Close",
+    "characteristics": "Features",
+    "footerCopyright": "© {year} araldev — {title}",
+    "links": {
+      "liveDemo": "Live Demo",
+      "npm": "npm",
+      "storybook": "Storybook",
+      "sourceCode": "Source Code"
+    }
   },
   "about": {
     "title": "About Me",
@@ -36,7 +72,7 @@
     ],
     "highlights": [
       { "icon": "🎓", "label": "Self-taught", "desc": "Continuous learning" },
-      { "icon": "💡", "label": "Problem Solver", "desc": "Resourceful approach" },
+      { "icon": "💡", "label": "Resourceful", "desc": "Approach to problems" },
       { "icon": "🏋️", "label": "Athlete", "desc": "Mind-body balance" },
       { "icon": "🚀", "label": "Full-Stack", "desc": "MERN + more" },
       { "icon": "🎯", "label": "Focus", "desc": "Mental clarity" },
@@ -62,5 +98,13 @@
       "github": "GitHub",
       "discord": "Discord"
     }
+  },
+  "language": {
+    "switcher": "Language"
+  },
+  "images": {
+    "brandAraldev": "Araldev brand",
+    "profile": "Arturo's photo",
+    "profileHero": "Profile image"
   }
 }

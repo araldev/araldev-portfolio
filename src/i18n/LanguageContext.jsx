@@ -1,6 +1,6 @@
 import { createContext, useCallback, useEffect, useMemo, useState } from 'react'
 import { detectInitialLanguage, LANGUAGE_STORAGE_KEY } from './detectLanguage.js'
-import { DEFAULT_LANG, SUPPORTED_LANGS, translations, getValue } from './translations.js'
+import { DEFAULT_LANG, SUPPORTED_LANGS, translations, getValue, interpolate } from './translations.js'
 
 /**
  * LanguageContext — single source of truth for the active UI language.
@@ -48,9 +48,10 @@ export function LanguageProvider ({ children, initialLang }) {
     return () => window.removeEventListener('storage', onStorage)
   }, [])
 
-  const t = useCallback((path, fallback) => {
+  const t = useCallback((path, fallback, vars) => {
     const dict = translations[lang] ?? translations[DEFAULT_LANG]
-    return getValue(dict, path, fallback ?? path)
+    const value = getValue(dict, path, fallback ?? path)
+    return interpolate(value, vars)
   }, [lang])
 
   const value = useMemo(() => ({ lang, setLang, t }), [lang, setLang, t])

@@ -1,5 +1,6 @@
 import styles from './JobCard.module.css'
 import { useJobDuration } from '../../Hooks/useJobDuration.js'
+import { useLanguage } from '../../i18n/useLanguage.js'
 
 /**
  * JobCardMeta — meta row under the header.
@@ -12,6 +13,7 @@ import { useJobDuration } from '../../Hooks/useJobDuration.js'
  */
 export function JobCardMeta ({ job }) {
   const duration = useJobDuration(job)
+  const { t } = useLanguage()
 
   return (
     <div className={styles.job_card_meta}>
@@ -27,7 +29,7 @@ export function JobCardMeta ({ job }) {
           <span
             className={styles.job_card_remote_dot}
             role='img'
-            aria-label='Remote'
+            aria-label={t('job.remote')}
           />
         )}
       </span>

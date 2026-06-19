@@ -458,12 +458,16 @@
   transform: scale(0.97);
 }
 .job_card_expand_icon {
-  font-size: 0.7rem;
+  font-size: 0.85rem;
   line-height: 1;
-  transition: transform 0.2s ease;
+  display: inline-block;
+  transition: transform 0.3s var(--ease-vision-pro);
 }
 .job_card_expand_icon[data-expanded='true'] {
   transform: rotate(180deg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .job_card_expand_icon { transition: none; }
 }
 
 /* ---------- Compact variant (≤519px) ---------- */
