@@ -47,6 +47,19 @@
   flex-shrink: 0;
 }
 
+/* On mobile the hamburger (.nav_icon) is position: fixed at the
+   right edge, and the LanguageToggle would visually collide with
+   it. Pin the toggle to the right as well, but to the LEFT of the
+   hamburger, with enough gutter that the two never overlap. */
+@media (max-width: 850px) {
+  .nav_lang {
+    position: fixed;
+    top: 15px;
+    right: 90px;
+    z-index: 100;
+  }
+}
+
 .nav_links {
   display: flex;
   width: 80%;

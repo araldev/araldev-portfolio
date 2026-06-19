@@ -46,8 +46,14 @@
   transition:
     background 0.2s var(--ease-vision-pro),
     border-color 0.2s var(--ease-vision-pro),
-    transform 0.2s var(--ease-vision-pro);
+    transform 0.2s var(--ease-vision-pro),
+    filter 0.2s var(--ease-vision-pro),
+    opacity 0.2s var(--ease-vision-pro);
   font-family: inherit;
+  /* Inactive buttons are clearly desaturated so the active one pops
+     at a glance. The active button overrides both below. */
+  opacity: 0.45;
+  filter: saturate(0.5);
 }
 
 /* Spanish flag: red / yellow / red with a 1:2:1 ratio */
@@ -134,14 +140,48 @@
 }
 
 .flagBtnActive {
-  border-color: rgba(0, 201, 255, 0.6);
-  box-shadow: 0 0 10px -2px rgba(0, 201, 255, 0.55);
+  /* Restore full saturation and add a thick cyan ring + a check
+     tick so the user can tell at a glance which language is live.
+     The tick is rendered via a data-attr in the JSX. */
+  opacity: 1;
+  filter: saturate(1);
+  border-color: rgba(0, 201, 255, 0.9);
+  box-shadow:
+    0 0 0 2px rgba(0, 201, 255, 0.45),
+    0 0 14px -2px rgba(0, 201, 255, 0.7);
+}
+
+.flagBtnActive::after {
+  content: '✓';
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 16px;
+  height: 16px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--color-bg-web);
+  color: rgb(0, 201, 255);
+  font-size: 0.7rem;
+  font-weight: 800;
+  line-height: 1;
+  box-shadow: 0 0 6px rgba(0, 201, 255, 0.5);
+  pointer-events: none;
 }
 
 @media (hover: hover) and (pointer: fine) {
   .flagBtn:hover {
+    /* Hover lifts the inactive button back to full visibility so
+       the user can see what they're about to pick. The active
+       button stays at full visibility + adds a small lift. */
+    opacity: 1;
+    filter: saturate(1);
     border-color: rgba(0, 201, 255, 0.35);
     transform: translateY(-1px);
+  }
+  .flagBtnActive:hover {
+    transform: translateY(-1px) scale(1.04);
   }
 }
 

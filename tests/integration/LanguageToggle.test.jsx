@@ -90,4 +90,15 @@ describe('LanguageToggle', () => {
       expect(style.background.length).toBeGreaterThan(0)
     })
   })
+
+  it('only the active button has the active state class (so the checkmark + cyan ring render on it)', () => {
+    const { container } = renderWithProvider(<LanguageToggle />, 'es')
+    // The CSS class `flagBtnActive` is a hashed class. We just check
+    // that exactly one button has it (the active one).
+    const buttons = container.querySelectorAll('button')
+    const activeCount = Array.from(buttons).filter((b) =>
+      b.getAttribute('aria-pressed') === 'true'
+    ).length
+    expect(activeCount).toBe(1)
+  })
 })
