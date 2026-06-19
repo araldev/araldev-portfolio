@@ -22,7 +22,9 @@
   grid-template-rows: auto;
   justify-content: center;
   justify-items: start;
-  gap: 80px;
+  /* Wide gap so the two columns feel like distinct sections and the
+     side margins (viewport - content_width - gap) stay slim. */
+  gap: 140px;
   margin: 0 auto;
   padding: 60px 0;
   position: relative;
@@ -185,20 +187,34 @@ position: relative;
   }
 }
 
-/* On small screens, stack the two columns vertically so the
-   max-content grid doesn't overflow the viewport. */
+/* On small screens, keep the two columns side-by-side (max-content
+   sized) so neither wraps the heading + list. We shrink the gap to
+   fit narrower viewports and let the footer_content clamp to the
+   viewport with side padding, instead of stacking. The columns
+   stay left-aligned (h3 + first <li> share the same X) so the
+   inner alignment matches the desktop layout. */
 @media (max-width: 768px) {
   .footer_content {
-    grid-template-columns: 1fr;
+    grid-template-columns: max-content max-content;
     gap: 40px;
+    max-width: 100%;
+    padding: 40px 24px;
   }
   .contact_container,
   .links_container,
   .ul_contact,
   .ul_links {
-    width: 100%;
     min-width: 0;
-    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Below 480px the two max-content columns (icon+name vs
+     single-word link) start to crowd. Drop the gap entirely so
+     the two columns sit shoulder-to-shoulder while still leaving
+     24px gutter on each side. */
+  .footer_content {
+    gap: 0;
   }
 }
 
