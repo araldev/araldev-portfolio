@@ -3,7 +3,20 @@ import { Button } from '../Button/Button.jsx'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { useSendEmailJs } from '../../Hooks/useSendEmailJs.js'
 import { useLanguage } from '../../i18n/useLanguage.js'
-import { useRef, useState } from 'react'
+import { useRef, useState, useCallback } from 'react'
+
+function validateEmail (value) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+}
+
+const FIELD_NAMES = ['name', 'email', 'subject', 'message']
+const INITIAL_VALUES = { name: '', email: '', subject: '', message: '' }
+
+function getFieldError (name, value, t) {
+  if (!value.trim()) return t('contact.errors.required')
+  if (name === 'email' && !validateEmail(value)) return t('contact.errors.invalidEmail')
+  return null
+}
 
 export function ContactSection () {
   const { isFormSend, error, handleSendEmailJs } = useSendEmailJs()
@@ -11,10 +24,33 @@ export function ContactSection () {
   const captchaRef = useRef(null)
   const [isLoading, setIsLoading] = useState(false)
 
+  const [values, setValues] = useState(INITIAL_VALUES)
+  const [touched, setTouched] = useState({})
+
+  const handleChange = useCallback((e) => {
+    const { name, value } = e.target
+    setValues(prev => ({ ...prev, [name]: value }))
+  }, [])
+
+  const handleBlur = useCallback((e) => {
+    const { name } = e.target
+    setTouched(prev => ({ ...prev, [name]: true }))
+  }, [])
+
+  function hasAnyError () {
+    return FIELD_NAMES.some(name => getFieldError(name, values[name], t))
+  }
+
   async function handleSubmit (event) {
     event.preventDefault()
-
     const captcha = captchaRef.current
+
+    // Touch all fields
+    const allTouched = {}
+    FIELD_NAMES.forEach(name => { allTouched[name] = true })
+    setTouched(allTouched)
+
+    if (hasAnyError()) return
 
     try {
       setIsLoading(true)
@@ -33,6 +69,8 @@ export function ContactSection () {
       if (success) {
         form.reset()
         captcha.reset()
+        setValues(INITIAL_VALUES)
+        setTouched({})
       }
     } catch (err) {
       console.error('Error sending email:', err)
@@ -42,30 +80,59 @@ export function ContactSection () {
     }
   }
 
+  const fieldLabels = {
+    name: t('contact.name'),
+    email: 'Email',
+    subject: t('contact.subject'),
+    message: t('contact.message')
+  }
+
+  function renderField (name) {
+    const label = fieldLabels[name]
+    const fieldError = touched[name] ? getFieldError(name, values[name], t) : null
+    const isValid = touched[name] && !fieldError && values[name].length > 0
+    const isMessage = name === 'message'
+
+    let fieldClass = styles.field
+    if (fieldError) fieldClass += ` ${styles['field--error']}`
+    else if (isValid) fieldClass += ` ${styles['field--valid']}`
+
+    const inputProps = {
+      id: `contact-${name}`,
+      name,
+      value: values[name],
+      onChange: handleChange,
+      onBlur: handleBlur,
+      placeholder: label,
+      'aria-label': label,
+      'aria-invalid': fieldError ? 'true' : undefined,
+      'aria-describedby': fieldError ? `contact-${name}-error` : undefined,
+      required: true
+    }
+
+    return (
+      <div className={fieldClass}>
+        <label htmlFor={`contact-${name}`}>
+          <span className={styles.visually_hidden}>{label}</span>
+          {isMessage
+            ? <textarea {...inputProps} rows='5' cols='40' />
+            : <input {...inputProps} type={name === 'email' ? 'email' : 'text'} autoComplete={name} />}
+        </label>
+        {fieldError && (
+          <span id={`contact-${name}-error`} className={styles.field_error} role='alert'>
+            {fieldError}
+          </span>
+        )}
+      </div>
+    )
+  }
+
   return (
     <section id='contact' className={styles.contact_container}>
       <h2>{t('contact.title')}</h2>
 
       <form autoComplete='on' name='contact-form' onSubmit={handleSubmit} className={styles.form} action=''>
-        <label>
-          <span className={styles.visually_hidden}>{t('contact.name')}</span>
-          <input name='name' type='text' placeholder={t('contact.name')} aria-label={t('contact.name')} required />
-        </label>
-
-        <label>
-          <span className={styles.visually_hidden}>Email</span>
-          <input name='email' type='email' placeholder='example@gmail.com' aria-label='Email' required />
-        </label>
-
-        <label>
-          <span className={styles.visually_hidden}>{t('contact.subject')}</span>
-          <input name='subject' type='text' placeholder={t('contact.subject')} aria-label={t('contact.subject')} required />
-        </label>
-
-        <label>
-          <span className={styles.visually_hidden}>{t('contact.message')}</span>
-          <textarea name='message' rows='5' cols='40' placeholder={t('contact.message')} aria-label={t('contact.message')} required />
-        </label>
+        {FIELD_NAMES.map(renderField)}
 
         <ReCAPTCHA
           ref={captchaRef}
@@ -79,8 +146,8 @@ export function ContactSection () {
           {isLoading ? t('contact.loading') : t('contact.send')}
         </Button>
 
-        {error && <small style={{ color: 'red' }} role='status'>{error}</small>}
-        {!error && isFormSend && <small style={{ color: 'green' }} role='status'>{t('contact.success')}</small>}
+        {error && <small className={styles.form_feedback} role='status' data-type='error'>{error}</small>}
+        {!error && isFormSend && <small className={styles.form_feedback} role='status' data-type='success'>{t('contact.success')}</small>}
       </form>
     </section>
   )

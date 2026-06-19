@@ -1,3 +1,7 @@
+/* ═══════════════════════════════════════════════════════════
+   EXISTING STYLES — preserved 100%
+   ═══════════════════════════════════════════════════════════ */
+
 .contact_container {
   /* P6 follow-up: same width recipe as ProjectsCards + JobsCards
      + AboutMeSection. Was `width: 100%` (no max-width, no
@@ -95,4 +99,115 @@
       }
     }
   }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   NEW: Field wrapper — glass layer + validation anchor
+   ═══════════════════════════════════════════════════════════ */
+
+.field {
+  position: relative;
+  width: 90%;
+  max-width: 600px;
+  padding: 4px 16px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: border-color 0.2s cubic-bezier(0.4, 0, 0.3, 1),
+              box-shadow 0.2s cubic-bezier(0.4, 0, 0.3, 1),
+              background 0.2s cubic-bezier(0.4, 0, 0.3, 1);
+}
+
+/* Make the label fill the glass field */
+.field label {
+  width: 100%;
+  max-width: 100%;
+  min-width: 100%;
+}
+
+/* Hover (non-touch) */
+@media (hover: hover) {
+  .field:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.06);
+  }
+}
+
+/* Focus ring — page accent colour (#00C9FF = brand cyan) */
+.field:focus-within {
+  border-color: rgba(0, 201, 255, 0.5);
+  box-shadow: 0 0 0 3px rgba(0, 201, 255, 0.15);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* ─── Validation states ──────────────────────────────────── */
+
+.field--error {
+  border-color: rgba(239, 68, 68, 0.6);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+.field--error input,
+.field--error textarea {
+  border-bottom-color: #ef4444;
+}
+
+/* Error + focus: inner line stays red, glow uses page colour */
+.field--error:focus-within {
+  border-color: rgba(239, 68, 68, 0.6);
+  box-shadow: 0 0 0 3px rgba(0, 201, 255, 0.2);
+}
+
+.field--valid {
+  border-color: rgba(34, 197, 94, 0.5);
+}
+
+.field--valid input,
+.field--valid textarea {
+  border-bottom-color: #22c55e;
+}
+
+/* Valid + focus: inner line stays green, glow uses page colour */
+.field--valid:focus-within {
+  border-color: rgba(34, 197, 94, 0.5);
+  box-shadow: 0 0 0 3px rgba(0, 201, 255, 0.2);
+}
+
+/* ─── Error message ──────────────────────────────────────── */
+
+.field_error {
+  display: block;
+  font-size: 0.78rem;
+  color: #ef4444;
+  padding: 2px 0 4px 6px;
+  animation: fadeInUp 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── Form feedback (server result) ──────────────────────── */
+
+.form_feedback {
+  display: block;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+.form_feedback[data-type='error'] {
+  color: #ef4444;
+}
+
+.form_feedback[data-type='success'] {
+  color: #22c55e;
 }

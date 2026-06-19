@@ -113,7 +113,11 @@
     "message": "How can we collaborate?",
     "send": "Send",
     "loading": "Loading...",
-    "success": "Successfully sent"
+    "success": "Successfully sent",
+    "errors": {
+      "required": "This field is required",
+      "invalidEmail": "Invalid email"
+    }
   },
   "footer": {
     "contact": "Contact",

@@ -113,7 +113,11 @@
     "message": "¿Cómo podemos colaborar?",
     "send": "Enviar",
     "loading": "Cargando...",
-    "success": "Enviado correctamente"
+    "success": "Enviado correctamente",
+    "errors": {
+      "required": "Este campo es obligatorio",
+      "invalidEmail": "El email no es válido"
+    }
   },
   "footer": {
     "contact": "Contacto",
