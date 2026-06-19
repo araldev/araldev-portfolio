@@ -14,7 +14,7 @@ import { useFlipJobs } from '../../Hooks/useFlipJobs.js'
  *    import stability) since the entrance + reorder animations are gone
  *  - Renders the empty-state fallback when jobs === [] (EC-006)
  *
- * Placement (DA-06): between Projects and AboutMe. Mounted in App.jsx.
+ * Placement (DA-06): between Projects and Contact. Mounted in App.jsx.
  */
 export function JobsCards () {
   const gridRef = useRef(null)

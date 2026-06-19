@@ -122,6 +122,11 @@
   --job-reorder-duration: 300ms;
 }
 
+html {
+  /* Sticky-friendly: no overflow here so position:sticky works
+     in children. Horizontal scroll is prevented on body instead. */
+}
+
 html, body {
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -135,8 +140,14 @@ html, body {
   min-height: 100%;
   background-color: var(--color-bg-web);
   color: #fff;
-  overflow-x: hidden;
   z-index: -1;
+}
+
+body {
+  /* overflow-x only on body, not html — this is the key fix for
+     position:sticky. Setting overflow on html creates a scroll
+     container that breaks sticky positioning. */
+  overflow-x: hidden;
 }
 
 strong, b {

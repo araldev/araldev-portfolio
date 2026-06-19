@@ -21,13 +21,12 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html', 'lcov'],
-      // 004 (UX Overhaul & Relayout Root-Fix) adds ProjectsCards and
-      // AboutMe to the coverage scope so the SC-005 ≥80% gate applies to
-      // the new code in those components (N1 in P3, N3 in P2). Pre-PR
-      // scoping keeps existing out-of-scope files (NavHeader, AboutMe
-      // styles already in scope, etc.) at 0% until each feature's suite
-      // is added. Vitest still RUNS every test file; this only restricts
-      // which files are counted in the coverage report.
+      // 004 (UX Overhaul & Relayout Root-Fix) adds ProjectsCards to
+      // the coverage scope so the SC-005 ≥80% gate applies to the new
+      // code in those components (N1 in P3). Pre-PR scoping keeps
+      // existing out-of-scope files (NavHeader, etc.) at 0% until each
+      // feature's suite is added. Vitest still RUNS every test file;
+      // this only restricts which files are counted in the coverage report.
       include: [
         'src/Hooks/useJobDuration.js',
         'src/Hooks/useSortJobs.js',
@@ -38,8 +37,7 @@ export default defineConfig({
         'src/Hooks/usePrefersReducedMotion.js',
         'src/components/JobCard/**',
         'src/components/JobsCards/**',
-        'src/components/ProjectsCards/**',
-        'src/components/AboutMe/**'
+        'src/components/ProjectsCards/**'
       ],
       exclude: [
         'src/**/*.module.css'

@@ -1,41 +1,65 @@
 import styles from './AboutMeSection.module.css'
 import avatar from '../../assets/perfil_sin_fondo.webp'
-import brand from '../../assets/brand-araldev.webp'
-import { useFadeInElement } from '../../Hooks/useFadeInElement'
-import { useRef } from 'react'
+
+const highlights = [
+  { icon: '🎓', label: 'Autodidacta', desc: 'Aprendizaje continuo' },
+  { icon: '💡', label: 'Problem Solver', desc: 'Enfoque resolutivo' },
+  { icon: '🏋️', label: 'Atleta', desc: 'Equilibrio mente-cuerpo' },
+  { icon: '🚀', label: 'Full-Stack', desc: 'MERN + más' },
+  { icon: '🎯', label: 'Enfoque', desc: 'Claridad mental' },
+  { icon: '⚡', label: 'Proactividad', desc: 'Iniciativa constante' },
+]
 
 export function AboutMeSection () {
-  const avatarRef = useRef()
-  const brandRef = useRef()
-  const textRef = useRef()
-  useFadeInElement(avatarRef, 'right')
-  useFadeInElement(brandRef, 'left')
-  useFadeInElement(textRef, 'up')
-
   return (
-    <section id='about-me' className={styles.about_me_container}>
-      <h2>About Me</h2>
+    <section id='about-me' className={styles.about_section}>
+      <h2 className={styles.section_title}>About Me</h2>
 
-      {/*
-        P2-B3 / T-210 (a11y fix).  The previous <aside> wrapper made the
-        bento grid a complementary landmark; WAI-ARIA requires
-        complementary landmarks to be at the top level, so axe fired
-        `landmark-complementary-is-top-level` at all 3 viewports.  A
-        plain <div> has no implicit landmark role, so the rule is
-        satisfied.  The <section id="about-me"> remains the region's
-        primary landmark (FR-N3-08).  The data-testid stabilises the
-        selector for the visual + integration tests.
-      */}
-      <div data-testid='bento-grid' className={styles.grid_container}>
-        <img ref={avatarRef} className={styles.avatar_image} src={avatar} alt={'Arturo\'s photo'} />
-        <img ref={brandRef} className={styles.brand_image} src={brand} alt='Araldev Brand' />
-        <div ref={textRef} className={styles.text_container}>
-          <p>Mi nombre es Arturo, aunque muchos me conocen como R2. Estudié TSAFAD, pero tras varios años dedicándome a ello, decidí dar un giro hacia el sector tecnológico —otra de mis grandes pasiones— impulsado por mi interés en crear, construir y resolver.</p>
-          <p>Desde pequeño he estado en contacto con ordenadores, aunque no fue hasta 2022 cuando comencé a adentrarme en el mundo de la programación. En enero de 2025, tomé la decisión de formarme de manera seria y estructurada. Desde entonces, he desarrollado múltiples proyectos y tengo otros tantos en mente que me gustaría llevar a cabo y monetizar.</p>
-          <p>Me considero una persona autodidacta; aprender por mi cuenta ha sido una constante en mi vida y eso me ha convertido en alguien resolutivo, independiente y siempre en busca de nuevas soluciones.</p>
-          <p>Además, soy una persona muy activa y deportista. Mantenerme en forma no solo me ayuda a estar bien físicamente, sino que también potencia mi enfoque, energía y claridad mental para afrontar cualquier desafío.</p>
+      <div className={styles.content_flex}>
+        {/* Avatar - sticky on desktop */}
+        <div className={styles.avatar_card}>
+          <div className={styles.avatar_wrapper}>
+            <img src={avatar} alt="Arturo's photo" className={styles.avatar_image} />
+          </div>
+          <div className={styles.avatar_info}>
+            <span className={styles.avatar_name}>Arturo "R2"</span>
+            <span className={styles.avatar_tag}>Full-Stack Developer</span>
+          </div>
         </div>
 
+        {/* Bio + Highlights */}
+        <div className={styles.bio_column}>
+          <div className={styles.bio_card}>
+            <p>
+              Mi nombre es Arturo, aunque muchos me conocen como <strong>R2</strong>.
+              Estudié TSAFAD, pero tras varios años dedicándome a ello, decidí dar un giro
+              hacia el sector tecnológico —otra de mis grandes pasiones— impulsado por mi
+              interés en crear, construir y resolver.
+            </p>
+            <p>
+              Desde pequeño he estado en contacto con ordenadores, aunque no fue hasta 2022
+              cuando comencé a adentrarme en el mundo de la programación. En enero de 2025,
+              tomé la decisión de formarme de manera seria y estructurada. Desde entonces,
+              he desarrollado múltiples proyectos y tengo otros tantos en mente que me
+              gustaría llevar a cabo y monetizar.
+            </p>
+            <p>
+              Me considero una persona <strong>autodidacta</strong>; aprender por mi cuenta
+              ha sido una constante en mi vida y eso me ha convertido en alguien resolutivo,
+              independiente y siempre en busca de nuevas soluciones.
+            </p>
+          </div>
+
+          <div className={styles.highlights_grid}>
+            {highlights.map((item) => (
+              <div key={item.label} className={styles.highlight_card}>
+                <span className={styles.highlight_icon}>{item.icon}</span>
+                <span className={styles.highlight_label}>{item.label}</span>
+                <span className={styles.highlight_desc}>{item.desc}</span>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   )

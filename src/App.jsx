@@ -31,9 +31,9 @@ export default function () {
         <IsIconCheckFilterProvider>
           <ProjectsCards />
           <JobsCards />
+          <AboutMeSection />
         </IsIconCheckFilterProvider>
-        <AboutMeSection />
-        <ContactSection />
+          <ContactSection />
         <BackgroundHeroCanvas />
       </main>
       <Footer />

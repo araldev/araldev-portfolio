@@ -21,9 +21,6 @@ vi.mock('../../src/components/Backgrounds/BackgroundHeroCanvas.jsx', () => ({
 vi.mock('../../src/components/Contact/ContactSection.jsx', () => ({
   ContactSection: () => <section id='contact' />
 }))
-vi.mock('../../src/components/AboutMe/AboutMeSection.jsx', () => ({
-  AboutMeSection: () => <section id='about-me' />
-}))
 vi.mock('../../src/components/Footer/Footer.jsx', () => ({
   Footer: () => <footer />
 }))

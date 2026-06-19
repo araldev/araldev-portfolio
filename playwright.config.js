@@ -3,7 +3,7 @@
 // Runs the Playwright specs in `tests/visual/` against a real Chromium
 // browser. The 3-viewport matrix (1440×900, 768×1024, 375×812) is the
 // real-browser gate for the layout fixes in P2 (N2 JobsCards relayout,
-// N3 AboutMe Bento) and P3 (N1 ProjectsCards v3).
+// P3 (N1 ProjectsCards v3).
 //
 // jsdom cannot reproduce the bugs we are testing (image-async relayout,
 // Bento auto-row expansion, clip-path deformation). Real Chromium can —
