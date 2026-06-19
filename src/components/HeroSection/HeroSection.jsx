@@ -11,8 +11,8 @@ export function HeroSection () {
   const paragraphRef = useRef()
   const heroContainerRef = useRef()
   const { t } = useLanguage()
-  useFadeInText(titleRef, heroContainerRef, 'chars', 'linear-gradient(90deg, #00C9FF, #92FE9D)')
-  useFadeInText(subtitleRef, heroContainerRef, 'chars', 'linear-gradient(135deg, #8fc6ff 0%, #5a9cff  100%)')
+  useFadeInText(titleRef, heroContainerRef, 'words', 'linear-gradient(90deg, #00C9FF, #92FE9D)')
+  useFadeInText(subtitleRef, heroContainerRef, 'words', 'linear-gradient(135deg, #8fc6ff 0%, #5a9cff  100%)')
   useFadeInText(paragraphRef, heroContainerRef)
 
   return (

@@ -14,12 +14,12 @@ export function useFadeInText (textRef, triggerRef, splitType = 'chars', backgro
     })
 
     if (backgroundColor) {
-      splitText.chars.forEach(char => {
-        char.style.background = backgroundColor
-        char.style.backgroundClip = 'text'
-        char.style.webkitBackgroundClip = 'text'
-        char.style.color = 'transparent'
-        char.style.webkitTextFillColor = 'transparent'
+      splitText[splitType].forEach(el => {
+        el.style.background = backgroundColor
+        el.style.backgroundClip = 'text'
+        el.style.webkitBackgroundClip = 'text'
+        el.style.color = 'transparent'
+        el.style.webkitTextFillColor = 'transparent'
       })
     }
 
@@ -32,10 +32,10 @@ export function useFadeInText (textRef, triggerRef, splitType = 'chars', backgro
     })
     tl.from(splitText[splitType], {
       opacity: 0,
-      y: 10,
-      filter: 'blur(10px)',
-      duration: 0.5,
-      stagger: 0.03
+      y: 8,
+      filter: 'blur(5px)',
+      duration: 0.35,
+      stagger: 0.025
     })
 
     return () => {
