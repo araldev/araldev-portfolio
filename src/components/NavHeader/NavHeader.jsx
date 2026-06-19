@@ -25,10 +25,10 @@ export const NavHeader = forwardRef((props, ref) => {
         </label>
 
         <ul className={styles.nav_links} role='list'>
-          <li><button data-id='home' onClick={handleClick}>{t('nav.home')}</button></li>
-          <li><button data-id='projects' onClick={handleClick}>{t('nav.projects')}</button></li>
-          <li><button data-id='about-me' onClick={handleClick}>{t('nav.aboutMe')}</button></li>
-          <li><button data-id='contact' onClick={handleClick}>{t('nav.contact')}</button></li>
+          <li><a href='#home' data-id='home' onClick={handleClick}>{t('nav.home')}</a></li>
+          <li><a href='#projects' data-id='projects' onClick={handleClick}>{t('nav.projects')}</a></li>
+          <li><a href='#about-me' data-id='about-me' onClick={handleClick}>{t('nav.aboutMe')}</a></li>
+          <li><a href='#contact' data-id='contact' onClick={handleClick}>{t('nav.contact')}</a></li>
         </ul>
 
         <div className={styles.nav_lang}>

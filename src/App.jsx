@@ -34,6 +34,7 @@ export default function () {
       </header>
       <NavToTop ref={navToTopRef} />
       <AnimatedTitle>
+        <span id='home' />
         <HeroSection />
       </AnimatedTitle>
       <main id='main-content' ref={mainRef} className='container_main '>
