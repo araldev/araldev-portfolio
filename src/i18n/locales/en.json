@@ -140,5 +140,110 @@
     "description": "Frontend developer focused on crafting modern, visually engaging, and animated web experiences. React, GSAP, and interactive design.",
     "ogTitle": "Araldev Portfolio",
     "ogDescription": "Explore the portfolio of Arturo Alba García — frontend development, animations, and interactive UI."
+  },
+  "jobsContent": {
+    "nttData": {
+      "role": "Backend & Full-Stack Developer (Internship)",
+      "period": "April 2026 — May 2026",
+      "description": [
+        "Professional internship at NTT DATA within the Java SE + Spring Boot training program. The program covered six technical areas: backend development with Java and Spring Boot (RESTful services), software quality with JUnit 5 and Mockito (coverage over 85%), data management in PostgreSQL, frontend with Angular, AI integration, and a final integrative project.",
+        "The final project involved technical leadership in developing a complete solution, coordinating the full SDLC from requirements to deployment. In parallel, I participated in the Java SE Programmer Certification Preparation by NTT DATA / Oracle, diving deep into Java core (multithreading, lambdas, streams, concurrency, and memory management)."
+      ],
+      "achievements": [
+        "Backend Development with Java + Spring Boot: implemented robust RESTful services, optimizing business logic and ensuring system scalability. Deep command of the Spring ecosystem (Boot, Data, Security), microservices architecture, and enterprise application lifecycle management.",
+        "Software Quality (Testing): created unit and integration test suites with JUnit 5 and Mockito, guaranteeing code coverage above 85%. Testing-First mindset, ability to isolate dependencies for unit testing, and efficient debugging of complex errors.",
+        "Data Management: modeled and administered PostgreSQL schemas, optimizing complex SQL queries to improve response time. Relational database optimization, normalized schema design, and transaction management.",
+        "Frontend Development with Angular: built dynamic, responsive, component-based user interfaces connected to APIs through services. Reactive programming (RxJS), frontend state management, and Single Page Application (SPA) development.",
+        "Artificial Intelligence Integration: explored and implemented AI-based solutions for task automation and data analysis within the project environment. LLM integration, effective prompt design, and workflow with generative AI APIs.",
+        "Final Project: technical leadership in developing a complete solution end-to-end, coordinating the full SDLC from requirements to deployment. Complex problem-solving under agile methodologies, interdisciplinary teamwork, and end-to-end software vision.",
+        "Java SE Programmer Certification Preparation (NTT DATA / Oracle Training): advanced training aimed at Oracle Professional Certification. Deep knowledge of Java core (multithreading, lambdas, streams, concurrency, memory management) and programming best practices under international standards."
+      ],
+      "tags": [
+        "Internship",
+        "NTT DATA",
+        "Java",
+        "Spring Boot",
+        "Angular",
+        "AI",
+        "SDLC"
+      ]
+    }
+  },
+  "projectsContent": {
+    "v12-ui": {
+      "shortDescription": "Auto-responsive, auto-theme React component library",
+      "description": [
+        "React component system with full TypeScript typing. Professional build with tree-shaking, ESM & CJS builds, and GSAP + Lenis integrated for smooth animations.",
+        "4 core components (Button, Stack, AnimatedBackground, Text) + 1 custom hook. Interactive documentation in Storybook and official npm publication."
+      ],
+      "details": [
+        {
+          "title": "Polymorphic Components",
+          "text": "Button and Text are polymorphic components that adapt their HTML structure based on context (button, a, div, span...). Stack provides a flexible Flex container with full control over direction, gap, and alignment."
+        },
+        {
+          "title": "AnimatedBackground Canvas",
+          "text": "Canvas component that generates abstract particle animations. Configurable duration, density, and colors. Integrated with GSAP for precise timeline control and smooth transitions."
+        },
+        {
+          "title": "Tree-shakable & Dual Builds",
+          "text": "Production-optimized package: ESM exports for modern bundlers and CJS for legacy compatibility. Tree-shaking guarantees only the used code reaches production."
+        },
+        {
+          "title": "Tech Stack",
+          "text": "TypeScript 79% · CSS 19.4% · JS 1.6%. 147 commits, 9 releases (latest v0.2.5 Aug 2025). MIT license. Direct Tailwind CSS integration and auto-theme support with zero configuration."
+        }
+      ]
+    },
+    "listening-maze": {
+      "shortDescription": "Active listening game in English with JSON-driven scalable levels",
+      "description": [
+        "Audio navigation game where the player follows English instructions to find the maze exit. JSON-driven level system for maximum scalability.",
+        "Designed for touch and responsive. Immediate visual feedback for every player action. Integrated into English Web as the main Game Center exercise."
+      ],
+      "details": [
+        {
+          "title": "JSON Scalable Levels",
+          "text": "Each level is defined in a JSON file with maze structure, audio instructions, and metadata. Adding new levels requires no code changes — just add an entry to the array."
+        },
+        {
+          "title": "Audio Guidance in English",
+          "text": "Spoken English instructions guide the player through the maze. Integrated audio system that plays clear, progressively more complex directions based on the level."
+        },
+        {
+          "title": "Interactive Grammar Cards",
+          "text": "After completing each maze, grammar cards display vocabulary and structures used. Positive reinforcement that connects gameplay with learning."
+        },
+        {
+          "title": "Responsive & Touch-friendly",
+          "text": "Touch controls optimized for tablets and smartphones. Virtual D-pad and action buttons adapted for touch screens without losing navigation precision."
+        }
+      ]
+    },
+    "english-web": {
+      "shortDescription": "Vanilla HTML/CSS/JS educational platform for learning English",
+      "description": [
+        "My first complete project: an interactive exercise and educational game platform built 100% with vanilla HTML, CSS, and JavaScript. JSON-driven architecture for zero-dependency scalability.",
+        "104 commits of hand-written code. Includes grammar exercises, vocabulary, listening comprehension, and the Game Center with Listening Maze as the flagship feature."
+      ],
+      "details": [
+        {
+          "title": "Vanilla Architecture",
+          "text": "HTML 37.1% · CSS 32.4% · JS 30.5%. Zero external dependencies. Everything written from scratch to master fundamentals before using frameworks or libraries. Optimal performance and minimal size."
+        },
+        {
+          "title": "JSON-driven Game Levels",
+          "text": "Exercise and level content is stored in JSON structures. Adding new content (questions, vocabulary, maps) requires no HTML changes — just update the data."
+        },
+        {
+          "title": "Game Center Integration",
+          "text": "English Web integrates multiple educational games under unified navigation. Listening Maze is the flagship, with grammar cards and per-session progress tracking."
+        },
+        {
+          "title": "Learning-first Design",
+          "text": "Every interaction is designed to reinforce learning: immediate feedback, difficulty progression, and spaced repetition. Clean interface that prioritizes education over visuals."
+        }
+      ]
+    }
   }
 }

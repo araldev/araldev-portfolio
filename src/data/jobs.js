@@ -88,6 +88,7 @@ export function validateJobContract (job, index = 0) {
 export const jobs = [
   {
     id: 'ntt-data-practicas-2026',
+    contentKey: 'nttData',
     company: 'NTT DATA',
     companyLogo: undefined,
     role: 'Backend & Full-Stack Developer (Prácticas)',

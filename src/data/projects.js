@@ -37,6 +37,7 @@ export const mockDetailImages = [
 export const projects = [
   {
     id: 1,
+    contentKey: 'v12-ui',
     imgSrc: new URL('/src/assets/screenshot-v12-ui.png', import.meta.url).href,
     title: 'v12-ui',
     shortDescription: 'Librería de componentes UI autoresponsive y autoTheme para React',
@@ -88,6 +89,7 @@ export const projects = [
   },
   {
     id: 2,
+    contentKey: 'listening-maze',
     imgSrc: new URL('/src/assets/screenshot-web-game.png', import.meta.url).href,
     title: 'Listening Maze',
     shortDescription: 'Juego de escucha activa en inglés con niveles escalables via JSON',
@@ -136,6 +138,7 @@ export const projects = [
   },
   {
     id: 3,
+    contentKey: 'english-web',
     imgSrc: new URL('/src/assets/shot-english-web.webp', import.meta.url).href,
     title: 'English Web',
     shortDescription: 'Plataforma educativa vanilla HTML/CSS/JS para aprender inglés',

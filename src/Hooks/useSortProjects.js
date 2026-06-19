@@ -1,20 +1,21 @@
 import { useEffect, useState } from 'react'
 import { useIsIconCheckFilter } from './useIsIconCheckFilter'
-import { projects } from '../data/projects'
+import { useTranslatedProjects } from './useTranslatedProjects.js'
 
 export function useSortProjects () {
   const { isIconCheck } = useIsIconCheckFilter()
-  const [sortProjects, setSortProjects] = useState(projects)
+  const translatedProjects = useTranslatedProjects()
+  const [sortProjects, setSortProjects] = useState(translatedProjects)
 
   useEffect(() => {
     setSortProjects(() => {
     // Si no hay filtros activos, devolver proyectos originales
       if (Object.values(isIconCheck).every(value => value === false)) {
-        return projects.map(project => ({ ...project, techsCheked: 0 }))
+        return translatedProjects.map(project => ({ ...project, techsCheked: 0 }))
       }
 
       // Crear nuevos proyectos y calcular techsCheked desde cero
-      const newProjects = projects.map(project => {
+      const newProjects = translatedProjects.map(project => {
         let techsCheked = 0
 
         // Contar cuántas tecnologías seleccionadas tiene este proyecto
@@ -35,7 +36,7 @@ export function useSortProjects () {
 
       return newProjects
     })
-  }, [isIconCheck])
+  }, [isIconCheck, translatedProjects])
 
   return { sortProjects }
 }

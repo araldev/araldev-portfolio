@@ -140,5 +140,110 @@
     "description": "Desarrollador frontend enfocado en crear experiencias web modernas, visualmente atractivas y animadas. React, GSAP y diseño interactivo.",
     "ogTitle": "Portfolio Araldev",
     "ogDescription": "Explorá el portfolio de Arturo Alba García — desarrollo frontend, animaciones y UI interactiva."
+  },
+  "jobsContent": {
+    "nttData": {
+      "role": "Backend & Full-Stack Developer (Prácticas)",
+      "period": "Abril 2026 — Mayo 2026",
+      "description": [
+        "Prácticas profesionales en NTT DATA dentro del programa de formación Java SE + Spring Boot. El programa cubrió seis áreas técnicas: desarrollo backend con Java y Spring Boot (servicios RESTful), calidad de software con JUnit 5 y Mockito (cobertura superior al 85%), gestión de datos en PostgreSQL, frontend con Angular, integración de IA y un proyecto final integrador.",
+        "El proyecto final consistió en liderar técnicamente el desarrollo de una solución completa, coordinando el ciclo de vida (SDLC) desde los requerimientos hasta el despliegue. En paralelo participé en la formación Java SE Programmer Certification Preparation de NTT DATA / Oracle, profundizando en el núcleo de Java (multihilo, lambdas, streams, concurrencia y gestión de memoria)."
+      ],
+      "achievements": [
+        "Desarrollo Backend con Java + Spring Boot: implementación de servicios RESTful robustos, optimizando la lógica de negocio y asegurando la escalabilidad del sistema. Dominio profundo del ecosistema Spring (Boot, Data, Security), arquitectura de microservicios y gestión del ciclo de vida de aplicaciones empresariales.",
+        "Calidad de Software (Testing): creación de suites de pruebas unitarias e integración con JUnit 5 y Mockito, garantizando una cobertura de código superior al 85%. Mentalidad Testing-First, capacidad de aislar dependencias para pruebas unitarias y depuración eficiente de errores complejos.",
+        "Gestión de Datos: modelado y administración de esquemas en PostgreSQL, optimizando consultas SQL complejas para mejorar el tiempo de respuesta. Optimización de bases de datos relacionales, diseño de esquemas normalizados y gestión de transacciones.",
+        "Desarrollo Frontend con Angular: creación de interfaces de usuario dinámicas, receptivas y basadas en componentes, conectadas a APIs mediante servicios. Programación reactiva (RxJS), gestión de estado en frontend y creación de Single Page Applications (SPA).",
+        "Integración de Inteligencia Artificial: exploración e implementación de soluciones basadas en IA para automatización de tareas y análisis de datos en el entorno del proyecto. Integración de LLMs, diseño de prompts efectivos y flujo de trabajo con APIs de IA generativa.",
+        "Proyecto Final: liderazgo técnico en el desarrollo de una solución integral de principio a fin, coordinando el ciclo de vida completo (SDLC), desde los requerimientos hasta el despliegue. Resolución de problemas complejos bajo metodologías ágiles, trabajo en equipo interdisciplinario y visión integral del software.",
+        "Java SE Programmer Certification Preparation (NTT DATA / Oracle Training): formación avanzada orientada a la Certificación Profesional de Oracle. Conocimiento profundo del núcleo de Java (multihilo, lambdas, streams, concurrencia, gestión de memoria) y buenas prácticas de programación bajo estándares internacionales."
+      ],
+      "tags": [
+        "Prácticas",
+        "NTT DATA",
+        "Java",
+        "Spring Boot",
+        "Angular",
+        "IA",
+        "SDLC"
+      ]
+    }
+  },
+  "projectsContent": {
+    "v12-ui": {
+      "shortDescription": "Librería de componentes UI autoresponsive y autoTheme para React",
+      "description": [
+        "Sistema de componentes React con tipado completo en TypeScript. Construcción profesional con tree-shaking, builds ESM & CJS, y GSAP + Lenis integrados para animaciones fluidas.",
+        "4 componentes core (Button, Stack, AnimatedBackground, Text) + 1 custom hook. Documentación interactiva en Storybook y publicación oficial en npm."
+      ],
+      "details": [
+        {
+          "title": "Componentes Polimórficos",
+          "text": "Button y Text son componentes polimórficos que adaptan su estructura HTML según el contexto (button, a, div, span...). Stack proporciona un container Flex flexible con control total sobre dirección, gap y alineación."
+        },
+        {
+          "title": "AnimatedBackground Canvas",
+          "text": "Componente canvas que genera animaciones de partículas abstractas. Configurable en duración, densidad y colores. Integrado con GSAP para control preciso del timeline y transiciones suaves."
+        },
+        {
+          "title": "Tree-shakable & Dual Builds",
+          "text": "Paquete optimizado para producción: exports ESM para bundlers modernos y CJS para compatibilidad legacy. Tree-shaking garantiza que solo el código usado llega a producción."
+        },
+        {
+          "title": "Stack Tecnológico",
+          "text": "TypeScript 79% · CSS 19.4% · JS 1.6%. 147 commits, 9 releases (última v0.2.5 ago 2025). Licencia MIT. Integración directa con Tailwind CSS y soporte para autoTheme sin configuración."
+        }
+      ]
+    },
+    "listening-maze": {
+      "shortDescription": "Juego de escucha activa en inglés con niveles escalables via JSON",
+      "description": [
+        "Game de navegación auditiva donde el jugador sigue instrucciones en inglés para encontrar la salida del laberinto. Sistema de niveles driven por JSON para máxima escalabilidad.",
+        "Diseñado táctil y responsive. Feedback visual inmediato para cada acción del jugador. Integración en English Web como ejercicio principal del Game Center."
+      ],
+      "details": [
+        {
+          "title": "Niveles Escalables via JSON",
+          "text": "Cada nivel se define en un archivo JSON con estructura de laberinto, instrucciones auditivas y metadata. Añadir nuevos niveles no requiere cambios en código — solo agregar una entrada al array."
+        },
+        {
+          "title": "Audio Guidance en Inglés",
+          "text": "Instrucciones spoken en inglés guían al jugador por el laberinto. Sistema de audio integrado que reproduce indicaciones claras y progresivamente más complejas según el nivel."
+        },
+        {
+          "title": "Interactive Grammar Cards",
+          "text": "Después de completar cada laberinto, se muestran grammar cards con el vocabulario y estructuras usadas. Refuerzo positivo que conecta el juego con el aprendizaje."
+        },
+        {
+          "title": "Responsive & Touch-friendly",
+          "text": "Controles táctiles optimizados para tablets y smartphones. D-pad virtual y botones de acción adaptados para pantalla táctil sin perder precisión en la navegación."
+        }
+      ]
+    },
+    "english-web": {
+      "shortDescription": "Plataforma educativa vanilla HTML/CSS/JS para aprender inglés",
+      "description": [
+        "Mi primer proyecto completo: plataforma de ejercicios interactivos y juegos educativos construidos 100% con vanilla HTML, CSS y JavaScript. Arquitectura JSON-driven para escalabilidad sin dependencias.",
+        "104 commits de código escrito a mano. Incluye ejercicios de gramática, vocabulario, comprensión auditiva y el Game Center con Listening Maze como flagship feature."
+      ],
+      "details": [
+        {
+          "title": "Vanilla Architecture",
+          "text": "HTML 37.1% · CSS 32.4% · JS 30.5%. Cero dependencias externas. Todo escrito desde cero para dominar los fundamentos antes de usar frameworks o librerías. Rendimiento óptimo y tamaño mínimo."
+        },
+        {
+          "title": "JSON-driven Game Levels",
+          "text": "El contenido de ejercicios y niveles se almacena en estructuras JSON. Agregar nuevo contenido (preguntas, vocabulario, mapas) no requiere modificar HTML — solo actualizar los datos."
+        },
+        {
+          "title": "Game Center Integration",
+          "text": "English Web integra múltiples juegos educativos bajo una navegación unificada. Listening Maze es el flagship, con grammar cards y tracking de progreso por sesión."
+        },
+        {
+          "title": "Learning-first Design",
+          "text": "Cada interacción está diseñada para reforzar el aprendizaje: feedback inmediato, progresión de dificultad, y repetición espaciada. Interfaz clara que prioriza la educación sobre lo visual."
+        }
+      ]
+    }
   }
 }

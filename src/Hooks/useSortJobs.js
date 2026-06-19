@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { jobs } from '../data/jobs.js'
+import { useTranslatedJobs } from './useTranslatedJobs.js'
 
 /**
  * P4 simplification: filter logic removed per user feedback (filtering
@@ -17,7 +17,8 @@ import { jobs } from '../data/jobs.js'
  * @returns {{ sortJobs: Object[] }}
  */
 export function useSortJobs () {
-  const sortJobs = useMemo(() => sortByCurrentAndDate(jobs), [])
+  const translatedJobs = useTranslatedJobs()
+  const sortJobs = useMemo(() => sortByCurrentAndDate(translatedJobs), [translatedJobs])
   return { sortJobs }
 }
 
