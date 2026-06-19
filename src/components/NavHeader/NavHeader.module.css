@@ -91,7 +91,7 @@
       }
     }
 
-    a {
+    a, button {
       align-content: center;
       width: fit-content;
       height: fit-content;
@@ -106,6 +106,9 @@
       background-clip: text;
       -webkit-background-clip: text;
       transition: transform .2s ease-in-out;
+      border: none;
+      font-family: inherit;
+      line-height: 1;
       /* P5 follow-up: the link's transform previously only fired
          when the mouse was physically over the <a>'s own hit area.
          The user reported this as a bug — the <a> is a flex child
@@ -124,7 +127,8 @@
    transform on parent-hover, so PostCSS / standardjs parse the
    selector reliably. Kept outside the .nav_links block for
    selector clarity. */
-.nav_links li:hover a {
+.nav_links li:hover a,
+.nav_links li:hover button {
   transform: scale(1.2);
   /* P6 follow-up: the user asked for the <a> to have the same
      "feel" as a real link on hover — not just a scale. Adding a
@@ -141,7 +145,8 @@
   text-underline-offset: 4px;
 }
 @media (hover: none) and (pointer: coarse) {
-  .nav_links li:active a {
+  .nav_links li:active a,
+  .nav_links li:active button {
     transform: scale(1.2);
     filter: brightness(1.15);
     text-decoration: underline;
@@ -175,6 +180,11 @@
   .checkbox {
     width: 100%;
     height: 100%;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
   }
   .stroke_1{
     position: absolute; 
@@ -268,8 +278,10 @@
   .nav_icon:has(.checkbox) ~ .nav_links li {
     width: fit-content;
     height: 100px;
-    a{
+    a, button{
       color: var(--color-nav-text-checked);
+      background: none;
+      -webkit-text-fill-color: var(--color-nav-text-checked);
     }
   }
   

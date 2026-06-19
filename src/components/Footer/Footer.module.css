@@ -145,19 +145,19 @@ position: relative;
     cursor: pointer;
 
     @media (hover: hover) and (pointer: fine) {
-      &:hover a {
+      &:hover a, &:hover button {
         color: #fff;
         transform: translateX(-10px);
       }
     }
     @media (hover: none) and (pointer: coarse) {
-      &:active a {
+      &:active a, &:active button {
         color: #fff;
         transform: translateX(-10px);
       }
     }
 
-    a {
+    a, button {
       display: flex;
       justify-content: flex-start;
       align-items: center;
@@ -166,6 +166,12 @@ position: relative;
       text-decoration: none;
       color: #ddd;
       transition: transform .2s ease-in-out, color .2s ease-in-out;
+      border: none;
+      background: none;
+      font-family: inherit;
+      font-size: inherit;
+      cursor: pointer;
+      padding: 0;
     }
   }
 } 

@@ -12,23 +12,23 @@ export const NavHeader = forwardRef((props, ref) => {
   const idNavIcon = useId()
   return (
     <>
-      <nav ref={ref} className={styles.nav_header}>
+      <nav ref={ref} className={styles.nav_header} aria-label={t('nav.ariaLabel')}>
         <div className={styles.nav_logo}>
           <img src={brand} alt={t('images.brandAraldev')} />
         </div>
 
-        <label htmlFor={idNavIcon} className={styles.nav_icon}>
-          <input ref={navMenuRef} className={styles.checkbox} id={idNavIcon} type='checkbox' hidden />
-          <div className={styles.stroke_1} />
-          <div className={styles.stroke_2} />
-          <div className={styles.stroke_3} />
+        <label htmlFor={idNavIcon} className={styles.nav_icon} aria-label={t('nav.menuToggle')}>
+          <input ref={navMenuRef} className={styles.checkbox} id={idNavIcon} type='checkbox' />
+          <div className={styles.stroke_1} aria-hidden='true' />
+          <div className={styles.stroke_2} aria-hidden='true' />
+          <div className={styles.stroke_3} aria-hidden='true' />
         </label>
 
-        <ul className={styles.nav_links}>
-          <li><a data-id='home' onClick={handleClick}>{t('nav.home')}</a></li>
-          <li><a data-id='projects' onClick={handleClick}>{t('nav.projects')}</a></li>
-          <li><a data-id='about-me' onClick={handleClick}>{t('nav.aboutMe')}</a></li>
-          <li><a data-id='contact' onClick={handleClick}>{t('nav.contact')}</a></li>
+        <ul className={styles.nav_links} role='list'>
+          <li><button data-id='home' onClick={handleClick}>{t('nav.home')}</button></li>
+          <li><button data-id='projects' onClick={handleClick}>{t('nav.projects')}</button></li>
+          <li><button data-id='about-me' onClick={handleClick}>{t('nav.aboutMe')}</button></li>
+          <li><button data-id='contact' onClick={handleClick}>{t('nav.contact')}</button></li>
         </ul>
 
         <div className={styles.nav_lang}>
@@ -36,7 +36,7 @@ export const NavHeader = forwardRef((props, ref) => {
         </div>
       </nav>
 
-      <div className={styles.overlay} />
+      <div className={styles.overlay} aria-hidden='true' />
     </>
   )
 })

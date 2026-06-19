@@ -3,7 +3,9 @@
     "home": "Inicio",
     "projects": "Proyectos",
     "aboutMe": "Sobre Mí",
-    "contact": "Contacto"
+    "contact": "Contacto",
+    "ariaLabel": "Navegación principal",
+    "menuToggle": "Abrir o cerrar menú"
   },
   "hero": {
     "title": "Desarrollador Frontend",
@@ -71,12 +73,36 @@
       "Me considero una persona [[autodidacta]]; aprender por mi cuenta ha sido una constante en mi vida y eso me ha convertido en alguien resolutivo, independiente y siempre en busca de nuevas soluciones."
     ],
     "highlights": [
-      { "icon": "🎓", "label": "Autodidacta", "desc": "Aprendizaje continuo" },
-      { "icon": "💡", "label": "Resolutivo", "desc": "Enfoque ante problemas" },
-      { "icon": "🏋️", "label": "Atleta", "desc": "Equilibrio mente-cuerpo" },
-      { "icon": "🚀", "label": "Full-Stack", "desc": "MERN + más" },
-      { "icon": "🎯", "label": "Enfoque", "desc": "Claridad mental" },
-      { "icon": "⚡", "label": "Proactividad", "desc": "Iniciativa constante" }
+      {
+        "icon": "🎓",
+        "label": "Autodidacta",
+        "desc": "Aprendizaje continuo"
+      },
+      {
+        "icon": "💡",
+        "label": "Resolutivo",
+        "desc": "Enfoque ante problemas"
+      },
+      {
+        "icon": "🏋️",
+        "label": "Atleta",
+        "desc": "Equilibrio mente-cuerpo"
+      },
+      {
+        "icon": "🚀",
+        "label": "Full-Stack",
+        "desc": "MERN + más"
+      },
+      {
+        "icon": "🎯",
+        "label": "Enfoque",
+        "desc": "Claridad mental"
+      },
+      {
+        "icon": "⚡",
+        "label": "Proactividad",
+        "desc": "Iniciativa constante"
+      }
     ]
   },
   "contact": {
@@ -97,7 +123,9 @@
       "email": "Email",
       "github": "GitHub",
       "discord": "Discord"
-    }
+    },
+    "contactAria": "Enlaces de contacto",
+    "linksAria": "Enlaces rápidos"
   },
   "language": {
     "switcher": "Idioma"
@@ -106,5 +134,11 @@
     "brandAraldev": "Logo de Araldev",
     "profile": "Foto de Arturo",
     "profileHero": "Foto de perfil"
+  },
+  "seo": {
+    "title": "Araldev — Portfolio de Desarrollador Frontend",
+    "description": "Desarrollador frontend enfocado en crear experiencias web modernas, visualmente atractivas y animadas. React, GSAP y diseño interactivo.",
+    "ogTitle": "Portfolio Araldev",
+    "ogDescription": "Explorá el portfolio de Arturo Alba García — desarrollo frontend, animaciones y UI interactiva."
   }
 }

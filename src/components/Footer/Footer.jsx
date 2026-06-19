@@ -11,11 +11,11 @@ export function Footer () {
   return (
     <footer className={styles.footer_container}>
       <div className={styles.footer_content}>
-        <nav className={styles.contact_container}>
+        <nav className={styles.contact_container} aria-label={t('footer.contactAria')}>
 
           <h3>{t('footer.contact')}</h3>
 
-          <ul className={styles.ul_contact}>
+          <ul className={styles.ul_contact} role='list'>
             <li>
               <a href='https://www.linkedin.com/in/araldev/' target='_blank' rel='noopener noreferrer'>
                 {socialIcons.linkedin}
@@ -50,22 +50,22 @@ export function Footer () {
           </ul>
         </nav>
 
-        <nav className={styles.links_container}>
+        <nav className={styles.links_container} aria-label={t('footer.linksAria')}>
 
           <h3>{t('footer.links')}</h3>
 
-          <ul className={styles.ul_links}>
-            <li><a data-id='home' onClick={handleClick}>{t('nav.home')}</a></li>
-            <li><a data-id='projects' onClick={handleClick}>{t('nav.projects')}</a></li>
-            <li><a data-id='about-me' onClick={handleClick}>{t('nav.aboutMe')}</a></li>
-            <li><a data-id='contact' onClick={handleClick}>{t('nav.contact')}</a></li>
+          <ul className={styles.ul_links} role='list'>
+            <li><button data-id='home' onClick={handleClick}>{t('nav.home')}</button></li>
+            <li><button data-id='projects' onClick={handleClick}>{t('nav.projects')}</button></li>
+            <li><button data-id='about-me' onClick={handleClick}>{t('nav.aboutMe')}</button></li>
+            <li><button data-id='contact' onClick={handleClick}>{t('nav.contact')}</button></li>
           </ul>
 
         </nav>
       </div>
 
       <div className={styles.brand}>
-        <img src={brand} alt='Brand Araldev' />
+        <img src={brand} alt={t('images.brandAraldev')} />
       </div>
     </footer>
   )

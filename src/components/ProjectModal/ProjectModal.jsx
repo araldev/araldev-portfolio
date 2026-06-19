@@ -117,9 +117,20 @@ export function ProjectModal ({ project, onClose }) {
   useEffect(() => {
     document.addEventListener('keydown', handleKeyDown)
     document.body.style.overflow = 'hidden'
+
+    // Trap focus inside the modal: focus the close button on open
+    const prevFocus = document.activeElement
+    if (closeBtnRef.current) {
+      closeBtnRef.current.focus()
+    }
+
     return () => {
       document.removeEventListener('keydown', handleKeyDown)
       document.body.style.overflow = ''
+      // Return focus to the element that triggered the modal
+      if (prevFocus && prevFocus.focus) {
+        prevFocus.focus()
+      }
     }
   }, [handleKeyDown])
 

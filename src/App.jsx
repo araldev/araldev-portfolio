@@ -12,6 +12,7 @@ import { useAnimatedNavToTop } from './Hooks/useAnimatedNavToTop.js'
 import { Footer } from './components/Footer/Footer.jsx'
 import { ContactSection } from './components/Contact/ContactSection.jsx'
 import { AboutMeSection } from './components/AboutMe/AboutMeSection.jsx'
+import { useDocumentHead } from './Hooks/useDocumentHead.js'
 
 export default function () {
   const mainRef = useRef()
@@ -19,15 +20,23 @@ export default function () {
   const navToTopRef = useRef()
   useAnimatedNavHeader({ mainRef, navHeaderRef })
   useAnimatedNavToTop({ mainRef, navToTopRef })
+  useDocumentHead()
 
   return (
     <>
-      <NavHeader ref={navHeaderRef} />
+      {/* Skip-to-content link for keyboard users */}
+      <a className='skip-to-content' href='#main-content'>
+        Skip to content
+      </a>
+
+      <header>
+        <NavHeader ref={navHeaderRef} />
+      </header>
       <NavToTop ref={navToTopRef} />
       <AnimatedTitle>
         <HeroSection />
       </AnimatedTitle>
-      <main ref={mainRef} className='container_main '>
+      <main id='main-content' ref={mainRef} className='container_main '>
         <IsIconCheckFilterProvider>
           <ProjectsCards />
           <JobsCards />

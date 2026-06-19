@@ -3,7 +3,9 @@
     "home": "Home",
     "projects": "Projects",
     "aboutMe": "About Me",
-    "contact": "Contact"
+    "contact": "Contact",
+    "ariaLabel": "Main navigation",
+    "menuToggle": "Toggle menu"
   },
   "hero": {
     "title": "Frontend Developer",
@@ -71,12 +73,36 @@
       "I consider myself a [[self-taught]] person; learning on my own has been a constant in my life and that has made me resourceful, independent, and always in search of new solutions."
     ],
     "highlights": [
-      { "icon": "🎓", "label": "Self-taught", "desc": "Continuous learning" },
-      { "icon": "💡", "label": "Resourceful", "desc": "Approach to problems" },
-      { "icon": "🏋️", "label": "Athlete", "desc": "Mind-body balance" },
-      { "icon": "🚀", "label": "Full-Stack", "desc": "MERN + more" },
-      { "icon": "🎯", "label": "Focus", "desc": "Mental clarity" },
-      { "icon": "⚡", "label": "Proactive", "desc": "Constant initiative" }
+      {
+        "icon": "🎓",
+        "label": "Self-taught",
+        "desc": "Continuous learning"
+      },
+      {
+        "icon": "💡",
+        "label": "Resourceful",
+        "desc": "Approach to problems"
+      },
+      {
+        "icon": "🏋️",
+        "label": "Athlete",
+        "desc": "Mind-body balance"
+      },
+      {
+        "icon": "🚀",
+        "label": "Full-Stack",
+        "desc": "MERN + more"
+      },
+      {
+        "icon": "🎯",
+        "label": "Focus",
+        "desc": "Mental clarity"
+      },
+      {
+        "icon": "⚡",
+        "label": "Proactive",
+        "desc": "Constant initiative"
+      }
     ]
   },
   "contact": {
@@ -97,7 +123,9 @@
       "email": "Email",
       "github": "GitHub",
       "discord": "Discord"
-    }
+    },
+    "contactAria": "Contact links",
+    "linksAria": "Quick links"
   },
   "language": {
     "switcher": "Language"
@@ -106,5 +134,11 @@
     "brandAraldev": "Araldev brand",
     "profile": "Arturo's photo",
     "profileHero": "Profile image"
+  },
+  "seo": {
+    "title": "Araldev — Frontend Developer Portfolio",
+    "description": "Frontend developer focused on crafting modern, visually engaging, and animated web experiences. React, GSAP, and interactive design.",
+    "ogTitle": "Araldev Portfolio",
+    "ogDescription": "Explore the portfolio of Arturo Alba García — frontend development, animations, and interactive UI."
   }
 }

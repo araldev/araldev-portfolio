@@ -10,11 +10,15 @@
   transform: translateY(80px);
   pointer-events: none;
   transition: opacity 1s ease-in-out, transform .5s ease-in-out;
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
   &.show {
   pointer-events: unset;
   opacity: 1;
   transform: translateY(0px);
-}
+  }
 
   > svg {
     overflow: visible;

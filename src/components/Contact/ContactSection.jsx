@@ -48,19 +48,23 @@ export function ContactSection () {
 
       <form autoComplete='on' name='contact-form' onSubmit={handleSubmit} className={styles.form} action=''>
         <label>
-          <input name='name' type='text' placeholder={t('contact.name')} required />
+          <span className={styles.visually_hidden}>{t('contact.name')}</span>
+          <input name='name' type='text' placeholder={t('contact.name')} aria-label={t('contact.name')} required />
         </label>
 
         <label>
-          <input name='email' type='email' placeholder='example@gmail.com' required />
+          <span className={styles.visually_hidden}>Email</span>
+          <input name='email' type='email' placeholder='example@gmail.com' aria-label='Email' required />
         </label>
 
         <label>
-          <input name='subject' type='text' placeholder={t('contact.subject')} required />
+          <span className={styles.visually_hidden}>{t('contact.subject')}</span>
+          <input name='subject' type='text' placeholder={t('contact.subject')} aria-label={t('contact.subject')} required />
         </label>
 
         <label>
-          <textarea name='message' rows='5' cols='40' placeholder={t('contact.message')} required />
+          <span className={styles.visually_hidden}>{t('contact.message')}</span>
+          <textarea name='message' rows='5' cols='40' placeholder={t('contact.message')} aria-label={t('contact.message')} required />
         </label>
 
         <ReCAPTCHA
@@ -75,8 +79,8 @@ export function ContactSection () {
           {isLoading ? t('contact.loading') : t('contact.send')}
         </Button>
 
-        {error && <small style={{ color: 'red' }}>{error}</small>}
-        {!error && isFormSend && <small style={{ color: 'green' }}>{t('contact.success')}</small>}
+        {error && <small style={{ color: 'red' }} role='status'>{error}</small>}
+        {!error && isFormSend && <small style={{ color: 'green' }} role='status'>{t('contact.success')}</small>}
       </form>
     </section>
   )
