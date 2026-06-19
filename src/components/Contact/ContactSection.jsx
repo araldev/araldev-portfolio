@@ -3,7 +3,7 @@ import { Button } from '../Button/Button.jsx'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { useSendEmailJs } from '../../Hooks/useSendEmailJs.js'
 import { useLanguage } from '../../i18n/useLanguage.js'
-import { useRef, useState, useCallback } from 'react'
+import React, { useRef, useState, useCallback } from 'react'
 
 function validateEmail (value) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
@@ -132,7 +132,10 @@ export function ContactSection () {
       <h2>{t('contact.title')}</h2>
 
       <form autoComplete='on' name='contact-form' onSubmit={handleSubmit} className={styles.form} action=''>
-        {FIELD_NAMES.map(renderField)}
+        {FIELD_NAMES.map((name) => {
+          const element = renderField(name)
+          return React.cloneElement(element, { key: name })
+        })}
 
         <ReCAPTCHA
           ref={captchaRef}
