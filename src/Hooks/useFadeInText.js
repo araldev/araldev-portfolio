@@ -2,7 +2,7 @@ import { gsap } from 'gsap'
 import { useEffect } from 'react'
 import SplitText from 'gsap/SplitText'
 
-export function useFadeInText (textRef, triggerRef, splitType = 'chars', backgroundColor = false) {
+export function useFadeInText (textRef, triggerRef, splitType = 'words', backgroundColor = false) {
   useEffect(() => {
     const text = textRef.current
     const trigger = triggerRef.current
