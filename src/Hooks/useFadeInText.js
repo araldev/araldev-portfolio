@@ -1,6 +1,5 @@
 import { gsap } from 'gsap'
 import { useEffect } from 'react'
-import SplitText from 'gsap/SplitText'
 
 export function useFadeInText (textRef, triggerRef, splitType = 'words', backgroundColor = false) {
   useEffect(() => {
@@ -9,19 +8,34 @@ export function useFadeInText (textRef, triggerRef, splitType = 'words', backgro
 
     if (!text && !trigger) return
 
-    const splitText = new SplitText(text, {
-      type: splitType
-    })
+    // Manual word-split: each word becomes an inline-block <span>
+    // This guarantees wrapping at word boundaries on small screens
+    const originalContent = text.textContent
+    const words = originalContent.split(/\s+/)
 
-    if (backgroundColor) {
-      splitText[splitType].forEach(el => {
-        el.style.background = backgroundColor
-        el.style.backgroundClip = 'text'
-        el.style.webkitBackgroundClip = 'text'
-        el.style.color = 'transparent'
-        el.style.webkitTextFillColor = 'transparent'
-      })
-    }
+    text.innerHTML = ''
+    const spans = words.map((word, i) => {
+      const span = document.createElement('span')
+      span.textContent = word
+      span.style.display = 'inline-block'
+
+      if (backgroundColor) {
+        span.style.background = backgroundColor
+        span.style.backgroundClip = 'text'
+        span.style.webkitBackgroundClip = 'text'
+        span.style.color = 'transparent'
+        span.style.webkitTextFillColor = 'transparent'
+      }
+
+      text.appendChild(span)
+
+      // Preserve whitespace between words (except after the last)
+      if (i < words.length - 1) {
+        text.appendChild(document.createTextNode(' '))
+      }
+
+      return span
+    })
 
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -30,7 +44,7 @@ export function useFadeInText (textRef, triggerRef, splitType = 'words', backgro
         toggleActions: 'play none none none'
       }
     })
-    tl.from(splitText[splitType], {
+    tl.from(spans, {
       opacity: 0,
       y: 8,
       filter: 'blur(5px)',
@@ -40,7 +54,7 @@ export function useFadeInText (textRef, triggerRef, splitType = 'words', backgro
 
     return () => {
       if (tl) tl.kill()
-      if (splitText) splitText.revert()
+      text.textContent = originalContent
     }
   }, [])
 }
