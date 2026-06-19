@@ -22,6 +22,10 @@ export function JobCardFooter ({
   expandLabel = 'See more',
   collapseLabel = 'See less'
 }) {
+  // `expandLabel`/`collapseLabel` defaults are kept as a defensive
+  // fallback so the component is safe to render in isolation
+  // (Storybook, tests). The default render path always supplies
+  // real labels from JobCard using t('experience.seeMore/seeLess').
   const hasAchievements = job.achievements && job.achievements.length > 0
   const achievementsId = `job-${id}-achievements`
 

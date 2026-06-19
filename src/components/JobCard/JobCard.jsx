@@ -9,6 +9,7 @@ import { JobCardAchievements } from './JobCardAchievements.jsx'
 import { JobCardFooter } from './JobCardFooter.jsx'
 import { useBeaconPulse } from '../../Hooks/useBeaconPulse.js'
 import { useIsFeaturedJob } from '../../Hooks/useIsFeaturedJob.js'
+import { useLanguage } from '../../i18n/useLanguage.js'
 
 /**
  * JobCard — composed card representing one professional position.
@@ -36,12 +37,16 @@ import { useIsFeaturedJob } from '../../Hooks/useIsFeaturedJob.js'
 export function JobCard ({
   job,
   jobsList,
-  expandLabel = 'See more',
-  collapseLabel = 'See less'
+  expandLabel,
+  collapseLabel
 }) {
+  const { t } = useLanguage()
   const [isExpanded, setIsExpanded] = useState(false)
   const expandTriggerRef = useRef(null)
   const beaconRef = useRef(null)
+
+  const resolvedExpandLabel = expandLabel ?? t('experience.seeMore', 'See more')
+  const resolvedCollapseLabel = collapseLabel ?? t('experience.seeLess', 'See less')
 
   const isFeatured = useIsFeaturedJob(job, jobsList)
   const hasAchievements = useMemo(
@@ -123,8 +128,8 @@ export function JobCard ({
           isExpanded={isExpanded}
           onToggleExpand={toggleExpand}
           expandTriggerRef={expandTriggerRef}
-          expandLabel={expandLabel}
-          collapseLabel={collapseLabel}
+          expandLabel={resolvedExpandLabel}
+          collapseLabel={resolvedCollapseLabel}
         />
       </div>
     </article>

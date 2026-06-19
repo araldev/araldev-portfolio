@@ -5,6 +5,9 @@
     "aboutMe": "About Me",
     "contact": "Contact"
   },
+  "projects": {
+    "filterLegend": "Select and search projects by technology used"
+  },
   "hero": {
     "title": "Frontend Developer",
     "description": "Focused on crafting modern, visually engaging, and animated web experiences.",
@@ -19,7 +22,9 @@
   "experience": {
     "title": "Experience",
     "subtitle": "Experience — A Holo-Log of my Career",
-    "empty": "No experience entries available."
+    "empty": "No experience entries available.",
+    "seeMore": "See more",
+    "seeLess": "See less"
   },
   "about": {
     "title": "About Me",

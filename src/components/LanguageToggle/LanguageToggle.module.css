@@ -1,14 +1,21 @@
 /* ============================================================
    LanguageToggle.module.css — Two-flag language switcher.
 
-   Design language:
-     - Glass surface (rgba + backdrop-filter) to match the rest of
-       the UI glass cards.
-     - Active state uses the cyan accent (--color-job-beacon) so it
-       reads as "selected" at a glance, consistent with the
-       ProjectsCards filter active state.
-     - Vision Pro spring easing (--ease-vision-pro) on hover and
-       active transitions.
+   Each button is a 32×24 (3:2 aspect ratio, real flag ratio)
+   rectangular swatch painted entirely in CSS so the toggle works
+   on every platform — including those that do not render country
+   flag emoji (older Chromium, Linux without noto-emoji, etc.).
+
+   Flag designs:
+     - 🇪🇸 Spain: 3 horizontal stripes (red / yellow / yellow / red);
+       the yellow stripe is twice as tall as each red one.
+     - 🇬🇧 UK (Union Jack simplified): blue field with a red cross
+       outlined in white. Vertical and horizontal red bars cross
+       at the centre, with thin white fimbriations.
+
+   The "ES" / "EN" two-letter ISO code sits in the bottom-right
+   corner of each swatch so the active language is unambiguous,
+   even at small sizes.
    ============================================================ */
 
 .toggle {
@@ -24,6 +31,7 @@
 }
 
 .flagBtn {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -34,31 +42,104 @@
   border: 1px solid transparent;
   border-radius: 7px;
   cursor: pointer;
+  overflow: hidden;
   transition:
     background 0.2s var(--ease-vision-pro),
     border-color 0.2s var(--ease-vision-pro),
     transform 0.2s var(--ease-vision-pro);
   font-family: inherit;
-  /* Click "press" feedback for coarse pointers (mobile). */
 }
 
-.flag {
-  font-size: 1.15rem;
+/* Spanish flag: red / yellow / red with a 1:2:1 ratio */
+.flagEs {
+  background:
+    linear-gradient(
+      to bottom,
+      #aa151b 0%, #aa151b 25%,
+      #f1bf00 25%, #f1bf00 75%,
+      #aa151b 75%, #aa151b 100%
+    );
+}
+
+/* Union Jack simplified: blue field with a red cross + white
+   fimbriation. We compose four linear-gradients: the blue
+   background, the white diagonals (fimbriation), the red
+   diagonals (St Andrew + St Patrick), the white vertical/horizontal
+   (fimbriation of St George), and the red vertical/horizontal
+   (St George cross). */
+.flagEn {
+  background:
+    /* St George red cross (vertical + horizontal) */
+    linear-gradient(
+      to bottom,
+      transparent 38%, #ffffff 38%, #ffffff 42%,
+      #c8102e 42%, #c8102e 58%,
+      #ffffff 58%, #ffffff 62%,
+      transparent 62%
+    ),
+    /* St George red cross horizontal */
+    linear-gradient(
+      to right,
+      transparent 38%, #ffffff 38%, #ffffff 42%,
+      #c8102e 42%, #c8102e 58%,
+      #ffffff 58%, #ffffff 62%,
+      transparent 62%
+    ),
+    /* St Andrew + St Patrick diagonals — red */
+    linear-gradient(
+      45deg,
+      transparent 45%, #c8102e 45%, #c8102e 55%,
+      transparent 55%
+    ),
+    linear-gradient(
+      -45deg,
+      transparent 45%, #c8102e 45%, #c8102e 55%,
+      transparent 55%
+    ),
+    /* White fimbriation of the diagonals */
+    linear-gradient(
+      45deg,
+      transparent 42%, #ffffff 42%, #ffffff 45%,
+      transparent 45%, transparent 55%, #ffffff 55%, #ffffff 58%,
+      transparent 58%
+    ),
+    linear-gradient(
+      -45deg,
+      transparent 42%, #ffffff 42%, #ffffff 45%,
+      transparent 45%, transparent 55%, #ffffff 55%, #ffffff 58%,
+      transparent 58%
+    ),
+    /* Blue field */
+    #012169;
+  background-blend-mode: normal, normal, normal, normal, normal, normal, normal;
+}
+
+.code {
+  position: absolute;
+  bottom: 2px;
+  right: 3px;
+  font-size: 0.55rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
   line-height: 1;
-  /* Some platforms render flag emoji as text; keep crisp */
-  font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
-  display: inline-block;
+  color: #ffffff;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.85);
+  pointer-events: none;
+}
+
+/* ES uses a darker text colour for contrast against yellow */
+.flagEs .code {
+  color: #111;
+  text-shadow: 0 0 2px rgba(255, 255, 255, 0.85);
 }
 
 .flagBtnActive {
-  background: rgba(0, 201, 255, 0.18);
   border-color: rgba(0, 201, 255, 0.6);
   box-shadow: 0 0 10px -2px rgba(0, 201, 255, 0.55);
 }
 
 @media (hover: hover) and (pointer: fine) {
   .flagBtn:hover {
-    background: rgba(0, 201, 255, 0.1);
     border-color: rgba(0, 201, 255, 0.35);
     transform: translateY(-1px);
   }
@@ -66,7 +147,6 @@
 
 @media (hover: none) and (pointer: coarse) {
   .flagBtn:active {
-    background: rgba(0, 201, 255, 0.18);
     transform: scale(0.95);
     transition: 0.1s ease-out;
   }

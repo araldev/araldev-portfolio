@@ -2,6 +2,7 @@ import { useId } from 'react'
 import styles from './FilterProjects.module.css'
 import { techIcons } from '../../data/icons.js'
 import { useIsIconCheckFilter } from '../../Hooks/useIsIconCheckFilter.js'
+import { useLanguage } from '../../i18n/useLanguage.js'
 
 function TechIcons () {
   const { setIsIconCheck } = useIsIconCheckFilter()
@@ -47,9 +48,10 @@ function TechIcons () {
 }
 
 export function FilterProjects () {
+  const { t } = useLanguage()
   return (
     <form className={styles.form_filter_container}>
-      <legend>Select and search projects by technology used</legend>
+      <legend>{t('projects.filterLegend')}</legend>
       <div className={styles.filter_container}>
         <TechIcons />
       </div>

@@ -2,9 +2,19 @@ import styles from './LanguageToggle.module.css'
 import { useLanguage } from '../../i18n/useLanguage.js'
 import { SUPPORTED_LANGS } from '../../i18n/translations.js'
 
-const FLAGS = {
-  es: { flag: '🇪🇸', label: 'Español' },
-  en: { flag: '🇬🇧', label: 'English' }
+/**
+ * Map of supported languages to:
+ *  - flagClass: a CSS class that paints the flag in pure CSS
+ *  - code:     the two-letter ISO code rendered in the corner
+ *  - label:    the full language name for aria-label
+ *
+ * Flags are drawn in CSS (not emoji) so the toggle renders the
+ * same on every platform — including those without country flag
+ * emoji support (older Chromium, Linux without noto-emoji).
+ */
+const LANG_META = {
+  es: { flagClass: 'flagEs', code: 'ES', label: 'Español' },
+  en: { flagClass: 'flagEn', code: 'EN', label: 'English' }
 }
 
 /**
@@ -20,8 +30,8 @@ const FLAGS = {
  *    as the language switcher.
  *  - each button is a real <button> with aria-pressed reflecting the
  *    active state.
- *  - the flag emoji is wrapped in aria-hidden; the visible label is
- *    the full language name, not the flag.
+ *  - the visible text is the two-letter ISO code, which the
+ *    aria-label expands to the full language name for screen readers.
  */
 export function LanguageToggle () {
   const { lang, setLang } = useLanguage()
@@ -30,17 +40,18 @@ export function LanguageToggle () {
     <div role='group' aria-label='Language' className={styles.toggle}>
       {SUPPORTED_LANGS.map((code) => {
         const isActive = code === lang
-        const { flag, label } = FLAGS[code] ?? { flag: code.toUpperCase(), label: code }
+        const meta = LANG_META[code] ?? { flagClass: '', code: code.toUpperCase(), label: code }
+        const flagClass = styles[meta.flagClass] ?? ''
         return (
           <button
             key={code}
             type='button'
-            className={`${styles.flagBtn} ${isActive ? styles.flagBtnActive : ''}`}
+            className={`${styles.flagBtn} ${flagClass} ${isActive ? styles.flagBtnActive : ''}`}
             aria-pressed={isActive}
-            aria-label={label}
+            aria-label={meta.label}
             onClick={() => setLang(code)}
           >
-            <span aria-hidden='true' className={styles.flag}>{flag}</span>
+            <span aria-hidden='true' className={styles.code}>{meta.code}</span>
           </button>
         )
       })}

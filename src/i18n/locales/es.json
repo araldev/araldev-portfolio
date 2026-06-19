@@ -5,6 +5,9 @@
     "aboutMe": "Sobre Mí",
     "contact": "Contacto"
   },
+  "projects": {
+    "filterLegend": "Selecciona y filtra proyectos por tecnología usada"
+  },
   "hero": {
     "title": "Desarrollador Frontend",
     "description": "Enfocado en crear experiencias web modernas, visualmente atractivas y animadas.",
@@ -19,7 +22,9 @@
   "experience": {
     "title": "Experiencia",
     "subtitle": "Experiencia — Un Holo-Log de mi Carrera",
-    "empty": "No hay entradas de experiencia disponibles."
+    "empty": "No hay entradas de experiencia disponibles.",
+    "seeMore": "Ver más",
+    "seeLess": "Ver menos"
   },
   "about": {
     "title": "Sobre Mí",
@@ -31,7 +36,7 @@
     ],
     "highlights": [
       { "icon": "🎓", "label": "Autodidacta", "desc": "Aprendizaje continuo" },
-      { "icon": "💡", "label": "Problem Solver", "desc": "Enfoque resolutivo" },
+      { "icon": "💡", "label": "Resolutivo", "desc": "Enfoque ante problemas" },
       { "icon": "🏋️", "label": "Atleta", "desc": "Equilibrio mente-cuerpo" },
       { "icon": "🚀", "label": "Full-Stack", "desc": "MERN + más" },
       { "icon": "🎯", "label": "Enfoque", "desc": "Claridad mental" },

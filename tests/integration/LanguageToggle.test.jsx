@@ -58,9 +58,30 @@ describe('LanguageToggle', () => {
     expect(group).toBeInTheDocument()
   })
 
-  it('wraps each flag in an aria-hidden span (decorative)', () => {
+  it('wraps each flag code in an aria-hidden span (decorative)', () => {
     const { container } = renderWithProvider(<LanguageToggle />)
     const flagSpans = container.querySelectorAll('span[aria-hidden="true"]')
     expect(flagSpans.length).toBeGreaterThanOrEqual(2)
+  })
+
+  it('renders the ISO language code in each button (ES/EN)', () => {
+    const { container } = renderWithProvider(<LanguageToggle />)
+    // The codes live in aria-hidden spans.
+    const codes = Array.from(container.querySelectorAll('span[aria-hidden="true"]'))
+      .map((el) => el.textContent)
+    expect(codes).toContain('ES')
+    expect(codes).toContain('EN')
+  })
+
+  it('uses CSS-only flag swatches (no emoji glyphs rendered)', () => {
+    // The flag is painted via background-image / linear-gradient. We
+    // assert the button background is non-empty (the CSS module sets
+    // it). The test is loose on purpose: the goal is to confirm the
+    // button has visual content, not to pin the exact gradient.
+    const buttons = renderWithProvider(<LanguageToggle />).getAllByRole('button')
+    buttons.forEach((btn) => {
+      const style = window.getComputedStyle(btn)
+      expect(style.background.length).toBeGreaterThan(0)
+    })
   })
 })

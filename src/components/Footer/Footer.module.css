@@ -39,18 +39,19 @@
     -webkit-background-clip: text;
     color: transparent;
     -webkit-text-fill-color: transparent;
-    width: 110px;
+    width: max-content;
     height: max-content;
     text-align: left;
   }
-} 
+}
 .ul_contact {
 display: flex;
 justify-content: flex-start;
 align-items: flex-start;
 flex-direction: column;
 list-style: none;
-width: 110px;
+width: 100%;
+max-width: 220px;
 height: auto;
 gap: 20px;
 position: relative;
@@ -115,7 +116,7 @@ position: relative;
     -webkit-background-clip: text;
     color: transparent;
     -webkit-text-fill-color: transparent;
-    width: 100px;
+    width: max-content;
     height: max-content;
   }
 }
@@ -125,7 +126,8 @@ position: relative;
   align-items: flex-start;
   flex-direction: column;
   list-style: none;
-  width: 100px;
+  width: 100%;
+  max-width: 220px;
   height: auto;
   gap: 20px;
   margin-bottom: auto;
