@@ -28,13 +28,13 @@
 
 .hero_img_container {
   position: absolute;
-  top: 40%;
+  top: 30%;
   left: 65%;
   transform: translate(-50%, -50%);
   width: 350px;
   height: auto;
   object-fit: contain;
-  z-index: 0;
+  z-index: 1;
 
   img {
     width: 100%;
@@ -153,19 +153,19 @@
 
 @media(max-width: 1600px) {
   .hero_img_container {
-    top: 40%;
+    top: 30%;
     left: 70%;
   }
 }
 @media(max-width: 1300px) {
   .hero_img_container {
-    top: 40%;
+    top: 30%;
     left: 75%;
   }
 }
 @media(max-width: 1050px) {
   .hero_img_container {
-    top: 40%;
+    top: 30%;
     left: 78%;
   }
 }
@@ -179,7 +179,7 @@
   }
 
   .hero_img_container {
-    top: 40%;
+    top: 30%;
     left: 80%;
   }
 
@@ -189,7 +189,7 @@
 }
 @media(max-width: 850px) {
   .hero_img_container {
-    top: 40%;
+    top: 30%;
     left: 80%;
 
     img {
