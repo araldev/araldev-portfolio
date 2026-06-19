@@ -1,12 +1,11 @@
-import { useEffect, useRef } from 'react'
-import { projectsDataSvg } from '../components/AnimatedTitle/titles'
+import { useLayoutEffect, useRef } from 'react'
 
 import { gsap } from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
-export function useAnimatedTitle () {
+export function useAnimatedTitle (svgPath) {
   const timeoutId = useRef(null)
 
   const heroRef = useRef(null)
@@ -20,7 +19,7 @@ export function useAnimatedTitle () {
   const titleContainerRef = useRef(null)
   const titleMaskRef = useRef(null)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const hero = heroRef.current
     const heroImgContainer = heroImgContainerRef.current
     const heroImgTitle = heroImgTitleRef.current
@@ -97,7 +96,7 @@ export function useAnimatedTitle () {
     // =========================
 
     const updateMaskPosition = () => {
-      titleMask.setAttribute('d', projectsDataSvg)
+      titleMask.setAttribute('d', svgPath)
       titleMask.removeAttribute('transform')
 
       const titleDimensions =
@@ -257,7 +256,7 @@ export function useAnimatedTitle () {
           const revealProgress =
             (scrollProgress - 0.6) * (1 / 0.25)
 
-          const gradientSpread = 100
+          const gradientSpread = 200
 
           const gradientBottom =
             240 - revealProgress * 280
@@ -308,7 +307,7 @@ export function useAnimatedTitle () {
 
       if (fadeInImg) fadeInImg.kill()
     }
-  }, [])
+  }, [svgPath])
 
   return {
     heroRef,

@@ -3,11 +3,15 @@ import { useId } from 'react'
 import { useAnimatedTitle } from '../../Hooks/useAnimatedTitle.js'
 import { usePreloadImg } from '../../Hooks/usePreloadImg.js'
 import { useLanguage } from '../../i18n/useLanguage.js'
+import { projectsDataSvg, projectsDataSvgEs } from './titles'
 import avatar from '../../assets/perfil_2_sin_fondo.webp'
 import { utilsIcons } from '../../data/icons.js'
 
 export function AnimatedTitle ({ children }) {
   const titleRevealMaskId = useId()
+  const { t, lang } = useLanguage()
+  const svgPath = lang === 'es' ? projectsDataSvgEs : projectsDataSvg
+
   const {
     heroRef,
     heroImgContainerRef,
@@ -19,8 +23,7 @@ export function AnimatedTitle ({ children }) {
     overlayCopyRef,
     titleContainerRef,
     titleMaskRef
-  } = useAnimatedTitle()
-  const { t } = useLanguage()
+  } = useAnimatedTitle(svgPath)
 
   usePreloadImg(avatar)
 
