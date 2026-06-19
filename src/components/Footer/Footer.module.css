@@ -12,21 +12,27 @@
   width: var(--width-web-content);
   height: auto;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr)) ;
+  /* Two columns sized to their own content (h3 + ul) so the whole
+     block is only as wide as the widest column + gap. The
+     `justify-content: center` below centres that block within the
+     1200px container. The alternative (1fr 1fr) pinned the headings
+     + lists to the inner-left edge of each 600px column, which read
+     as visually off-centre once the grid hit its 1200px cap. */
+  grid-template-columns: max-content max-content;
   grid-template-rows: auto;
-  place-content: center;
-  place-items: start;
-  gap: 40px;
+  justify-content: center;
+  justify-items: start;
+  gap: 80px;
   margin: 0 auto;
   padding: 60px 0;
   position: relative;
 }
 .contact_container {
-  width: 100%;
+  width: max-content;
   height: fit-content;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   flex-direction: column;
   gap: 20px;
   position: relative;
@@ -45,12 +51,12 @@
 }
 .ul_contact {
 display: flex;
-justify-content: center;
-align-items: center;
+justify-content: flex-start;
+align-items: flex-start;
 flex-direction: column;
 list-style: none;
-width: 100%;
-max-width: 220px;
+width: max-content;
+min-width: 220px;
 height: auto;
 gap: 20px;
 position: relative;
@@ -98,11 +104,11 @@ position: relative;
 }
   
 .links_container {
-  width: 100%;
+  width: max-content;
   height: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   flex-direction: column;
   gap: 20px;
   position: relative;
@@ -121,12 +127,12 @@ position: relative;
 }
 .ul_links {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   flex-direction: column;
   list-style: none;
-  width: 100%;
-  max-width: 220px;
+  width: max-content;
+  min-width: 220px;
   height: auto;
   gap: 20px;
   margin-bottom: auto;
@@ -178,6 +184,24 @@ position: relative;
     margin: 0 auto;
   }
 }
+
+/* On small screens, stack the two columns vertically so the
+   max-content grid doesn't overflow the viewport. */
+@media (max-width: 768px) {
+  .footer_content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .contact_container,
+  .links_container,
+  .ul_contact,
+  .ul_links {
+    width: 100%;
+    min-width: 0;
+    align-items: center;
+  }
+}
+
  /* para adaptar el gmail de contact_container sin que entre en el espacio del container_links */
 @media (max-width: 470px) {
   .footer_container .footer_content .contact_container > ul > li:nth-child(2) > a > svg {
