@@ -2,10 +2,12 @@ import styles from './ContactSection.module.css'
 import { Button } from '../Button/Button.jsx'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { useSendEmailJs } from '../../Hooks/useSendEmailJs.js'
+import { useLanguage } from '../../i18n/useLanguage.js'
 import { useRef, useState } from 'react'
 
 export function ContactSection () {
   const { isFormSend, error, handleSendEmailJs } = useSendEmailJs()
+  const { t } = useLanguage()
   const captchaRef = useRef(null)
   const [isLoading, setIsLoading] = useState(false)
 
@@ -42,11 +44,11 @@ export function ContactSection () {
 
   return (
     <section id='contact' className={styles.contact_container}>
-      <h2>Contact</h2>
+      <h2>{t('contact.title')}</h2>
 
       <form autoComplete='on' name='contact-form' onSubmit={handleSubmit} className={styles.form} action=''>
         <label>
-          <input name='name' type='text' placeholder='Name' required />
+          <input name='name' type='text' placeholder={t('contact.name')} required />
         </label>
 
         <label>
@@ -54,11 +56,11 @@ export function ContactSection () {
         </label>
 
         <label>
-          <input name='subject' type='text' placeholder='Subject' required />
+          <input name='subject' type='text' placeholder={t('contact.subject')} required />
         </label>
 
         <label>
-          <textarea name='message' rows='5' cols='40' placeholder='How we can colaborate?' required />
+          <textarea name='message' rows='5' cols='40' placeholder={t('contact.message')} required />
         </label>
 
         <ReCAPTCHA
@@ -70,11 +72,11 @@ export function ContactSection () {
         />
 
         <Button disabled={isLoading} type='submit'>
-          {isLoading ? 'Loading...' : 'Send'}
+          {isLoading ? t('contact.loading') : t('contact.send')}
         </Button>
 
         {error && <small style={{ color: 'red' }}>{error}</small>}
-        {!error && isFormSend && <small style={{ color: 'green' }}>Successfully sent</small>}
+        {!error && isFormSend && <small style={{ color: 'green' }}>{t('contact.success')}</small>}
       </form>
     </section>
   )

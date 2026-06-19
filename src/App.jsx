@@ -33,7 +33,7 @@ export default function () {
           <JobsCards />
           <AboutMeSection />
         </IsIconCheckFilterProvider>
-          <ContactSection />
+        <ContactSection />
         <BackgroundHeroCanvas />
       </main>
       <Footer />

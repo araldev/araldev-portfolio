@@ -2,6 +2,7 @@ import styles from './HeroSection.module.css'
 import { BackgroundHeroCanvas } from '../Backgrounds/BackgroundHeroCanvas.jsx'
 import { socialIcons } from '../../data/icons.js'
 import { useFadeInText } from '../../Hooks/useFadeInText.js'
+import { useLanguage } from '../../i18n/useLanguage.js'
 import { useRef } from 'react'
 
 export function HeroSection () {
@@ -9,19 +10,20 @@ export function HeroSection () {
   const subtitleRef = useRef()
   const paragraphRef = useRef()
   const heroContainerRef = useRef()
+  const { t } = useLanguage()
   useFadeInText(titleRef, heroContainerRef, 'chars', 'linear-gradient(90deg, #00C9FF, #92FE9D)')
-  useFadeInText(subtitleRef, heroContainerRef, 'chars', 'linear-gradient(135deg, #8fc6ff 0%, #5a9cff  100%')
+  useFadeInText(subtitleRef, heroContainerRef, 'chars', 'linear-gradient(135deg, #8fc6ff 0%, #5a9cff  100%)')
   useFadeInText(paragraphRef, heroContainerRef)
 
   return (
     <header ref={heroContainerRef} id='home' className={styles.container_header}>
       <aside className={styles.hero_section}>
         <h1 ref={titleRef} className={styles.title_hero}>Arturo Alba García</h1>
-        <h2 ref={subtitleRef} className={styles.subTitle_hero}>Frontend Developer</h2>
-        <p ref={paragraphRef} className={styles.paragraph_hero}>Focused on crafting modern, visually engaging, and <br />animated web experiences.</p>
+        <h2 ref={subtitleRef} className={styles.subTitle_hero}>{t('hero.title')}</h2>
+        <p ref={paragraphRef} className={styles.paragraph_hero}>{t('hero.description')}</p>
         <nav className={styles.socials_hero_container}>
           <a className={styles.button_cv} href='./public/cv-araldev.pdf' download>
-            Download CV
+            {t('hero.downloadCV')}
           </a>
           <div className={styles.social_icons_container}>
             <a href='https://www.linkedin.com/in/araldev/' target='_blank' rel='noopener noreferrer'>

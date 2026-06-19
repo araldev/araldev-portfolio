@@ -1,19 +1,35 @@
 import styles from './AboutMeSection.module.css'
 import avatar from '../../assets/perfil_sin_fondo.webp'
+import { useLanguage } from '../../i18n/useLanguage.js'
 
-const highlights = [
-  { icon: '🎓', label: 'Autodidacta', desc: 'Aprendizaje continuo' },
-  { icon: '💡', label: 'Problem Solver', desc: 'Enfoque resolutivo' },
-  { icon: '🏋️', label: 'Atleta', desc: 'Equilibrio mente-cuerpo' },
-  { icon: '🚀', label: 'Full-Stack', desc: 'MERN + más' },
-  { icon: '🎯', label: 'Enfoque', desc: 'Claridad mental' },
-  { icon: '⚡', label: 'Proactividad', desc: 'Iniciativa constante' },
-]
+/**
+ * Parses a translation string with `[[X]]` markers into a list of
+ * React-safe nodes. `[[X]]` becomes <strong>X</strong>. Anything
+ * else is plain text. This avoids dangerouslySetInnerHTML (XSS risk)
+ * while still letting translators mark emphasis in plain JSON.
+ *
+ * @param {string} text
+ * @returns {Array<{ kind: 'text'|'strong', value: string }>}
+ */
+function parseEmphasis (text) {
+  if (typeof text !== 'string') return []
+  // Split keeping the [[X]] tokens. Pattern: any `[[X]]` (non-greedy).
+  const parts = text.split(/(\[\[[^\]]+\]\])/g).filter(Boolean)
+  return parts.map((part) => {
+    const match = part.match(/^\[\[([^\]]+)\]\]$/)
+    if (match) return { kind: 'strong', value: match[1] }
+    return { kind: 'text', value: part }
+  })
+}
 
 export function AboutMeSection () {
+  const { t } = useLanguage()
+  const bio = t('about.bio', [])
+  const highlights = t('about.highlights', [])
+
   return (
     <section id='about-me' className={styles.about_section}>
-      <h2 className={styles.section_title}>About Me</h2>
+      <h2 className={styles.section_title}>{t('about.title')}</h2>
 
       <div className={styles.content_flex}>
         {/* Avatar - sticky on desktop */}
@@ -23,35 +39,29 @@ export function AboutMeSection () {
           </div>
           <div className={styles.avatar_info}>
             <span className={styles.avatar_name}>Arturo "R2"</span>
-            <span className={styles.avatar_tag}>Full-Stack Developer</span>
+            <span className={styles.avatar_tag}>{t('about.tagline')}</span>
           </div>
         </div>
 
         {/* Bio + Highlights */}
         <div className={styles.bio_column}>
           <div className={styles.bio_card}>
-            <p>
-              Mi nombre es Arturo, aunque muchos me conocen como <strong>R2</strong>.
-              Estudié TSAFAD, pero tras varios años dedicándome a ello, decidí dar un giro
-              hacia el sector tecnológico —otra de mis grandes pasiones— impulsado por mi
-              interés en crear, construir y resolver.
-            </p>
-            <p>
-              Desde pequeño he estado en contacto con ordenadores, aunque no fue hasta 2022
-              cuando comencé a adentrarme en el mundo de la programación. En enero de 2025,
-              tomé la decisión de formarme de manera seria y estructurada. Desde entonces,
-              he desarrollado múltiples proyectos y tengo otros tantos en mente que me
-              gustaría llevar a cabo y monetizar.
-            </p>
-            <p>
-              Me considero una persona <strong>autodidacta</strong>; aprender por mi cuenta
-              ha sido una constante en mi vida y eso me ha convertido en alguien resolutivo,
-              independiente y siempre en busca de nuevas soluciones.
-            </p>
+            {Array.isArray(bio) && bio.map((paragraph, i) => {
+              const segments = parseEmphasis(paragraph)
+              return (
+                <p key={i}>
+                  {segments.map((seg, j) =>
+                    seg.kind === 'strong'
+                      ? <strong key={j}>{seg.value}</strong>
+                      : <span key={j}>{seg.value}</span>
+                  )}
+                </p>
+              )
+            })}
           </div>
 
           <div className={styles.highlights_grid}>
-            {highlights.map((item) => (
+            {Array.isArray(highlights) && highlights.map((item) => (
               <div key={item.label} className={styles.highlight_card}>
                 <span className={styles.highlight_icon}>{item.icon}</span>
                 <span className={styles.highlight_label}>{item.label}</span>

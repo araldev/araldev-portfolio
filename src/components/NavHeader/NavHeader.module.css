@@ -41,6 +41,12 @@
   background-size: cover;
 }
 
+.nav_lang {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
 .nav_links {
   display: flex;
   width: 80%;

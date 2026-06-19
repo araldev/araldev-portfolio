@@ -1,0 +1,61 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "projects": "Proyectos",
+    "aboutMe": "Sobre Mí",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "title": "Desarrollador Frontend",
+    "description": "Enfocado en crear experiencias web modernas, visualmente atractivas y animadas.",
+    "downloadCV": "Descargar CV"
+  },
+  "animatedTitle": {
+    "scrollDown": "Desplázate hacia abajo",
+    "quote1": "«El código se encuentra con la creatividad»",
+    "quote2": "«La lógica fluye con el arte»",
+    "quote3": "«Estos son mis proyectos»"
+  },
+  "experience": {
+    "title": "Experiencia",
+    "subtitle": "Experiencia — Un Holo-Log de mi Carrera",
+    "empty": "No hay entradas de experiencia disponibles."
+  },
+  "about": {
+    "title": "Sobre Mí",
+    "tagline": "Desarrollador Full-Stack",
+    "bio": [
+      "Mi nombre es Arturo, aunque muchos me conocen como [[R2]]. Estudié TSAFAD, pero tras varios años dedicándome a ello, decidí dar un giro hacia el sector tecnológico —otra de mis grandes pasiones— impulsado por mi interés en crear, construir y resolver.",
+      "Desde pequeño he estado en contacto con ordenadores, aunque no fue hasta 2022 cuando comencé a adentrarme en el mundo de la programación. En enero de 2025, tomé la decisión de formarme de manera seria y estructurada. Desde entonces, he desarrollado múltiples proyectos y tengo otros tantos en mente que me gustaría llevar a cabo y monetizar.",
+      "Me considero una persona [[autodidacta]]; aprender por mi cuenta ha sido una constante en mi vida y eso me ha convertido en alguien resolutivo, independiente y siempre en busca de nuevas soluciones."
+    ],
+    "highlights": [
+      { "icon": "🎓", "label": "Autodidacta", "desc": "Aprendizaje continuo" },
+      { "icon": "💡", "label": "Problem Solver", "desc": "Enfoque resolutivo" },
+      { "icon": "🏋️", "label": "Atleta", "desc": "Equilibrio mente-cuerpo" },
+      { "icon": "🚀", "label": "Full-Stack", "desc": "MERN + más" },
+      { "icon": "🎯", "label": "Enfoque", "desc": "Claridad mental" },
+      { "icon": "⚡", "label": "Proactividad", "desc": "Iniciativa constante" }
+    ]
+  },
+  "contact": {
+    "title": "Contacto",
+    "name": "Nombre",
+    "email": "Email",
+    "subject": "Asunto",
+    "message": "¿Cómo podemos colaborar?",
+    "send": "Enviar",
+    "loading": "Cargando...",
+    "success": "Enviado correctamente"
+  },
+  "footer": {
+    "contact": "Contacto",
+    "links": "Enlaces",
+    "socials": {
+      "linkedin": "Linkedin",
+      "email": "Email",
+      "github": "GitHub",
+      "discord": "Discord"
+    }
+  }
+}

@@ -2,6 +2,7 @@ import styles from './AnimatedTitle.module.css'
 import { useId } from 'react'
 import { useAnimatedTitle } from '../../Hooks/useAnimatedTitle.js'
 import { usePreloadImg } from '../../Hooks/usePreloadImg.js'
+import { useLanguage } from '../../i18n/useLanguage.js'
 import avatar from '../../assets/perfil_2_sin_fondo.webp'
 import { utilsIcons } from '../../data/icons.js'
 
@@ -19,6 +20,7 @@ export function AnimatedTitle ({ children }) {
     titleContainerRef,
     titleMaskRef
   } = useAnimatedTitle()
+  const { t } = useLanguage()
 
   usePreloadImg(avatar)
 
@@ -33,7 +35,7 @@ export function AnimatedTitle ({ children }) {
           </div>
 
           <div className={styles.hero_img_copy} ref={heroImgCopyRef}>
-            <p className={styles.paragraph}>Scroll down</p>
+            <p className={styles.paragraph}>{t('animatedTitle.scrollDown')}</p>
             {utilsIcons.arrowDown}
           </div>
         </div>
@@ -61,9 +63,9 @@ export function AnimatedTitle ({ children }) {
 
         <div className={styles.overlay_copy} ref={overlayCopyContainerRef}>
           <h2 ref={overlayCopyRef}>
-            «Code meets creativity» <br /> <br />
-            «Logic flows with art» <br /> <br />
-            «These are my projects»
+            {t('animatedTitle.quote1')} <br /> <br />
+            {t('animatedTitle.quote2')} <br /> <br />
+            {t('animatedTitle.quote3')}
           </h2>
         </div>
       </section>

@@ -1,0 +1,78 @@
+/* ============================================================
+   LanguageToggle.module.css — Two-flag language switcher.
+
+   Design language:
+     - Glass surface (rgba + backdrop-filter) to match the rest of
+       the UI glass cards.
+     - Active state uses the cyan accent (--color-job-beacon) so it
+       reads as "selected" at a glance, consistent with the
+       ProjectsCards filter active state.
+     - Vision Pro spring easing (--ease-vision-pro) on hover and
+       active transitions.
+   ============================================================ */
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 0.5px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+}
+
+.flagBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 32px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  cursor: pointer;
+  transition:
+    background 0.2s var(--ease-vision-pro),
+    border-color 0.2s var(--ease-vision-pro),
+    transform 0.2s var(--ease-vision-pro);
+  font-family: inherit;
+  /* Click "press" feedback for coarse pointers (mobile). */
+}
+
+.flag {
+  font-size: 1.15rem;
+  line-height: 1;
+  /* Some platforms render flag emoji as text; keep crisp */
+  font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
+  display: inline-block;
+}
+
+.flagBtnActive {
+  background: rgba(0, 201, 255, 0.18);
+  border-color: rgba(0, 201, 255, 0.6);
+  box-shadow: 0 0 10px -2px rgba(0, 201, 255, 0.55);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .flagBtn:hover {
+    background: rgba(0, 201, 255, 0.1);
+    border-color: rgba(0, 201, 255, 0.35);
+    transform: translateY(-1px);
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .flagBtn:active {
+    background: rgba(0, 201, 255, 0.18);
+    transform: scale(0.95);
+    transition: 0.1s ease-out;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flagBtn { transition: background 0.15s ease, border-color 0.15s ease; }
+  .flagBtn:hover { transform: none; }
+}

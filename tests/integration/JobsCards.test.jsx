@@ -2,6 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { JobsCards } from '../../src/components/JobsCards/JobsCards.jsx'
 import { IsIconCheckFilterProvider } from '../../src/contexts/IsIconCheckFilter.jsx'
+import { LanguageProvider } from '../../src/i18n/LanguageContext.jsx'
 import { minimalJob, jobEmptyStack } from '../fixtures/jobs.js'
 
 vi.mock('../../src/components/JobsCards/JobsCards.module.css', () => ({
@@ -24,7 +25,11 @@ beforeEach(() => {
 })
 
 function renderWithProviders (ui) {
-  return render(<IsIconCheckFilterProvider>{ui}</IsIconCheckFilterProvider>)
+  return render(
+    <LanguageProvider>
+      <IsIconCheckFilterProvider>{ui}</IsIconCheckFilterProvider>
+    </LanguageProvider>
+  )
 }
 
 describe('JobsCards', () => {

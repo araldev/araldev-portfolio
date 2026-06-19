@@ -4,6 +4,7 @@ import { JobCard } from '../JobCard/JobCard.jsx'
 import { useSortJobs } from '../../Hooks/useSortJobs.js'
 import { useFadeInJobCards } from '../../Hooks/useFadeInJobCards.js'
 import { useFlipJobs } from '../../Hooks/useFlipJobs.js'
+import { useLanguage } from '../../i18n/useLanguage.js'
 
 /**
  * JobsCards — <section id="experience"> wrapper.
@@ -19,6 +20,7 @@ import { useFlipJobs } from '../../Hooks/useFlipJobs.js'
 export function JobsCards () {
   const gridRef = useRef(null)
   const { sortJobs } = useSortJobs()
+  const { t } = useLanguage()
 
   // Both hooks are P4 no-ops; the gridRef is kept as a local ref in case
   // a future P5 brings back an animation that needs it.
@@ -32,9 +34,9 @@ export function JobsCards () {
         className={`${styles.experience_section} ${styles['experience_section--empty']}`}
         aria-labelledby='experience-title'
       >
-        <h2 id='experience-title' className={styles.experience_title}>Experience</h2>
+        <h2 id='experience-title' className={styles.experience_title}>{t('experience.title')}</h2>
         <p role='status' className={styles.experience_empty}>
-          No experience entries available.
+          {t('experience.empty')}
         </p>
       </section>
     )
@@ -49,7 +51,7 @@ export function JobsCards () {
       aria-labelledby='experience-title'
     >
       <h2 id='experience-title' className={styles.experience_title}>
-        Experience — A Holo-Log of my Career
+        {t('experience.subtitle')}
       </h2>
 
       <div className={styles.experience_cards_container} ref={gridRef}>
