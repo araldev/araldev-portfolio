@@ -27,3 +27,12 @@ npm-shrinkwrap.json
 *.sln
 *.sw?
 *.env
+
+# Project tooling — not part of the source
+.atl/
+.husky/
+.specify/
+.github/agents/
+.github/prompts/
+coverage/
+test-results/

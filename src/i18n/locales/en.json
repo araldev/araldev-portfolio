@@ -240,28 +240,28 @@
       "shortDescription": "Full-stack educational platform. Vanilla frontend, Node.js backend, Turso + Prisma, Redis sessions, JWT auth, and hexagonal architecture.",
       "description": [
         "Why this project? Because I wanted to truly understand how a web application works. Not 'learn React' or 'set up Next.js'. Understand the fundamentals: HTTP, authentication, databases, server-side vs client-side rendering, session management, and above all, architecture.",
-        "The decision was deliberate: zero frontend frameworks, zero magic dependencies. Everything here, I understand and control. Built to learn — not to impress with framework names."
+        "The decision was deliberate: zero frontend frameworks, zero magic dependencies. Everything here, I understand and control. Built to learn, not to impress with framework names."
       ],
       "details": [
         {
           "id": "english-web-1",
           "imgIndex": 0,
           "title": "Architecture > Framework",
-          "text": "Backend structured with Hexagonal / Screaming Architecture. The src/ folder screams what it does: auth/, user/, shared/. No matter what framework or database I use — the core business logic is isolated. If I change Prisma for Drizzle or Turso for PostgreSQL tomorrow, I only touch infrastructure/.",
+          "text": "Backend structured with Hexagonal / Screaming Architecture. The src/ folder screams what it does: auth/, user/, shared/. No matter what framework or database I use, the core business logic stays isolated. If I change Prisma for Drizzle or Turso for PostgreSQL tomorrow, I only touch infrastructure/.",
           "code": "src/\n  auth/\n    application/ → use-cases\n    domain/       → entities, ports\n    infrastructure/ → adapters (Prisma, Redis, JWT)"
         },
         {
           "id": "english-web-2",
           "imgIndex": 1,
           "title": "Authentication from Scratch",
-          "text": "No NextAuth, Lucia, or magic. Complete implementation: email/password with bcrypt, Google OAuth 2.0 with full verification flow, dual JWT (access 15min + refresh 7d with rotation), Redis for active refresh tokens with TTL, secure cookies (httpOnly, sameSite, secure). Can close sessions actively — revoke tokens. Something JWT alone can't do.",
+          "text": "No NextAuth, Lucia, or magic. Complete implementation: email/password with bcrypt, Google OAuth 2.0 with full verification flow, dual JWT (access 15min + refresh 7d with rotation), Redis for active refresh tokens with TTL, secure cookies (httpOnly, sameSite, secure). Active sessions can be closed and tokens revoked, something stateless JWT alone can't do.",
           "code": "// Redis stores active refresh tokens\n// On refresh: previous token is invalidated (rotation)\n// If a token is stolen, next refresh detects it"
         },
         {
           "id": "english-web-3",
           "imgIndex": 2,
           "title": "Vanilla Frontend, Real HTTP",
-          "text": "Traditional HTML pages (index.html, lessons.html, user_profile.html). No React, no Vue, no router. Every navigation is a real HTTP request. The problem: full page reloads. The solution: don't force SPA — accept traditional navigation and optimize what matters: cached stylesheets, deferred scripts, and async session verification via fetch('/auth/me')."
+          "text": "Traditional HTML pages (index.html, lessons.html, user_profile.html). No React, no Vue, no router. Every navigation is a real HTTP request. Full page reloads are the trade-off. The approach is to accept traditional navigation and optimize what matters: cached stylesheets, deferred scripts, and async session verification via fetch('/auth/me')."
         },
         {
           "id": "english-web-4",
@@ -281,7 +281,7 @@
           "id": "english-web-6",
           "imgIndex": 5,
           "title": "What I Learned (that doesn't show in code)",
-          "text": "Architecture > Framework — good structure survives any tech change. JWT is not 'state in client' — it's a token you validate, rotate, and revoke. You can't truly log out without Redis or similar. CSS 3D is not 'animation' — it's perspective and how the GPU renders layers. Not every project needs to be SPA. JSON as a content format decouples data from presentation cleanly.",
+          "text": "Architecture over Framework: good structure survives any tech change. JWT is not just a 'state in client', it's a token you validate, rotate, and revoke. Without Redis or similar, you can't truly log out. CSS 3D is not just an 'animation', it's about perspective and how the GPU renders layers. Not every project needs to be SPA. JSON as a content format decouples data from presentation cleanly.",
           "code": null
         }
       ]

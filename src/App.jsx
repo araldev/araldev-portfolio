@@ -9,6 +9,7 @@ import { useActiveSection } from './Hooks/useActiveSection.js'
 import { BackgroundHeroCanvas } from './components/Backgrounds/BackgroundHeroCanvas.jsx'
 import { IsIconCheckFilterProvider } from './contexts/IsIconCheckFilter.jsx'
 import { NavToTop } from './components/NavToTop/NavToTop.jsx'
+import { CVDownloadWidget } from './components/CVDownloadWidget/CVDownloadWidget.jsx'
 import { useAnimatedNavToTop } from './Hooks/useAnimatedNavToTop.js'
 import { Footer } from './components/Footer/Footer.jsx'
 import { ContactSection } from './components/Contact/ContactSection.jsx'
@@ -41,6 +42,7 @@ export default function () {
         <HeroSection />
       </AnimatedTitle>
       <main id='main-content' ref={mainRef} className='container_main '>
+        <CVDownloadWidget />
         <IsIconCheckFilterProvider>
           <ProjectsCards />
           <JobsCards />

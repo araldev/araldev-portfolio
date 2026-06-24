@@ -15,6 +15,9 @@ vi.mock('../../src/components/NavHeader/NavHeader.jsx', () => ({
 vi.mock('../../src/components/NavToTop/NavToTop.jsx', () => ({
   NavToTop: () => null
 }))
+vi.mock('../../src/components/CVDownloadWidget/CVDownloadWidget.jsx', () => ({
+  CVDownloadWidget: () => null
+}))
 vi.mock('../../src/components/Backgrounds/BackgroundHeroCanvas.jsx', () => ({
   BackgroundHeroCanvas: () => null
 }))

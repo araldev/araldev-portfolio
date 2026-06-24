@@ -22,7 +22,7 @@ export function HeroSection () {
         <h2 ref={subtitleRef} className={styles.subTitle_hero}>{t('hero.title')}</h2>
         <p ref={paragraphRef} className={styles.paragraph_hero}>{t('hero.description')}</p>
         <nav className={styles.socials_hero_container}>
-          <a className={styles.button_cv} href='./public/cv-araldev.pdf' download>
+          <a className={styles.button_cv} href={`${import.meta.env.BASE_URL}cv-araldev.pdf`} download='cv-arturo-alba-garcia.pdf'>
             {t('hero.downloadCV')}
           </a>
           <div className={styles.social_icons_container}>
