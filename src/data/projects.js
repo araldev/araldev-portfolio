@@ -1,5 +1,14 @@
 /* eslint-disable quotes */
 import { techIcons } from './icons'
+import screenshotV12Ui from '../assets/screenshot-v12-ui.webp'
+import realHero from '../assets/real-hero.webp'
+import realStack from '../assets/real-stack.webp'
+import realButtons from '../assets/real-buttons.webp'
+import realControls from '../assets/real-controls.webp'
+import realAccordion from '../assets/real-accordion.webp'
+import demoFull from '../assets/demo-full.webp'
+import shotEnglishWeb from '../assets/shot-english-web.webp'
+import screenshotWebGame from '../assets/screenshot-web-game.png'
 
 function genId () {
   return crypto.randomUUID
@@ -38,14 +47,14 @@ export const projects = [
   {
     id: 1,
     contentKey: 'v12-ui',
-    imgSrc: new URL('/src/assets/screenshot-v12-ui.webp', import.meta.url).href,
+    imgSrc: screenshotV12Ui,
     gallery: [
-      { src: new URL('/src/assets/real-hero.webp', import.meta.url).href, alt: 'Hero section' },
-      { src: new URL('/src/assets/real-stack.webp', import.meta.url).href, alt: 'Stack tecnológico' },
-      { src: new URL('/src/assets/real-buttons.webp', import.meta.url).href, alt: 'Componentes Button' },
-      { src: new URL('/src/assets/real-controls.webp', import.meta.url).href, alt: 'Controles interactivos' },
-      { src: new URL('/src/assets/real-accordion.webp', import.meta.url).href, alt: 'Componente Accordion' },
-      { src: new URL('/src/assets/demo-full.webp', import.meta.url).href, alt: 'Vista completa del sistema' }
+      { src: realHero, alt: 'Hero section' },
+      { src: realStack, alt: 'Stack tecnológico' },
+      { src: realButtons, alt: 'Componentes Button' },
+      { src: realControls, alt: 'Controles interactivos' },
+      { src: realAccordion, alt: 'Componente Accordion' },
+      { src: demoFull, alt: 'Vista completa del sistema' }
     ],
     title: 'v12-ui',
     shortDescription: 'Librería de componentes UI autoresponsive y autoTheme para React',
@@ -98,7 +107,7 @@ export const projects = [
   {
     id: 2,
     contentKey: 'listening-maze',
-    imgSrc: new URL('/src/assets/screenshot-web-game.png', import.meta.url).href,
+    imgSrc: screenshotWebGame,
     title: 'Listening Maze',
     shortDescription: 'Juego de escucha activa en inglés con niveles escalables via JSON',
     description: [
@@ -147,7 +156,7 @@ export const projects = [
   {
     id: 3,
     contentKey: 'english-web',
-    imgSrc: new URL('/src/assets/shot-english-web.webp', import.meta.url).href,
+    imgSrc: shotEnglishWeb,
     title: 'English Web',
     shortDescription: 'Plataforma educativa vanilla HTML/CSS/JS para aprender inglés',
     description: [
