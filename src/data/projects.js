@@ -7,6 +7,7 @@ import realButtons from '../assets/real-buttons.webp'
 import realControls from '../assets/real-controls.webp'
 import realAccordion from '../assets/real-accordion.webp'
 import demoFull from '../assets/demo-full.webp'
+import bundlephobiaStats from '../assets/bundlephobia-stats.png'
 import shotEnglishWeb from '../assets/shot-english-web.webp'
 import screenshotWebGame from '../assets/screenshot-web-game.png'
 
@@ -54,7 +55,7 @@ export const projects = [
       { src: realButtons, alt: 'Button — 9 variantes con neon glow halos' },
       { src: realControls, alt: 'Toggle (WAI-ARIA switch) + Select (WAI-ARIA combobox)' },
       { src: realAccordion, alt: 'Accordion — 3 panels, arrow-key navigation' },
-      { src: realStack, alt: 'Stack tecnológico' }
+      { src: bundlephobiaStats, alt: 'Bundlephobia stats: 68.3KB minified, 17.6KB gzip, tree-shakeable' }
     ],
     title: 'v12-ui',
     shortDescription: 'React component library con utility-first design, accessibility y canvas particle effects',
