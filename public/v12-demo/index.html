@@ -215,30 +215,6 @@
   .component-tile .label .live-dot { display: inline-flex; align-items: center; gap: 6px; color: var(--v12-primary-glow); }
   .component-tile .label .live-dot::before { content: ''; width: 6px; height: 6px; background: var(--v12-primary-glow); border-radius: 50%; box-shadow: 0 0 6px var(--v12-primary-glow); animation: pulse 2s infinite; }
 
-  /* ENHANCED CINEMATIC GALLERY */
-  .cinema-grid { display: grid; gap: 24px; grid-template-columns: repeat(12, 1fr); }
-  .cinema-card {
-    position: relative; overflow: hidden; border-radius: var(--v12-radius);
-    border: 1px solid var(--v12-border); aspect-ratio: 16/9;
-    cursor: pointer; transition: all 0.5s var(--ease-out);
-  }
-  .cinema-card.span-8 { grid-column: span 8; }
-  .cinema-card.span-4 { grid-column: span 4; }
-  .cinema-card.span-6 { grid-column: span 6; }
-  .cinema-card.span-12 { grid-column: span 12; }
-  .cinema-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.8s var(--ease-out); }
-  .cinema-card:hover { border-color: var(--v12-primary); transform: translateY(-4px); box-shadow: 0 30px 80px -20px rgba(13,148,136,0.35); }
-  .cinema-card:hover img { transform: scale(1.05); }
-  .cinema-card .overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.85) 100%);
-    display: flex; flex-direction: column; justify-content: flex-end;
-    padding: 24px; opacity: 1;
-  }
-  .cinema-card .overlay .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--v12-primary-glow); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px; }
-  .cinema-card .overlay h4 { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
-  .cinema-card .overlay p { font-size: 13px; color: rgba(255,255,255,0.7); }
-
   /* COMPONENTS GRID */
   .components-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-top: 32px; }
   .component-card {
@@ -276,7 +252,7 @@
     .container { padding: 0 20px; }
     .nav-links { display: none; }
     .real-item.span-7, .real-item.span-5, .real-item.span-4, .real-item.span-6, .real-item.span-12,
-    .component-tile, .cinema-card.span-8, .cinema-card.span-4, .cinema-card.span-6, .cinema-card.span-12 { grid-column: span 12; }
+    .component-tile { grid-column: span 12; }
     .footer-grid { grid-template-columns: 1fr; gap: 32px; }
     .hero { padding: 40px 0 40px; }
     section { padding: 60px 0; }
@@ -300,7 +276,6 @@
     </div>
     <div class="nav-links">
       <a href="#real">Real</a>
-      <a href="#cinematic">Cinematic</a>
       <a href="#components">Components</a>
       <a href="#stack">Stack</a>
       <a href="https://github.com/araldev/v12-ui" target="_blank" rel="noopener">GitHub ↗</a>
@@ -448,73 +423,6 @@
   </div>
 </section>
 
-<!-- ============ CINEMATIC ENHANCED ============ -->
-<section id="cinematic">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-eyebrow">// Visual Direction</div>
-      <h2 class="section-title">Mood board.</h2>
-      <p class="section-desc">Six cinematic compositions exploring the visual language of the library — teal accents, volumetric light, deep contrast. Use them as hero pieces, social cards, or feature imagery.</p>
-    </div>
-
-    <div class="cinema-grid">
-      <div class="cinema-card span-8 fade-in">
-        <img src="images/enhanced/04-full-showcase-cinematic.png" alt="Full showcase cinematic" />
-        <div class="overlay">
-          <div class="eyebrow">FRAME 04 · HERO</div>
-          <h4>Component Showcase · Server Room</h4>
-          <p>The full demo floating as a holographic display, teal volumetric beams, reflective obsidian floor.</p>
-        </div>
-      </div>
-
-      <div class="cinema-card span-4 fade-in">
-        <img src="images/enhanced/01-buttons-cinematic.png" alt="Buttons cinematic" />
-        <div class="overlay">
-          <div class="eyebrow">FRAME 01</div>
-          <h4>Button Variants</h4>
-          <p>Volumetric teal key light, bokeh orbs, reflective surface.</p>
-        </div>
-      </div>
-
-      <div class="cinema-card span-4 fade-in">
-        <img src="images/enhanced/02-controls-cinematic.png" alt="Controls cinematic" />
-        <div class="overlay">
-          <div class="eyebrow">FRAME 02</div>
-          <h4>Toggle + Select</h4>
-          <p>Glass surface, ambient particles, museum-quality exhibit.</p>
-        </div>
-      </div>
-
-      <div class="cinema-card span-4 fade-in">
-        <img src="images/enhanced/03-accordion-cinematic.png" alt="Accordion cinematic" />
-        <div class="overlay">
-          <div class="eyebrow">FRAME 03</div>
-          <h4>Accordion</h4>
-          <p>Marble floor, dramatic chiaroscuro, panels as display exhibits.</p>
-        </div>
-      </div>
-
-      <div class="cinema-card span-4 fade-in">
-        <img src="images/enhanced/06-storybook-toggle.png" alt="Storybook Toggle cinematic" />
-        <div class="overlay">
-          <div class="eyebrow">FRAME 06</div>
-          <h4>Storybook · Toggle</h4>
-          <p>Live docs in a futuristic lab environment.</p>
-        </div>
-      </div>
-
-      <div class="cinema-card span-12 fade-in">
-        <img src="images/enhanced/05-github-cinematic.png" alt="GitHub cinematic" />
-        <div class="overlay">
-          <div class="eyebrow">FRAME 05 · WIDE</div>
-          <h4>github.com/araldev/v12-ui · Developer Workspace</h4>
-          <p>The actual repo rendered inside a tilted browser window, warm desk lamp key light, cool teal monitor spill in the background. Slight 3D perspective, anamorphic bokeh.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ============ COMPONENTS GRID ============ -->
 <section id="components">
   <div class="container">
@@ -605,7 +513,7 @@
       }
     });
   }, { threshold: 0.08 });
-  document.querySelectorAll('.component-card, .real-item, .component-tile, .cinema-card, .stat-card').forEach(el => {
+  document.querySelectorAll('.component-card, .real-item, .component-tile, .stat-card').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(24px)';
     el.style.transition = 'opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1)';
