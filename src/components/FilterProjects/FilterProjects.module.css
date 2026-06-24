@@ -329,7 +329,9 @@
 .filter_icon_label .angular > svg path,
 .filter_icon_label .junit > svg path,
 .filter_icon_label .rxjs > svg path,
-.filter_icon_label .ia > svg path {
+.filter_icon_label .ia > svg path,
+.filter_icon_label .python > svg path,
+.filter_icon_label .nextjs > svg path {
   fill: #ffffff;
   transition: fill .3s ease-in-out;
 }
@@ -367,7 +369,9 @@
 .filter_icon_label .angular > svg,
 .filter_icon_label .junit  > svg,
 .filter_icon_label .rxjs   > svg,
-.filter_icon_label .ia     > svg {
+.filter_icon_label .ia     > svg,
+.filter_icon_label .python > svg,
+.filter_icon_label .nextjs > svg {
   transition: transform .3s ease-in-out;
 }
 
@@ -383,7 +387,9 @@
   .filter_icon_label:hover .angular > svg,
   .filter_icon_label:hover .junit > svg,
   .filter_icon_label:hover .rxjs > svg,
-  .filter_icon_label:hover .ia > svg {
+  .filter_icon_label:hover .ia > svg,
+  .filter_icon_label:hover .python > svg,
+  .filter_icon_label:hover .nextjs > svg {
     transform: scale(1.2);
   }
 
@@ -413,6 +419,9 @@
   .filter_icon_label:hover .rxjs > svg path:nth-of-type(3) { fill: url(#rxjs-grad-b); }
   .filter_icon_label:hover .rxjs > svg path:nth-of-type(4) { fill: url(#rxjs-grad-c); }
   /* IA: no fill change on hover — the gradient IS its brand identity */
+  .filter_icon_label:hover .python > svg path:nth-of-type(1) { fill: #327EBD; }
+  .filter_icon_label:hover .python > svg path:nth-of-type(2) { fill: #FFDA4B; }
+  .filter_icon_label:hover .nextjs > svg path { fill: #000; }
 }
 
 /* Active (touch / no hover capability) — same colours as :hover, scale via :active */
@@ -423,7 +432,9 @@
   .filter_icon_label:active .angular > svg,
   .filter_icon_label:active .junit > svg,
   .filter_icon_label:active .rxjs > svg,
-  .filter_icon_label:active .ia > svg {
+  .filter_icon_label:active .ia > svg,
+  .filter_icon_label:active .python > svg,
+  .filter_icon_label:active .nextjs > svg {
     transform: scale(1.2);
   }
 
@@ -452,6 +463,9 @@
   .filter_icon_label:active .rxjs > svg path:nth-of-type(2) { fill: url(#rxjs-grad-a); }
   .filter_icon_label:active .rxjs > svg path:nth-of-type(3) { fill: url(#rxjs-grad-b); }
   .filter_icon_label:active .rxjs > svg path:nth-of-type(4) { fill: url(#rxjs-grad-c); }
+  .filter_icon_label:active .python > svg path:nth-of-type(1) { fill: #327EBD; }
+  .filter_icon_label:active .python > svg path:nth-of-type(2) { fill: #FFDA4B; }
+  .filter_icon_label:active .nextjs > svg path { fill: #000; }
 }
 
 /* Checked (icon is part of the active filter) — real colours, NO scale */
@@ -482,3 +496,7 @@
 .filter_icon_checkbox:checked ~ .rxjs > svg path:nth-of-type(4) { fill: url(#rxjs-grad-c); }
 
 /* IA: checked keeps the futuristic gradient as its brand identity */
+
+.filter_icon_checkbox:checked ~ .python > svg path:nth-of-type(1) { fill: #327EBD; }
+.filter_icon_checkbox:checked ~ .python > svg path:nth-of-type(2) { fill: #FFDA4B; }
+.filter_icon_checkbox:checked ~ .nextjs > svg path { fill: #000; }

@@ -75,7 +75,7 @@ export function JobCard ({
     >
       <div className={styles.job_card_surface}>
         <div className={styles.job_card_top}>
-          <JobCardLogo company={job.company} companyLogo={job.companyLogo} />
+          <JobCardLogo company={job.company} companyLogo={job.companyLogo} companyIcon={job.companyIcon} />
           <div className={styles.job_card_top_text}>
             <JobCardHeader job={job} id={job.id} />
           </div>

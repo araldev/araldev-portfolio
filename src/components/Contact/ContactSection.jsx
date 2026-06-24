@@ -1,9 +1,9 @@
 import styles from './ContactSection.module.css'
 import { Button } from '../Button/Button.jsx'
 import ReCAPTCHA from 'react-google-recaptcha'
+import React, { useRef, useState, useCallback } from 'react'
 import { useSendEmailJs } from '../../Hooks/useSendEmailJs.js'
 import { useLanguage } from '../../i18n/useLanguage.js'
-import React, { useRef, useState, useCallback } from 'react'
 
 function validateEmail (value) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)

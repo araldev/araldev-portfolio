@@ -3,6 +3,7 @@
  * @property {string} id
  * @property {string} company
  * @property {string} [companyLogo]
+ * @property {React.ReactNode} [companyIcon]
  * @property {string} role
  * @property {('full-time'|'part-time'|'contract'|'freelance'|'internship')} type
  * @property {string} period
@@ -75,13 +76,8 @@ export function validateJobContract (job, index = 0) {
 
 /**
  * Static job data. Single entry — the NTT DATA internship
- * (April 2026 — May 2026) sourced from the candidate's CV.
- *
- * The previous 4-entry mock history (Araldev Tech Lead,
- * Independent, PrevSaaS, EdTech Lab) was removed in this
- * revision because those were placeholder data, not actual
- * work history. The JobCard section now shows the only
- * real professional experience on the CV.
+ * (April 2026 — May 2026) revised with realistic achievements
+ * for a first-year DAW dual internship.
  *
  * @type {Job[]}
  */
@@ -91,7 +87,8 @@ export const jobs = [
     contentKey: 'nttData',
     company: 'NTT DATA',
     companyLogo: undefined,
-    role: 'Backend & Full-Stack Developer (Prácticas)',
+    companyIcon: techIcons.nttData,
+    role: 'Full-Stack Developer',
     type: 'internship',
     period: 'Abril 2026 — Mayo 2026',
     startDate: '2026-04',
@@ -100,17 +97,19 @@ export const jobs = [
     location: 'Málaga, Spain',
     remote: false,
     description: [
-      'Prácticas profesionales en NTT DATA dentro del programa de formación Java SE + Spring Boot. El programa cubrió seis áreas técnicas: desarrollo backend con Java y Spring Boot (servicios RESTful), calidad de software con JUnit 5 y Mockito (cobertura superior al 85%), gestión de datos en PostgreSQL, frontend con Angular, integración de IA y un proyecto final integrador.',
-      'El proyecto final consistió en liderar técnicamente el desarrollo de una solución completa, coordinando el ciclo de vida (SDLC) desde los requerimientos hasta el despliegue. En paralelo participé en la formación Java SE Programmer Certification Preparation de NTT DATA / Oracle, profundizando en el núcleo de Java (multihilo, lambdas, streams, concurrencia y gestión de memoria).'
+      'Prácticas en NTT DATA dentro del programa de formación Java y Spring Boot. Trabajamos backend con Spring Boot (servicios REST), testing con JUnit y Mockito, PostgreSQL, frontend con Angular, y un proyecto integrador donde aplicamos todo lo aprendido.',
+      'El proyecto final se desarrolló en equipo usando Git y GitHub para coordinar el trabajo: cada funcionalidad en una rama independiente, los cambios se integraban mediante Pull Requests y se revisaban antes de mergear. Una forma real de trabajar en equipo con control de versiones.',
+      'Además, realizamos cursos especializados en ingeniería de prompts con IA generativa y en testing unitario con mocks, complementando la formación técnica con habilidades en dos áreas clave del desarrollo moderno.'
     ],
     achievements: [
-      'Desarrollo Backend con Java + Spring Boot: implementación de servicios RESTful robustos, optimizando la lógica de negocio y asegurando la escalabilidad del sistema. Dominio profundo del ecosistema Spring (Boot, Data, Security), arquitectura de microservicios y gestión del ciclo de vida de aplicaciones empresariales.',
-      'Calidad de Software (Testing): creación de suites de pruebas unitarias e integración con JUnit 5 y Mockito, garantizando una cobertura de código superior al 85%. Mentalidad Testing-First, capacidad de aislar dependencias para pruebas unitarias y depuración eficiente de errores complejos.',
-      'Gestión de Datos: modelado y administración de esquemas en PostgreSQL, optimizando consultas SQL complejas para mejorar el tiempo de respuesta. Optimización de bases de datos relacionales, diseño de esquemas normalizados y gestión de transacciones.',
-      'Desarrollo Frontend con Angular: creación de interfaces de usuario dinámicas, receptivas y basadas en componentes, conectadas a APIs mediante servicios. Programación reactiva (RxJS), gestión de estado en frontend y creación de Single Page Applications (SPA).',
-      'Integración de Inteligencia Artificial: exploración e implementación de soluciones basadas en IA para automatización de tareas y análisis de datos en el entorno del proyecto. Integración de LLMs, diseño de prompts efectivos y flujo de trabajo con APIs de IA generativa.',
-      'Proyecto Final: liderazgo técnico en el desarrollo de una solución integral de principio a fin, coordinando el ciclo de vida completo (SDLC), desde los requerimientos hasta el despliegue. Resolución de problemas complejos bajo metodologías ágiles, trabajo en equipo interdisciplinario y visión integral del software.',
-      'Java SE Programmer Certification Preparation (NTT DATA / Oracle Training): formación avanzada orientada a la Certificación Profesional de Oracle. Conocimiento profundo del núcleo de Java (multihilo, lambdas, streams, concurrencia, gestión de memoria) y buenas prácticas de programación bajo estándares internacionales.'
+      'Uso de Git y GitHub como herramienta de coordinación: aplicamos Git para gestionar el trabajo en equipo con ramas por funcionalidad, commits atómicos, Pull Requests y merges controlados. Ya conocía Git, aquí lo implementamos como herramienta de coordinación real en un equipo.',
+      'Desarrollo backend con mini proyectos: realicé varios proyectos pequeños en Java con Spring Boot donde implementaba endpoints REST, servicios y lógica de negocio. Cada mini proyecto abordaba una tecnología o concepto distinto.',
+      'SQL avanzado en PostgreSQL: trabajé con consultas complejas incluyendo subconsultas anidadas, vistas, procedimientos almacenados, funciones y triggers.',
+      'Curso de Angular con standalone components y Signals: realicé un curso específico donde aprendí la nueva arquitectura con componentes standalone y Signals. Creamos un frontend completo con Angular.',
+      'Curso de testing unitario con mocks: formación específica en creación de mocks y verificación de comportamiento con Mockito y JUnit.',
+      'Curso de ingeniería de prompts con IA generativa: formación en prompts avanzados (cerrados/abiertos, zero-shot, few-shot, chain-of-thought), configuración de hiperparámetros, generación SQL precisa, comparativa de plataformas IA, MLOps y seguridad legal.',
+      'Metodologías ágiles: trabajo con sprints quincenales y daily standups, estimación de tareas y uso de Kanban.',
+      'Documentación técnica: redacción de documentación de funcionalidades implementadas, incluyendo decisiones de diseño y ejemplos de uso.'
     ],
     stack: {
       java: techIcons.java,
@@ -118,12 +117,11 @@ export const jobs = [
       postgres: techIcons.postgres,
       angular: techIcons.angular,
       junit: techIcons.junit,
-      rxjs: techIcons.rxjs,
       ia: techIcons.ia,
       git: techIcons.git,
       gitHub: techIcons.gitHub
     },
-    tags: ['Prácticas', 'NTT DATA', 'Java', 'Spring Boot', 'Angular', 'IA', 'SDLC'],
+    tags: ['Java', 'Spring Boot', 'Prácticas', 'Trabajo en equipo', 'Metodologías ágiles', 'Resolución de problemas', 'Comunicación efectiva', 'Adaptabilidad'],
     links: {}
   }
 ]

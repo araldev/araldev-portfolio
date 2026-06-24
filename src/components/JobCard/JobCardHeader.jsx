@@ -1,3 +1,4 @@
+import { useLanguage } from '../../i18n/useLanguage.js'
 import styles from './JobCard.module.css'
 
 /**
@@ -14,7 +15,8 @@ import styles from './JobCard.module.css'
  * @param {string} props.id - job.id, used to build stable element IDs
  */
 export function JobCardHeader ({ job, id }) {
-  const typeLabel = JOB_TYPE_LABELS[job.type] || job.type
+  const { t } = useLanguage()
+  const typeLabel = t(`jobTypes.${job.type}`) || job.type
   const badgeClass = `${styles.job_card_type_badge} ${styles[`job_card_type_badge--${job.type}`] || ''}`
 
   return (
@@ -27,12 +29,4 @@ export function JobCardHeader ({ job, id }) {
       </span>
     </header>
   )
-}
-
-const JOB_TYPE_LABELS = {
-  'full-time': 'Full-time',
-  'part-time': 'Part-time',
-  contract: 'Contract',
-  freelance: 'Freelance',
-  internship: 'Internship'
 }

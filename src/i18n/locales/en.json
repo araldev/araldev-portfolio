@@ -2,6 +2,7 @@
   "nav": {
     "home": "Home",
     "projects": "Projects",
+    "experience": "Experience",
     "aboutMe": "About Me",
     "contact": "Contact",
     "ariaLabel": "Main navigation",
@@ -20,11 +21,18 @@
   },
   "experience": {
     "title": "Experience",
-    "subtitle": "Experience: A Holo-Log of my Career",
+    "subtitle": "Experience: My career",
     "empty": "No experience entries available.",
     "seeMore": "See more",
     "seeLess": "See less",
     "keyAchievements": "Key achievements"
+  },
+  "jobTypes": {
+    "full-time": "Full-time",
+    "part-time": "Part-time",
+    "contract": "Contract",
+    "freelance": "Freelance",
+    "internship": "Internship"
   },
   "job": {
     "remote": "Remote",
@@ -147,29 +155,32 @@
   },
   "jobsContent": {
     "nttData": {
-      "role": "Backend & Full-Stack Developer (Internship)",
+      "role": "Full-Stack Developer",
       "period": "April 2026 — May 2026",
       "description": [
-        "Professional internship at NTT DATA within the Java SE + Spring Boot training program. The program covered six technical areas: backend development with Java and Spring Boot (RESTful services), software quality with JUnit 5 and Mockito (coverage over 85%), data management in PostgreSQL, frontend with Angular, AI integration, and a final integrative project.",
-        "The final project involved technical leadership in developing a complete solution, coordinating the full SDLC from requirements to deployment. In parallel, I participated in the Java SE Programmer Certification Preparation by NTT DATA / Oracle, diving deep into Java core (multithreading, lambdas, streams, concurrency, and memory management)."
+        "Internship at NTT DATA within the Java and Spring Boot training program. We worked on backend with Spring Boot (REST services), testing with JUnit and Mockito, PostgreSQL, frontend with Angular, and an integrative project where we applied everything we learned.",
+        "The final project was developed as a team using Git and GitHub to coordinate work: each feature in its own branch, changes integrated through Pull Requests and reviewed before merging. A real-world approach to team collaboration with version control.",
+        "We also completed specialized courses in prompt engineering with generative AI and unit testing with mocks, complementing the technical training with skills in two key areas of modern development."
       ],
       "achievements": [
-        "Backend Development with Java + Spring Boot: implemented robust RESTful services, optimizing business logic and ensuring system scalability. Deep command of the Spring ecosystem (Boot, Data, Security), microservices architecture, and enterprise application lifecycle management.",
-        "Software Quality (Testing): created unit and integration test suites with JUnit 5 and Mockito, guaranteeing code coverage above 85%. Testing-First mindset, ability to isolate dependencies for unit testing, and efficient debugging of complex errors.",
-        "Data Management: modeled and administered PostgreSQL schemas, optimizing complex SQL queries to improve response time. Relational database optimization, normalized schema design, and transaction management.",
-        "Frontend Development with Angular: built dynamic, responsive, component-based user interfaces connected to APIs through services. Reactive programming (RxJS), frontend state management, and Single Page Application (SPA) development.",
-        "Artificial Intelligence Integration: explored and implemented AI-based solutions for task automation and data analysis within the project environment. LLM integration, effective prompt design, and workflow with generative AI APIs.",
-        "Final Project: technical leadership in developing a complete solution end-to-end, coordinating the full SDLC from requirements to deployment. Complex problem-solving under agile methodologies, interdisciplinary teamwork, and end-to-end software vision.",
-        "Java SE Programmer Certification Preparation (NTT DATA / Oracle Training): advanced training aimed at Oracle Professional Certification. Deep knowledge of Java core (multithreading, lambdas, streams, concurrency, memory management) and programming best practices under international standards."
+        "Git and GitHub as a coordination tool: applied Git to manage teamwork with feature branches, atomic commits, Pull Requests, and controlled merges. I already knew Git — here we implemented it as a real team coordination tool.",
+        "Backend development with mini projects: built several small Java Spring Boot projects implementing REST endpoints, services, and business logic. Each mini project covered a different technology or concept, allowing me to learn Spring Boot progressively and hands-on.",
+        "Advanced SQL in PostgreSQL: worked with complex queries including nested subqueries, views, stored procedures, functions, and triggers. Learned to design and optimize database schemas beyond basic CRUD operations.",
+        "Angular course with standalone components and Signals: completed a dedicated Angular course covering the new standalone component architecture, Signals for reactivity, and ecosystem best practices. Built a complete frontend applying these concepts.",
+        "Unit testing with mocks course: specialized training in creating mocks and verifying behavior with Mockito and JUnit. Learned to isolate dependencies in unit tests, simulate behaviors, and precisely verify object interactions.",
+        "Prompt engineering with generative AI course: structured training in advanced prompt design — closed vs. open prompts, zero-shot and few-shot prompting, chain-of-thought for step-by-step reasoning. Hyperparameter configuration (temperature, Top P, stop sequences) to regulate model creativity. Precise SQL query generation with explicit constraints, architectural platform comparison (ChatGPT vs. Perplexity), iterative data refinement workflows, and fundamentals of MLOps and legal security in model deployment.",
+        "Agile methodologies in practice: the team worked with bi-weekly sprints and daily standups. Learned to estimate tasks, communicate blockers on time, and use the Kanban board to prioritize pending work.",
+        "Technical documentation: wrote technical documentation for the features I implemented, including design decisions, available endpoints, and usage examples. This taught me the importance of keeping documentation alive and accessible to the team."
       ],
       "tags": [
-        "Internship",
-        "NTT DATA",
         "Java",
         "Spring Boot",
-        "Angular",
-        "AI",
-        "SDLC"
+        "Internship",
+        "Teamwork",
+        "Agile methodologies",
+        "Problem solving",
+        "Effective communication",
+        "Adaptability"
       ]
     }
   },

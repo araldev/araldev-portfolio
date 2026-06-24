@@ -35,7 +35,7 @@ function renderWithProviders (ui) {
 describe('JobsCards', () => {
   it('renders the experience section with a heading', () => {
     renderWithProviders(<JobsCards />)
-    expect(screen.getByRole('heading', { level: 2, name: /Holo-Log/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 2, name: /My career/i })).toBeInTheDocument()
   })
 
   it('renders one JobCard per job', () => {

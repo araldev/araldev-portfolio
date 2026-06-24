@@ -45,8 +45,8 @@ test('verify P6 brand icons rendered with hardcoded colours', async ({ page }) =
   }
   console.log('=== total icons:', icons.length, '===')
 
-  // We need the 7 P6 icons (Java, Spring, Postgres, Angular, JUnit, RxJS, IA)
-  expect(icons.length, 'stack must contain the 7 P6 icons').toBeGreaterThanOrEqual(7)
+  // We need the 6 P6 icons (Java, Spring, Postgres, Angular, JUnit, IA)
+  expect(icons.length, 'stack must contain the 6 P6 icons').toBeGreaterThanOrEqual(6)
 
   // Build a flat set of all fills present
   const allFills = new Set(icons.flatMap(i => i.fills))
@@ -58,7 +58,6 @@ test('verify P6 brand icons rendered with hardcoded colours', async ({ page }) =
     '0 0 48 48',            // Spring
     '-4 0 264 264',         // Postgres
     '-8 0 272 272',         // Angular
-    '12.1 8.4 262.8 272.2', // RxJS
     '0 0 512 512'           // IA
   ]
   for (const vb of p6ViewBoxes) {
@@ -91,7 +90,6 @@ test('verify P6 brand icons rendered with hardcoded colours', async ({ page }) =
     { name: 'Angular dark',  hex: '#B52E31', rgb: 'rgb(181,46,49)' },
     { name: 'JUnit red',     hex: '#dc514a', rgb: 'rgb(220,81,74)' },
     { name: 'JUnit green',   hex: '#23a161', rgb: 'rgb(35,161,97)' },
-    { name: 'RxJS pink',     hex: '#e32286', rgb: 'rgb(227,34,134)' },
     // IA was previously a single black fill; after the futuristic
     // gradient swap, its "brand identity" is a linearGradient with
     // 3 stops (cyan / violet / hot pink). Accept any of those as

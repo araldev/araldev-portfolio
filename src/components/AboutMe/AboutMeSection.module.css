@@ -55,6 +55,8 @@
   border: 0.5px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--border-radius);
   flex-shrink: 0;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .avatar_card::before {
@@ -80,6 +82,7 @@
   border-radius: 50%;
   z-index: 0;
   animation: avatarPulse 3s ease-in-out infinite alternate;
+  will-change: transform, opacity;
 }
 
 @keyframes avatarPulse {
@@ -156,6 +159,8 @@
   gap: 16px;
   position: relative;
   overflow: hidden;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .bio_card::before {

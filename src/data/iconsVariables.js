@@ -20,7 +20,10 @@ export const iconsColors = {
   angular: '#DD0031',
   junit: '#25A162',
   rxjs: '#B7178C',
-  ia: '#7C3AED'
+  ia: '#7C3AED',
+  nttData: '#0072bc',
+  python: '#327EBD',
+  nextjs: '#000000'
 }
 
 export const allIconsDictionaryKey = {
@@ -47,6 +50,9 @@ export const allIconsDictionaryKey = {
   junit: 'junit',
   rxjs: 'rxjs',
   ia: 'ia',
+  nttData: 'nttData',
+  python: 'python',
+  nextjs: 'nextjs',
   arrowUp: 'arrowUp',
   arrowDown: 'arrowDown'
 }

@@ -5,11 +5,20 @@ import { useLanguage } from '../../i18n/useLanguage.js'
 import { LanguageToggle } from '../LanguageToggle/LanguageToggle.jsx'
 import brand from '../../assets/brand-araldev-miniatura.webp'
 
-export const NavHeader = forwardRef((props, ref) => {
+export const NavHeader = forwardRef(({ activeSection }, ref) => {
   const navMenuRef = useRef(null)
   const { handleClick } = useNavPaths({ navMenuRef })
   const { t } = useLanguage()
   const idNavIcon = useId()
+
+  const navItems = [
+    { id: 'home', label: t('nav.home') },
+    { id: 'projects', label: t('nav.projects') },
+    { id: 'experience', label: t('nav.experience') },
+    { id: 'about-me', label: t('nav.aboutMe') },
+    { id: 'contact', label: t('nav.contact') }
+  ]
+
   return (
     <>
       <nav ref={ref} className={styles.nav_header} aria-label={t('nav.ariaLabel')}>
@@ -25,10 +34,16 @@ export const NavHeader = forwardRef((props, ref) => {
         </label>
 
         <ul className={styles.nav_links} role='list'>
-          <li><a href='#home' data-id='home' onClick={handleClick}>{t('nav.home')}</a></li>
-          <li><a href='#projects' data-id='projects' onClick={handleClick}>{t('nav.projects')}</a></li>
-          <li><a href='#about-me' data-id='about-me' onClick={handleClick}>{t('nav.aboutMe')}</a></li>
-          <li><a href='#contact' data-id='contact' onClick={handleClick}>{t('nav.contact')}</a></li>
+          {navItems.map(({ id, label }) => {
+            const liClass = activeSection === id
+              ? `${styles.nav_link_item} ${styles.nav_link_item_active}`
+              : styles.nav_link_item
+            return (
+              <li key={id} className={liClass}>
+                <a href={`#${id}`} data-id={id} onClick={handleClick}>{label}</a>
+              </li>
+            )
+          })}
         </ul>
 
         <div className={styles.nav_lang}>

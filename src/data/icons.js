@@ -28,7 +28,10 @@ export const techIcons = {
   angular: ICONS.ANGULAR_ICON,
   junit: ICONS.JUNIT_ICON,
   rxjs: ICONS.RXJS_ICON,
-  ia: ICONS.IA_ICON
+  ia: ICONS.IA_ICON,
+  nttData: ICONS.NTT_DATA_ICON,
+  python: ICONS.PYTHON_ICON,
+  nextjs: ICONS.NEXTJS_ICON
 }
 
 export const utilsIcons = {

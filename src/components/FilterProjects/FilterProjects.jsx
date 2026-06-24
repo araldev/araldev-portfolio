@@ -22,7 +22,7 @@ function TechIcons () {
   return (
     <>
       {
-        Object.entries(techIcons).map(([key, eachTechIcon], index) => {
+        Object.entries(techIcons).filter(([key]) => key !== 'nttData').map(([key, eachTechIcon], index) => {
           const idFilter = `${idBaseFilter}-${index}`
           const styleForIcon = key ? styles[key] : ''
 

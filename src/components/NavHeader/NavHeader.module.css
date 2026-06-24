@@ -67,87 +67,70 @@
   list-style: none;
   justify-content: center;
   align-items: center;
-  
-  li {
-    width: auto;
-    min-width: 150px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-    border-radius: 12px;
-    transition: box-shadow .3s ease;
-    @media (hover: hover) and (pointer: fine) {
-      &:hover {
-        outline: 2px solid rgb(0, 201, 255);
-        box-shadow: inset 0 0 20px 10px rgba(0, 201, 255, .3);
-      }
-    }
-    @media (hover: none) and (pointer: coarse) {
-      &:active {
-        outline: 2px solid rgb(0, 201, 255);
-        box-shadow: inset 0 0 20px 10px rgba(0, 201, 255, .3);
-      }
-    }
+}
 
-    a {
-      align-content: center;
-      width: fit-content;
-      height: fit-content;
-      padding: 20px;
-      text-decoration: none;
-      font-weight: var(--font-weight-nav);
-      font-size: var(--font-size-nav);
-      cursor: pointer;
-      background: var(--color-text-gradient);
-      color:transparent;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      -webkit-background-clip: text;
-      transition: transform .2s ease-in-out;
-      /* P5 follow-up: the link's transform previously only fired
-         when the mouse was physically over the <a>'s own hit area.
-         The user reported this as a bug — the <a> is a flex child
-         centered in a wider <li>, so the "empty" space around the
-         text wasn't part of the hover surface. The selectors
-         `.nav_links li:hover a` (and the coarse-pointer active
-         equivalent) below fire the transform from the <li>'s
-         hover, so the whole list item acts as the hit area
-         (matches the outline + box-shadow hover that the <li>
-         already had). */
-    }  
+.nav_link_item {
+  width: auto;
+  min-width: 150px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  border-radius: 12px;
+  transition: box-shadow .3s ease, border .3s ease;
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      outline: 2px solid rgb(0, 201, 255);
+      box-shadow: inset 0 0 20px 10px rgba(0, 201, 255, .3);
+    }
+  }
+  @media (hover: none) and (pointer: coarse) {
+    &:active {
+      outline: 2px solid rgb(0, 201, 255);
+      box-shadow: inset 0 0 20px 10px rgba(0, 201, 255, .3);
+    }
+  }
+
+  a {
+    align-content: center;
+    width: fit-content;
+    height: fit-content;
+    padding: 20px;
+    text-decoration: none;
+    font-weight: var(--font-weight-nav);
+    font-size: var(--font-size-nav);
+    cursor: pointer;
+    background: var(--color-text-gradient);
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    transition: transform .2s ease-in-out;
   }
 }
 
-/* P5 follow-up: explicit (non-nested) selectors for the link
-   transform on parent-hover, so PostCSS / standardjs parse the
-   selector reliably. Kept outside the .nav_links block for
-   selector clarity. */
-.nav_links li:hover a {
+/* Active section — accent underline at the bottom of the <li>,
+   different from the hover glow + outline. The link text gets a
+   solid vibrant colour instead of the resting gradient. */
+.nav_link_item_active {
+  border-bottom: 2px solid rgb(0, 201, 255);
+  border-radius: 0;
+}
+.nav_link_item_active a {
+  background: none;
+  color: rgb(0, 201, 255);
+  -webkit-text-fill-color: rgb(0, 201, 255);
+}
+
+.nav_link_item:hover a {
   transform: scale(1.2);
-  /* P6 follow-up: the user asked for the <a> to have the same
-     "feel" as a real link on hover — not just a scale. Adding a
-     subtle brightness lift (1.15) + a text-decoration gradient
-     underline that uses the same brand colour as the resting
-     text. Combined with the parent <li>'s outline + box-shadow,
-     hovering anywhere in the hit area now produces a coherent
-     "this is a link" feedback: outline around the <li>, glow
-     inside the <li>, scale + underline + brightness on the <a>. */
   filter: brightness(1.15);
-  text-decoration: underline;
-  text-decoration-color: rgb(0, 201, 255);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 4px;
 }
 @media (hover: none) and (pointer: coarse) {
-  .nav_links li:active a {
+  .nav_link_item:active a {
     transform: scale(1.2);
     filter: brightness(1.15);
-    text-decoration: underline;
-    text-decoration-color: rgb(0, 201, 255);
-    text-decoration-thickness: 2px;
-    text-underline-offset: 4px;
   }
 }
 
@@ -270,7 +253,7 @@
     transform: translateX(0%);
     transition: opacity .3s ease-in-out, background .3s ease-in-out, transform .3s ease-in-out, visibility 0s linear 0s; 
   }
-  .nav_icon:has(.checkbox) ~ .nav_links li {
+  .nav_icon:has(.checkbox) ~ .nav_links .nav_link_item {
     width: fit-content;
     height: 100px;
     a{

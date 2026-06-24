@@ -5,6 +5,7 @@ import { NavHeader } from './components/NavHeader/NavHeader.jsx'
 import { ProjectsCards } from './components/ProjectsCards/ProjectsCards.jsx'
 import { JobsCards } from './components/JobsCards/JobsCards.jsx'
 import { useAnimatedNavHeader } from './Hooks/useAnimatedNavHeader.js'
+import { useActiveSection } from './Hooks/useActiveSection.js'
 import { BackgroundHeroCanvas } from './components/Backgrounds/BackgroundHeroCanvas.jsx'
 import { IsIconCheckFilterProvider } from './contexts/IsIconCheckFilter.jsx'
 import { NavToTop } from './components/NavToTop/NavToTop.jsx'
@@ -22,6 +23,8 @@ export default function () {
   useAnimatedNavToTop({ mainRef, navToTopRef })
   useDocumentHead()
 
+  const activeSection = useActiveSection(['home', 'projects', 'about-me', 'contact', 'experience'])
+
   return (
     <>
       {/* Skip-to-content link for keyboard users */}
@@ -30,7 +33,7 @@ export default function () {
       </a>
 
       <header>
-        <NavHeader ref={navHeaderRef} />
+        <NavHeader ref={navHeaderRef} activeSection={activeSection} />
       </header>
       <NavToTop ref={navToTopRef} />
       <AnimatedTitle>

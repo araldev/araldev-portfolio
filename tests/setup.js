@@ -38,6 +38,23 @@ if (typeof globalThis.crypto === 'undefined') {
   globalThis.crypto = { randomUUID: () => Math.random().toString(36).slice(2) }
 }
 
+// Polyfill IntersectionObserver for jsdom (used by useActiveSection)
+if (typeof window !== 'undefined' && typeof window.IntersectionObserver === 'undefined') {
+  class MockIntersectionObserver {
+    constructor (callback) {
+      this.callback = callback
+      this.elements = new Set()
+    }
+    observe (el) { this.elements.add(el) }
+    unobserve (el) { this.elements.delete(el) }
+    disconnect () { this.elements.clear() }
+  }
+  Object.defineProperty(window, 'IntersectionObserver', {
+    writable: true,
+    value: MockIntersectionObserver
+  })
+}
+
 // Clean up the DOM after every test
 afterEach(() => {
   cleanup()

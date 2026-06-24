@@ -48,6 +48,11 @@ test.describe('SC-N2-01: JobsCards no relayout between t=0 and t=after-load', ()
     // re-flowed after image decode (the bug), the heights will differ.
     await page.goto('/#experience')
 
+    // Ensure the experience section and its job cards are in the DOM
+    // before measuring at t=0. Without this, React's async render
+    // (especially with Lenis lazy-load) may not have committed yet.
+    await page.waitForSelector('[data-job-card]', { timeout: 5000 })
+
     // t=0: measure immediately after the load event. Images may be
     // in "loaded but not yet decoded" state, so any card whose
     // height depends on the image's intrinsic dimensions will be
@@ -126,6 +131,11 @@ test.describe('SC-N2-04: axe-core 0 violations @ active viewport', () => {
   test('axe-core on #experience', async ({ page }) => {
     await page.goto('/#experience')
     await waitForVisualSettle(page)
+
+    // Ensure #experience is in the DOM and visible before axe-core analysis.
+    // With Lenis lazy-load and React async rendering, the section may not
+    // be fully settled by the 600ms wait alone.
+    await page.waitForSelector('#experience', { state: 'visible', timeout: 5000 })
 
     const results = await new AxeBuilder({ page })
       .include('#experience')
