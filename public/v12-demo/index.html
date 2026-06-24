@@ -178,15 +178,19 @@
     display: grid; gap: 24px;
     grid-template-columns: repeat(12, 1fr);
   }
+  .real-item-link {
+    display: block; text-decoration: none; color: inherit;
+    cursor: pointer;
+  }
   .real-item {
     border-radius: var(--v12-radius); overflow: hidden;
     background: var(--v12-surface); border: 1px solid var(--v12-border);
     transition: all 0.3s var(--ease-out);
   }
-  .real-item:hover { border-color: var(--v12-border-strong); transform: translateY(-4px); }
+  .real-item-link:hover .real-item { border-color: var(--v12-border-strong); transform: translateY(-4px); }
   .real-item .img-wrap { aspect-ratio: 16/10; overflow: hidden; background: #000; }
   .real-item img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; transition: transform 0.6s var(--ease-out); }
-  .real-item:hover img { transform: scale(1.03); }
+  .real-item-link:hover .real-item img { transform: scale(1.03); }
   .real-item .meta { padding: 20px 24px; }
   .real-item .meta h4 {
     font-family: 'JetBrains Mono', monospace; font-size: 14px;
@@ -194,11 +198,11 @@
   }
   .real-item .meta p { font-size: 14px; color: var(--v12-text-dim); }
 
-  .real-item.span-7 { grid-column: span 7; }
-  .real-item.span-5 { grid-column: span 5; }
-  .real-item.span-4 { grid-column: span 4; }
-  .real-item.span-6 { grid-column: span 6; }
-  .real-item.span-12 { grid-column: span 12; }
+  .real-item-link.span-7 { grid-column: span 7; }
+  .real-item-link.span-5 { grid-column: span 5; }
+  .real-item-link.span-4 { grid-column: span 4; }
+  .real-item-link.span-6 { grid-column: span 6; }
+  .real-item-link.span-12 { grid-column: span 12; }
 
   /* COMPONENT GALLERY — dark backdrop with the real component renders */
   .component-gallery { display: grid; gap: 16px; grid-template-columns: repeat(12, 1fr); margin-top: 32px; }
@@ -289,7 +293,7 @@
     <div class="fade-in"><span class="badge">v0.6.0 · Released 23 Jun 2026</span></div>
     <h1 class="title fade-in">A React component library with<br />utility-first <em>design</em>.</h1>
     <p class="subtitle fade-in">
-      Built by <strong style="color:var(--v12-text);">araldev</strong>. Fully typed, tree-shakable, zero-config — with canvas particle effects, accessibility-first primitives, and Tailwind v4 theming.
+      Built by <strong style="color:var(--v12-text);">araldev</strong>. Fully typed, tree-shakable, zero-config. Canvas particle effects, accessibility-first primitives, Tailwind v4 theming.
     </p>
     <div class="meta-row fade-in">
       <span class="pill">⚛️ React 18 · 19</span>
@@ -302,7 +306,7 @@
 
     <div class="hero-image fade-in">
       <img src="images/01-hero-poster.png" alt="v12-ui cinematic hero" />
-      <div class="hero-image-caption">Fig 01 · Cinematic Identity · AI-generated hero composition</div>
+      <div class="hero-image-caption">Fig 01 · Component showcase</div>
     </div>
   </div>
 </header>
@@ -335,45 +339,55 @@
     </div>
 
     <div class="real-grid">
-      <div class="real-item span-7 fade-in">
-        <div class="img-wrap"><img src="screenshots/github-repo.png" alt="araldev/v12-ui on GitHub" /></div>
-        <div class="meta">
-          <h4>github.com/araldev/v12-ui</h4>
-          <p>The repository where the library is developed: semantic-release automation, 25 tagged releases, MIT license, full README and About panel.</p>
+      <a href="https://github.com/araldev/v12-ui" target="_blank" rel="noopener" class="real-item-link span-7 fade-in">
+        <div class="real-item">
+          <div class="img-wrap"><img src="screenshots/github-repo.png" alt="araldev/v12-ui on GitHub" /></div>
+          <div class="meta">
+            <h4>github.com/araldev/v12-ui</h4>
+            <p>The repository where the library is developed: semantic-release automation, 25 tagged releases, MIT license, full README and About panel.</p>
+          </div>
         </div>
-      </div>
+      </a>
 
-      <div class="real-item span-5 fade-in">
-        <div class="img-wrap"><img src="screenshots/storybook-button.png" alt="Button component docs in Storybook" /></div>
-        <div class="meta">
-          <h4>Storybook · Button/Docs</h4>
-          <p>Live autodocs: 13 variant stories (Primary, Secondary, Muted, Accent, Success, Warning, Error, Info, Ghost, Border, Shadow variants), full prop table (as, href, variant, border, shadow, rounded), live controls panel.</p>
+      <a href="https://storybook.araldev.com/?path=/docs/components-button--docs" target="_blank" rel="noopener" class="real-item-link span-5 fade-in">
+        <div class="real-item">
+          <div class="img-wrap"><img src="screenshots/storybook-button.png" alt="Button component docs in Storybook" /></div>
+          <div class="meta">
+            <h4>Storybook · Button/Docs</h4>
+            <p>Live autodocs: 13 variant stories (Primary, Secondary, Muted, Accent, Success, Warning, Error, Info, Ghost, Border, Shadow variants), full prop table (as, href, variant, border, shadow, rounded), live controls panel.</p>
+          </div>
         </div>
-      </div>
+      </a>
 
-      <div class="real-item span-4 fade-in">
-        <div class="img-wrap"><img src="screenshots/storybook-toggle.png" alt="Toggle component docs" /></div>
-        <div class="meta">
-          <h4>Storybook · Toggle/Docs</h4>
-          <p>WAI-ARIA switch component: variant, size, disabled, readonly, defaultChecked, checked, onChange. Full story list (Default, On State, Off State, Muted, Size Sm/Md/Lg, Disabled, Readonly, Controlled).</p>
+      <a href="https://storybook.araldev.com/?path=/docs/components-toggle--docs" target="_blank" rel="noopener" class="real-item-link span-4 fade-in">
+        <div class="real-item">
+          <div class="img-wrap"><img src="screenshots/storybook-toggle.png" alt="Toggle component docs" /></div>
+          <div class="meta">
+            <h4>Storybook · Toggle/Docs</h4>
+            <p>WAI-ARIA switch component: variant, size, disabled, readonly, defaultChecked, checked, onChange. Full story list (Default, On State, Off State, Muted, Size Sm/Md/Lg, Disabled, Readonly, Controlled).</p>
+          </div>
         </div>
-      </div>
+      </a>
 
-      <div class="real-item span-4 fade-in">
-        <div class="img-wrap"><img src="screenshots/storybook-animated.png" alt="AnimatedBackground live canvas" /></div>
-        <div class="meta">
-          <h4>Storybook · AnimatedBackground</h4>
-          <p>Canvas-based light-source animation. Particles drift upward with spring physics, mouse interaction, and lightsourced glow on every blob. Auto-disabled when prefers-reduced-motion is set.</p>
+      <a href="https://storybook.araldev.com/?path=/docs/components-animatedbackground--docs" target="_blank" rel="noopener" class="real-item-link span-4 fade-in">
+        <div class="real-item">
+          <div class="img-wrap"><img src="screenshots/storybook-animated.png" alt="AnimatedBackground live canvas" /></div>
+          <div class="meta">
+            <h4>Storybook · AnimatedBackground</h4>
+            <p>Canvas-based light-source animation. Particles drift upward with spring physics, mouse interaction, and lightsourced glow on every blob. Auto-disabled when prefers-reduced-motion is set.</p>
+          </div>
         </div>
-      </div>
+      </a>
 
-      <div class="real-item span-4 fade-in">
-        <div class="img-wrap"><img src="screenshots/storybook-accordion.png" alt="Accordion component docs" /></div>
-        <div class="meta">
-          <h4>Storybook · Accordion</h4>
-          <p>WAI-ARIA accordion with arrow-key navigation. Default, muted, and ghost variants in three sizes (sm, md, lg). The sidebar reveals the full component tree: MagicLogo, MagicMouseFollower, MagicText, Stack, Accordion, AnimatedBackground, Button, Select, Text, Toggle.</p>
+      <a href="https://storybook.araldev.com/?path=/docs/components-accordion--docs" target="_blank" rel="noopener" class="real-item-link span-4 fade-in">
+        <div class="real-item">
+          <div class="img-wrap"><img src="screenshots/storybook-accordion.png" alt="Accordion component docs" /></div>
+          <div class="meta">
+            <h4>Storybook · Accordion</h4>
+            <p>WAI-ARIA accordion with arrow-key navigation. Default, muted, and ghost variants in three sizes (sm, md, lg). The sidebar reveals the full component tree: MagicLogo, MagicMouseFollower, MagicText, Stack, Accordion, AnimatedBackground, Button, Select, Text, Toggle.</p>
+          </div>
         </div>
-      </div>
+      </a>
     </div>
   </div>
 </section>
