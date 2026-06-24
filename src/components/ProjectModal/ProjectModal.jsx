@@ -209,10 +209,6 @@ export function ProjectModal ({ project, onClose }) {
           aria-label={t('projectModal.detailsOf', null, titleVars)}
         >
           <section className={styles.hero_section} ref={heroRef}>
-            <div className={styles.hero_image_container}>
-              <img src={project.imgSrc} alt={project.title} className={styles.hero_image} loading="lazy" decoding="async" />
-              <div className={styles.hero_gradient_overlay} />
-            </div>
             <div className={styles.hero_content}>
               {project.tags && project.tags.length > 0 && (
                 <div className={styles.hero_tags}>
@@ -233,22 +229,6 @@ export function ProjectModal ({ project, onClose }) {
             </div>
           </section>
 
-          <section className={styles.details_section}>
-            <div className={styles.details_header}>
-              <span className={styles.details_label}>{t('projectModal.characteristics')}</span>
-              <div className={styles.details_header_line} />
-            </div>
-            {project.details.map((detail, index) => (
-              <DetailSection
-                key={detail.id}
-                detail={detail}
-                index={index}
-                sectionRef={(el) => { sectionRefs.current[index] = el }}
-                gallery={project.gallery}
-              />
-            ))}
-          </section>
-
           {project.demoLink && (
             <section className={styles.demo_section}>
               <div className={styles.demo_header}>
@@ -266,6 +246,22 @@ export function ProjectModal ({ project, onClose }) {
               </div>
             </section>
           )}
+
+          <section className={styles.details_section}>
+            <div className={styles.details_header}>
+              <span className={styles.details_label}>{t('projectModal.characteristics')}</span>
+              <div className={styles.details_header_line} />
+            </div>
+            {project.details.map((detail, index) => (
+              <DetailSection
+                key={detail.id}
+                detail={detail}
+                index={index}
+                sectionRef={(el) => { sectionRefs.current[index] = el }}
+                gallery={project.gallery}
+              />
+            ))}
+          </section>
 
           <footer className={styles.modal_footer}>
             <div className={styles.footer_links}>
