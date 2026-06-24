@@ -1,6 +1,6 @@
 /* eslint-disable quotes */
 import { techIcons } from './icons'
-import screenshotV12Ui from '../assets/screenshot-v12-ui.webp'
+import v12UiHeroCinematic from '../assets/v12-ui-hero-cinematic.png'
 import realHero from '../assets/real-hero.webp'
 import realStack from '../assets/real-stack.webp'
 import realButtons from '../assets/real-buttons.webp'
@@ -47,20 +47,20 @@ export const projects = [
   {
     id: 1,
     contentKey: 'v12-ui',
-    imgSrc: screenshotV12Ui,
+    imgSrc: v12UiHeroCinematic,
     gallery: [
-      { src: realHero, alt: 'Hero section' },
-      { src: realStack, alt: 'Stack tecnológico' },
-      { src: realButtons, alt: 'Componentes Button' },
-      { src: realControls, alt: 'Controles interactivos' },
-      { src: realAccordion, alt: 'Componente Accordion' },
-      { src: demoFull, alt: 'Vista completa del sistema' }
+      { src: demoFull, alt: 'Vista completa del sistema de componentes' },
+      { src: realHero, alt: 'Hero section con efectos cinematográficos' },
+      { src: realButtons, alt: 'Button — 9 variantes con neon glow halos' },
+      { src: realControls, alt: 'Toggle (WAI-ARIA switch) + Select (WAI-ARIA combobox)' },
+      { src: realAccordion, alt: 'Accordion — 3 panels, arrow-key navigation' },
+      { src: realStack, alt: 'Stack tecnológico' }
     ],
     title: 'v12-ui',
-    shortDescription: 'Librería de componentes UI autoresponsive y autoTheme para React',
+    shortDescription: 'React component library con utility-first design, accessibility y canvas particle effects',
     description: [
-      'Sistema de componentes React con tipado completo en TypeScript. Construcción profesional con tree-shaking, builds ESM & CJS, y GSAP + Lenis integrados para animaciones fluidas.',
-      '4 componentes core (Button, Stack, AnimatedBackground, Text) + 1 custom hook. Documentación interactiva en Storybook y publicación oficial en npm.'
+      'A React component library with a focus on utility-first design and accessibility. Built by araldev. Fully typed, tree-shakable, zero-config.',
+      'Canvas particle effects, accessibility-first primitives, Tailwind v4 theming. Supports React 18 and 19 with 100% TypeScript coverage.'
     ],
     tech: {
       ts: techIcons.ts,
@@ -72,7 +72,7 @@ export const projects = [
       gitHub: techIcons.gitHub,
       git: techIcons.git
     },
-    tags: ['TypeScript', 'React', 'Storybook'],
+    tags: ['TypeScript', 'React', 'Storybook', 'A11Y', 'Tailwind v4'],
     npmLink: 'https://www.npmjs.com/package/v12-ui',
     storybookLink: 'https://araldev.github.io/v12-ui/',
     demoLink: `${import.meta.env.BASE_URL}v12-demo/index.html`,
@@ -81,26 +81,38 @@ export const projects = [
       {
         id: genId(),
         imgIndex: 0,
-        title: 'Componentes Polimórficos',
-        text: 'Button y Text son componentes polimórficos que adaptan su estructura HTML según el contexto (button, a, div, span...). Stack proporciona un container Flex flexible con control total sobre dirección, gap y alineación.'
+        title: '10 Componentes Primitivos',
+        text: 'Button (polimórfico, CVA variants), Stack (Flexbox container), Text (polimórfico), Accordion (WAI-ARIA), Select (WAI-ARIA combobox), Toggle (WAI-ARIA switch), AnimatedBackground, MagicText, MagicLogo, MagicMouseFollower.'
       },
       {
         id: genId(),
         imgIndex: 1,
-        title: 'AnimatedBackground Canvas',
-        text: 'Componente canvas que genera animaciones de partículas abstractas. Configurable en duración, densidad y colores. Integrado con GSAP para control preciso del timeline y transiciones suaves.'
+        title: 'Canvas Particle Effects',
+        text: 'AnimatedBackground con canvas-based light-source animation. Particles drift upward con spring physics, mouse interaction y lightsourced glow. Auto-disabled cuando prefers-reduced-motion está activo.'
       },
       {
         id: genId(),
         imgIndex: 2,
-        title: 'Tree-shakable & Dual Builds',
-        text: 'Paquete optimizado para producción: exports ESM para bundlers modernos y CJS para compatibilidad legacy. Tree-shaking garantiza que solo el código usado llega a producción.'
+        title: 'WAI-ARIA Accessibility',
+        text: 'Accordion con arrow-key navigation, Select con keyboard navigation & animated dropdown, Toggle con WAI-ARIA switch pattern. Cada componente interactivo soporta los patrones de accesibilidad WAI-ARIA.'
       },
       {
         id: genId(),
         imgIndex: 3,
         title: 'Stack Tecnológico',
-        text: 'TypeScript 79% · CSS 19.4% · JS 1.6%. 147 commits, 9 releases (última v0.2.5 ago 2025). Licencia MIT. Integración directa con Tailwind CSS y soporte para autoTheme sin configuración.'
+        text: 'React 18 · 19 · TypeScript 5.8 · Tailwind CSS v4 · Vite 7 · Storybook 10 · Vitest + RTL · Semantic Release · clsx · class-variance-authority · tailwind-merge. Dual builds (ESM + CJS), fully tree-shakable.'
+      },
+      {
+        id: genId(),
+        imgIndex: 4,
+        title: '100% TypeScript + CVA',
+        text: 'Componentes polimórficos con tipado estricto. class-variance-authority para variantes consistentes (Primary, Secondary, Muted, Accent, Success, Warning, Error, Info, Ghost, Border, Shadow).'
+      },
+      {
+        id: genId(),
+        imgIndex: 5,
+        title: 'Zero-config + MIT License',
+        text: 'npm i v12-ui · import \'v12-ui/styles.css\' · Listo para production. MIT licensed, open source, 25+ tagged releases con semantic-release automation.'
       }
     ]
   },
