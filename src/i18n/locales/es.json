@@ -236,69 +236,53 @@
         }
       ]
     },
-    "listening-maze": {
-      "shortDescription": "Juego de escucha activa en inglés con niveles escalables via JSON",
-      "description": [
-        "Game de navegación auditiva donde el jugador sigue instrucciones en inglés para encontrar la salida del laberinto. Sistema de niveles driven por JSON para máxima escalabilidad.",
-        "Diseñado táctil y responsive. Feedback visual inmediato para cada acción del jugador. Integración en English Web como ejercicio principal del Game Center."
-      ],
-      "details": [
-        {
-          "id": "listening-maze-1",
-          "imgIndex": 4,
-          "title": "Niveles Escalables via JSON",
-          "text": "Cada nivel se define en un archivo JSON con estructura de laberinto, instrucciones auditivas y metadata. Añadir nuevos niveles no requiere cambios en código. Solo agregar una entrada al array."
-        },
-        {
-          "id": "listening-maze-2",
-          "imgIndex": 5,
-          "title": "Audio Guidance en Inglés",
-          "text": "Instrucciones spoken en inglés guían al jugador por el laberinto. Sistema de audio integrado que reproduce indicaciones claras y progresivamente más complejas según el nivel."
-        },
-        {
-          "id": "listening-maze-3",
-          "imgIndex": 0,
-          "title": "Interactive Grammar Cards",
-          "text": "Después de completar cada laberinto, se muestran grammar cards con el vocabulario y estructuras usadas. Refuerzo positivo que conecta el juego con el aprendizaje."
-        },
-        {
-          "id": "listening-maze-4",
-          "imgIndex": 1,
-          "title": "Responsive & Touch-friendly",
-          "text": "Controles táctiles optimizados para tablets y smartphones. D-pad virtual y botones de acción adaptados para pantalla táctil sin perder precisión en la navegación."
-        }
-      ]
-    },
     "english-web": {
-      "shortDescription": "Plataforma educativa vanilla HTML/CSS/JS para aprender inglés",
+      "shortDescription": "Plataforma educativa full-stack. Frontend vanilla, backend Node.js, Turso + Prisma, sesiones con Redis, auth JWT y arquitectura hexagonal.",
       "description": [
-        "Mi primer proyecto completo: plataforma de ejercicios interactivos y juegos educativos construidos 100% con vanilla HTML, CSS y JavaScript. Arquitectura JSON-driven para escalabilidad sin dependencias.",
-        "104 commits de código escrito a mano. Incluye ejercicios de gramática, vocabulario, comprensión auditiva y el Game Center con Listening Maze como flagship feature."
+        "¿Por qué este proyecto? Porque quería entender realmente cómo funciona una web application. No 'aprender React' ni 'configurar Next.js'. Entender las bases: HTTP, autenticación, bases de datos, renderizado del lado del servidor vs cliente, manejo de sesiones, y sobre todo, arquitectura.",
+        "La decisión fue deliberada: cero frameworks en frontend, cero dependencias mágicas. Todo lo que está acá, lo entiendo y lo controlo. Construido para aprender — no para impresionar con nombres de frameworks."
       ],
       "details": [
         {
           "id": "english-web-1",
-          "imgIndex": 2,
-          "title": "Vanilla Architecture",
-          "text": "HTML 37.1% · CSS 32.4% · JS 30.5%. Cero dependencias externas. Todo escrito desde cero para dominar los fundamentos antes de usar frameworks o librerías. Rendimiento óptimo y tamaño mínimo."
+          "imgIndex": 0,
+          "title": "Arquitectura > Framework",
+          "text": "Backend estructurado con Arquitectura Hexagonal / Screaming Architecture. La carpeta src/ grita lo que hace: auth/, user/, shared/. No importa qué framework o base de datos use — el core de negocio está aislado. Si mañana cambio Prisma por Drizzle o Turso por PostgreSQL, solo toco infrastructure/.",
+          "code": "src/\n  auth/\n    application/ → casos de uso\n    domain/       → entidades, puertos\n    infrastructure/ → adapters (Prisma, Redis, JWT)"
         },
         {
           "id": "english-web-2",
-          "imgIndex": 3,
-          "title": "JSON-driven Game Levels",
-          "text": "El contenido de ejercicios y niveles se almacena en estructuras JSON. Agregar nuevo contenido (preguntas, vocabulario, mapas) no requiere modificar HTML. Solo actualizar los datos."
+          "imgIndex": 1,
+          "title": "Autenticación desde Cero",
+          "text": "Sin NextAuth, Lucia, ni magia. Implementación completa: email/password con bcrypt, Google OAuth 2.0 con flujo completo de verificación, JWT dual (access 15min + refresh 7d con rotación), Redis para refresh tokens activos con TTL, cookies seguras (httpOnly, sameSite, secure). Puedo cerrar sesiones activamente — revocar tokens. Algo que JWT puro no te da.",
+          "code": "// Redis almacena refresh tokens activos\n// Al refrescar: token anterior se invalida (rotación)\n// Si roban un token, el siguiente refresh lo detecta"
         },
         {
           "id": "english-web-3",
-          "imgIndex": 4,
-          "title": "Game Center Integration",
-          "text": "English Web integra múltiples juegos educativos bajo una navegación unificada. Listening Maze es el flagship, con grammar cards y tracking de progreso por sesión."
+          "imgIndex": 2,
+          "title": "Frontend Vanilla, HTTP Real",
+          "text": "Páginas HTML tradicionales (index.html, lessons.html, user_profile.html). Sin React, sin Vue, sin router. Cada navegación es un request HTTP real. El problema: recarga completa de página. La solución: no forzar SPA — acepto navegación tradicional y optimizo lo que importa: estilos cacheados, scripts con defer, y verificación de sesión via fetch('/auth/me')."
         },
         {
           "id": "english-web-4",
+          "imgIndex": 3,
+          "title": "CSS 3D Flip Cards",
+          "text": "Las cards de vocabulario/lecciones usan un efecto flip 3D con CSS puro. Cero JavaScript para la animación. El GPU renderiza el 3D via transform-style: preserve-3d y backface-visibility: hidden. Solo un toggle de clase impulsa la animación.",
+          "code": ".card-inner {\n  transition: transform 0.6s;\n  transform-style: preserve-3d;\n}\n.card.flipped .card-inner {\n  transform: rotateY(180deg);\n}"
+        },
+        {
+          "id": "english-web-5",
+          "imgIndex": 4,
+          "title": "Contenido Driven por JSON",
+          "text": "El contenido de juegos y lecciones se define en archivos JSON. Cada nivel es un objeto con palabras, traducciones, pistas visuales y config de dificultad. Agregar un nivel nuevo significa crear un archivo JSON nuevo. Sin tocar HTML, sin tocar CSS, sin tocar el motor. Cargar un nivel nuevo es fetch('/niveles/nuevo.json'). Cualquiera que sepa escribir JSON puede extender el proyecto.",
+          "code": "{\n  \"level\": 3,\n  \"words\": [...],\n  \"translations\": [...],\n  \"difficulty\": \"intermediate\"\n}"
+        },
+        {
+          "id": "english-web-6",
           "imgIndex": 5,
-          "title": "Learning-first Design",
-          "text": "Cada interacción está diseñada para reforzar el aprendizaje: feedback inmediato, progresión de dificultad, y repetición espaciada. Interfaz clara que prioriza la educación sobre lo visual."
+          "title": "Lo que Aprendí (lo que no sale en el código)",
+          "text": "Arquitectura > Framework — una buena estructura sobrevive a cualquier cambio de tecnología. JWT no es 'estado en el cliente' — es un token que validás, rotás y podés revocar. Sin Redis o similar, no podés cerrar sesión de verdad. CSS 3D no es 'animación' — es perspectiva y cómo el GPU renderiza capas. No todo proyecto necesita ser SPA. JSON como formato de contenido separa datos de presentación de forma limpia.",
+          "code": null
         }
       ]
     }

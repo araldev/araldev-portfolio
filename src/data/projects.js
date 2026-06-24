@@ -64,7 +64,6 @@ import realAccordion from '../assets/real-accordion.webp'
 import demoFull from '../assets/demo-full.webp'
 import bundlephobiaStats from '../assets/bundlephobia-stats.png'
 import shotEnglishWeb from '../assets/shot-english-web.webp'
-import screenshotWebGame from '../assets/screenshot-web-game.png'
 import magicLogo from '../assets/v12-ui-magic-logo.png'
 import v12UiStack from '../assets/v12-ui-stack.png'
 
@@ -123,26 +122,6 @@ export const projects = [
     storybookLink: 'https://araldev.github.io/v12-ui/',
     demoLink: `${import.meta.env.BASE_URL}v12-demo/index.html`,
     codeLink: 'https://github.com/araldev/v12-ui'
-  },
-  {
-    id: 2,
-    contentKey: 'listening-maze',
-    imgSrc: screenshotWebGame,
-    title: 'Listening Maze',
-    shortDescription: '', // Fallback only — content in locale files
-    description: [],       // Fallback only — content in locale files
-    tech: {
-      js: techIcons.js,
-      css: techIcons.css,
-      html: techIcons.html,
-      gitHub: techIcons.gitHub,
-      git: techIcons.git
-    },
-    tags: ['Vanilla JS', 'CSS', 'Game'],
-    npmLink: '',
-    storybookLink: '',
-    demoLink: 'https://araldev.github.io/english-web/exercises.html',
-    codeLink: 'https://github.com/araldev/english-web/blob/main/src/js/games/listening-maze.js'
   },
   {
     id: 3,
