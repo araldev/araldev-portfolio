@@ -38,7 +38,15 @@ export const projects = [
   {
     id: 1,
     contentKey: 'v12-ui',
-    imgSrc: new URL('/src/assets/screenshot-v12-ui.png', import.meta.url).href,
+    imgSrc: new URL('/src/assets/screenshot-v12-ui.webp', import.meta.url).href,
+    gallery: [
+      { src: new URL('/src/assets/real-hero.webp', import.meta.url).href, alt: 'Hero section' },
+      { src: new URL('/src/assets/real-stack.webp', import.meta.url).href, alt: 'Stack tecnológico' },
+      { src: new URL('/src/assets/real-buttons.webp', import.meta.url).href, alt: 'Componentes Button' },
+      { src: new URL('/src/assets/real-controls.webp', import.meta.url).href, alt: 'Controles interactivos' },
+      { src: new URL('/src/assets/real-accordion.webp', import.meta.url).href, alt: 'Componente Accordion' },
+      { src: new URL('/src/assets/demo-full.webp', import.meta.url).href, alt: 'Vista completa del sistema' }
+    ],
     title: 'v12-ui',
     shortDescription: 'Librería de componentes UI autoresponsive y autoTheme para React',
     description: [

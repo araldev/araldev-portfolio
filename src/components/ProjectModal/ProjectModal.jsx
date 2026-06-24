@@ -52,6 +52,14 @@ const patterns = {
   )
 }
 
+function RealImage ({ src, alt }) {
+  return (
+    <div className={styles.real_image_wrapper}>
+      <img src={src} alt={alt} className={styles.real_image} loading="lazy" decoding="async" />
+    </div>
+  )
+}
+
 function MockImage ({ imgIndex }) {
   const mock = mockDetailImages[imgIndex % mockDetailImages.length]
   const PatternComponent = patterns[mock.pattern]
@@ -78,8 +86,10 @@ function MockImage ({ imgIndex }) {
   )
 }
 
-function DetailSection ({ detail, index, sectionRef }) {
+function DetailSection ({ detail, index, sectionRef, gallery }) {
   const isReversed = index % 2 !== 0
+  const hasGallery = gallery && gallery.length > 0
+  const imageData = hasGallery ? gallery[detail.imgIndex % gallery.length] : null
 
   return (
     <div
@@ -87,7 +97,10 @@ function DetailSection ({ detail, index, sectionRef }) {
       className={`${styles.detail_section} ${isReversed ? styles.detail_reversed : ''}`}
     >
       <div className={styles.detail_image_wrapper}>
-        <MockImage imgIndex={detail.imgIndex} />
+        {imageData
+          ? <RealImage src={imageData.src} alt={imageData.alt} />
+          : <MockImage imgIndex={detail.imgIndex} />
+        }
         {detail.featureTag && (
           <span className={styles.feature_tag}>{detail.featureTag}</span>
         )}
@@ -231,6 +244,7 @@ export function ProjectModal ({ project, onClose }) {
                 detail={detail}
                 index={index}
                 sectionRef={(el) => { sectionRefs.current[index] = el }}
+                gallery={project.gallery}
               />
             ))}
           </section>

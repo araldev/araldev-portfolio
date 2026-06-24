@@ -285,6 +285,21 @@
   background: rgba(255, 255, 255, 0.2);
 }
 
+.real_image_wrapper {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.real_image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
 .detail_text_wrapper {
   position: relative;
   padding-left: 24px;
