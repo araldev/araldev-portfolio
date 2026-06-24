@@ -65,7 +65,7 @@ export function Footer () {
       </div>
 
       <div className={styles.brand}>
-        <img src={brand} alt={t('images.brandAraldev')} />
+        <img src={brand} alt={t('images.brandAraldev')} loading="lazy" />
       </div>
     </footer>
   )

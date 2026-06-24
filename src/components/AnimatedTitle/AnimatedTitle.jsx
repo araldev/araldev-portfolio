@@ -34,7 +34,7 @@ export function AnimatedTitle ({ children }) {
           {children}
 
           <div className={styles.hero_img_container} ref={heroImgTitleRef}>
-            <img src={avatar} alt={t('images.profileHero')} />
+            <img src={avatar} alt={t('images.profileHero')} fetchpriority="high" />
           </div>
 
           <div className={styles.hero_img_copy} ref={heroImgCopyRef}>

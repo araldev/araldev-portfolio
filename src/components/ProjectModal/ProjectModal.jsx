@@ -197,7 +197,7 @@ export function ProjectModal ({ project, onClose }) {
         >
           <section className={styles.hero_section} ref={heroRef}>
             <div className={styles.hero_image_container}>
-              <img src={project.imgSrc} alt={project.title} className={styles.hero_image} />
+              <img src={project.imgSrc} alt={project.title} className={styles.hero_image} loading="lazy" decoding="async" />
               <div className={styles.hero_gradient_overlay} />
             </div>
             <div className={styles.hero_content}>
