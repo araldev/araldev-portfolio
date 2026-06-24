@@ -172,14 +172,13 @@
   align-items: flex-start;
   gap: 14px;
   padding: 40px 32px;
-  background: var(--color-background-gradient);
-  background-size: 300% 300%;
-  animation: radialZoom 5s ease-in-out infinite alternate;
+  background: linear-gradient(180deg, rgba(13, 148, 136, 0.08) 0%, rgba(10, 10, 15, 0.95) 100%);
+  border-bottom: 1px solid rgba(0, 201, 255, 0.06);
 }
 
 .project_title {
-  font-size: var(--font-size-subtitle);
-  font-weight: 700;
+  font-size: clamp(1.4rem, 3vw, 1.75rem);
+  font-weight: 800;
   background: var(--color-text-gradient);
   background-clip: text;
   -webkit-background-clip: text;
@@ -188,24 +187,15 @@
   text-align: left;
   margin: 0;
   text-wrap: balance;
-  /* Roboto Flex stretch trick: gives the title a wider, more
-     designed display feel without custom font loading. */
-  font-stretch: 75%;
-  font-variation-settings: 'wght' 900, 'wdth' 75;
-  letter-spacing: -0.01em;
-  line-height: 1.15;
-  /* Hover-only chroma: default = solid white, hover = gradient */
-  transition: background 0.25s var(--ease-vision-pro);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  filter: drop-shadow(0 2px 8px rgba(0, 201, 255, 0.2));
+  transition: filter 0.25s var(--ease-vision-pro);
 }
 
 @media (hover: hover) and (pointer: fine) {
   .project_card:hover .project_title {
-    background: var(--color-text-gradient);
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 0 8px rgba(0, 201, 255, 0.45));
+    filter: drop-shadow(0 0 12px rgba(0, 201, 255, 0.5));
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -213,29 +203,33 @@
 }
 
 .short_description {
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.78);
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
   text-align: left;
   margin: 0;
-  line-height: 1.4;
+  line-height: 1.5;
   max-width: 52ch;
+  padding: 10px 14px;
+  background: rgba(0, 201, 255, 0.08);
+  border-left: 3px solid rgba(0, 201, 255, 0.5);
+  border-radius: 0 8px 8px 0;
 }
 
 .description_list {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0.6lh;
+  gap: 0.5lh;
 
   p {
     text-align: left;
     max-width: 100%;
-    width: 52ch;
-    font-size: var(--font-size-paragraph);
-    font-weight: var(--font-weight-paragraph);
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.78);
+    width: 100%;
+    font-size: 0.88rem;
+    font-weight: 400;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.75);
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
@@ -262,9 +256,7 @@
   flex-wrap: wrap;
   gap: 12px 16px;
   padding: 22px 24px;
-  background: var(--color-background-gradient);
-  background-size: 300% 300%;
-  animation: radialZoom 5s ease-in-out infinite alternate;
+  background: linear-gradient(180deg, rgba(10, 10, 15, 0.98) 0%, rgba(10, 10, 15, 0.9) 100%);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 
   span {

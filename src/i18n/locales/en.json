@@ -20,7 +20,7 @@
   },
   "experience": {
     "title": "Experience",
-    "subtitle": "Experience — A Holo-Log of my Career",
+    "subtitle": "Experience: A Holo-Log of my Career",
     "empty": "No experience entries available.",
     "seeMore": "See more",
     "seeLess": "See less",
@@ -175,27 +175,53 @@
   },
   "projectsContent": {
     "v12-ui": {
-      "shortDescription": "Auto-responsive, auto-theme React component library",
+      "shortDescription": "React component library and hooks. Tailwind CSS v4, full TypeScript typing, tree-shakeable.",
       "description": [
-        "React component system with full TypeScript typing. Professional build with tree-shaking, ESM & CJS builds, and GSAP + Lenis integrated for smooth animations.",
-        "4 core components (Button, Stack, AnimatedBackground, Text) + 1 custom hook. Interactive documentation in Storybook and official npm publication."
+        "10 components (Button, Stack, Text, AnimatedBackground, MagicText, MagicLogo, MagicMouseFollower, Accordion, Select, Toggle) + 2 hooks (useDataTheme, useReducedMotion).",
+        "Polymorphic components, automatic dark mode, canvas particle effects, WAI-ARIA accessibility, CSS variables theming, and zero-config setup."
       ],
       "details": [
         {
+          "id": "v12-ui-1",
+          "imgIndex": 0,
+          "title": "10 Components + 2 Hooks",
+          "text": "Button, Stack, Text, AnimatedBackground, MagicText, MagicLogo, MagicMouseFollower, Accordion, Select, Toggle. Plus useDataTheme and useReducedMotion hooks. Full TypeScript with autocomplete and strict types.",
+          "code": "// Quick start\nimport { Button } from 'v12-ui';\nimport 'v12-ui/styles.css';\n\n<Button variant='primary'>Click me</Button>"
+        },
+        {
+          "id": "v12-ui-2",
+          "imgIndex": 1,
+          "title": "Tree-shakeable & Zero-config",
+          "text": "Built with Vite, exports both ESM and CJS modules. Tree-shaking ensures only the components you import end up in production. No plugins or providers needed. On npm with full Storybook docs.",
+          "code": "// Tree-shakeable - only import what you use\nimport { Button, Stack } from 'v12-ui';\nimport 'v12-ui/styles.css';\n\n// npm i v12-ui"
+        },
+        {
+          "id": "v12-ui-3",
+          "imgIndex": 3,
           "title": "Polymorphic Components",
-          "text": "Button and Text are polymorphic components that adapt their HTML structure based on context (button, a, div, span...). Stack provides a flexible Flex container with full control over direction, gap, and alignment."
+          "text": "Button renders as <button> or <a>. Text and Stack render as any HTML tag. Full polymorphic refs and type safety. Automatic dark mode reads data-theme on <html> or falls back to prefers-color-scheme.",
+          "code": "// Button adapts to context\n<Button variant='primary'>Button</Button>\n<Button as='a' href='/docs'>Link</Button>\n\n// Text and Stack are polymorphic\n<Text as='h1' variant='hero'>Title</Text>\n<Stack as='section' direction='col'>Content</Stack>"
         },
         {
-          "title": "AnimatedBackground Canvas",
-          "text": "Canvas component that generates abstract particle animations. Configurable duration, density, and colors. Integrated with GSAP for precise timeline control and smooth transitions."
+          "id": "v12-ui-4",
+          "imgIndex": 6,
+          "title": "Canvas Particle Effects",
+          "text": "MagicText assembles text from particles. MagicLogo disassembles images into particles. MagicMouseFollower creates particle trails. All use spring physics and respect prefers-reduced-motion.",
+          "code": "// MagicText - particles form text\n<MagicText text='Hello' colors={['#0d9488', '#14b8a6']} />\n\n// MagicMouseFollower - cursor particle trail\n<MagicMouseFollower particleCount={30} />"
         },
         {
-          "title": "Tree-shakable & Dual Builds",
-          "text": "Production-optimized package: ESM exports for modern bundlers and CJS for legacy compatibility. Tree-shaking guarantees only the used code reaches production."
+          "id": "v12-ui-5",
+          "imgIndex": 5,
+          "title": "WAI-ARIA Accessibility",
+          "text": "Accordion: WAI-ARIA accordion pattern with arrow-key navigation (up/down/home/end). Select: WAI-ARIA combobox with keyboard nav and dropdown animation. Toggle: WAI-ARIA switch pattern.",
+          "code": "// Toggle - WAI-ARIA switch\n<Toggle aria-label='Enable notifications' />\n\n// Select - WAI-ARIA combobox\n<Select aria-label='Choose an option'>\n  <Select.Option value='1'>Option 1</Select.Option>\n</Select>"
         },
         {
-          "title": "Tech Stack",
-          "text": "TypeScript 79% · CSS 19.4% · JS 1.6%. 147 commits, 9 releases (latest v0.2.5 Aug 2025). MIT license. Direct Tailwind CSS integration and auto-theme support with zero configuration."
+          "id": "v12-ui-6",
+          "imgIndex": 4,
+          "title": "Themeable via CSS Variables",
+          "text": "Customize colors using CSS variables in your stylesheet. Semantic tokens map to Tailwind utilities. Works with Tailwind CSS v4 @theme directive. Import the stylesheet and use components directly.",
+          "code": ":root {\n  --v12-primary: #0d9488;\n  --v12-background: #fafafa;\n  --v12-foreground: #1a1a1a;\n}\n\n[data-theme='dark'] {\n  --v12-background: #0a0a0a;\n  --v12-foreground: #f5f5f5;\n}"
         }
       ]
     },
@@ -207,18 +233,26 @@
       ],
       "details": [
         {
+          "id": "listening-maze-1",
+          "imgIndex": 4,
           "title": "JSON Scalable Levels",
-          "text": "Each level is defined in a JSON file with maze structure, audio instructions, and metadata. Adding new levels requires no code changes — just add an entry to the array."
+          "text": "Each level is defined in a JSON file with maze structure, audio instructions, and metadata. Adding new levels requires no code changes. Just add an entry to the array."
         },
         {
+          "id": "listening-maze-2",
+          "imgIndex": 5,
           "title": "Audio Guidance in English",
           "text": "Spoken English instructions guide the player through the maze. Integrated audio system that plays clear, progressively more complex directions based on the level."
         },
         {
+          "id": "listening-maze-3",
+          "imgIndex": 0,
           "title": "Interactive Grammar Cards",
           "text": "After completing each maze, grammar cards display vocabulary and structures used. Positive reinforcement that connects gameplay with learning."
         },
         {
+          "id": "listening-maze-4",
+          "imgIndex": 1,
           "title": "Responsive & Touch-friendly",
           "text": "Touch controls optimized for tablets and smartphones. Virtual D-pad and action buttons adapted for touch screens without losing navigation precision."
         }
@@ -232,18 +266,26 @@
       ],
       "details": [
         {
+          "id": "english-web-1",
+          "imgIndex": 2,
           "title": "Vanilla Architecture",
           "text": "HTML 37.1% · CSS 32.4% · JS 30.5%. Zero external dependencies. Everything written from scratch to master fundamentals before using frameworks or libraries. Optimal performance and minimal size."
         },
         {
+          "id": "english-web-2",
+          "imgIndex": 3,
           "title": "JSON-driven Game Levels",
-          "text": "Exercise and level content is stored in JSON structures. Adding new content (questions, vocabulary, maps) requires no HTML changes — just update the data."
+          "text": "Exercise and level content is stored in JSON structures. Adding new content (questions, vocabulary, maps) requires no HTML changes. Just update the data."
         },
         {
+          "id": "english-web-3",
+          "imgIndex": 4,
           "title": "Game Center Integration",
           "text": "English Web integrates multiple educational games under unified navigation. Listening Maze is the flagship, with grammar cards and per-session progress tracking."
         },
         {
+          "id": "english-web-4",
+          "imgIndex": 5,
           "title": "Learning-first Design",
           "text": "Every interaction is designed to reinforce learning: immediate feedback, difficulty progression, and spaced repetition. Clean interface that prioritizes education over visuals."
         }

@@ -20,7 +20,7 @@
   },
   "experience": {
     "title": "Experiencia",
-    "subtitle": "Experiencia — Un Holo-Log de mi Carrera",
+    "subtitle": "Experiencia: Mi Trayectoria",
     "empty": "No hay entradas de experiencia disponibles.",
     "seeMore": "Ver más",
     "seeLess": "Ver menos",
@@ -175,27 +175,53 @@
   },
   "projectsContent": {
     "v12-ui": {
-      "shortDescription": "Librería de componentes UI autoresponsive y autoTheme para React",
+      "shortDescription": "Librería de componentes React y hooks. Tailwind CSS v4, tipado completo, tree-shakeable.",
       "description": [
-        "Sistema de componentes React con tipado completo en TypeScript. Construcción profesional con tree-shaking, builds ESM & CJS, y GSAP + Lenis integrados para animaciones fluidas.",
-        "4 componentes core (Button, Stack, AnimatedBackground, Text) + 1 custom hook. Documentación interactiva en Storybook y publicación oficial en npm."
+        "10 componentes (Button, Stack, Text, AnimatedBackground, MagicText, MagicLogo, MagicMouseFollower, Accordion, Select, Toggle) + 2 hooks (useDataTheme, useReducedMotion).",
+        "Componentes polimórficos, dark mode automático, efectos de partículas en canvas, accesibilidad WAI-ARIA, theming via CSS variables, y setup sin configuración."
       ],
       "details": [
         {
+          "id": "v12-ui-1",
+          "imgIndex": 0,
+          "title": "10 Componentes + 2 Hooks",
+          "text": "Button, Stack, Text, AnimatedBackground, MagicText, MagicLogo, MagicMouseFollower, Accordion, Select, Toggle. Más los hooks useDataTheme y useReducedMotion. TypeScript completo con autocompletado y tipos estrictos.",
+          "code": "// Inicio rápido\nimport { Button } from 'v12-ui';\nimport 'v12-ui/styles.css';\n\n<Button variant='primary'>Clic aquí</Button>"
+        },
+        {
+          "id": "v12-ui-2",
+          "imgIndex": 1,
+          "title": "Tree-shakeable & Sin Config",
+          "text": "Construido con Vite, exporta módulos ESM y CJS. Tree-shaking asegura que solo los componentes que importas llegan a producción. Sin plugins ni providers. En npm con docs completas en Storybook.",
+          "code": "// Tree-shakeable - solo importa lo que usas\nimport { Button, Stack } from 'v12-ui';\nimport 'v12-ui/styles.css';\n\n// npm i v12-ui"
+        },
+        {
+          "id": "v12-ui-3",
+          "imgIndex": 3,
           "title": "Componentes Polimórficos",
-          "text": "Button y Text son componentes polimórficos que adaptan su estructura HTML según el contexto (button, a, div, span...). Stack proporciona un container Flex flexible con control total sobre dirección, gap y alineación."
+          "text": "Button renderiza como <button> o <a>. Text y Stack pueden ser cualquier tag HTML. Refs polimórficos con tipo completo. Dark mode automático lee data-theme en <html> o usa prefers-color-scheme.",
+          "code": "// Button se adapta al contexto\n<Button variant='primary'>Button</Button>\n<Button as='a' href='/docs'>Enlace</Button>\n\n// Text y Stack son polimórficos\n<Text as='h1' variant='hero'>Título</Text>\n<Stack as='section' direction='col'>Contenido</Stack>"
         },
         {
-          "title": "AnimatedBackground Canvas",
-          "text": "Componente canvas que genera animaciones de partículas abstractas. Configurable en duración, densidad y colores. Integrado con GSAP para control preciso del timeline y transiciones suaves."
+          "id": "v12-ui-4",
+          "imgIndex": 6,
+          "title": "Efectos de Partículas en Canvas",
+          "text": "MagicText forma texto con partículas. MagicLogo descompone imágenes en partículas. MagicMouseFollower crea estelas de partículas. Todos usan física de resortes y respetan prefers-reduced-motion.",
+          "code": "// MagicText - partículas forman texto\n<MagicText text='Hola' colors={['#0d9488', '#14b8a6']} />\n\n// MagicMouseFollower - estela de partículas\n<MagicMouseFollower particleCount={30} />"
         },
         {
-          "title": "Tree-shakable & Dual Builds",
-          "text": "Paquete optimizado para producción: exports ESM para bundlers modernos y CJS para compatibilidad legacy. Tree-shaking garantiza que solo el código usado llega a producción."
+          "id": "v12-ui-5",
+          "imgIndex": 5,
+          "title": "Accesibilidad WAI-ARIA",
+          "text": "Accordion: patrón WAI-ARIA con navegación por flechas (up/down/home/end). Select: combobox WAI-ARIA con teclado y animación dropdown. Toggle: patrón switch WAI-ARIA.",
+          "code": "// Toggle - switch WAI-ARIA\n<Toggle aria-label='Activar notificaciones' />\n\n// Select - combobox WAI-ARIA\n<Select aria-label='Elige una opción'>\n  <Select.Option value='1'>Opción 1</Select.Option>\n</Select>"
         },
         {
-          "title": "Stack Tecnológico",
-          "text": "TypeScript 79% · CSS 19.4% · JS 1.6%. 147 commits, 9 releases (última v0.2.5 ago 2025). Licencia MIT. Integración directa con Tailwind CSS y soporte para autoTheme sin configuración."
+          "id": "v12-ui-6",
+          "imgIndex": 4,
+          "title": "Theming via CSS Variables",
+          "text": "Personaliza los colores usando variables CSS en tu stylesheet. Los tokens semánticos se mapean a utilidades de Tailwind. Compatible con Tailwind CSS v4 @theme directive. Importa los estilos y usa los componentes directamente.",
+          "code": ":root {\n  --v12-primary: #0d9488;\n  --v12-background: #fafafa;\n  --v12-foreground: #1a1a1a;\n}\n\n[data-theme='dark'] {\n  --v12-background: #0a0a0a;\n  --v12-foreground: #f5f5f5;\n}"
         }
       ]
     },
@@ -207,18 +233,26 @@
       ],
       "details": [
         {
+          "id": "listening-maze-1",
+          "imgIndex": 4,
           "title": "Niveles Escalables via JSON",
-          "text": "Cada nivel se define en un archivo JSON con estructura de laberinto, instrucciones auditivas y metadata. Añadir nuevos niveles no requiere cambios en código — solo agregar una entrada al array."
+          "text": "Cada nivel se define en un archivo JSON con estructura de laberinto, instrucciones auditivas y metadata. Añadir nuevos niveles no requiere cambios en código. Solo agregar una entrada al array."
         },
         {
+          "id": "listening-maze-2",
+          "imgIndex": 5,
           "title": "Audio Guidance en Inglés",
           "text": "Instrucciones spoken en inglés guían al jugador por el laberinto. Sistema de audio integrado que reproduce indicaciones claras y progresivamente más complejas según el nivel."
         },
         {
+          "id": "listening-maze-3",
+          "imgIndex": 0,
           "title": "Interactive Grammar Cards",
           "text": "Después de completar cada laberinto, se muestran grammar cards con el vocabulario y estructuras usadas. Refuerzo positivo que conecta el juego con el aprendizaje."
         },
         {
+          "id": "listening-maze-4",
+          "imgIndex": 1,
           "title": "Responsive & Touch-friendly",
           "text": "Controles táctiles optimizados para tablets y smartphones. D-pad virtual y botones de acción adaptados para pantalla táctil sin perder precisión en la navegación."
         }
@@ -232,18 +266,26 @@
       ],
       "details": [
         {
+          "id": "english-web-1",
+          "imgIndex": 2,
           "title": "Vanilla Architecture",
           "text": "HTML 37.1% · CSS 32.4% · JS 30.5%. Cero dependencias externas. Todo escrito desde cero para dominar los fundamentos antes de usar frameworks o librerías. Rendimiento óptimo y tamaño mínimo."
         },
         {
+          "id": "english-web-2",
+          "imgIndex": 3,
           "title": "JSON-driven Game Levels",
-          "text": "El contenido de ejercicios y niveles se almacena en estructuras JSON. Agregar nuevo contenido (preguntas, vocabulario, mapas) no requiere modificar HTML — solo actualizar los datos."
+          "text": "El contenido de ejercicios y niveles se almacena en estructuras JSON. Agregar nuevo contenido (preguntas, vocabulario, mapas) no requiere modificar HTML. Solo actualizar los datos."
         },
         {
+          "id": "english-web-3",
+          "imgIndex": 4,
           "title": "Game Center Integration",
           "text": "English Web integra múltiples juegos educativos bajo una navegación unificada. Listening Maze es el flagship, con grammar cards y tracking de progreso por sesión."
         },
         {
+          "id": "english-web-4",
+          "imgIndex": 5,
           "title": "Learning-first Design",
           "text": "Cada interacción está diseñada para reforzar el aprendizaje: feedback inmediato, progresión de dificultad, y repetición espaciada. Interfaz clara que prioriza la educación sobre lo visual."
         }

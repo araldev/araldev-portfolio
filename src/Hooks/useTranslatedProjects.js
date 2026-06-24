@@ -33,25 +33,15 @@ export function useTranslatedProjects () {
 }
 
 /**
- * Translates the `details` array — each item has a `title` and `text`
- * that live at `{prefix}.details[{index}].{field}` in the locale.
+ * Returns the details array from locale files.
+ * Locale files are the single source of truth for all project details.
  */
 function translateDetails (details, prefix, t) {
-  if (!Array.isArray(details)) return details
-
+  // Get details directly from locale files (source of truth)
   const translated = t(`${prefix}.details`, null)
-  if (Array.isArray(translated) && translated.length === details.length) {
-    return translated.map((item, index) => ({
-      ...details[index],
-      title: item?.title ?? details[index].title,
-      text: item?.text ?? details[index].text
-    }))
+  if (Array.isArray(translated)) {
+    return translated
   }
-
-  // Fallback: translate each detail individually
-  return details.map((detail, index) => ({
-    ...detail,
-    title: t(`${prefix}.details.${index}.title`, detail.title),
-    text: t(`${prefix}.details.${index}.text`, detail.text)
-  }))
+  // Fallback to projects.js details if locale fails (backward compatibility)
+  return details
 }

@@ -52,10 +52,45 @@ const patterns = {
   )
 }
 
-function RealImage ({ src, alt }) {
+function RealImage ({ src, alt, onClick }) {
   return (
-    <div className={styles.real_image_wrapper}>
+    <div className={styles.real_image_wrapper} onClick={onClick}>
       <img src={src} alt={alt} className={styles.real_image} loading="lazy" decoding="async" />
+    </div>
+  )
+}
+
+function ImageZoomOverlay ({ src, alt, onClose }) {
+  const overlayRef = useRef(null)
+  const contentRef = useRef(null)
+
+  useEffect(() => {
+    const tl = gsap.timeline()
+    tl.fromTo(overlayRef.current,
+      { autoAlpha: 0 },
+      { autoAlpha: 1, duration: 0.3, ease: 'power2.out' }
+    ).fromTo(contentRef.current,
+      { scale: 0.85, autoAlpha: 0 },
+      { scale: 1, autoAlpha: 1, duration: 0.4, ease: 'back.out(1.4)' },
+      '-=0.15'
+    )
+    return () => { tl.kill() }
+  }, [])
+
+  return (
+    <div
+      className={styles.image_zoom_overlay}
+      ref={overlayRef}
+      onClick={onClose}
+    >
+      <div className={styles.image_zoom_content} ref={contentRef} onClick={(e) => e.stopPropagation()}>
+        <img src={src} alt={alt} className={styles.image_zoom_img} />
+        <button className={styles.image_zoom_close} onClick={onClose} aria-label='Close zoom'>
+          <svg viewBox='0 0 24 24' fill='none' stroke='currentColor'>
+            <path d='M18 6L6 18M6 6l12 12' />
+          </svg>
+        </button>
+      </div>
     </div>
   )
 }
@@ -86,7 +121,7 @@ function MockImage ({ imgIndex }) {
   )
 }
 
-function DetailSection ({ detail, index, sectionRef, gallery }) {
+function DetailSection ({ detail, index, sectionRef, gallery, onImageClick }) {
   const isReversed = index % 2 !== 0
   const hasGallery = gallery && gallery.length > 0
   const imageData = hasGallery ? gallery[detail.imgIndex % gallery.length] : null
@@ -98,7 +133,7 @@ function DetailSection ({ detail, index, sectionRef, gallery }) {
     >
       <div className={styles.detail_image_wrapper}>
         {imageData
-          ? <RealImage src={imageData.src} alt={imageData.alt} />
+          ? <RealImage src={imageData.src} alt={imageData.alt} onClick={() => onImageClick(imageData)} />
           : <MockImage imgIndex={detail.imgIndex} />
         }
         {detail.featureTag && (
@@ -125,10 +160,21 @@ export function ProjectModal ({ project, onClose }) {
   const heroRef = useRef(null)
   const sectionRefs = useRef([])
   const titleVars = { title: project.title }
+  const [zoomImage, setZoomImage] = useState(null)
 
   const handleKeyDown = useCallback((e) => {
-    if (e.key === 'Escape') onClose()
-  }, [onClose])
+    if (e.key === 'Escape') {
+      if (zoomImage) {
+        setZoomImage(null)
+      } else {
+        onClose()
+      }
+    }
+  }, [onClose, zoomImage])
+
+  const handleImageClick = useCallback((imageData) => {
+    setZoomImage(imageData)
+  }, [])
 
   useEffect(() => {
     document.addEventListener('keydown', handleKeyDown)
@@ -262,6 +308,7 @@ export function ProjectModal ({ project, onClose }) {
                 index={index}
                 sectionRef={(el) => { sectionRefs.current[index] = el }}
                 gallery={project.gallery}
+                onImageClick={handleImageClick}
               />
             ))}
           </section>
@@ -319,6 +366,13 @@ export function ProjectModal ({ project, onClose }) {
           <path d='M18 6L6 18M6 6l12 12' />
         </svg>
       </button>
+      {zoomImage && (
+        <ImageZoomOverlay
+          src={zoomImage.src}
+          alt={zoomImage.alt}
+          onClose={() => setZoomImage(null)}
+        />
+      )}
     </>,
     document.body
   )
