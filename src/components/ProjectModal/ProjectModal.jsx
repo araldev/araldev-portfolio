@@ -109,6 +109,9 @@ function DetailSection ({ detail, index, sectionRef, gallery }) {
         <div className={styles.detail_number}>0{index + 1}</div>
         <h3 className={styles.detail_title}>{detail.title}</h3>
         <p className={styles.detail_text}>{detail.text}</p>
+        {detail.code && (
+          <pre className={styles.detail_code}>{detail.code}</pre>
+        )}
       </div>
     </div>
   )

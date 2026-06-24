@@ -81,38 +81,64 @@ export const projects = [
       {
         id: genId(),
         imgIndex: 0,
-        title: '10 Componentes Primitivos',
-        text: 'Button (polimórfico, CVA variants), Stack (Flexbox container), Text (polimórfico), Accordion (WAI-ARIA), Select (WAI-ARIA combobox), Toggle (WAI-ARIA switch), AnimatedBackground, MagicText, MagicLogo, MagicMouseFollower.'
+        title: 'Tree-shaking Real',
+        text: 'Importa solo lo que usas. Button: 4.7KB · Stack: 496 bytes · Toggle: 2.8KB · Accordion: 6.5KB. Si solo necesitas Button y Stack, tu bundle suma ~5KB. El resto nunca llega a producción.',
+        code: `import { Button, Stack } from 'v12-ui'
+// Stack: 496 bytes | Button: 4.7KB
+// Accordion bundle completo: 6.5KB`
       },
       {
         id: genId(),
         imgIndex: 1,
-        title: 'Canvas Particle Effects',
-        text: 'AnimatedBackground con canvas-based light-source animation. Particles drift upward con spring physics, mouse interaction y lightsourced glow. Auto-disabled cuando prefers-reduced-motion está activo.'
+        title: 'Polimórfico + CVA',
+        text: 'Button se adapta al contexto: rendered como <button> o <a> según props. class-variance-authority define 9 variants (primary, secondary, muted, accent, success, warning, error, info, ghost) + border, shadow, rounded, size.',
+        code: `<Button variant="primary" size="md">Ship it</Button>
+<Button as="a" href="/docs" variant="ghost">Docs</Button>
+<Button variant="success" shadow rounded="pill">Enabled</Button>`
       },
       {
         id: genId(),
         imgIndex: 2,
-        title: 'WAI-ARIA Accessibility',
-        text: 'Accordion con arrow-key navigation, Select con keyboard navigation & animated dropdown, Toggle con WAI-ARIA switch pattern. Cada componente interactivo soporta los patrones de accesibilidad WAI-ARIA.'
+        title: 'Dark/Light Theme',
+        text: 'Tailwind CSS v4 con @theme. Los tokens --bg-primary, --text-primary, --border-primary se adaptan al tema activo. AnimatedBackground auto-detecta prefers-color-scheme y ajusta partículas.',
+        code: `/* Tailwind @theme integration */
+@theme {
+  --color-bg-primary: var(--v12-bg);
+  --color-text-primary: var(--v12-text);
+}
+/* Automatic dark/light via CSS vars */`
       },
       {
         id: genId(),
         imgIndex: 3,
-        title: 'Stack Tecnológico',
-        text: 'React 18 · 19 · TypeScript 5.8 · Tailwind CSS v4 · Vite 7 · Storybook 10 · Vitest + RTL · Semantic Release · clsx · class-variance-authority · tailwind-merge. Dual builds (ESM + CJS), fully tree-shakable.'
+        title: 'WAI-ARIA + Keyboard',
+        text: 'Accordion: arrow-key navigation (up/down/home/end). Select: combobox con keyboard navigation. Toggle: switch pattern con aria-checked. Todos los componentes respetan focus-visible y prefers-reduced-motion.',
+        code: `<Accordion>
+  <Accordion.Item>
+    <Accordion.Trigger>What is v12-ui?</Accordion.Trigger>
+    <Accordion.Content>...</Accordion.Content>
+  </Accordion.Item>
+</Accordion>`
       },
       {
         id: genId(),
         imgIndex: 4,
-        title: '100% TypeScript + CVA',
-        text: 'Componentes polimórficos con tipado estricto. class-variance-authority para variantes consistentes (Primary, Secondary, Muted, Accent, Success, Warning, Error, Info, Ghost, Border, Shadow).'
+        title: 'Stack Tecnológico',
+        text: 'React 18/19 · TypeScript 5.8 (tipado estricto) · Tailwind CSS v4 · Vite 7 · Storybook 10 · Vitest + RTL · clsx + tailwind-merge · class-variance-authority · Semantic Release',
+        code: `// GitHub metrics (Jun 2026)
+TypeScript: 91.2% · CSS: 7.8% · Other: 1.0%
+Components: 10 | Hooks: 2 | Tests: passing
+License: MIT | Releases: 25+`
       },
       {
         id: genId(),
         imgIndex: 5,
-        title: 'Zero-config + MIT License',
-        text: 'npm i v12-ui · import \'v12-ui/styles.css\' · Listo para production. MIT licensed, open source, 25+ tagged releases con semantic-release automation.'
+        title: 'Zero-config Setup',
+        text: '2 líneas para empezar. npm i v12-ui + import styles. No config files, no wrappers, no providers. Los tokens de tema se injectan via CSS y funcionan con cualquier Tailwind setup.',
+        code: `npm i v12-ui
+import 'v12-ui/styles.css'
+import { Button } from 'v12-ui'
+// Zero config. Works out of the box.`
       }
     ]
   },

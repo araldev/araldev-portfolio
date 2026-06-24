@@ -359,6 +359,24 @@
   max-width: 45ch;
 }
 
+.detail_code {
+  margin-top: 16px;
+  padding: 16px 20px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 201, 255, 0.2);
+  border-radius: 10px;
+  font-family: var(--font-family-mono);
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: rgba(146, 254, 157, 0.9);
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-x: auto;
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
+
 .modal_footer {
   width: 100%;
   max-width: 900px;
