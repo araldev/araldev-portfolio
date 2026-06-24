@@ -58,10 +58,10 @@ export const projects = [
       { src: bundlephobiaStats, alt: 'Bundlephobia stats: 68.3KB minified, 17.6KB gzip, tree-shakeable' }
     ],
     title: 'v12-ui',
-    shortDescription: 'React component library con utility-first design, accessibility y canvas particle effects',
+    shortDescription: 'Librería de componentes UI autoresponsive y autoTheme para React',
     description: [
-      'A React component library with a focus on utility-first design and accessibility. Built by araldev. Fully typed, tree-shakable, zero-config.',
-      'Canvas particle effects, accessibility-first primitives, Tailwind v4 theming. Supports React 18 and 19 with 100% TypeScript coverage.'
+      'Sistema de componentes React con tipado completo en TypeScript. Construcción profesional con tree-shaking, builds ESM & CJS, y GSAP + Lenis integrados para animaciones fluidas.',
+      '4 componentes core (Button, Stack, AnimatedBackground, Text) + 1 custom hook. Documentación interactiva en Storybook y publicación oficial en npm.'
     ],
     tech: {
       ts: techIcons.ts,
