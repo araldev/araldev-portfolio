@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>v12-ui · Cinematic Portfolio Showcase</title>
+<meta name="description" content="A cinematic portfolio presentation of v12-ui — a React component library by araldev with utility-first design, accessibility, and canvas particle effects." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d9488'/%3E%3Ctext x='32' y='44' font-family='monospace' font-weight='700' font-size='28' fill='%230a0a0b' text-anchor='middle'%3Ev12%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --v12-primary: #0d9488;
+    --v12-primary-glow: #14b8a6;
+    --v12-bg: #0a0a0b;
+    --v12-surface: #111114;
+    --v12-surface-2: #16161a;
+    --v12-border: rgba(255, 255, 255, 0.08);
+    --v12-border-strong: rgba(255, 255, 255, 0.16);
+    --v12-text: #f5f5f7;
+    --v12-text-dim: #a1a1aa;
+    --v12-text-muted: #71717a;
+    --v12-radius: 16px;
+    --v12-radius-sm: 8px;
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--v12-bg);
+    color: var(--v12-text);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-feature-settings: 'cv11', 'ss01', 'ss03';
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 15% 20%, rgba(13, 148, 136, 0.15), transparent 45%),
+      radial-gradient(circle at 85% 80%, rgba(20, 184, 166, 0.08), transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.08 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity: 0.4;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 32px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* NAV */
+  nav.topbar {
+    position: sticky; top: 0; z-index: 100;
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    background: rgba(10, 10, 11, 0.7);
+    border-bottom: 1px solid var(--v12-border);
+  }
+  nav.topbar .inner {
+    display: flex; justify-content: space-between; align-items: center; height: 64px;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 0.08em; }
+  .brand-dot {
+    width: 10px; height: 10px; background: var(--v12-primary); border-radius: 50%;
+    box-shadow: 0 0 16px var(--v12-primary); animation: pulse 2.5s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);}50%{opacity:.6;transform:scale(.85);} }
+  .nav-links { display: flex; gap: 32px; font-size: 14px; color: var(--v12-text-dim); }
+  .nav-links a { color: inherit; text-decoration: none; transition: color 0.2s var(--ease-out); }
+  .nav-links a:hover { color: var(--v12-text); }
+
+  /* HERO */
+  .hero { padding: 80px 0 60px; position: relative; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 14px; background: rgba(13,148,136,0.12);
+    border: 1px solid rgba(13,148,136,0.3); border-radius: 999px;
+    font-size: 12px; font-family: 'JetBrains Mono', monospace;
+    color: var(--v12-primary-glow); letter-spacing: 0.05em; margin-bottom: 24px;
+  }
+  .badge::before { content: ''; width: 6px; height: 6px; background: var(--v12-primary-glow); border-radius: 50%; box-shadow: 0 0 8px var(--v12-primary-glow); }
+  h1.title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(56px, 10vw, 144px); line-height: 0.9;
+    letter-spacing: -0.02em;
+    background: linear-gradient(180deg, #ffffff 0%, #a1a1aa 100%);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 24px;
+  }
+  h1.title em {
+    font-style: normal;
+    background: linear-gradient(135deg, var(--v12-primary) 0%, var(--v12-primary-glow) 50%, #5eead4 100%);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .subtitle {
+    font-size: clamp(18px, 2vw, 22px); color: var(--v12-text-dim);
+    max-width: 720px; margin-bottom: 40px; font-weight: 400;
+  }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 60px; }
+  .pill {
+    padding: 8px 16px; background: var(--v12-surface);
+    border: 1px solid var(--v12-border); border-radius: 999px;
+    font-family: 'JetBrains Mono', monospace; font-size: 13px;
+    color: var(--v12-text-dim); transition: all 0.3s var(--ease-out);
+  }
+  .pill:hover { border-color: var(--v12-primary); color: var(--v12-text); transform: translateY(-2px); }
+
+  /* FRAMED IMAGE */
+  .hero-image {
+    position: relative; border-radius: var(--v12-radius); overflow: hidden;
+    aspect-ratio: 16 / 9;
+    box-shadow: 0 0 0 1px var(--v12-border-strong), 0 30px 80px -20px rgba(13,148,136,0.3), 0 0 120px -30px rgba(13,148,136,0.4);
+  }
+  .hero-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-image::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 60%, rgba(10,10,11,0.4) 100%); pointer-events: none; }
+  .hero-image-caption {
+    position: absolute; bottom: 24px; left: 24px; right: 24px;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    color: rgba(255,255,255,0.7); letter-spacing: 0.08em; text-transform: uppercase; z-index: 2;
+  }
+
+  /* SECTION */
+  section { padding: 80px 0; position: relative; }
+  .section-header { margin-bottom: 48px; }
+  .section-eyebrow {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    color: var(--v12-primary-glow); letter-spacing: 0.12em;
+    text-transform: uppercase; margin-bottom: 12px;
+  }
+  h2.section-title {
+    font-size: clamp(32px, 5vw, 56px); font-weight: 700;
+    letter-spacing: -0.02em; line-height: 1.05; margin-bottom: 16px;
+    background: linear-gradient(180deg, #ffffff 0%, #d4d4d8 100%);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .section-desc { font-size: 18px; color: var(--v12-text-dim); max-width: 680px; }
+
+  /* STATS */
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin: 32px 0; }
+  .stat-card {
+    padding: 28px 24px; background: var(--v12-surface);
+    border: 1px solid var(--v12-border); border-radius: var(--v12-radius);
+    transition: all 0.3s var(--ease-out);
+  }
+  .stat-card:hover { border-color: var(--v12-primary); background: linear-gradient(135deg, rgba(13,148,136,0.06), var(--v12-surface)); }
+  .stat-value {
+    font-family: 'Bebas Neue', sans-serif; font-size: 56px; line-height: 1;
+    background: linear-gradient(135deg, var(--v12-primary-glow), #5eead4);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+  .stat-label { font-size: 13px; color: var(--v12-text-dim); text-transform: uppercase; letter-spacing: 0.08em; }
+
+  /* REAL SCREENSHOTS — captioned gallery */
+  .real-grid {
+    display: grid; gap: 24px;
+    grid-template-columns: repeat(12, 1fr);
+  }
+  .real-item-link {
+    display: block; text-decoration: none; color: inherit;
+    cursor: pointer;
+  }
+  .real-item {
+    border-radius: var(--v12-radius); overflow: hidden;
+    background: var(--v12-surface); border: 1px solid var(--v12-border);
+    transition: all 0.3s var(--ease-out);
+  }
+  .real-item-link:hover .real-item { border-color: var(--v12-border-strong); transform: translateY(-4px); }
+  .real-item .img-wrap { aspect-ratio: 16/10; overflow: hidden; background: #000; }
+  .real-item img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; transition: transform 0.6s var(--ease-out); }
+  .real-item-link:hover .real-item img { transform: scale(1.03); }
+  .real-item .meta { padding: 20px 24px; }
+  .real-item .meta h4 {
+    font-family: 'JetBrains Mono', monospace; font-size: 14px;
+    color: var(--v12-primary-glow); margin-bottom: 6px; letter-spacing: 0.04em;
+  }
+  .real-item .meta p { font-size: 14px; color: var(--v12-text-dim); }
+
+  .real-item-link.span-7 { grid-column: span 7; }
+  .real-item-link.span-5 { grid-column: span 5; }
+  .real-item-link.span-4 { grid-column: span 4; }
+  .real-item-link.span-6 { grid-column: span 6; }
+  .real-item-link.span-12 { grid-column: span 12; }
+
+  /* COMPONENT GALLERY — dark backdrop with the real component renders */
+  .component-gallery { display: grid; gap: 16px; grid-template-columns: repeat(12, 1fr); margin-top: 32px; }
+  .component-tile {
+    grid-column: span 6;
+    border-radius: var(--v12-radius); overflow: hidden;
+    background: var(--v12-bg); border: 1px solid var(--v12-border);
+    transition: all 0.3s var(--ease-out);
+  }
+  .component-tile.span-12 { grid-column: span 12; }
+  .component-tile:hover { border-color: var(--v12-primary); transform: translateY(-2px); box-shadow: 0 20px 40px -10px rgba(13,148,136,0.2); }
+  .component-tile img { width: 100%; display: block; }
+  .component-tile .label { padding: 16px 20px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--v12-text-dim); display: flex; justify-content: space-between; align-items: center; }
+  .component-tile .label .live-dot { display: inline-flex; align-items: center; gap: 6px; color: var(--v12-primary-glow); }
+  .component-tile .label .live-dot::before { content: ''; width: 6px; height: 6px; background: var(--v12-primary-glow); border-radius: 50%; box-shadow: 0 0 6px var(--v12-primary-glow); animation: pulse 2s infinite; }
+
+  /* COMPONENTS GRID */
+  .components-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-top: 32px; }
+  .component-card {
+    background: var(--v12-surface); border: 1px solid var(--v12-border);
+    border-radius: var(--v12-radius); padding: 24px; transition: all 0.3s var(--ease-out);
+    position: relative; overflow: hidden;
+  }
+  .component-card::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(13,148,136,0.08), transparent 60%);
+    opacity: 0; transition: opacity 0.3s var(--ease-out);
+  }
+  .component-card:hover { border-color: var(--v12-primary); transform: translateY(-4px); box-shadow: 0 20px 40px -10px rgba(13,148,136,0.2); }
+  .component-card:hover::before { opacity: 1; }
+  .component-icon {
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, var(--v12-primary), var(--v12-primary-glow));
+    border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px; font-family: 'JetBrains Mono', monospace; font-size: 18px;
+    color: #0a0a0b; font-weight: 700; position: relative; z-index: 1;
+  }
+  .component-name { font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 600; margin-bottom: 6px; position: relative; z-index: 1; }
+  .component-desc { font-size: 14px; color: var(--v12-text-dim); position: relative; z-index: 1; }
+
+  /* FOOTER */
+  footer { border-top: 1px solid var(--v12-border); padding: 60px 0 40px; margin-top: 80px; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 40px; }
+  .footer-col h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--v12-text-muted); margin-bottom: 16px; }
+  .footer-col a { display: block; color: var(--v12-text-dim); text-decoration: none; padding: 6px 0; font-size: 14px; transition: color 0.2s var(--ease-out); }
+  .footer-col a:hover { color: var(--v12-primary-glow); }
+  .copyright { padding-top: 24px; border-top: 1px solid var(--v12-border); font-size: 13px; color: var(--v12-text-muted); font-family: 'JetBrains Mono', monospace; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .container { padding: 0 20px; }
+    .nav-links { display: none; }
+    .real-item.span-7, .real-item.span-5, .real-item.span-4, .real-item.span-6, .real-item.span-12,
+    .component-tile { grid-column: span 12; }
+    .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+    .hero { padding: 40px 0 40px; }
+    section { padding: 60px 0; }
+  }
+
+  /* FADE-IN */
+  .fade-in { opacity: 0; transform: translateY(20px); animation: fadeIn 0.8s var(--ease-out) forwards; }
+  .fade-in:nth-child(2) { animation-delay: 0.1s; }
+  .fade-in:nth-child(3) { animation-delay: 0.2s; }
+  .fade-in:nth-child(4) { animation-delay: 0.3s; }
+  @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="container inner">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <span>v12-ui</span>
+    </div>
+    <div class="nav-links">
+      <a href="#real">Real</a>
+      <a href="#components">Components</a>
+      <a href="#stack">Stack</a>
+      <a href="https://github.com/araldev/v12-ui" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="container">
+    <div class="fade-in"><span class="badge">v0.6.0 · Released 23 Jun 2026</span></div>
+    <h1 class="title fade-in">A React component library with<br />utility-first <em>design</em>.</h1>
+    <p class="subtitle fade-in">
+      Built by <strong style="color:var(--v12-text);">araldev</strong>. Fully typed, tree-shakable, zero-config. Canvas particle effects, accessibility-first primitives, Tailwind v4 theming.
+    </p>
+    <div class="meta-row fade-in">
+      <span class="pill">⚛️ React 18 · 19</span>
+      <span class="pill">📘 TypeScript</span>
+      <span class="pill">🎨 Tailwind CSS v4</span>
+      <span class="pill">📦 Zero-config</span>
+      <span class="pill">♿ WAI-ARIA</span>
+      <span class="pill">🌑 Dark mode</span>
+    </div>
+
+    <div class="hero-image fade-in">
+      <img src="images/01-hero-poster.png" alt="v12-ui cinematic hero" />
+      
+    </div>
+  </div>
+</header>
+
+<!-- ============ STATS ============ -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">// Project Snapshot</div>
+      <h2 class="section-title">Built small. Built sharp.</h2>
+      <p class="section-desc">A focused library: 10 components, 2 hooks, infinite composability. No bloat, no surprises.</p>
+    </div>
+    <div class="stats">
+      <div class="stat-card"><div class="stat-value">10</div><div class="stat-label">Components</div></div>
+      <div class="stat-card"><div class="stat-value">2</div><div class="stat-label">Hooks</div></div>
+      <div class="stat-card"><div class="stat-value">100%</div><div class="stat-label">TypeScript</div></div>
+      <div class="stat-card"><div class="stat-value">A11Y</div><div class="stat-label">WAI-ARIA Ready</div></div>
+      <div class="stat-card"><div class="stat-value">MIT</div><div class="stat-label">Open Source</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REAL SCREENSHOTS ============ -->
+<section id="real">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">// The Project</div>
+      <h2 class="section-title">An open-source design system.</h2>
+      <p class="section-desc">v12-ui is a React component library focused on utility-first design and accessibility. The surfaces below are live: the GitHub repo where the package is developed, and the production Storybook that documents every component.</p>
+    </div>
+
+    <div class="real-grid">
+      <a href="https://github.com/araldev/v12-ui" target="_blank" rel="noopener" class="real-item-link span-7 fade-in">
+        <div class="real-item">
+          <div class="img-wrap"><img src="screenshots/github-repo.png" alt="araldev/v12-ui on GitHub" /></div>
+          <div class="meta">
+            <h4>github.com/araldev/v12-ui</h4>
+            <p>The repository where the library is developed: semantic-release automation, 25 tagged releases, MIT license, full README and About panel.</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="https://araldev.github.io/v12-ui/?path=/docs/components-button--docs" target="_blank" rel="noopener" class="real-item-link span-5 fade-in">
+        <div class="real-item">
+          <div class="img-wrap"><img src="screenshots/storybook-button.png" alt="Button component docs in Storybook" /></div>
+          <div class="meta">
+            <h4>Storybook · Button/Docs</h4>
+            <p>Live autodocs: 13 variant stories (Primary, Secondary, Muted, Accent, Success, Warning, Error, Info, Ghost, Border, Shadow variants), full prop table (as, href, variant, border, shadow, rounded), live controls panel.</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="https://araldev.github.io/v12-ui/?path=/docs/components-toggle--docs" target="_blank" rel="noopener" class="real-item-link span-4 fade-in">
+        <div class="real-item">
+          <div class="img-wrap"><img src="screenshots/storybook-toggle.png" alt="Toggle component docs" /></div>
+          <div class="meta">
+            <h4>Storybook · Toggle/Docs</h4>
+            <p>WAI-ARIA switch component: variant, size, disabled, readonly, defaultChecked, checked, onChange. Full story list (Default, On State, Off State, Muted, Size Sm/Md/Lg, Disabled, Readonly, Controlled).</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="https://araldev.github.io/v12-ui/?path=/docs/components-animatedbackground--docs" target="_blank" rel="noopener" class="real-item-link span-4 fade-in">
+        <div class="real-item">
+          <div class="img-wrap"><img src="screenshots/storybook-animated.png" alt="AnimatedBackground live canvas" /></div>
+          <div class="meta">
+            <h4>Storybook · AnimatedBackground</h4>
+            <p>Canvas-based light-source animation. Particles drift upward with spring physics, mouse interaction, and lightsourced glow on every blob. Auto-disabled when prefers-reduced-motion is set.</p>
+          </div>
+        </div>
+      </a>
+
+      <a href="https://araldev.github.io/v12-ui/?path=/docs/components-accordion--docs" target="_blank" rel="noopener" class="real-item-link span-4 fade-in">
+        <div class="real-item">
+          <div class="img-wrap"><img src="screenshots/storybook-accordion.png" alt="Accordion component docs" /></div>
+          <div class="meta">
+            <h4>Storybook · Accordion</h4>
+            <p>WAI-ARIA accordion with arrow-key navigation. Default, muted, and ghost variants in three sizes (sm, md, lg). The sidebar reveals the full component tree: MagicLogo, MagicMouseFollower, MagicText, Stack, Accordion, AnimatedBackground, Button, Select, Text, Toggle.</p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LIVE COMPONENTS ============ -->
+<section id="components-real">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">// In Isolation</div>
+      <h2 class="section-title">Components, in detail.</h2>
+      <p class="section-desc">Every primitive in <code style="font-family:'JetBrains Mono',monospace;color:var(--v12-primary-glow);">v12-ui</code>: Button, Toggle, Select, Accordion, Stack, Text, shown at full fidelity with their real styling, glow effects, and interactive states.</p>
+    </div>
+
+    <div class="component-gallery">
+      <div class="component-tile span-12 fade-in">
+        <img src="images/real/demo-full.png" alt="Full component showcase" />
+        <div class="label">
+          <span><span class="live-dot">SHOWCASE</span> · Full composition · 5 component groups</span>
+          <span style="color:var(--v12-text-muted);">1440 × 3212</span>
+        </div>
+      </div>
+
+      <div class="component-tile fade-in">
+        <img src="images/real/real-buttons.png" alt="Button — 9 variants" />
+        <div class="label">
+          <span><span class="live-dot">CVA</span> · Button — 9 variants with neon glow halos</span>
+          <span style="color:var(--v12-text-muted);">2640 × 320</span>
+        </div>
+      </div>
+
+      <div class="component-tile fade-in">
+        <img src="images/real/real-controls.png" alt="Toggle + Select controls" />
+        <div class="label">
+          <span><span class="live-dot">A11Y</span> · Toggle (WAI-ARIA switch) + Select (WAI-ARIA combobox)</span>
+          <span style="color:var(--v12-text-muted);">2640 × 480</span>
+        </div>
+      </div>
+
+      <div class="component-tile span-12 fade-in">
+        <img src="images/real/real-accordion.png" alt="Accordion — WAI-ARIA" />
+        <div class="label">
+          <span><span class="live-dot">WAI-ARIA</span> · Accordion — 3 panels, arrow-key navigation</span>
+          <span style="color:var(--v12-text-muted);">2640 × 506</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMPONENTS GRID ============ -->
+<section id="components">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">// Component Roster</div>
+      <h2 class="section-title">Every primitive, intentional.</h2>
+      <p class="section-desc">A curated surface area. Each component earns its place.</p>
+    </div>
+
+    <div class="components-grid">
+      <div class="component-card fade-in"><div class="component-icon">B</div><div class="component-name">Button</div><div class="component-desc">Polymorphic — renders as button or anchor with CVA variants.</div></div>
+      <div class="component-card fade-in"><div class="component-icon">S</div><div class="component-name">Stack</div><div class="component-desc">Flexbox layout container with spacing props.</div></div>
+      <div class="component-card fade-in"><div class="component-icon">T</div><div class="component-name">Text</div><div class="component-desc">Polymorphic text rendered as any HTML tag with variants.</div></div>
+      <div class="component-card fade-in"><div class="component-icon">A</div><div class="component-name">Accordion</div><div class="component-desc">WAI-ARIA accordion with arrow-key navigation.</div></div>
+      <div class="component-card fade-in"><div class="component-icon">⌄</div><div class="component-name">Select</div><div class="component-desc">WAI-ARIA combobox with keyboard navigation & animated dropdown.</div></div>
+      <div class="component-card fade-in"><div class="component-icon">◐</div><div class="component-name">Toggle</div><div class="component-desc">WAI-ARIA switch with success-state and CVA sizes.</div></div>
+      <div class="component-card fade-in"><div class="component-icon">✦</div><div class="component-name">AnimatedBackground</div><div class="component-desc">Canvas-based light-source animation with mouse interaction.</div></div>
+      <div class="component-card fade-in"><div class="component-icon">✺</div><div class="component-name">MagicText</div><div class="component-desc">Text assembled from animated particles with spring physics.</div></div>
+      <div class="component-card fade-in"><div class="component-icon">✸</div><div class="component-name">MagicLogo</div><div class="component-desc">Logo image disassembled into drifting particles.</div></div>
+      <div class="component-card fade-in"><div class="component-icon">✜</div><div class="component-name">MagicMouseFollower</div><div class="component-desc">Particle trail following the cursor with physics.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STACK ============ -->
+<section id="stack">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">// Architecture</div>
+      <h2 class="section-title">The stack behind the magic.</h2>
+      <p class="section-desc">Modern, minimal, production-grade tooling. Every dependency earns its bytes.</p>
+    </div>
+
+    <div class="components-grid">
+      <div class="component-card"><div class="component-icon">⚛️</div><div class="component-name">React 18 / 19</div><div class="component-desc">Supports the latest React versions via peerDependencies.</div></div>
+      <div class="component-card"><div class="component-icon">📘</div><div class="component-name">TypeScript 5.8</div><div class="component-desc">Strict types with polymorphic ref support throughout.</div></div>
+      <div class="component-card"><div class="component-icon">🎨</div><div class="component-name">Tailwind CSS v4</div><div class="component-desc">Uses the new <code style="color:var(--v12-primary-glow);font-family:'JetBrains Mono',monospace;">@theme</code> directive with semantic tokens.</div></div>
+      <div class="component-card"><div class="component-icon">⚡</div><div class="component-name">Vite 7</div><div class="component-desc">ESM + CJS dual builds via SWC, fully tree-shakable.</div></div>
+      <div class="component-card"><div class="component-icon">📚</div><div class="component-name">Storybook 10</div><div class="component-desc">Live component explorer with autodocs and accessibility addon.</div></div>
+      <div class="component-card"><div class="component-icon">🧪</div><div class="component-name">Vitest + RTL</div><div class="component-desc">Testing Library + jest-dom for behaviour-driven tests.</div></div>
+      <div class="component-card"><div class="component-icon">🔄</div><div class="component-name">Semantic Release</div><div class="component-desc">Conventional commits → automated versioning & changelog.</div></div>
+      <div class="component-card"><div class="component-icon">♿</div><div class="component-name">A11y Native</div><div class="component-desc">Every interactive component ships with WAI-ARIA patterns.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="brand" style="margin-bottom: 16px;">
+          <span class="brand-dot"></span>
+          <span>v12-ui</span>
+        </div>
+        <p style="color: var(--v12-text-dim); font-size: 14px; max-width: 360px;">
+          A React component library with a focus on utility-first design and accessibility. MIT licensed, open source, made with care by araldev.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="https://www.npmjs.com/package/v12-ui" target="_blank" rel="noopener">npm package</a>
+        <a href="https://github.com/araldev/v12-ui" target="_blank" rel="noopener">GitHub repo</a>
+        <a href="https://araldev.github.io/v12-ui/" target="_blank" rel="noopener">Storybook docs</a>
+        <a href="https://bundlephobia.com/package/v12-ui" target="_blank" rel="noopener">Bundle size</a>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Start</h4>
+        <a>npm i v12-ui</a>
+        <a>import 'v12-ui/styles.css'</a>
+        <a>import &#123; Button &#125; from 'v12-ui'</a>
+        <a>&lt;Button&gt;Ship it&lt;/Button&gt;</a>
+      </div>
+    </div>
+    <div class="copyright">
+      <span style="color: var(--v12-primary-glow);">©</span> v12-ui by araldev · MIT · Showcase made with ♥
+    </div>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.component-card, .real-item, .component-tile, .stat-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1)';
+    io.observe(el);
+  });
+</script>
+
+</body>
+</html>
