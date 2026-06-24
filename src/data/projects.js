@@ -66,7 +66,7 @@ export const projects = [
     tags: ['TypeScript', 'React', 'Storybook'],
     npmLink: 'https://www.npmjs.com/package/v12-ui',
     storybookLink: 'https://araldev.github.io/v12-ui/',
-    demoLink: '',
+    demoLink: '/v12-demo/index.html',
     codeLink: 'https://github.com/araldev/v12-ui',
     details: [
       {

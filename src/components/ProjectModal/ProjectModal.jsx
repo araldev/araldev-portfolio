@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from 'react'
+import { useEffect, useRef, useCallback, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { gsap } from 'gsap'
 import styles from './ProjectModal.module.css'
@@ -248,6 +248,24 @@ export function ProjectModal ({ project, onClose }) {
               />
             ))}
           </section>
+
+          {project.demoLink && (
+            <section className={styles.demo_section}>
+              <div className={styles.demo_header}>
+                <span className={styles.demo_label}>{t('projectModal.links.liveDemo')}</span>
+                <div className={styles.demo_header_line} />
+              </div>
+              <div className={styles.demo_container}>
+                <iframe
+                  src={project.demoLink}
+                  className={styles.demo_iframe}
+                  title={`${project.title} demo`}
+                  loading="lazy"
+                  allow="accelerometer; camera; encrypted-media; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write"
+                />
+              </div>
+            </section>
+          )}
 
           <footer className={styles.modal_footer}>
             <div className={styles.footer_links}>
