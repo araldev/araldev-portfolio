@@ -51,7 +51,7 @@ describe('JobCardAchievements', () => {
     expect(screen.getByText('Wrote blog post')).toBeInTheDocument()
   })
 
-  it('sets aria-hidden=true and the hidden attribute when collapsed', () => {
+  it('shows the title always and hides the list when collapsed', () => {
     renderWithLang(
       <JobCardAchievements
         achievements={achievements}
@@ -59,12 +59,16 @@ describe('JobCardAchievements', () => {
         achievementsId='ach-1'
       />
     )
+    // The section is always visible (title is always shown)
     const section = screen.getByText('Key achievements').closest('section')
-    expect(section).toHaveAttribute('aria-hidden', 'true')
-    expect(section).toHaveAttribute('hidden')
+    expect(section).toBeInTheDocument()
+    expect(section).not.toHaveAttribute('hidden')
+    // The list wrapper is hidden when collapsed
+    const listWrapper = section.querySelector('[class*="list_wrapper"]')
+    expect(listWrapper).toHaveAttribute('aria-hidden', 'true')
   })
 
-  it('sets aria-hidden=false and omits the hidden attribute when expanded', () => {
+  it('reveals the list when expanded', () => {
     renderWithLang(
       <JobCardAchievements
         achievements={achievements}
@@ -73,8 +77,11 @@ describe('JobCardAchievements', () => {
       />
     )
     const section = screen.getByText('Key achievements').closest('section')
-    expect(section).toHaveAttribute('aria-hidden', 'false')
-    expect(section).not.toHaveAttribute('hidden')
+    expect(section).toBeInTheDocument()
+    const listWrapper = section.querySelector('[class*="list_wrapper"]')
+    expect(listWrapper).not.toHaveAttribute('hidden')
+    // List items are visible
+    expect(screen.getByText('Shipped feature X')).toBeInTheDocument()
   })
 
   it('Escape key triggers the onToggleExpand callback', () => {

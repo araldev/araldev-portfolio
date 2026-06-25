@@ -34,6 +34,9 @@ export const NavHeader = forwardRef(({ activeSection }, ref) => {
         </label>
 
         <ul className={styles.nav_links} role='list'>
+          <li className={styles.nav_lang_mobile}>
+            <LanguageToggle />
+          </li>
           {navItems.map(({ id, label }) => {
             const liClass = activeSection === id
               ? `${styles.nav_link_item} ${styles.nav_link_item_active}`

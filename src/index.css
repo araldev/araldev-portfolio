@@ -13,6 +13,7 @@
   --color-bg-web: #111117;
   --padding-nav: 0px 60px;
   --padding-web-content: 60px 0px;
+  --section-padding-x: 60px;
   --border-radius: 12px;
   --border-color: #7d9cb8;
   --bg-blur-transparent: #5c5c5c50;
@@ -196,4 +197,11 @@ img {
   top: 0;
   outline: 2px solid #00C9FF;
   outline-offset: 2px;
+}
+
+/* Mobile: tighter section padding so cards span nearly full width */
+@media (max-width: 519px) {
+  :root {
+    --section-padding-x: 20px;
+  }
 }

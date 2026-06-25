@@ -74,6 +74,17 @@
   grid-template-columns: auto 1fr auto;
   align-items: flex-start;
   gap: 1rem;
+  width: 100%;
+}
+
+/* Desktop: shift the header row left so h3/h4/badge align with
+   the description text. The logo stays in the left margin/padding
+   area, outside the text column. */
+@media (min-width: 768px) {
+  .job_card_top {
+    width: calc(100% + 72px);
+    margin-left: -72px;
+  }
 }
 
 .job_card_logo_wrapper {
@@ -151,6 +162,8 @@
   flex-direction: column;
   gap: 0.35rem;
   min-width: 0;
+  max-width: 64ch;
+  width: 100%;
 }
 
 /* ---------- Header ---------- */
@@ -268,6 +281,8 @@
   align-items: center;
   font-size: 0.85rem;
   color: rgba(255, 255, 255, 0.78);
+  max-width: 64ch;
+  width: 100%;
 }
 
 .job_card_period {
@@ -315,27 +330,94 @@
   gap: 0.6rem;
 }
 .job_card_paragraph {
-  font-size: var(--font-size-paragraph);
-  font-weight: var(--font-weight-paragraph);
-  line-height: 1.6;
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.65;
   color: rgba(255, 255, 255, 0.78);
-  max-width: var(--paragraph-max-width);
+  max-width: 64ch;
+  text-align: left;
+  width: 100%;
 }
 
 /* ---------- Achievements ---------- */
 .job_card_achievements {
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+  width: 100%;
 }
 .job_card_achievements_title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  font-family: inherit;
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: rgba(0, 201, 255, 0.85);
   margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: color 0.2s ease;
+}
+.achievements_meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+.job_card_achievements_title {
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .job_card_achievements_title:hover {
+    color: rgba(0, 201, 255, 1);
+  }
+  .job_card_achievements_title:hover .achievements_meta {
+    opacity: 1;
+  }
+}
+.job_card_achievements_title:focus-visible {
+  outline: 2px solid #92FE9D;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.achievements_count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  border-radius: 999px;
+  background: rgba(0, 201, 255, 0.15);
+  color: rgba(0, 201, 255, 0.95);
+  line-height: 1;
+}
+.achievements_chevron {
+  display: inline-block;
+  font-size: 0.6rem;
+  line-height: 1;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  color: rgba(0, 201, 255, 0.7);
+}
+.achievements_chevron[data-expanded='true'] {
+  transform: rotate(180deg);
+}
+.achievements_list_wrapper {
+  overflow: hidden;
+  visibility: hidden;
+  height: 0;
 }
 .job_card_achievements_list {
   list-style: none;
@@ -347,19 +429,40 @@
 }
 .job_card_achievement_item {
   position: relative;
-  padding-left: 1rem;
+  padding: 0.3rem 0 0.3rem 1rem;
   font-size: 0.95rem;
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.85);
+  border-radius: 4px;
+  transition: background 0.2s ease, color 0.2s ease;
+  cursor: default;
 }
 .job_card_achievement_item::before {
   content: '';
   position: absolute;
   left: 0;
   top: 0.55em;
-  width: 2px;
+  width: 3px;
   height: 1em;
-  background: rgba(0, 201, 255, 0.7);
+  background: rgba(0, 201, 255, 0.5);
+  border-radius: 2px;
+  transition: background 0.2s ease, width 0.2s ease, box-shadow 0.2s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .job_card_achievement_item:hover {
+    background: rgba(0, 201, 255, 0.06);
+    color: #fff;
+  }
+  .job_card_achievement_item:hover::before {
+    background: rgba(0, 201, 255, 0.95);
+    width: 4px;
+    box-shadow: 0 0 8px rgba(0, 201, 255, 0.5);
+  }
+}
+@media (hover: none) and (pointer: coarse) {
+  .job_card_achievement_item:active {
+    background: rgba(0, 201, 255, 0.06);
+  }
 }
 
 /* ---------- Stack ---------- */
@@ -369,6 +472,7 @@
   gap: 14px;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 .job_card_stack .tech_icon {
   display: inline-flex;
@@ -451,6 +555,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+  width: 100%;
 }
 
 .job_card_tags {
@@ -533,5 +638,10 @@
 
 /* ---------- Desktop variant (≥1024px) ---------- */
 @media (min-width: 1024px) {
-  .job_card_surface { padding: 3.5rem; }
+  .job_card_surface { padding: 3.5rem 5rem; }
+}
+
+/* ---------- Extra-large screens (≥1440px) ---------- */
+@media (min-width: 1440px) {
+  .job_card_surface { padding: 4rem 7rem; }
 }

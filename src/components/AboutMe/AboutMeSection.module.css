@@ -12,7 +12,7 @@
   max-width: var(--width-web-content);
   width: 100%;
   margin: 0 auto;
-  padding: 0 var(--padding-web-content);
+  padding: 0 var(--section-padding-x);
   display: flex;
   flex-direction: column;
   align-items: center;

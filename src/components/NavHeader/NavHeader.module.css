@@ -47,16 +47,27 @@
   flex-shrink: 0;
 }
 
-/* On mobile the hamburger (.nav_icon) is position: fixed at the
-   right edge, and the LanguageToggle would visually collide with
-   it. Pin the toggle to the right as well, but to the LEFT of the
-   hamburger, with enough gutter that the two never overlap. */
+/* Mobile: keep the LanguageToggle inside the sidebar menu, not
+   floating. The desktop .nav_lang is hidden on mobile; instead the
+   toggle renders as the first item in .nav_links (.nav_lang_mobile). */
+.nav_lang_mobile {
+  display: none;
+}
+
 @media (max-width: 850px) {
   .nav_lang {
-    position: fixed;
-    top: 15px;
-    right: 90px;
-    z-index: 100;
+    display: none;
+  }
+
+  .nav_lang_mobile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    height: auto;
+    padding: 32px 0 16px;
+    margin: 0 auto;
+    list-style: none;
   }
 }
 

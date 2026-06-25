@@ -80,7 +80,7 @@ describe('JobCard — main composition', () => {
 
   it('renders the expand trigger for a job with achievements (FR-004)', () => {
     renderWithLang(<JobCard job={fullJob} jobsList={[fullJob]} />)
-    expect(screen.getByRole('button')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /See more/i })).toBeInTheDocument()
   })
 
   it('does NOT render the expand trigger when achievements is empty (FR-004 / EC-001)', () => {
@@ -90,7 +90,7 @@ describe('JobCard — main composition', () => {
 
   it('expands and collapses on click (US-3)', () => {
     renderWithLang(<JobCard job={fullJob} jobsList={[fullJob]} />)
-    const btn = screen.getByRole('button')
+    const btn = screen.getByRole('button', { name: /See more/i })
     expect(btn).toHaveAttribute('aria-expanded', 'false')
     fireEvent.click(btn)
     expect(btn).toHaveAttribute('aria-expanded', 'true')
