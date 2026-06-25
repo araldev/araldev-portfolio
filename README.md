@@ -20,7 +20,6 @@
 ![StandardJS](https://img.shields.io/badge/StandardJS-JS%20%26%20JSX-F7DF1E?style=flat-square)
 ![CSS Modules](https://img.shields.io/badge/CSS-Modules-663399?style=flat-square)
 ![GSAP](https://img.shields.io/badge/GSAP-3-0ae448?style=flat-square)
-![Three.js](https://img.shields.io/badge/Three.js-r184-000000?style=flat-square&logo=three.js)
 ![Lenis](https://img.shields.io/badge/Lenis-1.3-3178C6?style=flat-square)
 
 </div>
@@ -30,12 +29,12 @@
 ## ✨ Features
 
 - **Smooth scrolling** with Lenis (auto-raf, synced touch)
-- **GSAP + Three.js** animations for immersive interactions
+- **GSAP** animations for immersive interactions
 - **1700+ lines** of pure CSS Modules — no Tailwind
 - **Custom SVG icons** — 20+ tech brand icons, inline SVG with hover brand colors
-- **i18n** — Full English / Spanish support via `react-i18next`
+- **i18n** — Full English / Spanish support via custom React Context
 - **Accessibility** — axe-core 0 violations, semantic HTML, ARIA landmarks
-- **164 unit tests** + **42 Playwright visual tests** across 3 viewports
+    - **164 unit tests** + **48 Playwright visual tests** across 4 viewports
 - **Pre-commit hooks** via Husky — tests + visual regression guard
 - **Dark-first design** with cyan/blue gradient accents
 
@@ -67,7 +66,7 @@ src/
 
 Every commit runs:
 - `npm test` → 164 Vitest tests
-- `pnpm test:visual` → 42 Playwright snapshot tests (desktop, tablet, mobile)
+- `pnpm test:visual` → 48 Playwright snapshot tests (4 viewports)
 
 ## 🚀 Quick Start
 
@@ -86,7 +85,7 @@ pnpm deploy    # Build + deploy to GitHub Pages
 | Category | Tools |
 |----------|-------|
 | **Core** | React 18, Vite 6, CSS Modules |
-| **Animation** | GSAP 3, Three.js, Lenis |
+| **Animation** | GSAP 3, Lenis |
 | **Testing** | Vitest 4, Playwright 1.60, axe-core |
 | **Linting** | StandardJS |
 | **Fonts** | Roboto (400/500/600/700) via @fontsource |
