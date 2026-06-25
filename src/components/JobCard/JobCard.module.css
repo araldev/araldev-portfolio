@@ -330,6 +330,8 @@
   gap: 0.6rem;
 }
 .job_card_paragraph {
+  position: relative;
+  padding: 0.3rem 0 0.3rem 1rem;
   font-size: 1.05rem;
   font-weight: 400;
   line-height: 1.65;
@@ -337,6 +339,30 @@
   max-width: 64ch;
   text-align: left;
   width: 100%;
+  border-radius: 4px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.job_card_paragraph::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 3px;
+  height: 1em;
+  background: rgba(0, 201, 255, 0.5);
+  border-radius: 2px;
+  transition: background 0.2s ease, width 0.2s ease, box-shadow 0.2s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .job_card_paragraph:hover {
+    background: rgba(0, 201, 255, 0.06);
+    color: #fff;
+  }
+  .job_card_paragraph:hover::before {
+    background: rgba(0, 201, 255, 0.95);
+    width: 4px;
+    box-shadow: 0 0 8px rgba(0, 201, 255, 0.5);
+  }
 }
 
 /* ---------- Achievements ---------- */
