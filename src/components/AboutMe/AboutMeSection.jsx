@@ -38,7 +38,7 @@ export function AboutMeSection () {
             <img src={avatar} alt={t('images.profile')} className={styles.avatar_image} decoding='async' />
           </div>
           <div className={styles.avatar_info}>
-            <span className={styles.avatar_name}>Arturo "R2"</span>
+            <span className={styles.avatar_name}>Arturo "R2D2"</span>
             <span className={styles.avatar_tag}>{t('about.tagline')}</span>
           </div>
         </div>

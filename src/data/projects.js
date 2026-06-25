@@ -63,7 +63,13 @@ import realControls from '../assets/real-controls.webp'
 import realAccordion from '../assets/real-accordion.webp'
 import demoFull from '../assets/demo-full.webp'
 import bundlephobiaStats from '../assets/bundlephobia-stats.png'
-import shotEnglishWeb from '../assets/shot-english-web.webp'
+import englishWebHero from '../assets/00-hero.webp'
+import englishWebArchitecture from '../assets/01-architecture.webp'
+import englishWebAuth from '../assets/02-auth.webp'
+import englishWebFrontend from '../assets/03-frontend.webp'
+import englishWebFlipcards from '../assets/04-flipcards.webp'
+import englishWebJson from '../assets/05-json.webp'
+import englishWebLearned from '../assets/06-learned.webp'
 import magicLogo from '../assets/v12-ui-magic-logo.png'
 import v12UiStack from '../assets/v12-ui-stack.png'
 
@@ -126,7 +132,16 @@ export const projects = [
   {
     id: 3,
     contentKey: 'english-web',
-    imgSrc: shotEnglishWeb,
+    imgSrc: englishWebHero,
+    imgPosition: 'left', // Hero image focuses left side (3200x2000 → 4:3 card)
+    gallery: [
+      { src: englishWebArchitecture, alt: 'Arquitectura Hexagonal — Screaming Architecture' },
+      { src: englishWebAuth, alt: 'Autenticación JWT desde cero con rotación de tokens' },
+      { src: englishWebFrontend, alt: 'Frontend vanilla — navegación HTTP real' },
+      { src: englishWebFlipcards, alt: 'CSS 3D Flip Cards con transform-style: preserve-3d' },
+      { src: englishWebJson, alt: 'Contenido dinámico vía JSON — sin HTML ni CSS' },
+      { src: englishWebLearned, alt: 'Lecciones aprendidas — arquitectura sobre frameworks' }
+    ],
     title: 'English Web',
     shortDescription: '', // Fallback only — content in locale files
     description: [],       // Fallback only — content in locale files

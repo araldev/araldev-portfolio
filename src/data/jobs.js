@@ -15,7 +15,10 @@
  * @property {string[]} description
  * @property {string[]} [achievements]
  * @property {Object<string, any>} stack
- * @property {string[]} [tags]
+ * @property {string[]} [tags] — Soft skills only. NO tech stack, NO role types (e.g. 'Java', 'Spring Boot', 'Prácticas').
+ *                                     Tech skills go in `stack`, role context in `type`. This section is for
+ *                                     human/soft skills that help recruiters understand the candidate's
+ *                                     professional attributes beyond technology.
  * @property {{companyLink?: string, projectLink?: string, referenceLink?: string}} [links]
  */
 
@@ -121,7 +124,9 @@ export const jobs = [
       git: techIcons.git,
       gitHub: techIcons.gitHub
     },
-    tags: ['Java', 'Spring Boot', 'Prácticas', 'Trabajo en equipo', 'Metodologías ágiles', 'Resolución de problemas', 'Comunicación efectiva', 'Adaptabilidad'],
+    // ⚠️ Soft skills ONLY — no tech stack, no role types.
+    // Tech → `stack` property. Role → `type` property.
+    tags: ['Trabajo en equipo', 'Metodologías ágiles', 'Resolución de problemas', 'Comunicación efectiva', 'Adaptabilidad'],
     links: {}
   }
 ]

@@ -42,6 +42,32 @@
     cursor: pointer;
     padding: clamp(5px, 2%, 5px);
 
+    /* Tooltip: shows technology name below the icon on hover */
+    &::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(4px);
+      padding: 4px 10px;
+      background: #16161e;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 500;
+      white-space: nowrap;
+      border-radius: 6px;
+      border: 1px solid rgba(0, 201, 255, 0.25);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .2s ease, transform .2s ease;
+      z-index: 10;
+    }
+
+    &:hover::after {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
     .filter_icon_container{
       width: 100%;
       height: 100%;
@@ -335,6 +361,10 @@
   fill: #ffffff;
   transition: fill .3s ease-in-out;
 }
+.filter_icon_label .nextjs > svg circle {
+  fill: transparent;
+  transition: fill .3s ease-in-out;
+}
 
 .filter_icon_label:hover .ia > svg path {
   fill: url(#ia-futuristic-grad);
@@ -421,6 +451,7 @@
   /* IA: no fill change on hover — the gradient IS its brand identity */
   .filter_icon_label:hover .python > svg path:nth-of-type(1) { fill: #327EBD; }
   .filter_icon_label:hover .python > svg path:nth-of-type(2) { fill: #FFDA4B; }
+  .filter_icon_label:hover .nextjs > svg circle { fill: #fff; }
   .filter_icon_label:hover .nextjs > svg path { fill: #000; }
 }
 
@@ -465,6 +496,7 @@
   .filter_icon_label:active .rxjs > svg path:nth-of-type(4) { fill: url(#rxjs-grad-c); }
   .filter_icon_label:active .python > svg path:nth-of-type(1) { fill: #327EBD; }
   .filter_icon_label:active .python > svg path:nth-of-type(2) { fill: #FFDA4B; }
+  .filter_icon_label:active .nextjs > svg circle { fill: #fff; }
   .filter_icon_label:active .nextjs > svg path { fill: #000; }
 }
 
@@ -499,4 +531,5 @@
 
 .filter_icon_checkbox:checked ~ .python > svg path:nth-of-type(1) { fill: #327EBD; }
 .filter_icon_checkbox:checked ~ .python > svg path:nth-of-type(2) { fill: #FFDA4B; }
+.filter_icon_checkbox:checked ~ .nextjs > svg circle { fill: #fff; }
 .filter_icon_checkbox:checked ~ .nextjs > svg path { fill: #000; }

@@ -64,6 +64,7 @@ import { useLanguage } from '../../i18n/useLanguage.js'
 function TechsIcons ({ project }) {
   const { isIconCheck } = useIsIconCheckFilter()
   const isFilterActive = Object.values(isIconCheck).some(Boolean)
+  const { t } = useLanguage()
 
   const items = []
   for (const key in project.tech) {
@@ -71,6 +72,7 @@ function TechsIcons ({ project }) {
     const isActive = Boolean(isIconCheck[key])
     const shouldDim = isFilterActive && !isActive
     const className = shouldDim ? styles.dim : ''
+    const techName = t('projects.filterIcons.' + key)
     items.push(
       <span
         key={`${project.id}-${key}`}
@@ -78,6 +80,7 @@ function TechsIcons ({ project }) {
         data-tech-key={key}
         data-dimmed={shouldDim ? 'true' : 'false'}
         data-active={isFilterActive && isActive ? 'true' : 'false'}
+        data-tooltip={techName}
       >
         {project.tech[key]}
       </span>
@@ -115,12 +118,13 @@ function ProjectCard ({ project, onShowMore }) {
       data-project-id={project.id}
     >
       <div className={styles.project_image_container}>
-        <img
-          src={project.imgSrc}
-          alt={t('projects.links.thumbnailOf', null, titleVars)}
-          loading='lazy'
-          decoding='async'
-        />
+          <img
+            src={project.imgSrc}
+            alt={t('projects.links.thumbnailOf', null, titleVars)}
+            loading='lazy'
+            decoding='async'
+            style={project.imgPosition ? { objectPosition: project.imgPosition } : undefined}
+          />
       </div>
 
       <div className={styles.project_text_container}>

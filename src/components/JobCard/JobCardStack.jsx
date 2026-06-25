@@ -32,8 +32,9 @@ export function JobCardStack ({ stack, companyLabel }) {
       {entries.map(key => {
         const colorClass = styles[`tech_icon--${key}`] || ''
         const className = [styles.tech_icon, colorClass].filter(Boolean).join(' ')
+        const techName = t('projects.filterIcons.' + key)
         return (
-          <span key={key} className={className}>
+          <span key={key} className={className} data-tooltip={techName}>
             {stack[key]}
           </span>
         )

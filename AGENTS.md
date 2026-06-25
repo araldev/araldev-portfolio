@@ -101,12 +101,31 @@ Antes de terminar la sesión, guardar `mem_session_summary` con:
 │  projects.js = SOLO ESTRUCTURA (ids, imágenes, enlaces, tech stack, tags)   │
 │  locale files (en.json / es.json) = CONTENIDO (title, description, details)│
 └─────────────────────────────────────────────────────────────────────────────┘
+
+> Nota: `tags` en `projects.js` son tech tags (filtro). `tags` en `jobs.js` son soft skills únicamente.
 ```
 
 ### Jobs (experience)
 
 - `src/data/jobs.js` — estructura y contenido deexperience
 - `src/i18n/locales/en.json` y `es.json` — contenido localizado
+
+### Tags de Experiencia — Soft Skills Only
+
+> **Los `tags` en `jobs.js` son SOLO para soft skills/habilidades humanas.**
+> - ❌ NO tech stack (va en `stack`)
+> - ❌ NO tipo de rol (va en `type`)
+> - ✅ Solo soft skills: Trabajo en equipo, Comunicación, Adaptabilidad, etc.
+
+### Tooltips de Tecnologías — `filterIcons`
+
+> Los tooltips de los iconos técnicos se definen en `projects.filterIcons.<key>` dentro de los locale files.
+> Esto aplica a los tooltips en:
+> - **FilterProjects** (tooltip abajo del icono)
+> - **JobCardStack** (tooltip arriba del icono)
+> - **ProjectsCards** (tooltip arriba del icono)
+>
+> Los nombres de tecnologías son iguales en EN/ES salvo "IA" → "Artificial Intelligence" / "Inteligencia Artificial".
 
 ### Regla de Oro
 

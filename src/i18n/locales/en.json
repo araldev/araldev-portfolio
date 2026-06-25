@@ -58,6 +58,29 @@
       "sourceCodeOf": "Source code for {title}",
       "thumbnailOf": "Thumbnail of {title}",
       "externalLinksFor": "External links for {title}"
+    },
+    "filterIcons": {
+      "js": "JavaScript",
+      "react": "React",
+      "css": "CSS",
+      "tailwind": "Tailwind CSS",
+      "html": "HTML",
+      "ts": "TypeScript",
+      "git": "Git",
+      "gitHub": "GitHub",
+      "gsap": "GSAP",
+      "storybook": "Storybook",
+      "vite": "Vite",
+      "npm": "npm",
+      "java": "Java",
+      "spring": "Spring",
+      "postgres": "PostgreSQL",
+      "angular": "Angular",
+      "junit": "JUnit",
+      "rxjs": "RxJS",
+      "ia": "Artificial Intelligence",
+      "python": "Python",
+      "nextjs": "Next.js"
     }
   },
   "projectModal": {
@@ -76,9 +99,9 @@
     "title": "About Me",
     "tagline": "Full-Stack Developer",
     "bio": [
-      "My name is Arturo, although many know me as [[R2]]. I studied TSAFAD, but after several years dedicating myself to it, I decided to make a shift towards the tech sector —another of my great passions— driven by my interest in creating, building, and solving.",
+      "My name is Arturo, although many know me as R2D2. I studied TSAFAD, but after several years dedicating myself to it, I decided to make a shift towards the tech sector, another of my great passions, driven by my interest in creating, building, and solving.",
       "I've been in contact with computers since I was little, although it wasn't until 2022 that I started to delve into the world of programming. In January 2025, I made the decision to train seriously and in a structured way. Since then, I've developed multiple projects and have many more in mind that I'd like to carry out and monetize.",
-      "I consider myself a [[self-taught]] person; learning on my own has been a constant in my life and that has made me resourceful, independent, and always in search of new solutions."
+      "I consider myself a self-taught person; learning on my own has been a constant in my life and that has made me resourceful, independent, and always in search of new solutions."
     ],
     "highlights": [
       {
@@ -173,9 +196,6 @@
         "Technical documentation: wrote technical documentation for the features I implemented, including design decisions, available endpoints, and usage examples. This taught me the importance of keeping documentation alive and accessible to the team."
       ],
       "tags": [
-        "Java",
-        "Spring Boot",
-        "Internship",
         "Teamwork",
         "Agile methodologies",
         "Problem solving",

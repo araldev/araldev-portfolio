@@ -6,6 +6,7 @@ import { useLanguage } from '../../i18n/useLanguage.js'
 
 function TechIcons () {
   const { setIsIconCheck } = useIsIconCheckFilter()
+  const { t } = useLanguage()
   const idBaseFilter = useId()
 
   function handleClick (event) {
@@ -26,8 +27,9 @@ function TechIcons () {
           const idFilter = `${idBaseFilter}-${index}`
           const styleForIcon = key ? styles[key] : ''
 
+          const techName = t('projects.filterIcons.' + key)
           return (
-            <label className={styles.filter_icon_label} key={`${index}-${key}`} htmlFor={idFilter}>
+            <label className={styles.filter_icon_label} key={`${index}-${key}`} htmlFor={idFilter} data-tooltip={techName}>
               <input
                 data-key={key}
                 onClick={handleClick}
