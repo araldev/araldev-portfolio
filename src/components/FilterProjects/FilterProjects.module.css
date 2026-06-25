@@ -1,24 +1,108 @@
 .form_filter_container {
+  position: sticky;
+  top: 80px;
+  z-index: 20;
   width: 100%;
-  height: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  gap: 40px;
-  margin: 50px;
-  
+  margin: 0 0 28px;
+  background: rgba(10, 10, 15, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
 
-  legend {
-    text-align: center;
-    background: var(--color2-text-gradient);
-    background-clip: text;
-    color: transparent;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: var(--font-size-subtitle);
-    font-weight: var(--font-weight-subtitle)
+/* ── Header row: absolute so it always covers the collapsed
+      form height. Every pixel of the closed toolbar is clickable. ── */
+.toolbar_header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 52px;
+  z-index: 5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+  padding: 14px 16px;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
   }
+}
+
+.toolbar_legend {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.88);
+  background: none;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.88);
+}
+
+.chevron_up {
+  color: rgba(255, 255, 255, 0.5);
+  transition: transform 0.25s ease;
+}
+
+.chevron_down {
+  color: rgba(255, 255, 255, 0.5);
+  transition: transform 0.25s ease;
+  transform: rotate(180deg);
+}
+
+/* Group sections — compact row layout for the toolbar.
+   Each row: [HEADING] icons... The heading stays on the left,
+   icons wrap to the right. */
+.filter_group {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter_group_heading {
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.65);
+  margin: 0;
+  width: 72px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.filter_group_icons {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Animated wrapper: max-height + opacity transition for smooth
+   expand/collapse without conditional rendering. */
+.filter_animate {
+  width: 100%;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.35s ease, opacity 0.25s ease;
+}
+
+.filter_animate.filter_open {
+  max-height: 600px;
+  overflow: visible;
+  opacity: 1;
 }
 
 .filter_container {
@@ -27,20 +111,20 @@
   width: var(--width-web-content);
   height: max-content;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  gap: 40px;
-  flex-wrap: wrap;
+  gap: 6px;
+  padding-top: 52px;
 
   .filter_icon_label{
-    width: clamp(40px, 7vw, 84px);
-    height: clamp(40px, 7vw, 84px);
+    width: 38px;
+    height: 38px;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     cursor: pointer;
-    padding: clamp(5px, 2%, 5px);
+    padding: 6px;
 
     /* Tooltip: shows technology name below the icon on hover */
     &::after {
@@ -120,6 +204,9 @@
       transition: transform .3s ease-in-out;
       max-width: 100%;
     }
+    .nodejs > svg {
+      transition: transform .3s ease-in-out;
+    }
 
     @media (hover: hover) and (pointer: fine) {
       &:hover .js > svg {
@@ -188,6 +275,10 @@
         > path {
           stroke: #000;
         }
+      }
+      &:hover .nodejs > svg {
+        transform: scale(1.2);
+        color: #539E43;
       }
     }
     @media (hover: none) and (pointer: coarse) {
@@ -258,6 +349,10 @@
           stroke: #000;
         }
       }
+      &:active .nodejs > svg {
+        transform: scale(1.2);
+        color: #539E43;
+      }
     }
 
     .filter_icon_checkbox:checked ~ .js > svg {
@@ -312,6 +407,9 @@
       > path {
         stroke: #000;
       }
+    }
+    .filter_icon_checkbox:checked ~ .nodejs > svg {
+      color: #539E43;
     }
   }
 }

@@ -9,7 +9,7 @@
     "menuToggle": "Toggle menu"
   },
   "hero": {
-    "title": "Frontend Developer",
+    "title": "Full Stack Developer",
     "description": "Focused on crafting modern, visually engaging, and animated web experiences.",
     "downloadCV": "Download CV"
   },
@@ -46,6 +46,14 @@
   },
   "projects": {
     "filterLegend": "Select and search projects by technology used",
+    "filterCollapse": "Close filter",
+    "filterExpand": "Open filter",
+    "filterGroups": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "devops": "DevOps / Tools",
+      "ai": "AI"
+    },
     "seeDetails": "See details",
     "links": {
       "liveDemo": "Live Demo",
@@ -80,7 +88,8 @@
       "rxjs": "RxJS",
       "ia": "Artificial Intelligence",
       "python": "Python",
-      "nextjs": "Next.js"
+      "nextjs": "Next.js",
+      "nodejs": "Node.js"
     }
   },
   "projectModal": {
@@ -171,10 +180,10 @@
     "profileHero": "Profile image"
   },
   "seo": {
-    "title": "Araldev — Frontend Developer Portfolio",
-    "description": "Frontend developer focused on crafting modern, visually engaging, and animated web experiences. React, GSAP, and interactive design.",
+    "title": "Araldev — Full Stack Developer Portfolio",
+    "description": "Full-stack developer focused on crafting modern, visually engaging, and animated web experiences. React, GSAP, and interactive design.",
     "ogTitle": "Araldev Portfolio",
-    "ogDescription": "Explore the portfolio of Arturo Alba García — frontend development, animations, and interactive UI."
+    "ogDescription": "Explore the portfolio of Arturo Alba García — full-stack development, animations, and interactive UI."
   },
   "jobsContent": {
     "nttData": {

@@ -150,9 +150,10 @@ export const projects = [
       css: techIcons.css,
       html: techIcons.html,
       gitHub: techIcons.gitHub,
-      git: techIcons.git
+      git: techIcons.git,
+      nodejs: techIcons.nodejs
     },
-    tags: ['Vanilla JS', 'HTML', 'CSS'],
+    tags: ['Vanilla JS', 'HTML', 'CSS', 'Node.js'],
     npmLink: '',
     storybookLink: '',
     demoLink: 'https://araldev.github.io/english-web/index.html',

@@ -23,7 +23,8 @@ export const iconsColors = {
   ia: '#7C3AED',
   nttData: '#0072bc',
   python: '#327EBD',
-  nextjs: '#000000'
+  nextjs: '#000000',
+  nodejs: '#539E43'
 }
 
 export const allIconsDictionaryKey = {
@@ -53,6 +54,7 @@ export const allIconsDictionaryKey = {
   nttData: 'nttData',
   python: 'python',
   nextjs: 'nextjs',
+  nodejs: 'nodejs',
   arrowUp: 'arrowUp',
   arrowDown: 'arrowDown'
 }

@@ -31,7 +31,8 @@ export const techIcons = {
   ia: ICONS.IA_ICON,
   nttData: ICONS.NTT_DATA_ICON,
   python: ICONS.PYTHON_ICON,
-  nextjs: ICONS.NEXTJS_ICON
+  nextjs: ICONS.NEXTJS_ICON,
+  nodejs: ICONS.NODEJS_ICON
 }
 
 export const utilsIcons = {

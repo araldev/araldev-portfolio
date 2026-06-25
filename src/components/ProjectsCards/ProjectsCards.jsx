@@ -86,7 +86,7 @@ function TechsIcons ({ project }) {
       </span>
     )
   }
-  return <>{items}</>
+    return <div className={styles.tech_icons_row}>{items}</div>
 }
 
 // --- Single project card (renders the 4-section anatomy) ---
