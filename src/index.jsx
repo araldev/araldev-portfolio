@@ -4,14 +4,11 @@ import '@fontsource/roboto/600.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/400.css'
 import { createRoot } from 'react-dom/client'
-import { lazy, Suspense, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
+import { ReactLenis } from 'lenis/react'
 import App from './App.jsx'
 import { ScrollSync } from './components/ScrollSync.jsx'
 import { LanguageProvider } from './i18n/LanguageContext.jsx'
-
-// Lazy-load Lenis so the Google signalling XHR request (for cross-tab
-// scroll sync) fires after the first paint instead of blocking it.
-const ReactLenis = lazy(() => import('lenis/react'))
 
 const lenisOptions = {
   autoRaf: false,
@@ -21,14 +18,12 @@ const lenisOptions = {
 
 function AppWithLenis () {
   return (
-    <Suspense fallback={null}>
-      <ReactLenis root options={lenisOptions}>
-        <LanguageProvider>
-          <ScrollSync />
-          <App />
-        </LanguageProvider>
-      </ReactLenis>
-    </Suspense>
+    <ReactLenis root options={lenisOptions}>
+      <LanguageProvider>
+        <ScrollSync />
+        <App />
+      </LanguageProvider>
+    </ReactLenis>
   )
 }
 
