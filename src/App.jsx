@@ -20,7 +20,7 @@ export default function () {
   const mainRef = useRef()
   const navHeaderRef = useRef()
   const navToTopRef = useRef()
-  useAnimatedNavHeader({ mainRef, navHeaderRef })
+  useAnimatedNavHeader({ navHeaderRef })
   useAnimatedNavToTop({ mainRef, navToTopRef })
   useDocumentHead()
 
@@ -28,11 +28,6 @@ export default function () {
 
   return (
     <>
-      {/* Skip-to-content link for keyboard users */}
-      <a className='skip-to-content' href='#main-content'>
-        Skip to content
-      </a>
-
       <header>
         <NavHeader ref={navHeaderRef} activeSection={activeSection} />
       </header>

@@ -2,17 +2,16 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useEffect } from 'react'
 import { show } from '../components/NavHeader/NavHeader.module.css'
 
-export function useAnimatedNavHeader ({ mainRef, navHeaderRef }) {
+export function useAnimatedNavHeader ({ navHeaderRef }) {
   useEffect(() => {
-    if (!navHeaderRef?.current || !mainRef?.current) return
+    if (!navHeaderRef?.current) return
 
     const navHeader = navHeaderRef.current
-    const main = mainRef.current
 
     ScrollTrigger.create({
       id: 'nav-trigger',
-      trigger: main,
-      start: 'top bottom',
+      trigger: document.body,
+      start: 'top -80px',
       // markers: true,
       onEnter: () => {
         navHeader.classList.add(show)
@@ -26,7 +25,7 @@ export function useAnimatedNavHeader ({ mainRef, navHeaderRef }) {
       const st = ScrollTrigger.getById('nav-trigger')
       if (st) st.kill()
     }
-  }, [navHeaderRef, mainRef])
+  }, [navHeaderRef])
 
   return null
 }
