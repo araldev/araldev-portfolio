@@ -59,7 +59,8 @@
 
 /* Group sections — compact row layout for the toolbar.
    Each row: [HEADING] icons... The heading stays on the left,
-   icons wrap to the right. */
+   icons wrap to the right. Padding and a subtle bottom border
+   differentiate groups at a glance on desktop. */
 .filter_group {
   width: 100%;
   display: flex;
@@ -67,6 +68,12 @@
   align-items: center;
   gap: 8px;
   flex-wrap: wrap;
+  padding: 10px 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.filter_group:last-child {
+  border-bottom: none;
 }
 
 .filter_group_heading {
@@ -631,3 +638,34 @@
 .filter_icon_checkbox:checked ~ .python > svg path:nth-of-type(2) { fill: #FFDA4B; }
 .filter_icon_checkbox:checked ~ .nextjs > svg circle { fill: #fff; }
 .filter_icon_checkbox:checked ~ .nextjs > svg path { fill: #000; }
+
+/* ── Mobile ≤710px: stack heading above icons, divider lines, padding ── */
+@media (max-width: 710px) {
+  .form_filter_container {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .filter_group {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  .filter_group:last-child {
+    border-bottom: none;
+  }
+
+  .filter_group_heading {
+    width: auto;
+    text-align: left;
+    flex-shrink: 1;
+    font-size: 0.65rem;
+  }
+
+  .filter_group_icons {
+    justify-content: center;
+  }
+}
