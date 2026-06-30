@@ -113,6 +113,28 @@
   }
   .social_icons_container { gap: 12px; }
 }
+
+/* Tall portrait screens (foldables, ≥800px height): switch to
+   centered stacked layout (avatar above text) instead of side-by-side
+   to avoid avatar/text overlap on narrow-tall viewports. */
+@media (orientation: portrait) and (min-width: 601px) and (min-height: 800px) {
+  .hero_section {
+    max-width: 80%;
+    align-items: center;
+    text-align: center;
+    padding: 100px 16px 24px;
+    gap: 4px;
+  }
+  .hero_section .socials_hero_container {
+    justify-content: center;
+    gap: 16px;
+  }
+  .social_icons_container {
+    justify-content: center;
+    gap: 10px;
+  }
+}
+
 .title_hero{
   background: var(--color-text-gradient);
   background-clip: text;

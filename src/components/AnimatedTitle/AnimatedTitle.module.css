@@ -82,6 +82,18 @@
   }
 }
 
+/* Tall portrait screens (foldables, tablets in portrait ≥800px
+   height): side-by-side layout overflows/overlaps. Switch to
+   stacked layout like mobile — avatar centered above the h1. */
+@media (orientation: portrait) and (min-width: 601px) and (min-height: 800px) {
+  .hero_img_container {
+    top: calc(50% - 440px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: clamp(160px, 22vw, 280px);
+  }
+}
+
 @keyframes bounce {
   /* Bounce DOWN from natural position so it doesn't overlap
      the social icons row. The bottom margin is generous enough
