@@ -98,7 +98,13 @@
   width: 100%;
   color: var(--fon);
   height: 100%;
-  z-index: 1;
+  /* z-index:0 (was 1) puts the title-reveal dark layer below
+     the avatar (.hero_img_container, z:1) so the photo isn't
+     darkened at rest. The mask cuts still animate — they now
+     reveal .fade_overlay / page bg under them instead of the
+     avatar under the cuts. Don't bump without checking the
+     avatar-vs-overlay visual hierarchy. */
+  z-index: 0;
   pointer-events: none;
 }
 
