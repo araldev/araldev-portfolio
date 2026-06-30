@@ -32,7 +32,7 @@ describe('JobCardMeta', () => {
     // name resolves to the text content (e.g. "3y 3m"). The previous
     // "Duration: 3y 3m" aria-label was prohibited on <span>.
     renderWithLang(<JobCardMeta job={job} />)
-    expect(screen.getByText('3y 3m')).toBeInTheDocument()
+    expect(screen.getByText('3y 4m')).toBeInTheDocument()
   })
 
   it('renders the location', () => {

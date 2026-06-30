@@ -61,18 +61,30 @@ export function useAnimatedTitle (svgPath) {
     )
 
     // =========================
-    // RESIZE DEBOUNCED
+    // REFRESH RESIZE + ORIENTATION
     // =========================
+    // Chrome DevTools device-preset switching sometimes fires
+    // resize/orientation before the viewport dimensions settle.
+    // We do TWO refreshes: one quick (200ms) and one deferred
+    // (600ms) to catch the settled layout.
+
+    const doRefresh = () => {
+      ScrollTrigger.refresh()
+    }
 
     const handleResizeDebounce = () => {
       clearTimeout(timeoutId.current)
 
       timeoutId.current = setTimeout(() => {
-        ScrollTrigger.refresh()
-      }, 300)
+        doRefresh()
+        // Second refresh after the layout fully settles
+        // (catches DevTools preset-switch edge cases).
+        setTimeout(doRefresh, 400)
+      }, 200)
     }
 
     window.addEventListener('resize', handleResizeDebounce)
+    window.addEventListener('orientationchange', handleResizeDebounce)
 
     // =========================
     // FADE IN INICIAL
@@ -298,6 +310,10 @@ export function useAnimatedTitle (svgPath) {
     return () => {
       window.removeEventListener(
         'resize',
+        handleResizeDebounce
+      )
+      window.removeEventListener(
+        'orientationchange',
         handleResizeDebounce
       )
 

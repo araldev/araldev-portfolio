@@ -124,8 +124,12 @@
 }
 
 html {
-  /* Sticky-friendly: no overflow here so position:sticky works
-     in children. Horizontal scroll is prevented on body instead. */
+  /* Prevent horizontal overflow on the root element too.
+     Note: setting overflow on html CAN break position:sticky in
+     some edge cases, but the real guard is on body below — this
+     is a catch for Chrome DevTools device-switching edge cases
+     where body overflow doesn't propagate to the viewport. */
+  overflow-x: hidden;
 }
 
 html, body {
@@ -144,10 +148,11 @@ html, body {
   z-index: -1;
 }
 
+/* Prevent horizontal scroll. Both html + body are guarded so
+   the viewport never shows a horizontal scrollbar, even when
+   Chrome DevTools switches between device presets and the
+   resize event sequence leaves elements at stale widths. */
 body {
-  /* overflow-x only on body, not html — this is the key fix for
-     position:sticky. Setting overflow on html creates a scroll
-     container that breaks sticky positioning. */
   overflow-x: hidden;
 }
 

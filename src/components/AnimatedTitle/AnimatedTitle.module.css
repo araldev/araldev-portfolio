@@ -1,7 +1,7 @@
 .animation_container {
   position: relative;
   max-width: 100%;
-  width: 100vw;
+  width: 100%;
   max-height: 100%;
   height: 100svh;
   background-color: #111117;
@@ -16,7 +16,7 @@
   top: 0;
   left: 0;
   max-width: 100%;
-  width: 100vw;
+  width: 100%;
   height: 100%;
 }
 
@@ -27,11 +27,14 @@
 }
 
 .hero_img_container {
+  /* Mobile-first: avatar centered above the text. At desktop (≥601px)
+     it moves to 75%X / 50%Y (right column, vertically centered). */
   position: absolute;
-  top: 18%;
-  left: 65%;
-  transform: translate(-50%, -50%);
-  width: 350px;
+  top: 4%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(120px, 22vw, 220px);
+  aspect-ratio: 1 / 1.2;
   height: auto;
   object-fit: contain;
   z-index: 1;
@@ -40,33 +43,60 @@
     width: 100%;
     height: auto;
     mask-image: linear-gradient(
-    to bottom,
-    black 70%,
-    transparent 100%
-  );
-   -webkit-mask-image: linear-gradient(
-    to bottom,
-    black 70%, 
-    transparent 100% 
-  );
+      to bottom,
+      black 72%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      black 72%,
+      transparent 100%
+    );
+  }
+}
+
+/* Mobile ≤600px: position the avatar so it sits just above the h1
+   on ALL phone sizes. The h1 is vertically centered, so its
+   position changes with viewport height. Using calc(50% - X)
+   anchors the avatar relative to the center — the same anchor
+   point as the h1 — keeping it consistently just above the text
+   on both short (iPhone SE, 667px) and tall phones (14PM, 932px). */
+@media (max-width: 600px) {
+  .hero_img_container {
+    top: calc(50% - 290px);
+    width: clamp(120px, 30vw, 160px);
+  }
+}
+
+/* Tablet + Desktop ≥601px: avatar at 75% X, centered in viewport */
+@media (min-width: 601px) {
+  .hero_img_container {
+    /* translateY pulls the image UP from its center. -50% = pure
+       center. More negative = higher in the viewport. Adjust to
+       taste: -80% means the image sits 30% of its own height
+       above the viewport center. */
+    top: 50%;
+    left: 75%;
+    transform: translate(-50%, -80%);
+    width: clamp(160px, 22vw, 420px);
   }
 }
 
 @keyframes bounce {
-  from {
-    transform: translate(-50%, -100%);
-  }
-  to {
-    transform: translate(-50%, -60%);
-  }
+  /* Bounce DOWN from natural position so it doesn't overlap
+     the social icons row. The bottom margin is generous enough
+     (bottom: 6%) that the full bounce range stays in viewport. */
+  from { transform: translate(-50%, 0%); }
+  to   { transform: translate(-50%, 20%); }
 }
+
 .hero_img_copy {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   position: absolute;
-  bottom: 2%;
+  bottom: 6%;
   left: 50%;
   transform: translate(-50%, -50%);
   will-change: opacity;
@@ -75,13 +105,14 @@
   animation: bounce 1s ease-in-out both infinite alternate;
   width: 100%;
   z-index: 9;
+  pointer-events: none;
 
   .paragraph {
-  text-transform: uppercase;
-  font-size: var(--font-size-paragraph);
-  font-weight: var(--font-weight-paragraph);
-  line-height: 1;
-}
+    text-transform: uppercase;
+    font-size: var(--font-size-paragraph);
+    font-weight: var(--font-weight-paragraph);
+    line-height: 1;
+  }
 }
 
 .fade_overlay {
@@ -157,99 +188,26 @@
   }
 }
 
-@media(max-width: 1600px) {
-  .hero_img_container {
-    top: 18%;
-    left: 70%;
+/* Mobile/tablet bounce: same DOWN direction but smaller text
+   and tighter spacing so it doesn't crowd the bottom area. */
+@media (max-width: 1024px) {
+  .hero_img_copy {
+    font-size: .55rem;
+    gap: 4px;
+    line-height: 1;
   }
 }
-@media(max-width: 1300px) {
-  .hero_img_container {
-    top: 18%;
-    left: 75%;
-  }
-}
-@media(max-width: 1050px) {
-  .hero_img_container {
-    top: 18%;
-    left: 78%;
-  }
-}
+
 @media (max-width: 900px) {
   .overlay {
-  transform-origin: 49% 19%;
+    transform-origin: 49% 19%;
   }
 
   .overlay_copy h1 {
     letter-spacing: 0;
   }
 
-  .hero_img_container {
-    top: 18%;
-    left: 80%;
-  }
-
   .overlay_copy {
     width: 100%;
-  }
-}
-@media(max-width: 850px) {
-  .hero_img_container {
-    top: 18%;
-    left: 80%;
-    width: 250px;
-
-    img {
-      mask-image: linear-gradient(
-        to bottom,
-        black 80%,
-        transparent 100%
-      );
-      -webkit-mask-image: linear-gradient(
-        to bottom,
-        black 80%, 
-        transparent 100% 
-      );
-    }
-  }
-}
-@media(max-width: 760px) {
-  .hero_img_container {
-    top: 3%;
-    left: 80%;
-    width: 200px;
-
-    img {
-      mask-image: linear-gradient(
-        to bottom,
-        black 80%,
-        transparent 100%
-      );
-      -webkit-mask-image: linear-gradient(
-        to bottom,
-        black 80%, 
-        transparent 100% 
-      );
-    }
-  }
-}
-@media(max-width: 500px) {
-  .hero_img_container {
-    top: 5%;
-    left: 70%;
-    width: 150px;
-
-    img {
-      mask-image: linear-gradient(
-        to bottom,
-        black 80%,
-        transparent 100%
-      );
-      -webkit-mask-image: linear-gradient(
-        to bottom,
-        black 80%, 
-        transparent 100% 
-      );
-    }
   }
 }

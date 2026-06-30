@@ -29,12 +29,89 @@
   max-width: 80%;
   width: var(--width-web-content);
   min-width: 0;
-  height: 100vh;
+  min-height: 100svh;
+  padding: 60px 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 20px;
+  gap: 14px;
+}
+
+/* Desktop ≥1025px: reserve right column for avatar so text
+   doesn't extend under it. Tighter gap for cohesive text block
+   and LARGER fonts for big screens. */
+@media (min-width: 1025px) {
+  .hero_section {
+    max-width: 60%;
+    padding: 60px 6% 60px 0;
+    gap: 8px;
+  }
+  .hero_section .title_hero     { font-size: clamp(2rem, 5vw + 1rem, 5rem); }
+  .hero_section .subTitle_hero   { font-size: clamp(1.5rem, 2.5vw + 0.5rem, 2.8rem); }
+  .hero_section .paragraph_hero  { font-size: clamp(1rem, 1.2vw + 0.5rem, 1.5rem); }
+  .hero_section .button_cv       { font-size: clamp(1rem, 1vw + 0.5rem, 1.35rem); }
+  .hero_section .social_icons_container svg {
+    width: 48px;
+    height: 48px;
+  }
+  .socials_hero_container { gap: 8px; }
+}
+
+/* Mobile ≤600px: center everything horizontally and vertically. */
+@media (max-width: 600px) {
+  .hero_section {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 100px 16px 24px;
+    gap: 4px;
+  }
+  .hero_section .title_hero     { font-size: clamp(1.5rem, 7vw, 2rem); }
+  .hero_section .subTitle_hero   { font-size: clamp(1rem, 4.5vw, 1.4rem); }
+  .hero_section .paragraph_hero  { font-size: clamp(0.85rem, 3.5vw, 0.95rem); }
+  .hero_section .socials_hero_container {
+    justify-content: center;
+    gap: 16px;
+    margin-top: 8px;
+    margin-bottom: 30px;
+  }
+  .social_icons_container {
+    justify-content: center;
+    gap: 10px;
+  }
+}
+
+/* Short viewport (phones landscape, split-screen) */
+@media (max-width: 1024px) and (max-height: 560px) {
+  .hero_section {
+    padding: 70px 16px 12px;
+    gap: 2px;
+  }
+  .hero_section .title_hero     { font-size: clamp(1.1rem, 5vw, 1.5rem); }
+  .hero_section .subTitle_hero   { font-size: clamp(0.85rem, 3.5vw, 1.05rem); }
+  .hero_section .paragraph_hero  { font-size: clamp(0.75rem, 2.8vw, 0.85rem); }
+  .hero_section .socials_hero_container {
+    gap: 12px;
+    margin-top: 6px;
+    margin-bottom: 0;
+  }
+  .social_icons_container { gap: 8px; }
+}
+
+/* Tablet 601-1024px: vertical centering, no right-padding */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .hero_section {
+    justify-content: center;
+    gap: 8px;
+    padding: 48px 0;
+  }
+  .socials_hero_container {
+    justify-content: center;
+    gap: 14px;
+    margin-top: 6px;
+  }
+  .social_icons_container { gap: 12px; }
 }
 .title_hero{
   background: var(--color-text-gradient);
