@@ -7,11 +7,25 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  z-index: 1;
+  /* No z-index on purpose: this wrapper must NOT form a stacking
+     context, otherwise BackgroundHeroCanvas (its <::before> is
+     rgba(0,0,0,.3), translucent dark) gets lifted alongside
+     .hero_section, darkening the avatar from above.
+
+     The text (.hero_section below) carries its own z-index so
+     only the aside escapes above the avatar — the canvas stays
+     in its own negative-z layer behind everything.
+     Don't add a z-index here without auditing both children. */
 }
 
-/* Hero Section */
+/* Hero Section — only the <aside> with text, NOT the whole <header>.
+   The z-index here puts the title/subtitle/paragraph/CV/socials
+   above the avatar (.hero_img_container in AnimatedTitle, z:1)
+   where they overlap mid-viewport, while BackgroundHeroCanvas
+   stays in its own low-z layer behind the avatar. */
 .hero_section {
+  position: relative;
+  z-index: 2;
   max-width: 80%;
   width: var(--width-web-content);
   min-width: 0;
