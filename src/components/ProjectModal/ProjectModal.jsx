@@ -151,6 +151,36 @@ function DetailSection ({ detail, index, sectionRef, gallery, onImageClick }) {
   )
 }
 
+/**
+ * Collect the focusable elements inside a container, in DOM order.
+ *
+ * Elements that are disabled or hidden (via `hidden`, `aria-hidden` or
+ * inline `display:none`) are skipped — tabbing to them would move focus
+ * somewhere the user cannot see.
+ *
+ * @param {HTMLElement} container
+ * @returns {HTMLElement[]}
+ */
+function getFocusableElements (container) {
+  const selector = [
+    'a[href]',
+    'button:not([disabled])',
+    'input:not([disabled])',
+    'select:not([disabled])',
+    'textarea:not([disabled])',
+    '[tabindex]:not([tabindex="-1"])'
+  ].join(',')
+
+  return Array.from(container.querySelectorAll(selector)).filter((el) => {
+    if (el.hasAttribute('hidden')) return false
+    if (el.getAttribute('aria-hidden') === 'true') return false
+    // offsetParent is null for display:none elements. Fixed-position
+    // elements have a null offsetParent too, so check the computed
+    // style as well instead of relying on offsetParent alone.
+    return el.offsetParent !== null || getComputedStyle(el).position === 'fixed'
+  })
+}
+
 export function ProjectModal ({ project, onClose }) {
   const { t } = useLanguage()
   const overlayRef = useRef(null)
@@ -168,6 +198,47 @@ export function ProjectModal ({ project, onClose }) {
       } else {
         onClose()
       }
+      return
+    }
+
+    if (e.key !== 'Tab') return
+
+    // Keep Tab and Shift+Tab inside the dialog: wrap around at both
+    // ends instead of letting focus escape to the page behind.
+    //
+    // The dialog declares aria-modal="true", which tells assistive
+    // technology the rest of the page is inert — but that is a promise
+    // the browser does NOT keep for the keyboard. Without an explicit
+    // trap, Tab walks straight out of the modal and into the page
+    // behind it.
+    const modal = modalRef.current
+    if (!modal) return
+
+    const focusable = getFocusableElements(modal)
+    if (focusable.length === 0) {
+      e.preventDefault()
+      modal.focus()
+      return
+    }
+
+    const first = focusable[0]
+    const last = focusable[focusable.length - 1]
+    const active = document.activeElement
+
+    // Focus is on the dialog itself (or on something outside it):
+    // pull it back in.
+    if (!modal.contains(active)) {
+      e.preventDefault()
+      first.focus()
+      return
+    }
+
+    if (e.shiftKey && active === first) {
+      e.preventDefault()
+      last.focus()
+    } else if (!e.shiftKey && active === last) {
+      e.preventDefault()
+      first.focus()
     }
   }, [onClose, zoomImage])
 
@@ -179,11 +250,10 @@ export function ProjectModal ({ project, onClose }) {
     document.addEventListener('keydown', handleKeyDown)
     document.body.style.overflow = 'hidden'
 
-    // Trap focus inside the modal: focus the close button on open
+    // Focus is moved into the dialog by the GSAP timeline below, once
+    // the modal is actually visible. Here we only remember where focus
+    // came from, so it can be restored on close.
     const prevFocus = document.activeElement
-    if (closeBtnRef.current) {
-      closeBtnRef.current.focus()
-    }
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown)
@@ -216,6 +286,19 @@ export function ProjectModal ({ project, onClose }) {
         '-=0.4'
       )
     }
+
+    // Move focus into the dialog only once it is actually visible.
+    //
+    // .modal starts at `visibility: hidden` and is revealed by the
+    // autoAlpha tween above, so focusing it before the tween runs is a
+    // no-op — the browser silently refuses to focus a hidden element.
+    // Waiting for the tween guarantees the focus actually lands.
+    tl.call(() => {
+      if (modalRef.current) {
+        modalRef.current.focus()
+      }
+    })
+
     return () => { tl.kill() }
   }, [])
 
@@ -255,6 +338,7 @@ export function ProjectModal ({ project, onClose }) {
           role='dialog'
           aria-modal='true'
           aria-label={t('projectModal.detailsOf', null, titleVars)}
+          tabIndex={-1}
         >
           <section className={styles.hero_section} ref={heroRef}>
             <div className={styles.hero_content}>
