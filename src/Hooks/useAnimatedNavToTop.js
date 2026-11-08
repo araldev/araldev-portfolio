@@ -25,5 +25,5 @@ export function useAnimatedNavToTop ({ mainRef, navToTopRef }) {
           }
         }
       })
-  }, [])
+  }, [mainRef, navToTopRef])
 }

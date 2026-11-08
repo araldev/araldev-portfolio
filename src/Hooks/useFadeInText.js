@@ -6,7 +6,11 @@ export function useFadeInText (textRef, triggerRef, splitType = 'words', backgro
     const text = textRef.current
     const trigger = triggerRef.current
 
-    if (!text && !trigger) return
+    // Both refs are required: `text` is dereferenced below and the
+    // ScrollTrigger needs a trigger element. Bail out when EITHER is
+    // missing — `&&` would only bail when both were null and crash on
+    // `text.textContent` when just the text was missing.
+    if (!text || !trigger) return
 
     // Manual word-split: each word becomes an inline-block <span>
     // This guarantees wrapping at word boundaries on small screens
@@ -56,5 +60,5 @@ export function useFadeInText (textRef, triggerRef, splitType = 'words', backgro
       if (tl) tl.kill()
       text.textContent = originalContent
     }
-  }, [])
+  }, [textRef, triggerRef, backgroundColor])
 }
