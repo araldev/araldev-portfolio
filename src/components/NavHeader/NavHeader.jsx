@@ -1,15 +1,20 @@
 import { useId, useRef, forwardRef } from 'react'
 import styles from './NavHeader.module.css'
 import { useNavPaths } from '../../Hooks/useNavPaths.js'
+import { useDismissMenu } from '../../Hooks/useDismissMenu.js'
 import { useLanguage } from '../../i18n/useLanguage.js'
 import { LanguageToggle } from '../LanguageToggle/LanguageToggle.jsx'
 import brand from '../../assets/brand-araldev-miniatura.webp'
 
 export const NavHeader = forwardRef(({ activeSection }, ref) => {
   const navMenuRef = useRef(null)
-  const { handleClick } = useNavPaths({ navMenuRef })
+  const panelRef = useRef(null)
+  const toggleRef = useRef(null)
+  const { handleClick, closeMenu } = useNavPaths({ navMenuRef })
   const { t } = useLanguage()
   const idNavIcon = useId()
+
+  useDismissMenu({ navMenuRef, panelRef, toggleRef, onClose: closeMenu })
 
   const navItems = [
     { id: 'home', label: t('nav.home') },
@@ -26,14 +31,14 @@ export const NavHeader = forwardRef(({ activeSection }, ref) => {
           <img src={brand} alt={t('images.brandAraldev')} />
         </div>
 
-        <label htmlFor={idNavIcon} className={styles.nav_icon} aria-label={t('nav.menuToggle')}>
+        <label ref={toggleRef} htmlFor={idNavIcon} className={styles.nav_icon} aria-label={t('nav.menuToggle')}>
           <input ref={navMenuRef} className={styles.checkbox} id={idNavIcon} type='checkbox' />
           <div className={styles.stroke_1} aria-hidden='true' />
           <div className={styles.stroke_2} aria-hidden='true' />
           <div className={styles.stroke_3} aria-hidden='true' />
         </label>
 
-        <ul className={styles.nav_links} role='list'>
+        <ul ref={panelRef} className={styles.nav_links} role='list'>
           <li className={styles.nav_lang_mobile}>
             <LanguageToggle />
           </li>

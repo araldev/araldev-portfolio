@@ -5,34 +5,45 @@ export function useNavPaths ({ navMenuRef = null }) {
   const lenis = useLenis()
   const frameIdRef = useRef(null)
 
-  function onChange () {
+  // Sincroniza el bloqueo de scroll con el estado del checkbox del menú
+  // móvil. Cuando el menú está abierto el scroll se congela; al cerrarlo
+  // se libera.
+  const syncScrollLock = useCallback(() => {
     if (!lenis) return
     if (!navMenuRef || !navMenuRef.current) return
 
     // Hacer una funcion para que para cuando haga el scroll
     if (navMenuRef.current.checked) lenis.stop()
     else lenis.start()
-  }
+  }, [lenis, navMenuRef])
 
   useEffect(() => {
-    if (!navMenuRef) return
-    navMenuRef.current.addEventListener('change', onChange)
+    if (!navMenuRef || !navMenuRef.current) return
+    const checkbox = navMenuRef.current
+
+    checkbox.addEventListener('change', syncScrollLock)
 
     // Ejecutar una vez al montar por si ya está checked
-    onChange()
+    syncScrollLock()
     return () => {
-      if (!navMenuRef || !navMenuRef.current) return
-      navMenuRef.current.removeEventListener('change', onChange)
+      checkbox.removeEventListener('change', syncScrollLock)
     }
-  }, [navMenuRef, lenis])
+  }, [navMenuRef, syncScrollLock])
+
+  // Cierra el menú móvil desmarcando el checkbox. El estado vive en el
+  // DOM (CSS `:has(.checkbox:checked)`), no en React, por eso se
+  // manipula la propiedad `checked` directamente.
+  const closeMenu = useCallback(() => {
+    if (!navMenuRef || !navMenuRef.current) return
+
+    navMenuRef.current.checked = false
+    syncScrollLock()
+  }, [navMenuRef, syncScrollLock])
 
   const handleClick = useCallback((event) => {
     event.preventDefault()
 
-    if (navMenuRef) {
-      navMenuRef.current.checked = false
-      onChange()
-    }
+    closeMenu()
 
     if (!lenis) return
 
@@ -69,7 +80,7 @@ export function useNavPaths ({ navMenuRef = null }) {
     }
 
     frameIdRef.current = requestAnimationFrame(goTo)
-  }, [lenis])
+  }, [lenis, closeMenu])
 
-  return { handleClick }
+  return { handleClick, closeMenu }
 }
