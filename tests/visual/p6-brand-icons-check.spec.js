@@ -54,11 +54,11 @@ test('verify P6 brand icons rendered with hardcoded colours', async ({ page }) =
 
   // The P6 viewBoxes that must be present
   const p6ViewBoxes = [
-    '0 0 128 128',          // Java
-    '0 0 48 48',            // Spring
-    '-4 0 264 264',         // Postgres
-    '-8 0 272 272',         // Angular
-    '0 0 512 512'           // IA
+    '0 0 128 128', // Java
+    '0 0 48 48', // Spring
+    '-4 0 264 264', // Postgres
+    '-8 0 272 272', // Angular
+    '0 0 512 512' // IA
   ]
   for (const vb of p6ViewBoxes) {
     expect(allViewBoxes.has(vb), `viewBox "${vb}" must be present in the rendered stack`).toBe(true)
@@ -81,22 +81,22 @@ test('verify P6 brand icons rendered with hardcoded colours', async ({ page }) =
   const hasColor = (hex, rgb) => allFillsNorm.has(hex.toLowerCase()) || allFillsNorm.has(rgb)
 
   const required = [
-    { name: 'Java blue',     hex: '#0074BD', rgb: 'rgb(0,116,189)' },
-    { name: 'Java red',      hex: '#EA2D2E', rgb: 'rgb(234,45,46)' },
-    { name: 'Spring green',  hex: '#8bc34a', rgb: 'rgb(139,195,74)' },
-    { name: 'Spring white',  hex: '#fff',    rgb: 'rgb(255,255,255)' },
+    { name: 'Java blue', hex: '#0074BD', rgb: 'rgb(0,116,189)' },
+    { name: 'Java red', hex: '#EA2D2E', rgb: 'rgb(234,45,46)' },
+    { name: 'Spring green', hex: '#8bc34a', rgb: 'rgb(139,195,74)' },
+    { name: 'Spring white', hex: '#fff', rgb: 'rgb(255,255,255)' },
     { name: 'Postgres blue', hex: '#336791', rgb: 'rgb(51,103,145)' },
-    { name: 'Angular red',   hex: '#E23237', rgb: 'rgb(226,50,55)' },
-    { name: 'Angular dark',  hex: '#B52E31', rgb: 'rgb(181,46,49)' },
-    { name: 'JUnit red',     hex: '#dc514a', rgb: 'rgb(220,81,74)' },
-    { name: 'JUnit green',   hex: '#23a161', rgb: 'rgb(35,161,97)' },
+    { name: 'Angular red', hex: '#E23237', rgb: 'rgb(226,50,55)' },
+    { name: 'Angular dark', hex: '#B52E31', rgb: 'rgb(181,46,49)' },
+    { name: 'JUnit red', hex: '#dc514a', rgb: 'rgb(220,81,74)' },
+    { name: 'JUnit green', hex: '#23a161', rgb: 'rgb(35,161,97)' },
     // IA was previously a single black fill; after the futuristic
     // gradient swap, its "brand identity" is a linearGradient with
     // 3 stops (cyan / violet / hot pink). Accept any of those as
     // evidence the gradient is wired up.
-    { name: 'IA gradient stop cyan',    hex: '#00E0FF', rgb: 'rgb(0,224,255)' },
-    { name: 'IA gradient stop violet',  hex: '#7C3AED', rgb: 'rgb(124,58,237)' },
-    { name: 'IA gradient stop pink',    hex: '#FF1493', rgb: 'rgb(255,20,147)' }
+    { name: 'IA gradient stop cyan', hex: '#00E0FF', rgb: 'rgb(0,224,255)' },
+    { name: 'IA gradient stop violet', hex: '#7C3AED', rgb: 'rgb(124,58,237)' },
+    { name: 'IA gradient stop pink', hex: '#FF1493', rgb: 'rgb(255,20,147)' }
   ]
   const missing = required.filter(c => !hasColor(c.hex, c.rgb)).map(c => c.name)
   console.log('=== missing colours:', JSON.stringify(missing), '===')

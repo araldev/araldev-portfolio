@@ -169,7 +169,7 @@ describe('ContactSection — captcha integration', () => {
   it('prevents double-submit while the captcha is in flight', async () => {
     let resolveFirst
     captchaRef.executeAsync.mockImplementationOnce(
-      () => new Promise(res => { resolveFirst = res })
+      () => new Promise(resolve => { resolveFirst = resolve })
     )
     renderWithProvider(<ContactSection />)
     fillValid()

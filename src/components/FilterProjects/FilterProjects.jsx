@@ -149,7 +149,7 @@ export function FilterProjects () {
         >
           <span className={styles.toolbar_legend}>{t('projects.filterLegend')}</span>
           <svg width='18' height='18' viewBox='0 0 18 18' fill='none' aria-hidden='true' className={isOpen ? styles.chevron_up : styles.chevron_down}>
-            <path d='M5 7 L9 11 L13 7' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round'/>
+            <path d='M5 7 L9 11 L13 7' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round' />
           </svg>
         </button>
         <div id={filterGroupsId} className={styles.filter_container}>

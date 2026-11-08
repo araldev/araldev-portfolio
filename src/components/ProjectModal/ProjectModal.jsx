@@ -55,7 +55,7 @@ const patterns = {
 function RealImage ({ src, alt, onClick }) {
   return (
     <div className={styles.real_image_wrapper} onClick={onClick}>
-      <img src={src} alt={alt} className={styles.real_image} loading="lazy" decoding="async" />
+      <img src={src} alt={alt} className={styles.real_image} loading='lazy' decoding='async' />
     </div>
   )
 }
@@ -134,8 +134,7 @@ function DetailSection ({ detail, index, sectionRef, gallery, onImageClick }) {
       <div className={styles.detail_image_wrapper}>
         {imageData
           ? <RealImage src={imageData.src} alt={imageData.alt} onClick={() => onImageClick(imageData)} />
-          : <MockImage imgIndex={detail.imgIndex} />
-        }
+          : <MockImage imgIndex={detail.imgIndex} />}
         {detail.featureTag && (
           <span className={styles.feature_tag}>{detail.featureTag}</span>
         )}
@@ -289,8 +288,8 @@ export function ProjectModal ({ project, onClose }) {
                   src={project.demoLink}
                   className={styles.demo_iframe}
                   title={`${project.title} demo`}
-                  loading="lazy"
-                  allow="accelerometer; camera; encrypted-media; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write"
+                  loading='lazy'
+                  allow='accelerometer; camera; encrypted-media; geolocation; gyroscope; microphone; midi; clipboard-read; clipboard-write'
                 />
               </div>
             </section>

@@ -24,10 +24,10 @@ const P6_KEYS = ['java', 'spring', 'postgres', 'angular', 'junit', 'rxjs', 'ia']
 // stays recognisable without becoming a solid white blob. Indexed by
 // 1-based path position, exactly like REAL_COLOURS below.
 const TRANSPARENT_IN_DEFAULT = {
-  angular: [3],         // the white "A" letter inside the shield
-  postgres: [3, 4],     // the thin white highlight strokes on the elephant
-  spring: [1]           // the outer green leaf body — bg-colour makes only the
-                        // inner white cutout read as the leaf silhouette
+  angular: [3], // the white "A" letter inside the shield
+  postgres: [3, 4], // the thin white highlight strokes on the elephant
+  spring: [1] // the outer green leaf body — bg-colour makes only the
+  // inner white cutout read as the leaf silhouette
 }
 
 // Per-icon real-colour expectations: array indexed by path :nth-child
@@ -250,7 +250,6 @@ test.describe('P6 FilterProjects — default / hover / checked', () => {
   })
 
   test('IA: WHITE in default + checked; gradient revealed on :hover', async ({ page }) => {
-    const input = inputFor(page, 'ia')
     const svg = svgFor(page, 'ia')
     const label = labelFor(page, 'ia')
 

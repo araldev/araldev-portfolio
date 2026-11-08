@@ -1,0 +1,16 @@
+{
+  "extends": [
+    "standard",
+    "standard-jsx"
+  ],
+  "env": {
+    "browser": true
+  },
+  "plugins": [
+    "react",
+    "react-hooks"
+  ],
+  "rules": {
+    "react/jsx-closing-tag-location": "off"
+  }
+}

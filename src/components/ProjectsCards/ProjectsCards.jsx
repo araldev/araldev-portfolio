@@ -86,7 +86,7 @@ function TechsIcons ({ project }) {
       </span>
     )
   }
-    return <div className={styles.tech_icons_row}>{items}</div>
+  return <div className={styles.tech_icons_row}>{items}</div>
 }
 
 // --- Single project card (renders the 4-section anatomy) ---
@@ -118,13 +118,13 @@ function ProjectCard ({ project, onShowMore }) {
       data-project-id={project.id}
     >
       <div className={styles.project_image_container}>
-          <img
-            src={project.imgSrc}
-            alt={t('projects.links.thumbnailOf', null, titleVars)}
-            loading='lazy'
-            decoding='async'
-            style={project.imgPosition ? { objectPosition: project.imgPosition } : undefined}
-          />
+        <img
+          src={project.imgSrc}
+          alt={t('projects.links.thumbnailOf', null, titleVars)}
+          loading='lazy'
+          decoding='async'
+          style={project.imgPosition ? { objectPosition: project.imgPosition } : undefined}
+        />
       </div>
 
       <div className={styles.project_text_container}>
