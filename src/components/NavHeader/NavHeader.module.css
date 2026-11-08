@@ -248,6 +248,12 @@
     width: 50%;
     min-width: 280px;
     height: 100vh;
+    /* The panel content (language toggle + 5 links at 100px each) is
+       taller than a short viewport — a phone in landscape, for
+       instance. Without a scrollable panel the overflow links sit
+       below the fold and cannot be tapped at all. */
+    overflow-y: auto;
+    overscroll-behavior: contain;
     opacity: 0;
     background: var(--color-bg-button-gradient);
     backdrop-filter: blur(20px) ;
