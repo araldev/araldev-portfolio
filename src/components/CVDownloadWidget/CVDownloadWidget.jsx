@@ -18,8 +18,8 @@ export function CVDownloadWidget () {
 
   return (
     <a
-      href={`${import.meta.env.BASE_URL}cv-araldev.pdf`}
-      download='cv-arturo-alba-garcia.pdf'
+      href={`${import.meta.env.BASE_URL}CV_Arturo_Alba_Garcia.pdf`}
+      download='CV_Arturo_Alba_Garcia.pdf'
       className={styles.widget}
       aria-label={t('hero.downloadCV')}
       title={t('hero.downloadCV')}
