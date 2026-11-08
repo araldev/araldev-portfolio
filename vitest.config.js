@@ -35,9 +35,13 @@ export default defineConfig({
         'src/Hooks/useBeaconPulse.js',
         'src/Hooks/useIsFeaturedJob.js',
         'src/Hooks/usePrefersReducedMotion.js',
+        'src/Hooks/useFadeInText.js',
+        'src/Hooks/useNavPaths.js',
+        'src/Hooks/useDismissMenu.js',
         'src/components/JobCard/**',
         'src/components/JobsCards/**',
-        'src/components/ProjectsCards/**'
+        'src/components/ProjectsCards/**',
+        'src/components/NavHeader/**'
       ],
       exclude: [
         'src/**/*.module.css'
