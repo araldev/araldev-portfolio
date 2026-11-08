@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect, vi, afterEach } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { JobCardMeta } from '../../src/components/JobCard/JobCardMeta.jsx'
 import { LanguageProvider } from '../../src/i18n/LanguageContext.jsx'
@@ -19,6 +19,16 @@ const job = {
   remote: true
 }
 
+// A `current: true` job renders its duration relative to TODAY, so the
+// expected string drifts every month ("3y 3m" → "3y 4m" → ...). Pin the
+// clock so the assertion is stable forever. The Playwright suite uses the
+// same trick in tests/visual/clock-fixture.js.
+const FIXED_NOW = new Date(2026, 6, 1) // July 1 2026
+
+afterEach(() => {
+  vi.useRealTimers()
+})
+
 describe('JobCardMeta', () => {
   it('renders the period in a <time> with dateTime ISO (FR-016)', () => {
     renderWithLang(<JobCardMeta job={job} />)
@@ -29,9 +39,14 @@ describe('JobCardMeta', () => {
 
   it('renders the duration as visible text (SC-N2-04 regression — aria-prohibited-attr fix)', () => {
     // After T-307, the duration span has no aria-label. The accessible
-    // name resolves to the text content (e.g. "3y 3m"). The previous
-    // "Duration: 3y 3m" aria-label was prohibited on <span>.
+    // name resolves to the text content (e.g. "3y 4m"). The previous
+    // "Duration: 3y 4m" aria-label was prohibited on <span>.
+    vi.useFakeTimers()
+    vi.setSystemTime(FIXED_NOW)
+
     renderWithLang(<JobCardMeta job={job} />)
+
+    // Mar 2023 → Jul 2026 = 3 years and 4 months.
     expect(screen.getByText('3y 4m')).toBeInTheDocument()
   })
 
