@@ -72,6 +72,51 @@ test.describe('AboutMe qualities grid', () => {
       await expect(labels.nth(i)).not.toBeEmpty()
     }
   })
+
+  test('a partial last row is centred', async ({ page }) => {
+    await page.goto('/#about-me')
+    await waitForVisualSettle(page)
+
+    const layout = await page.evaluate(() => {
+      const grid = document.querySelector('[class*="highlights_grid"]')
+      const cards = [...grid.querySelectorAll('[class*="highlight_card"]')]
+
+      // Group the cards by their row (cards that share a top edge).
+      const rows = []
+      for (const card of cards) {
+        const top = Math.round(card.getBoundingClientRect().top)
+        const row = rows.find(r => Math.abs(r.top - top) <= 2)
+        if (row) row.cards.push(card)
+        else rows.push({ top, cards: [card] })
+      }
+
+      const gridBox = grid.getBoundingClientRect()
+      const gridCenter = gridBox.left + gridBox.width / 2
+
+      return {
+        gridCenter,
+        rows: rows.map(row => ({
+          count: row.cards.length,
+          // Distance of the row's visual centre from the grid's centre.
+          offset: Math.abs(
+            (row.cards[0].getBoundingClientRect().left +
+              row.cards[row.cards.length - 1].getBoundingClientRect().right) / 2 -
+            gridCenter
+          )
+        }))
+      }
+    })
+
+    const lastRow = layout.rows[layout.rows.length - 1]
+
+    // Only rows that do not fill the grid need centring.
+    if (lastRow.count > 0 && lastRow.count < 3) {
+      expect(
+        lastRow.offset,
+        `the last row has ${lastRow.count} card(s) and is ${Math.round(lastRow.offset)}px off-centre`
+      ).toBeLessThan(2)
+    }
+  })
 })
 
 test.describe('FR-N3-07: axe-core 0 violations @ active viewport', () => {
