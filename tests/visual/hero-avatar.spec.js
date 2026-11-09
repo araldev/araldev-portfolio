@@ -60,11 +60,13 @@ async function heroGeometry (page) {
     const container = document.querySelector('[class*="hero_img_container"]')
     const title = document.querySelector('[class*="hero_section"] h1')
     const image = document.querySelector('[class*="hero_img_container"] img')
+    const block = document.querySelector('[class*="hero_section"]')
     return {
       viewport: { width: window.innerWidth, height: window.innerHeight },
       image: box(image),
       container: box(container),
       title: box(title),
+      block: box(block),
       // GSAP must never own the positioning transform of the container
       containerTransform: container ? window.getComputedStyle(container).transform : null,
       inlineTransform: container ? container.style.transform || '' : ''
@@ -106,24 +108,30 @@ test.describe('Hero avatar is always fully visible', () => {
   }
 })
 
-test.describe('Hero name is the focal point (stacked layout)', () => {
-  // The avatar is anchored near the top and the text block is centred
-  // in the space below it, so the name lands on the optical centre of
-  // the screen instead of being pushed up by the avatar.
-  for (const vp of MATRIX.filter(v => v.layout === 'stacked' && v.height >= 600)) {
-    test(`${vp.width}x${vp.height} keeps the name in the focal band`, async ({ page }) => {
+test.describe('Hero text block is vertically centred (stacked layout)', () => {
+  // The avatar hangs right above the text block and the TEXT BLOCK is
+  // the centred element: the name is the focal point, not the picture.
+  for (const vp of MATRIX.filter(v => v.layout === 'stacked' && v.height >= 500)) {
+    test(`${vp.width}x${vp.height} centres the text block`, async ({ page }) => {
       await page.setViewportSize({ width: vp.width, height: vp.height })
       await page.goto('/')
       await page.waitForLoadState('networkidle')
       await page.waitForTimeout(1200)
 
       const g = await heroGeometry(page)
-      const namePercent = (g.title.top / g.viewport.height) * 100
+      const blockCentre = ((g.block.top + g.block.bottom) / 2 / g.viewport.height) * 100
 
-      // The name must not be crammed against the top (that was the old
-      // centred-group behaviour) nor pushed off the lower half.
-      expect(namePercent).toBeGreaterThan(28)
-      expect(namePercent).toBeLessThan(58)
+      // The text block must sit on the vertical middle of the screen.
+      // On very short viewports the hero content does not fit at all
+      // and the block is top-aligned instead (the avatar must never be
+      // clipped), so the upper bound is a bit looser there.
+      expect(blockCentre).toBeGreaterThan(44)
+      expect(blockCentre).toBeLessThan(64)
+
+      // And the avatar must be glued to it, not floating at the top.
+      const visibleBottom = g.image.top + g.image.height * 0.72
+      expect(g.title.top - visibleBottom).toBeLessThan(48)
+      expect(g.title.top - visibleBottom).toBeGreaterThan(-2)
     })
   }
 })

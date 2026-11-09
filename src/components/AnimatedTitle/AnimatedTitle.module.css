@@ -56,10 +56,36 @@
    `justify-content: center`. No magic offsets, no clipping.
    ================================================================== */
 .hero_container {
+  /* The avatar's size drives the composition: it hangs right above
+     the text block, and the text block is the centred element. */
+  --hero-avatar-size: clamp(72px, min(30vw, 17svh), 160px);
+  --hero-avatar-h: calc(var(--hero-avatar-size) * 1.2);
+  --hero-avatar-gap: clamp(8px, 2svh, 20px);
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  /* `safe` falls back to flex-start when the content does not fit,
+     so the avatar is never pushed out of the top of the hero. */
+  justify-content: safe center;
+  /* Reserve the avatar's height at the BOTTOM of the flex box: the
+     group (avatar + text) is then centred inside the space that is
+     left, which puts the TEXT BLOCK on the vertical centre of the
+     viewport while the picture stays glued to the title.
+     Without this the avatar would push the whole group up and the
+     name would land in the top quarter of the screen.
+
+     The bottom padding mirrors the top one: with an asymmetric
+     padding the centring shifts, and the text block would end up
+     slightly below the middle of the screen.
+
+     The top padding covers the GSAP zoom (1.1x about the centre),
+     which pushes the top edge up by ~5% of the viewport height. */
+  padding-top: max(16px, 6svh);
+  padding-bottom: calc(
+    max(16px, 6svh) + var(--hero-avatar-h) + var(--hero-avatar-gap)
+  );
 }
 
 .hero_img_container {
@@ -68,12 +94,12 @@
   flex: 0 0 auto;
   /* Never taller than ~17% of the viewport, so the avatar + text
      group always fits next to each other on short screens. */
-  width: clamp(72px, min(30vw, 17svh), 160px);
+  width: var(--hero-avatar-size);
   aspect-ratio: 1 / 1.2;
   height: auto;
   object-fit: contain;
   z-index: 1;
-  margin-bottom: clamp(8px, 2svh, 20px);
+  margin-bottom: var(--hero-avatar-gap);
 }
 
 /* Inner wrapper — GSAP animates THIS element (slide + blur).
@@ -106,26 +132,9 @@
 /* ==================================================================
    STACKED COMPOSITION (≤1024px)
    ------------------------------------------------------------------
-   The avatar reads as a HEADER element: it is anchored near the top
-   of the hero, and the text block is centred in the space that is
-   left below it (`margin-block: auto`).
-
-   Before, the whole group (avatar + text) was centred, so the avatar
-   pushed the name up to ~25% of the viewport height and the name
-   never became the focal point. Now the name lands on the optical
-   centre of the screen and the supporting content (role, paragraph,
-   CV, socials) flows below it.
+   Handled by the base .hero_container rules: the avatar hangs right
+   above the text block and the TEXT BLOCK is the centred element.
    ================================================================== */
-@media (max-width: 1024px) {
-  .hero_container {
-    justify-content: flex-start;
-    padding-top: clamp(24px, 7svh, 72px);
-  }
-
-  .hero_container > header {
-    margin-block: auto;
-  }
-}
 
 /* ==================================================================
    DESKTOP / LARGE TABLET (≥1025px) — side by side
@@ -138,6 +147,8 @@
 @media (min-width: 1025px) {
   .hero_container {
     display: block;
+    padding-top: 0;
+    padding-bottom: 0;
   }
 
   .hero_img_container {
@@ -303,9 +314,8 @@
 @media (max-width: 1024px) and (max-height: 420px) {
   .hero_container {
     justify-content: flex-start;
-    /* 5svh: the GSAP zoom (1.1x about the centre) pushes the top
-       edge up by 5% of the viewport height. */
     padding-top: max(14px, 5svh);
+    padding-bottom: 0;
   }
 
   .hero_img_container {
