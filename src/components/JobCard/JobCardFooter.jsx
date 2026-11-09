@@ -73,15 +73,6 @@ export function JobCardFooter ({
           <span className={styles.job_card_expand_label}>
             {isExpanded ? collapseLabel : expandLabel}
           </span>
-          <span
-            className={styles.job_card_expand_icon}
-            data-expanded={isExpanded}
-            aria-hidden='true'
-          >
-            {/* Single glyph, rotated via CSS when expanded so the
-                transition is animated rather than a hard glyph swap. */}
-            ▾
-          </span>
         </button>
       )}
     </footer>

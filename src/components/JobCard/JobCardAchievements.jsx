@@ -118,9 +118,6 @@ export function JobCardAchievements ({
         {t('experience.keyAchievements')}
         <span className={styles.achievements_meta} aria-hidden='true'>
           <span className={styles.achievements_count}>{achievements.length}</span>
-          <span className={styles.achievements_chevron} data-expanded={isExpanded}>
-            ▾
-          </span>
         </span>
       </button>
       <div ref={listRef} className={styles.achievements_list_wrapper} aria-hidden={!isExpanded}>
