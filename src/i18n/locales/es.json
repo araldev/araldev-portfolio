@@ -115,33 +115,31 @@
     "highlights": [
       {
         "icon": "🎓",
-        "label": "Autodidacta",
-        "desc": "Aprendizaje continuo"
+        "label": "Autodidacta"
       },
       {
         "icon": "💡",
-        "label": "Resolutivo",
-        "desc": "Enfoque ante problemas"
+        "label": "Resolutivo"
       },
       {
         "icon": "🏋️",
-        "label": "Atleta",
-        "desc": "Equilibrio mente-cuerpo"
+        "label": "Atleta"
       },
       {
         "icon": "🚀",
-        "label": "Full-Stack",
-        "desc": "MERN + más"
+        "label": "Full-Stack"
       },
       {
-        "icon": "🎯",
-        "label": "Enfoque",
-        "desc": "Claridad mental"
+        "icon": "🤝",
+        "label": "Trabajo en equipo"
+      },
+      {
+        "icon": "💬",
+        "label": "Comunicativo"
       },
       {
         "icon": "⚡",
-        "label": "Proactividad",
-        "desc": "Iniciativa constante"
+        "label": "Proactividad"
       }
     ]
   },
@@ -200,7 +198,7 @@
         "SQL avanzado en PostgreSQL: trabajé con consultas complejas incluyendo subconsultas anidadas, vistas (views), procedimientos almacenados (stored procedures), funciones y triggers. Aprendí a diseñar y optimizar esquemas de base de datos más allá de las operaciones CRUD básicas.",
         "Curso de Angular con componentes standalone y Signals: realicé un curso específico de Angular donde aprendí la nueva arquitectura con componentes standalone, Signals para reactivity, y buenas prácticas del ecosistema. Creamos un frontend completo con Angular aplicando estos conceptos.",
         "Curso de testing unitario con mocks: formación específica en creación de mocks y verificación de comportamiento con Mockito y JUnit. Aprendí a aislar dependencias en pruebas unitarias, simular comportamientos y verificar interacciones entre objetos de forma precisa.",
-        "Curso de ingeniería de prompts con IA generativa: formación estructurada en diseño de prompts avanzados — prompts cerrados vs. abiertos, zero-shot y few-shot prompting, chain-of-thought para razonamiento paso a paso. Configuración de hiperparámetros (temperatura, Top P, secuencias de parada) para regular la creatividad del modelo. Generación de consultas SQL precisas con restricciones explícitas, comparativa arquitectónica de plataformas (ChatGPT vs. Perplexity), flujos de refinamiento iterativo de datos, y fundamentos de MLOps y seguridad legal en despliegue de modelos.",
+        "Curso de ingeniería de prompts con IA generativa: formación estructurada en diseño de prompts avanzados, prompts cerrados vs. abiertos, zero-shot y few-shot prompting, chain-of-thought para razonamiento paso a paso. Configuración de hiperparámetros (temperatura, Top P, secuencias de parada) para regular la creatividad del modelo. Generación de consultas SQL precisas con restricciones explícitas, comparativa arquitectónica de plataformas (ChatGPT vs. Perplexity), flujos de refinamiento iterativo de datos, y fundamentos de MLOps y seguridad legal en despliegue de modelos.",
         "Metodologías ágiles en la práctica: el equipo trabajaba con sprints quincenales y reuniones diarias (daily standup). Aprendí a estimar tareas, comunicar bloqueos a tiempo y usar el tablero Kanban para priorizar el trabajo pendiente.",
         "Documentación técnica: redacté documentación técnica de las funcionalidades que implementaba, incluyendo decisiones de diseño, endpoints disponibles y ejemplos de uso. Esto me enseñó la importancia de mantener la documentación viva y accesible para el equipo."
       ],

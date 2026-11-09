@@ -39,7 +39,7 @@ export function AnimatedTitle ({ children }) {
                 transform. The container keeps the CSS layout
                 transform (centring) untouched. */}
             <div className={styles.hero_img_wrapper} ref={heroImgWrapperRef}>
-              <img src={avatar} alt={t('images.profileHero')} fetchpriority="high" />
+              <img src={avatar} alt={t('images.profileHero')} fetchpriority='high' />
             </div>
           </div>
 

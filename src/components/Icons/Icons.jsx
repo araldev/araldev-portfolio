@@ -368,4 +368,3 @@ export const IA_ICON = (
     </g>
   </svg>
 )
-

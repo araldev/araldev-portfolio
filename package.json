@@ -17,8 +17,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "deploy": "vite build && gh-pages -d dist",
-    "lint": "standard",
-    "lint:fix": "standard --fix",
+    "lint": "eslint . --ext .js,.jsx,.mjs",
+    "lint:fix": "eslint . --ext .js,.jsx,.mjs --fix",
     "test": "vitest",
     "test:run": "vitest --run",
     "test:coverage": "vitest --coverage",
@@ -34,6 +34,11 @@
     "@testing-library/user-event": "14.6.1",
     "@vitejs/plugin-react-swc": "3.10.0",
     "@vitest/coverage-v8": "4.1.7",
+    "eslint": "8.57.1",
+    "eslint-config-standard": "17.1.0",
+    "eslint-config-standard-jsx": "11.0.0",
+    "eslint-plugin-react": "7.37.5",
+    "eslint-plugin-react-hooks": "4.6.2",
     "gh-pages": "^6.3.0",
     "husky": "9.1.7",
     "jest-axe": "3.5.0",
@@ -50,14 +55,5 @@
     "react": "18.3.1",
     "react-dom": "18.3.0",
     "react-google-recaptcha": "3.1.0"
-  },
-  "eslintConfig": {
-    "extends": "./node_modules/standard/eslintrc.json",
-    "env": {
-      "browser": true
-    },
-    "rules": {
-      "react/jsx-closing-tag-location": "off"
-    }
   }
 }

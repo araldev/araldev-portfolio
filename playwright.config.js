@@ -45,7 +45,12 @@ export default defineConfig({
     // served from `/araldev-portfolio/` because vite.config.js sets
     // `base: '/araldev-portfolio/'`. The 302 redirect at `/` is handled
     // by page.goto automatically.
-    baseURL: 'http://localhost:5173',
+    //
+    // PLAYWRIGHT_BASE_URL lets a second checkout (or a worktree) run
+    // the suite against its own dev server instead of the one already
+    // listening on :5173 — otherwise the specs silently test the
+    // wrong working tree.
+    baseURL: process.env.PLAYWRIGHT_BASE_URL || 'http://localhost:5173',
 
     // FR-N4-07: evidence on first failure (trace) and after every test
     // (screenshot). Screenshots are the input to the diff reporter

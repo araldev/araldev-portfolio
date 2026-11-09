@@ -65,7 +65,6 @@ export function AboutMeSection () {
               <div key={item.label} className={styles.highlight_card}>
                 <span className={styles.highlight_icon}>{item.icon}</span>
                 <span className={styles.highlight_label}>{item.label}</span>
-                <span className={styles.highlight_desc}>{item.desc}</span>
               </div>
             ))}
           </div>

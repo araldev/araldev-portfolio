@@ -36,3 +36,9 @@ npm-shrinkwrap.json
 .github/prompts/
 coverage/
 test-results/
+
+# Local scratch/debug scripts dropped at the repo root during a session.
+# They are throwaway tooling, not project source: they hardcode
+# localhost ports and write to /tmp. Ignoring them keeps `git add .`
+# from sweeping them into a commit.
+hero-*.mjs

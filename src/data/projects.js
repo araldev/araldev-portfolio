@@ -56,8 +56,6 @@
 /* eslint-disable quotes */
 import { techIcons } from './icons'
 import v12UiHeroCinematic from '../assets/v12-ui-hero-cinematic.png'
-import realHero from '../assets/real-hero.webp'
-import realStack from '../assets/real-stack.webp'
 import realButtons from '../assets/real-buttons.webp'
 import realControls from '../assets/real-controls.webp'
 import realAccordion from '../assets/real-accordion.webp'
@@ -112,7 +110,7 @@ export const projects = [
     // content fields below are FALLBACKS ONLY — edit locale files for content
     title: 'v12-ui',
     shortDescription: '', // Fallback only — content in locale files
-    description: [],       // Fallback only — content in locale files
+    description: [], // Fallback only — content in locale files
     tech: {
       ts: techIcons.ts,
       react: techIcons.react,
@@ -144,7 +142,7 @@ export const projects = [
     ],
     title: 'English Web',
     shortDescription: '', // Fallback only — content in locale files
-    description: [],       // Fallback only — content in locale files
+    description: [], // Fallback only — content in locale files
     tech: {
       js: techIcons.js,
       css: techIcons.css,

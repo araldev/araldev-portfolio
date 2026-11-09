@@ -45,6 +45,7 @@ if (typeof window !== 'undefined' && typeof window.IntersectionObserver === 'und
       this.callback = callback
       this.elements = new Set()
     }
+
     observe (el) { this.elements.add(el) }
     unobserve (el) { this.elements.delete(el) }
     disconnect () { this.elements.clear() }
