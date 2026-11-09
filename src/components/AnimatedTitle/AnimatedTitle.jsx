@@ -16,6 +16,7 @@ export function AnimatedTitle ({ children }) {
     heroRef,
     heroImgContainerRef,
     heroImgTitleRef,
+    heroImgWrapperRef,
     heroImgCopyRef,
     overlayCopyContainerRef,
     fadeOverlayRef,
@@ -34,7 +35,12 @@ export function AnimatedTitle ({ children }) {
           {children}
 
           <div className={styles.hero_img_container} ref={heroImgTitleRef}>
-            <img src={avatar} alt={t('images.profileHero')} fetchpriority="high" />
+            {/* The wrapper is the ONLY element GSAP is allowed to
+                transform. The container keeps the CSS layout
+                transform (centring) untouched. */}
+            <div className={styles.hero_img_wrapper} ref={heroImgWrapperRef}>
+              <img src={avatar} alt={t('images.profileHero')} fetchpriority="high" />
+            </div>
           </div>
 
           <div className={styles.hero_img_copy} ref={heroImgCopyRef}>

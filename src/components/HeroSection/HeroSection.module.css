@@ -1,6 +1,6 @@
 .container_header {
   max-width: 100%;
-  width: 100dvw;
+  width: 100%;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -18,120 +18,141 @@
      Don't add a z-index here without auditing both children. */
 }
 
-/* Hero Section — only the <aside> with text, NOT the whole <header>.
-   The z-index here puts the title/subtitle/paragraph/CV/socials
-   above the avatar (.hero_img_container in AnimatedTitle, z:1)
-   where they overlap mid-viewport, while BackgroundHeroCanvas
-   stays in its own low-z layer behind the avatar. */
+/* ==================================================================
+   HERO TEXT — MOBILE FIRST (stacked layout)
+   ------------------------------------------------------------------
+   Phones AND tablets (≤1024px) share the stacked layout: the avatar
+   is a flow item above this text block (see AnimatedTitle.module.css).
+
+   This block is therefore CONTENT-SIZED (min-height: 0). The whole
+   avatar + text group is centred by .hero_container, so the text no
+   longer needs `min-height: 100svh` — that was the reason the avatar
+   had to guess the title's position with magic pixel offsets.
+
+   All the vertical rhythm is fluid (svh/vw based) so the group fits
+   inside the viewport on short screens (iPhone SE 568px tall, split
+   screen, landscape phones) instead of overflowing and pushing the
+   avatar out of view.
+   ================================================================== */
 .hero_section {
   position: relative;
   z-index: 2;
-  max-width: 80%;
+  max-width: 92%;
   width: var(--width-web-content);
   min-width: 0;
-  min-height: 100svh;
-  padding: 60px 0;
+  min-height: 0;
+  padding: clamp(40px, 8svh, 88px) 16px clamp(16px, 3svh, 28px);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
-  gap: 14px;
+  align-items: center;
+  text-align: center;
+  gap: clamp(2px, .6svh, 8px);
+  /* Tighter leading than the global 1.6 — the hero is a headline
+     block, and the vertical space is what the avatar needs. */
+  line-height: 1.35;
 }
 
-/* Desktop ≥1025px: reserve right column for avatar so text
-   doesn't extend under it. Tighter gap for cohesive text block
-   and LARGER fonts for big screens. */
+.hero_section .title_hero     { font-size: clamp(1.5rem, 7vw, 2rem); }
+.hero_section .subTitle_hero  { font-size: clamp(1rem, 4.5vw, 1.4rem); }
+.hero_section .paragraph_hero { font-size: clamp(.85rem, 3.5vw, .95rem); }
+
+/* Fluid vertical rhythm — the hero has to fit (avatar + text) inside
+   the viewport on short screens, so the gaps scale with the height
+   instead of eating a fixed 30px each. */
+.hero_section .subTitle_hero  { margin-bottom: clamp(10px, 2.4svh, 26px); }
+.hero_section .paragraph_hero { margin-bottom: clamp(10px, 2.4svh, 26px); }
+
+/* NOTE: these need the `.hero_section` prefix (0,2,0) — the shared
+   `.socials_hero_container` rule at the bottom of this file is
+   (0,1,0) and would otherwise win by source order. */
+.hero_section .socials_hero_container {
+  justify-content: center;
+  gap: 16px;
+  margin-top: clamp(4px, 1svh, 10px);
+  margin-bottom: clamp(8px, 2svh, 24px);
+}
+
+.hero_section .social_icons_container {
+  justify-content: center;
+  gap: 10px;
+}
+
+/* ==================================================================
+   DESKTOP (≥1025px) — side by side
+   ------------------------------------------------------------------
+   The avatar moves to its own column on the right (75% X), so the
+   text column is capped at 60% to guarantee the two never collide.
+   ================================================================== */
 @media (min-width: 1025px) {
   .hero_section {
     max-width: 60%;
+    min-height: 100svh;
     padding: 60px 6% 60px 0;
+    align-items: flex-start;
+    text-align: left;
     gap: 8px;
+    line-height: 1.6;
   }
   .hero_section .title_hero     { font-size: clamp(2rem, 5vw + 1rem, 5rem); }
   .hero_section .subTitle_hero   { font-size: clamp(1.5rem, 2.5vw + 0.5rem, 2.8rem); }
   .hero_section .paragraph_hero  { font-size: clamp(1rem, 1.2vw + 0.5rem, 1.5rem); }
   .hero_section .button_cv       { font-size: clamp(1rem, 1vw + 0.5rem, 1.35rem); }
+  .hero_section .subTitle_hero   { margin-bottom: 30px; }
+  .hero_section .paragraph_hero  { margin-bottom: 30px; }
+  /* The avatar owns the right column (centred at 75% X). Cap the
+     paragraph so the text never runs underneath the picture. */
+  .hero_section .paragraph_hero  { max-width: min(60ch, 42vw); }
   .hero_section .social_icons_container svg {
     width: 48px;
     height: 48px;
   }
-  .socials_hero_container { gap: 8px; }
-}
-
-/* Mobile ≤600px: center everything horizontally and vertically. */
-@media (max-width: 600px) {
-  .hero_section {
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 100px 16px 24px;
-    gap: 4px;
-  }
-  .hero_section .title_hero     { font-size: clamp(1.5rem, 7vw, 2rem); }
-  .hero_section .subTitle_hero   { font-size: clamp(1rem, 4.5vw, 1.4rem); }
-  .hero_section .paragraph_hero  { font-size: clamp(0.85rem, 3.5vw, 0.95rem); }
+  /* Back to a left-aligned row — the desktop text column is on the
+     left, the avatar sits in its own column on the right. */
   .hero_section .socials_hero_container {
-    justify-content: center;
-    gap: 16px;
-    margin-top: 8px;
-    margin-bottom: 30px;
+    justify-content: flex-start;
+    gap: 8px;
   }
-  .social_icons_container {
-    justify-content: center;
-    gap: 10px;
+  .hero_section .social_icons_container {
+    justify-content: flex-start;
   }
 }
 
-/* Short viewport (phones landscape, split-screen) */
+/* Tablet 601-1024px: bigger type than a phone, same stacked layout. */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .hero_section .title_hero     { font-size: var(--font-size-title); }
+  .hero_section .subTitle_hero  { font-size: var(--font-size-subtitle); }
+  .hero_section .paragraph_hero { font-size: var(--font-size-paragraph); }
+}
+
+/* Very short viewports (landscape phones, split screen): shrink the
+   type so the avatar + text group still fits above the fold. */
 @media (max-width: 1024px) and (max-height: 560px) {
   .hero_section {
-    padding: 70px 16px 12px;
+    padding: clamp(28px, 6svh, 56px) 16px clamp(10px, 2svh, 18px);
     gap: 2px;
   }
   .hero_section .title_hero     { font-size: clamp(1.1rem, 5vw, 1.5rem); }
-  .hero_section .subTitle_hero   { font-size: clamp(0.85rem, 3.5vw, 1.05rem); }
-  .hero_section .paragraph_hero  { font-size: clamp(0.75rem, 2.8vw, 0.85rem); }
+  .hero_section .subTitle_hero  { font-size: clamp(.85rem, 3.5vw, 1.05rem); }
+  .hero_section .paragraph_hero { font-size: clamp(.75rem, 2.8vw, .85rem); }
   .hero_section .socials_hero_container {
     gap: 12px;
     margin-top: 6px;
     margin-bottom: 0;
   }
-  .social_icons_container { gap: 8px; }
+  .hero_section .social_icons_container { gap: 8px; }
 }
 
-/* Tablet 601-1024px: vertical centering, no right-padding */
-@media (min-width: 601px) and (max-width: 1024px) {
+/* Short stacked viewports: the group (avatar + text) is centred in
+   the viewport, so the social row can land on the "scroll down"
+   indicator. Reserve the indicator's band at the bottom of the text
+   block so the two never collide — and trim the top padding to keep
+   the whole group inside the viewport (the hero zooms 1.1x at rest,
+   which eats ~5% of the height). */
+@media (max-width: 1024px) and (max-height: 640px) {
   .hero_section {
-    justify-content: center;
-    gap: 8px;
-    padding: 48px 0;
-  }
-  .socials_hero_container {
-    justify-content: center;
-    gap: 14px;
-    margin-top: 6px;
-  }
-  .social_icons_container { gap: 12px; }
-}
-
-/* Tall portrait screens (foldables, ≥800px height): switch to
-   centered stacked layout (avatar above text) instead of side-by-side
-   to avoid avatar/text overlap on narrow-tall viewports. */
-@media (orientation: portrait) and (min-width: 601px) and (min-height: 800px) {
-  .hero_section {
-    max-width: 80%;
-    align-items: center;
-    text-align: center;
-    padding: 100px 16px 24px;
-    gap: 4px;
-  }
-  .hero_section .socials_hero_container {
-    justify-content: center;
-    gap: 16px;
-  }
-  .social_icons_container {
-    justify-content: center;
-    gap: 10px;
+    padding-top: clamp(28px, 6svh, 60px);
+    padding-bottom: calc(max(6svh, 30px) + 30px);
   }
 }
 
@@ -274,4 +295,3 @@
     height: 40px;
   }
 }
- 

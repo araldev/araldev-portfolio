@@ -26,18 +26,66 @@
   height: auto;
 }
 
-.hero_img_container {
-  /* Mobile-first: avatar centered above the text. At desktop (≥601px)
-     it moves to 75%X / 50%Y (right column, vertically centered). */
+/* The #home scroll anchor is a zero-size marker used by
+   useActiveSection. Keep it out of the flex flow, otherwise it
+   becomes a flex item of the stacked hero and shifts the layout.
+   NOTE: CSS Modules hashes the `id` selector, so it must be
+   targeted through :first-child (the anchor is the first child). */
+.hero_container > span:first-child {
   position: absolute;
-  top: 4%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: clamp(120px, 22vw, 220px);
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+}
+
+/* ==================================================================
+   HERO LAYOUT — MOBILE FIRST (stacked)
+   ------------------------------------------------------------------
+   The avatar is a FLOW ITEM placed above the hero text (order: -1),
+   not an absolutely-positioned box with a hardcoded offset.
+
+   Why: an absolute avatar needs a magic number to sit "just above"
+   the <h1> (the old `top: calc(50% - 290px)`). That number only
+   matches ONE viewport height — on every other height the avatar
+   drifts, ends up clipped by .animation_container's overflow:hidden
+   (head cut off) or collides with the title.
+
+   With a flex column the avatar and the text stay glued together at
+   ANY viewport height, and the group is always centred by
+   `justify-content: center`. No magic offsets, no clipping.
+   ================================================================== */
+.hero_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero_img_container {
+  position: relative;
+  order: -1;
+  flex: 0 0 auto;
+  /* Never taller than ~17% of the viewport, so the avatar + text
+     group always fits next to each other on short screens. */
+  width: clamp(72px, min(30vw, 17svh), 160px);
   aspect-ratio: 1 / 1.2;
   height: auto;
   object-fit: contain;
   z-index: 1;
+  margin-bottom: clamp(8px, 2svh, 20px);
+}
+
+/* Inner wrapper — GSAP animates THIS element (slide + blur).
+   The container above owns the layout transform and must NEVER be
+   touched by GSAP: an inline `transform` written by GSAP overrides
+   the CSS centring (`translate(-50%, -80%)`) and pushes the avatar
+   half its width off-screen (or past the right edge on desktop). */
+.hero_img_wrapper {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
 
   img {
     width: 100%;
@@ -55,51 +103,41 @@
   }
 }
 
-/* Mobile ≤600px: position the avatar so it sits just above the h1
-   on ALL phone sizes. The h1 is vertically centered, so its
-   position changes with viewport height. Using calc(50% - X)
-   anchors the avatar relative to the center — the same anchor
-   point as the h1 — keeping it consistently just above the text
-   on both short (iPhone SE, 667px) and tall phones (14PM, 932px). */
-@media (max-width: 600px) {
-  .hero_img_container {
-    top: calc(50% - 290px);
-    width: clamp(120px, 30vw, 160px);
+/* ==================================================================
+   DESKTOP / LARGE TABLET (≥1025px) — side by side
+   ------------------------------------------------------------------
+   The avatar goes back to its own column on the right (75% X) and is
+   vertically pulled up from the centre. The `min(…, 45svh)` cap keeps
+   the picture inside the viewport on short screens, so it can never
+   be clipped by .animation_container's overflow:hidden.
+   ================================================================== */
+@media (min-width: 1025px) {
+  .hero_container {
+    display: block;
   }
-}
 
-/* Tablet + Desktop ≥601px: avatar at 75% X, centered in viewport */
-@media (min-width: 601px) {
   .hero_img_container {
-    /* translateY pulls the image UP from its center. -50% = pure
-       center. More negative = higher in the viewport. Adjust to
-       taste: -80% means the image sits 30% of its own height
-       above the viewport center. */
+    position: absolute;
+    order: auto;
     top: 50%;
     left: 75%;
     transform: translate(-50%, -80%);
-    width: clamp(160px, 22vw, 420px);
-  }
-}
-
-/* Tall portrait screens (foldables, tablets in portrait ≥800px
-   height): side-by-side layout overflows/overlaps. Switch to
-   stacked layout like mobile — avatar centered above the h1. */
-@media (orientation: portrait) and (min-width: 601px) and (min-height: 800px) {
-  .hero_img_container {
-    top: calc(50% - 440px);
-    left: 50%;
-    transform: translateX(-50%);
-    width: clamp(160px, 22vw, 280px);
+    /* The cap accounts for the GSAP zoom (scale 1.1 at rest) applied
+       to .hero_container: without it the picture would be pushed
+       past the top edge on short viewports and clipped by the
+       hero's overflow:hidden. */
+    width: min(clamp(160px, 22vw, 420px), 45svh);
+    margin-bottom: 0;
   }
 }
 
 @keyframes bounce {
   /* Bounce DOWN from natural position so it doesn't overlap
      the social icons row. The bottom margin is generous enough
-     (bottom: 6%) that the full bounce range stays in viewport. */
+     (bottom: max(6%, 30px)) that the full bounce range stays in
+     viewport even on short screens. */
   from { transform: translate(-50%, 0%); }
-  to   { transform: translate(-50%, 20%); }
+  to   { transform: translate(-50%, 15%); }
 }
 
 .hero_img_copy {
@@ -108,7 +146,7 @@
   justify-content: center;
   flex-direction: column;
   position: absolute;
-  bottom: 6%;
+  bottom: max(6%, 30px);
   left: 50%;
   transform: translate(-50%, -50%);
   will-change: opacity;
@@ -196,7 +234,7 @@
   transform-origin: 49.7% 19%;
 }
   .overlay_copy {
-  bottom: 0%;
+    bottom: 0%;
   }
 }
 
@@ -207,6 +245,57 @@
     font-size: .55rem;
     gap: 4px;
     line-height: 1;
+  }
+
+  /* The arrow is 24px tall by default. On the reduced hero of a
+     phone/tablet it collides with the social row, so shrink it. */
+  .hero_img_copy svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* Very short viewports (landscape phones): the hero fills the whole
+   screen, there is no room left for the "scroll down" label — it
+   would overlap the social row. Keep the bouncing arrow (the
+   affordance) and drop the text. */
+@media (max-height: 520px) {
+  .hero_img_copy {
+    /* 6% is the minimum: the GSAP zoom (scale 1.1 about the centre)
+       pushes anything anchored to the bottom edge ~5% further down. */
+    bottom: max(6%, 16px);
+  }
+
+  .hero_img_copy .paragraph {
+    display: none;
+  }
+}
+
+/* Ultra-short viewports (≤420px tall — a phone in landscape on a
+   small screen): there is not enough room for the whole hero. The
+   avatar is anchored to the TOP instead of centring the group, so the
+   picture always stays visible and the overflow (if any) falls on the
+   bottom of the text block. A clipped avatar is the worst outcome. */
+@media (max-width: 1024px) and (max-height: 420px) {
+  .hero_container {
+    justify-content: flex-start;
+    /* 5svh: the GSAP zoom (1.1x about the centre) pushes the top
+       edge up by 5% of the viewport height. */
+    padding-top: max(14px, 5svh);
+  }
+
+  .hero_img_container {
+    width: clamp(56px, min(24vw, 15svh), 160px);
+  }
+}
+
+/* ≤400px tall the hero text already overflows the viewport, so the
+   scroll indicator would sit on top of the social row. Drop it.
+   (This block MUST stay after the .hero_img_copy base rule — same
+   specificity, so source order decides.) */
+@media (max-width: 1024px) and (max-height: 400px) {
+  .hero_img_copy {
+    display: none;
   }
 }
 

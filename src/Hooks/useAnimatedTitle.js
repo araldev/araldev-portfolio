@@ -11,6 +11,7 @@ export function useAnimatedTitle (svgPath) {
   const heroRef = useRef(null)
   const heroImgContainerRef = useRef(null)
   const heroImgTitleRef = useRef(null)
+  const heroImgWrapperRef = useRef(null)
   const heroImgCopyRef = useRef(null)
   const fadeOverlayRef = useRef(null)
   const svgOverlayRef = useRef(null)
@@ -23,6 +24,7 @@ export function useAnimatedTitle (svgPath) {
     const hero = heroRef.current
     const heroImgContainer = heroImgContainerRef.current
     const heroImgTitle = heroImgTitleRef.current
+    const heroImgWrapper = heroImgWrapperRef.current
     const heroImgCopy = heroImgCopyRef.current
     const fadeOverlay = fadeOverlayRef.current
     const svgOverlay = svgOverlayRef.current
@@ -35,6 +37,7 @@ export function useAnimatedTitle (svgPath) {
       !hero ||
       !heroImgContainer ||
       !heroImgTitle ||
+      !heroImgWrapper ||
       !heroImgCopy ||
       !fadeOverlay ||
       !svgOverlay ||
@@ -89,9 +92,15 @@ export function useAnimatedTitle (svgPath) {
     // =========================
     // FADE IN INICIAL
     // =========================
+    // IMPORTANT: the entrance animation targets the INNER WRAPPER,
+    // never .hero_img_container. GSAP writes an inline `transform`
+    // on whatever it animates, which would overwrite the container's
+    // CSS centring (`translate(-50%, -80%)`) and shove the avatar
+    // half its width off-screen (or past the right edge on desktop).
+    // Animating the wrapper keeps the layout transform pristine.
 
     const fadeInImg = gsap.fromTo(
-      heroImgTitle,
+      heroImgWrapper,
       {
         x: 60,
         filter: 'blur(10px)'
@@ -329,6 +338,7 @@ export function useAnimatedTitle (svgPath) {
     heroRef,
     heroImgContainerRef,
     heroImgTitleRef,
+    heroImgWrapperRef,
     heroImgCopyRef,
     overlayCopyContainerRef,
     fadeOverlayRef,
