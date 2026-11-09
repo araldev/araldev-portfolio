@@ -115,33 +115,31 @@
     "highlights": [
       {
         "icon": "🎓",
-        "label": "Self-taught",
-        "desc": "Continuous learning"
+        "label": "Self-taught"
       },
       {
         "icon": "💡",
-        "label": "Resourceful",
-        "desc": "Approach to problems"
+        "label": "Resourceful"
       },
       {
         "icon": "🏋️",
-        "label": "Athlete",
-        "desc": "Mind-body balance"
+        "label": "Athlete"
       },
       {
         "icon": "🚀",
-        "label": "Full-Stack",
-        "desc": "MERN + more"
+        "label": "Full-Stack"
       },
       {
-        "icon": "🎯",
-        "label": "Focus",
-        "desc": "Mental clarity"
+        "icon": "🤝",
+        "label": "Teamwork"
+      },
+      {
+        "icon": "💬",
+        "label": "Communicative"
       },
       {
         "icon": "⚡",
-        "label": "Proactive",
-        "desc": "Constant initiative"
+        "label": "Proactive"
       }
     ]
   },

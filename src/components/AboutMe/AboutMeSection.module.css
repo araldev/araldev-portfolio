@@ -245,13 +245,6 @@
   letter-spacing: 0.01em;
 }
 
-.highlight_desc {
-  font-size: 0.78rem;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.55);
-  line-height: 1.3;
-}
-
 /* ---------- Responsive ---------- */
 
 @media (min-width: 768px) {

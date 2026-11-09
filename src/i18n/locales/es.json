@@ -115,33 +115,31 @@
     "highlights": [
       {
         "icon": "🎓",
-        "label": "Autodidacta",
-        "desc": "Aprendizaje continuo"
+        "label": "Autodidacta"
       },
       {
         "icon": "💡",
-        "label": "Resolutivo",
-        "desc": "Enfoque ante problemas"
+        "label": "Resolutivo"
       },
       {
         "icon": "🏋️",
-        "label": "Atleta",
-        "desc": "Equilibrio mente-cuerpo"
+        "label": "Atleta"
       },
       {
         "icon": "🚀",
-        "label": "Full-Stack",
-        "desc": "MERN + más"
+        "label": "Full-Stack"
       },
       {
-        "icon": "🎯",
-        "label": "Enfoque",
-        "desc": "Claridad mental"
+        "icon": "🤝",
+        "label": "Trabajo en equipo"
+      },
+      {
+        "icon": "💬",
+        "label": "Comunicativo"
       },
       {
         "icon": "⚡",
-        "label": "Proactividad",
-        "desc": "Iniciativa constante"
+        "label": "Proactividad"
       }
     ]
   },
