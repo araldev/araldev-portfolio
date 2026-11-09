@@ -53,14 +53,16 @@ async function heroGeometry (page) {
         top: r.top,
         bottom: r.bottom,
         left: r.left,
-        right: r.right
+        right: r.right,
+        height: r.height
       }
     }
     const container = document.querySelector('[class*="hero_img_container"]')
     const title = document.querySelector('[class*="hero_section"] h1')
+    const image = document.querySelector('[class*="hero_img_container"] img')
     return {
       viewport: { width: window.innerWidth, height: window.innerHeight },
-      image: box(document.querySelector('[class*="hero_img_container"] img')),
+      image: box(image),
       container: box(container),
       title: box(title),
       // GSAP must never own the positioning transform of the container
@@ -93,10 +95,35 @@ test.describe('Hero avatar is always fully visible', () => {
       expect(g.image.right).toBeLessThanOrEqual(g.viewport.width + 0.5)
 
       // 2. In the stacked layout the avatar sits ABOVE the title and
-      //    never overlaps it.
+      //    never overlaps it. The bottom 28% of the picture is masked
+      //    out (a fade-out), so the VISIBLE part is what must stay
+      //    clear of the title.
       if (vp.layout === 'stacked') {
-        expect(g.image.bottom).toBeLessThanOrEqual(g.title.top + 2)
+        const visibleBottom = g.image.top + g.image.height * 0.72
+        expect(visibleBottom).toBeLessThanOrEqual(g.title.top + 2)
       }
+    })
+  }
+})
+
+test.describe('Hero name is the focal point (stacked layout)', () => {
+  // The avatar is anchored near the top and the text block is centred
+  // in the space below it, so the name lands on the optical centre of
+  // the screen instead of being pushed up by the avatar.
+  for (const vp of MATRIX.filter(v => v.layout === 'stacked' && v.height >= 600)) {
+    test(`${vp.width}x${vp.height} keeps the name in the focal band`, async ({ page }) => {
+      await page.setViewportSize({ width: vp.width, height: vp.height })
+      await page.goto('/')
+      await page.waitForLoadState('networkidle')
+      await page.waitForTimeout(1200)
+
+      const g = await heroGeometry(page)
+      const namePercent = (g.title.top / g.viewport.height) * 100
+
+      // The name must not be crammed against the top (that was the old
+      // centred-group behaviour) nor pushed off the lower half.
+      expect(namePercent).toBeGreaterThan(28)
+      expect(namePercent).toBeLessThan(58)
     })
   }
 })

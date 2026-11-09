@@ -104,6 +104,30 @@
 }
 
 /* ==================================================================
+   STACKED COMPOSITION (≤1024px)
+   ------------------------------------------------------------------
+   The avatar reads as a HEADER element: it is anchored near the top
+   of the hero, and the text block is centred in the space that is
+   left below it (`margin-block: auto`).
+
+   Before, the whole group (avatar + text) was centred, so the avatar
+   pushed the name up to ~25% of the viewport height and the name
+   never became the focal point. Now the name lands on the optical
+   centre of the screen and the supporting content (role, paragraph,
+   CV, socials) flows below it.
+   ================================================================== */
+@media (max-width: 1024px) {
+  .hero_container {
+    justify-content: flex-start;
+    padding-top: clamp(24px, 7svh, 72px);
+  }
+
+  .hero_container > header {
+    margin-block: auto;
+  }
+}
+
+/* ==================================================================
    DESKTOP / LARGE TABLET (≥1025px) — side by side
    ------------------------------------------------------------------
    The avatar goes back to its own column on the right (75% X) and is
